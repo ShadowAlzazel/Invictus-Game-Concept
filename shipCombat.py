@@ -24,7 +24,7 @@ def combat_1v1(shipA, shipB):
         if prompt == 'N':
             combat += 1
 
-
+#BASIC FUNCTION CALL TESTER
 BB66 = AmagiClass(66, 'Amagi')
 BB69 = EssexClass(69, 'Essex')
 BB76 = EssexClass(76, 'Enterprise')
