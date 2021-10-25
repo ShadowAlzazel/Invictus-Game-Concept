@@ -1,36 +1,53 @@
 #Started 10/24/2021
 from shipTypes import *
 from shipClasses import *
+from random import randint
 
-def combat_1v1(shipA, shipB):   
-    combat = 0
+def combatGame(shipA, shipB):   
+    game = 0
+    vessel = priority(shipA, shipB)
 
-    if shipA.EVA > shipB.EVA:
-        prio = shipA
-        nonp = shipB
+    while game == 0:
+        hit(vessel[0], vessel[1])
+        hit(vessel[1], vessel[0])
+        vessel[1].inspect()
+        vessel[0].inspect()
+
+        if input("Continue the Engagement? Y/N: ") == 'N':
+            game += 1
+
+
+def priority(vesselA, vesselB):
+    combantants = []
+
+    if vesselA.SPD > vesselB.SPD: 
+        combantants = [vesselA, vesselB]
+    else: 
+        combantants = [vesselB, vesselA]
+    
+    return combantants
+
+#34 ACC 30 EVA
+def hit(vessel_0, vessel_1):
+    hitrate = (vessel_0.ACC) - (vessel_1.EVA) + 50  
+    r = randint(0, 100)
+
+    if r >= hitrate:
+        #vessel_1.shields -= vessel_0.FP // vessel_1.Armor
+        vessel_1.shields -= vessel_0.FP  
+        print(vessel_0.name, "Has Hit", vessel_1.name, "For", vessel_0.FP)
     else:
-        prio = shipB
-        nonp = shipA
+        print(vessel_0.name, "Has Missed", vessel_1.name)
 
-    while combat == 0:
-        nonp.shields -= prio.FP
-        print(prio.name, "Has Hit", nonp.name, "For", prio.FP)
-        prio.shields -= nonp.FP
-        print(nonp.name, "Has Hit", prio.name, "For", nonp.FP)
-        nonp.inspect()
-        prio.inspect()
 
-        prompt = input("Continue the Engagement? Y/N: ")
-        if prompt == 'N':
-            combat += 1
 
-#BASIC FUNCTION CALL TESTER
+
 BB66 = AmagiClass(66, 'Amagi')
 BB69 = EssexClass(69, 'Essex')
 BB76 = EssexClass(76, 'Enterprise')
 BB79 = EssexClass(79, 'Intrepid')
 
-combat_1v1(BB66, BB76)
+combatGame(BB66, BB76)
 
 #BB70 = Battleship(70, 'Valorant')
 #BB79.shield_capacity = 76

@@ -5,7 +5,7 @@ from shipTypes import Battleship
 class EssexClass(Battleship):
     ammount = 0
 
-    FP = 315
+    FP = 325
     shields = 12500
     hull = 10000
 
@@ -24,10 +24,11 @@ class AmagiClass(Battleship):
     ammount = 0
 
     FP = 305
-    EVA = 40
-    shields = 13000
+    ACC = 34
+    EVA = 33
+    shields = 11000
     hull = 9500
-
+    
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
 

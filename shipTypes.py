@@ -3,6 +3,7 @@
 class Ship:
     ammount = 0
     shiptype = 'CIV'
+
     shields = 100
     hull = 100
 
@@ -18,7 +19,7 @@ class Ship:
     def inspect(self):
         print(self.command,'-' , self.name, sep='', end=', ')
         print(self.shiptype, '-', self.hullnumber,':', sep='')
-        print("FP:", self.FP, " EVA:", self.EVA, " SPD:",  self.SPD, " Armor:", self.Armor, sep='')
+        print("FP:", self.FP," ACC:", self.ACC, " EVA:", self.EVA, " SPD:",  self.SPD, " Armor:", self.Armor, sep='')
         print("Shield Capcity at", "%.2f%%" % (self.shields / self.__class__.shields * 100.0))
         print("Hull Integrity at", "%.2f%%" % (self.hull / self.__class__.hull * 100.0))
         print("-<->--------------------------------------<->-")
@@ -30,9 +31,10 @@ class Battleship(Ship):
     ammount = 0
     shiptype = 'BB'
 
+    FP = 300
+    ACC = 30
     EVA = 30
     SPD = 25
-    FP = 300
     Armor = 5 #Superheavy
     shields = 10000 
     hull = 10000
