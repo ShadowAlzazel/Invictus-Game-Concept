@@ -27,17 +27,34 @@ def priority(vesselA, vesselB):
     
     return combantants
 
+
 def hit(vessel_0, vessel_1):
     hitrate = (vessel_0.ACC) - (vessel_1.EVA) + 50  
+    extraAcc = (hitrate % 100) * (hitrate // 100)
+    critrate = (vessel_0.luck) - (vessel_1.luck) + 1 + extraAcc
+    critmult = 1
     r = randint(0, 100)
 
     if hitrate >= r:
-        #vessel_1.shields -= vessel_0.FP // vessel_1.Armor
-        vessel_1.shields -= vessel_0.FP  
-        print(vessel_0.name, "Has Hit", vessel_1.name, "For", vessel_0.FP)
+        if critrate >= r:
+            critmult += 0.20 + (vessel_0.luck / 100)
+        
+        dmg = vessel_0.FP * critmult
+        healthDamage(vessel_1, dmg) 
+        print(vessel_0.name, "Has Hit", vessel_1.name, "For", dmg)
     else:
         print(vessel_0.name, "Has Missed", vessel_1.name)
 
+
+def healthDamage(vessel, damage):
+    if vessel.shields > damage:
+        vessel.shields -= damage
+    elif vessel.hull > damage:
+        trudmg = damage - vessel.shields 
+        vessel.shields = 0
+        vessel.hull -= trudmg // vessel.armor
+    else: 
+        print(vessel.name, "Destroyed!")
 
 
 #function call tester
@@ -45,8 +62,9 @@ BB66 = AmagiClass(66, 'Amagi')
 BB69 = EssexClass(69, 'Essex')
 BB76 = EssexClass(76, 'Enterprise')
 BB79 = EssexClass(79, 'Intrepid')
+DD557 = JohnstonClass(557, 'Johnston')
 
-combatGame(BB66, BB76)
+#combatGame(BB66, DD557)
 
 #BB70 = Battleship(70, 'Valorant')
 #BB79.shield_capacity = 76
