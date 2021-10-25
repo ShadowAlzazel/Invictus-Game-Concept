@@ -27,7 +27,6 @@ def priority(vesselA, vesselB):
     
     return combantants
 
-#34 ACC 30 EVA
 def hit(vessel_0, vessel_1):
     hitrate = (vessel_0.ACC) - (vessel_1.EVA) + 50  
     r = randint(0, 100)
@@ -41,7 +40,7 @@ def hit(vessel_0, vessel_1):
 
 
 
-
+#function call tester
 BB66 = AmagiClass(66, 'Amagi')
 BB69 = EssexClass(69, 'Essex')
 BB76 = EssexClass(76, 'Enterprise')
