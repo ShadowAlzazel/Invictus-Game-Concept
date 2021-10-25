@@ -31,7 +31,7 @@ def hit(vessel_0, vessel_1):
     hitrate = (vessel_0.ACC) - (vessel_1.EVA) + 50  
     r = randint(0, 100)
 
-    if r >= hitrate:
+    if hitrate >= r:
         #vessel_1.shields -= vessel_0.FP // vessel_1.Armor
         vessel_1.shields -= vessel_0.FP  
         print(vessel_0.name, "Has Hit", vessel_1.name, "For", vessel_0.FP)
