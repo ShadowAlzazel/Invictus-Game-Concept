@@ -1,57 +1,56 @@
 #Started 10/26/2021
 import json
 import sys
-from random import randint, choices
+from random import choice
 from shipCombatNew import combatGame
 from shipClasses import *
 
+shipLib = []
+
 with open("warShips.json", "r") as warShipsFile:
     warShips = json.load(warShipsFile)
+#>>> warShips[0]
+#{'name': 'Hood', 'shipClass': 'HoodClass', 'shipType': 'BB', 'hullnumber': 18, 'shipID': 'BB18'}
+#>>> warShips[1]['name']
+#'Prince of Wales'
 
 def getClass(strShipClass):
     return getattr(sys.modules[__name__], strShipClass)
 
 
+#launch Ship using json file
+def launchShip(jShip):
+    jClass = getClass(jShip["shipClass"])
+    newShip = jClass(jShip["hullnumber"], jShip["name"])
+    shipLib.append(newShip)
+
+
+#create multiple ships
 def createShips(n = 1):
-    global shipLib
     c = 0
-    z = []
-
     while c < n:
-        if len(shipLib) == len(warShips):
-            print("Library Full!")
-            return
-
-        r = randint(0, len(warShips) - 1)
-        for x in shipLib:
-            if x.name == warShips[r]["name"]:
-                z.append(r)
-
-        if r not in z:     
-            shipRClass = getClass(warShips[r]["shipClass"]) 
-            hullNum = warShips[r]["hullnumber"]
-            name = warShips[r]["name"]
-            newShip = shipRClass(hullNum, name)
-            shipLib.append(newShip)
+        randomShip = choice(warShips)
+        u = 0
+        if len(shipLib) == 0:
+            launchShip(randomShip)
+            randomShip = choice(warShips)
             c += 1
+        
+        for x in shipLib:
+            if x.name != randomShip['name'] and u == (len(shipLib) - 1):
+                launchShip(randomShip)
+                c += 1
+            else:
+                u += 1 
 
-
-def ranBattler():
-    rList = choices(shipLib, k=2)
-    combatGame(rList[0], rList[1])
-
-shipLib = []
-
+                
 createShips(3)
 for x in shipLib:
     x.inspect()
 
-ranBattler()
-
+combatGame(shipLib[0], shipLib[1])
 
 """
 thismodule = sys.modules[__name__]
 setattr(thismodule, shipID, shipRClass(hullNum, name))
 """
-
-

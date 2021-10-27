@@ -54,6 +54,13 @@
         "shipType": "BB",
         "hullnumber": 79,
         "shipID": "BB79"
+    },
+    {
+        "name": "New Jersey",
+        "shipClass": "NewJerseyClass",
+        "shipType": "BB",
+        "hullnumber": 109,
+        "shipID": "BB109"
     }
 ]
 

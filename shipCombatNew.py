@@ -11,8 +11,9 @@ def combatGame(shipA, shipB):
         totalDmg = 0
 
         for t in vessel[0 + turn].mainArm:
-            if hitCalc(t, vessel[0 + turn].ACC, vessel[1 - turn].EVA) == True:
-                totalDmg += damageCalc(t, vessel[0 + turn].FP, vessel[0 + turn].luck, vessel[1 - turn].luck, len(vessel[0 + turn].mainArm))
+            if hitCalc(t, vessel[0 + turn].shipStats['ACC'], vessel[1 - turn].shipStats['EVA']) == True:
+                totalDmg += damageCalc(t, vessel[0 + turn].shipStats['FP'], vessel[0 + turn].shipStats["luck"],
+                                        vessel[1 - turn].shipStats["luck"], len(vessel[0 + turn].mainArm))
             else:
                 totalDmg += 0
         healthCalc(vessel[1 - turn], totalDmg) 
@@ -35,7 +36,7 @@ def combatGame(shipA, shipB):
 def turnPrio(A, B):
     shipPlayers = []
 
-    if A.SPD > B.SPD:
+    if A.shipStats['SPD'] > B.shipStats['SPD']:
         shipPlayers = [A, B]
     else:
         shipPlayers = [B, A]
@@ -66,11 +67,4 @@ def damageCalc(t, s_FP, s_luck, d_luck, truFP):
 
 #health calculator using an int damage
 def healthCalc(vessel, damage):    
-    if vessel.shields > damage:
-        vessel.shields -= damage
-    elif vessel.hull > damage:
-        truDmg = damage - vessel.shields
-        vessel.shields = 0
-        vessel.hull -= truDmg // vessel.armor
-    else: 
-        print("Ship destroyed!")
+    vessel.takeDamage(damage)
