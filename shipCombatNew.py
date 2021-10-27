@@ -31,7 +31,7 @@ def combatGame(shipA, shipB):
             turn += 1
 
 
-#Who goes first
+#Who goes first in a turn based system
 def turnPrio(A, B):
     shipPlayers = []
 
@@ -41,6 +41,7 @@ def turnPrio(A, B):
         shipPlayers = [B, A]
     return shipPlayers
 
+#hit calculator for armament using two ships stats
 def hitCalc(t, s_ACC, d_EVA):
     hitRate = (s_ACC - d_EVA) + t.HIT
     r = randint(1, 100)
@@ -50,6 +51,7 @@ def hitCalc(t, s_ACC, d_EVA):
     else:
         return False
 
+#damage calculater for armament  using two ships stats
 def damageCalc(t, s_FP, s_luck, d_luck, truFP):
     critRate = s_luck - d_luck + 5
     mult = 1
@@ -62,6 +64,7 @@ def damageCalc(t, s_FP, s_luck, d_luck, truFP):
     damage = ((t.ATK + (s_FP // truFP)) * mult) // 1
     return damage
 
+#health calculator using an int damage
 def healthCalc(vessel, damage):    
     if vessel.shields > damage:
         vessel.shields -= damage
@@ -71,17 +74,3 @@ def healthCalc(vessel, damage):
         vessel.hull -= truDmg // vessel.armor
     else: 
         print("Ship destroyed!")
-
-
-#function call tester
-BB66 = AmagiClass(66, 'Amagi')
-BB69 = EssexClass(69, 'Essex')
-BB76 = EssexClass(76, 'Enterprise')
-BB79 = EssexClass(79, 'Intrepid')
-DD557 = JohnstonClass(557, 'Johnston')
-
-combatGame(BB66, BB69)
-
-#BB70 = Battleship(70, 'Valorant')
-#BB79.shield_capacity = 76
-#BB79.inspect()

@@ -4,15 +4,13 @@ class Ship:
     ammount = 0
     shiptype = 'CIV'
 
-    shields = 100
-    hull = 100
     luck = 10
 
     def __init__(self, hullnumber, name):
         self.command = 'ASCS'
         self.name = name
         self.hullnumber = hullnumber
-        self.shipID = ''.join([self.shiptype, str(self.hullnumber),'-', self.command, str(Ship.ammount)])
+        self.vesselID = ''.join([self.shiptype, str(self.hullnumber),'-', self.command, str(Ship.ammount)])
 
         print("New Ship Launched", end=': ')
         print(self.command, '-', name, sep='', end=', ')
@@ -25,7 +23,6 @@ class Ship:
         print("Shield Capcity at", "%.2f%%" % (self.shields / self.__class__.shields * 100.0))
         print("Hull Integrity at", "%.2f%%" % (self.hull / self.__class__.hull * 100.0))
         print("-<->--------------------------------------<->-")
-
 
 
 #Battleships
