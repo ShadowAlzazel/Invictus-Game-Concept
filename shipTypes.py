@@ -13,20 +13,29 @@ class Ship:
         self.command = 'ASCS'
         self.name = name
         self.hullnumber = hullnumber
-        self.vesselID = ''.join([self.shiptype, str(self.hullnumber),'-', self.command, str(Ship.ammount)])
+        self.vesselID = ''.join([self.shiptype, '-', str(self.hullnumber)])
 
         print("New Ship Launched", end=': ')
         print(self.command, '-', name, sep='', end=', ')
         Ship.ammount += 1
 
 
-    def inspect(self):
-        print(self.command,'-' , self.name, sep='', end=', ')
-        print(self.shiptype, '-', self.hullnumber,':', sep='')
+    def fullInspect(self):
+        print("--<->---------------------------------------------------------------------<->--")
+        print("Name: ", end='')
+        print(self.command,'-' , self.name, sep='')
+        print("Vessel Identifier: ", end='')
+        print(self.vesselID)
+        print("Ship Stats:")
         print(self.shipStats)
-        print("Shield Capcity at", "%.2f%%" % (self.shields / self.__class__.shields * 100.0))
-        print("Hull Integrity at", "%.2f%%" % (self.hull / self.__class__.hull * 100.0))
-        print("-<->--------------------------------------<->-")
+        print("Primary Armament:")
+        for x in self.mainArm:
+            print(x.armaID, x.gunStats)
+        print("Shield Capcity at", "%.2f%%" % ((self.shields / self.__class__.shields) * 100.0), end=', ')
+        print("with", self.shields, "out of", self.__class__.shields, "remaining")
+        print("Hull Integrity at", "%.2f%%" % ((self.hull / self.__class__.hull) * 100.0), end=', ')
+        print("with", self.hull, "out of", self.__class__.hull, "remaining")
+        print("--<->---------------------------------------------------------------------<->--")
 
 
     def takeDamage(self, dmgN):

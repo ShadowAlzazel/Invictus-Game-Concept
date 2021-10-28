@@ -6,10 +6,9 @@
 
 #Double Gun Turret Z_MK6
 class doubleZeusCannonMKVI:
-    ATK = 70 * 2
-    RLD = 25
-    HIT = 50
-    RNG = 30
+    gunStats = {
+        "ATK": 140 * 2, "RLD": 14, "HIT": 50, "RNG": 30
+    }
 
     def __init__(self, armaID):
         self.armaID = armaID 
@@ -17,10 +16,9 @@ class doubleZeusCannonMKVI:
 
 #Triple Gun Turret Z_MK6
 class tripleZeusCannonMKVI:
-    ATK = 70 * 3
-    RLD = 21
-    HIT = 50
-    RNG = 30
+    gunStats = {
+        "ATK": 140 * 3, "RLD": 18, "HIT": 51, "RNG": 30
+    }
 
     def __init__(self, armaID):
         self.armaID = armaID 
@@ -28,10 +26,9 @@ class tripleZeusCannonMKVI:
 
 #Quadruple Gun Turret Z_MK6
 class quadrupleZeusCannonMKVI:
-    ATK = 70 * 4
-    RLD = 29
-    HIT = 50
-    RNG = 30
+    gunStats = {
+        "ATK": 140 * 4, "RLD": 22, "HIT": 52, "RNG": 30
+    }
 
     def __init__(self, armaID):
         self.armaID = armaID 
@@ -39,10 +36,9 @@ class quadrupleZeusCannonMKVI:
         
 #Triple Gun Turret Z_MK7
 class tripleZeusCannonMKVII:
-    ATK = 97 * 3
-    RLD = 24
-    HIT = 55
-    RNG = 35
+    gunStats = {
+        "ATK": 185 * 3, "RLD": 19, "HIT": 55, "RNG": 35
+    }
 
     def __init__(self, armaID):
         self.armaID = armaID 
@@ -50,10 +46,9 @@ class tripleZeusCannonMKVII:
 
 #Quad Ball Point-Defense Laser System
 class quadBPDLaser:
-    ATK = 14 * 4
-    RLD = 5
-    HIT = 75
-    RNG = 5 
-
+    gunStats = {
+        "ATK": 23 * 4, "RLD": 5, "HIT": 75, "RNG": 5
+    }
+    
     def __init__(self, armaID):
         self.armaID = armaID 

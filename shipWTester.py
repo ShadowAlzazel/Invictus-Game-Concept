@@ -2,7 +2,6 @@
 import json
 import sys
 from random import choice
-from shipCombatNew import combatGame
 from shipClasses import *
 
 shipLib = []
@@ -46,9 +45,8 @@ def createShips(n = 1):
                 
 createShips(3)
 for x in shipLib:
-    x.inspect()
+    x.fullInspect()
 
-combatGame(shipLib[0], shipLib[1])
 
 """
 thismodule = sys.modules[__name__]

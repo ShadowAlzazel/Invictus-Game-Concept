@@ -1,6 +1,6 @@
 [
     {
-        "type":"IJN",
+        "origin":"IJN",
         "names":
         [
             "Yamakaze",
@@ -10,7 +10,7 @@
         ]
     },
     {
-        "type":"KMS",
+        "origin":"KMS",
         "names":
         [
             "Agir",
