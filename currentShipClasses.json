@@ -1,21 +1,32 @@
 [
     {
-        "classType":"BB",
-        "currentClasses":
+        "BB":
         [
             "AmagiClass",
             "EssexClass",
             "NewJerseyClass",
             "VittorioVenetoClass",
             "PrinceOfWalesClass",
-            "HoodClass"
-        ]
-    },
-    {
-        "classType":"DD",
-        "currentClasses":
+            "HoodClass"  
+        ],
+        "BC":
         [
-            "JohnstonClass"
+            "ZenithClass",
+            "EclipseClass"
+        ],
+        "CS":
+        [
+            "VoltageClass",
+            "DynamoClass"
+        ],
+        "CA":
+        [
+            "ApocalypseClass"
+        ],
+        "DD":
+        [
+            "JohnstonClass",
+            "ShimakazeClass"
         ]
     }
 ]

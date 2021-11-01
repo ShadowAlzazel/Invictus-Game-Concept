@@ -32,9 +32,9 @@ class Ship:
         for x in self.mainArm:
             print(x.armaID, x.gunStats)
         print("Shield Capcity at", "%.2f%%" % ((self.shields / self.__class__.shields) * 100.0), end=', ')
-        print("with", self.shields, "out of", self.__class__.shields, "remaining")
+        print("with", self.shields // 1, "out of", self.__class__.shields, "remaining")
         print("Hull Integrity at", "%.2f%%" % ((self.hull / self.__class__.hull) * 100.0), end=', ')
-        print("with", self.hull, "out of", self.__class__.hull, "remaining")
+        print("with", self.hull // 1, "out of", self.__class__.hull, "remaining")
         print("--<->---------------------------------------------------------------------<->--")
 
 
@@ -44,17 +44,24 @@ class Ship:
         elif self.hull > dmgN:
             truDmgN = dmgN - self.shields 
             self.shields = 0
-            self.hull -= truDmgN // self.shipStats["armor"]
+            self.hull -= truDmgN / self.shipStats["armor"]
         else: 
-            print("Ship Destryed")
+            print(self.name, "has been destryed!")
+            del self
 
 
-#Battleships
+    def selfRepair(self):
+        self.hull = self.__class__.hull
+        print(self.name, "Repaired!")
+
+"""--------------------------------------------------------------------------------------"""
+
+#Battleship
 class Battleship(Ship):
     ammount = 0
     shiptype = 'BB'
     shipStats = {
-        "FP": 300, "ACC": 30, "EVA": 30, "SPD": 25,
+        "FP": 300, "ACC": 38, "EVA": 30, "SPD": 25,
         "armor": 3, "luck": 10
     }
 
@@ -67,9 +74,62 @@ class Battleship(Ship):
         print(self.shiptype, '-', hullnumber, sep='')
         Battleship.ammount += 1
 
-    def self_repair(self):
-        self.hull = self.__class__.hull
-        print(self.name, "Repaired!")
+
+#Battlecruiser
+class Battlecruiser(Ship):
+    ammount = 0
+    shiptype = 'BC'
+    shipStats = {       
+        "FP": 250, "ACC": 45, "EVA": 35, "SPD": 29,
+        "armor": 2.75, "luck": 10
+    }
+
+    shields = 8200
+    hull = 7700
+
+    def __init__(self, hullnumber, name):
+        super().__init__(hullnumber, name)
+
+        print(self.shiptype, '-', hullnumber, sep='')
+        Battlecruiser.ammount += 1
+
+
+#Strikecruiser
+class Strikecruiser(Ship):
+    ammount = 0
+    shiptype = 'CS'
+    shipStats = {
+        "FP": 180, "ACC": 38, "EVA": 40, "SPD": 33,
+        "armor": 2.5, "luck": 10
+    }
+    
+    shields = 7100
+    hull = 5600
+
+    def __init__(self, hullnumber, name):
+        super().__init__(hullnumber, name)
+
+        print(self.shiptype, '-', hullnumber, sep='')
+        Strikecruiser.ammount += 1
+
+
+#Heavycrusier
+class Heavycruiser(Ship):
+    ammount = 0 
+    shiptype = 'CA'
+    shipStats = {
+        "FP": 190, "ACC": 33, "EVA": 30, "SPD": 25,
+        "armor": 2.5, "luck": 10
+    }
+    
+    shields = 6700
+    hull = 7600
+
+    def __init__(self, hullnumber, name):
+        super().__init__(hullnumber, name)
+
+        print(self.shiptype, '-', hullnumber, sep='')
+        Heavycruiser.ammount += 1
 
 
 #Destroyers

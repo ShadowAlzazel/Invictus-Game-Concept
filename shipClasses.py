@@ -106,7 +106,7 @@ class PrinceOfWalesClass(Battleship):
         
         PrinceOfWalesClass.ammount += 1  
 
-#New Jersey Class Batlleship
+#New Jersey Class Battleship
 class NewJerseyClass(Battleship):
     ammount = 0 
     shipStats = {
@@ -125,13 +125,117 @@ class NewJerseyClass(Battleship):
 
         NewJerseyClass.ammount += 1    
 
+"""--<->----------------------------BATTLECRUISERS------------------------------<->--"""
+
+#Zenith Class Battlecruiser
+class ZenithClass(Battlecruiser):
+    ammount = 0
+    shipStats = {
+        "FP": 297, "ACC": 50, "EVA": 35, "SPD": 30,
+        "armor": 3, "luck": 10
+    }
+
+    shields = 9100
+    hull = 8150
+
+    def __init__(self, hullnumber, name):
+        super().__init__(hullnumber, name)
+        #seven mainGuns in 1 triple turret and 2 double turrets
+        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3']]
+        self.mainArm = [doubleArcThrowerMKV(turretCases[0]), doubleArcThrowerMKV(turretCases[1]), tripleZeusCannonMKVI(turretCases[2])]
+
+        ZenithClass.ammount += 1
+
+#Eclipse Class Battlecruiser
+class EclipseClass(Battlecruiser):
+    ammount = 0
+    shipStats = {
+        "FP": 277, "ACC": 49, "EVA": 38, "SPD": 31,
+        "armor": 3, "luck": 10
+    }
+
+    shields = 9400
+    hull = 8250
+
+    def __init__(self, hullnumber, name):
+        super().__init__(hullnumber, name)
+        #seven mainGuns in 1 triple turret and 2 double turrets
+        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3']]
+        self.mainArm = [doubleZeusCannonMKVI(turretCases[0]), doubleZeusCannonMKVI(turretCases[1]), tripleArcThrowerMKV(turretCases[2])]
+
+        EclipseClass.ammount += 1
+
+
+"""--<->----------------------------STRIKECRUISERS------------------------------<->--"""
+
+#Voltage Class Strikecruiser
+class VoltageClass(Strikecruiser):
+    ammount = 0
+    shipStats = {
+        "FP": 185, "ACC": 43, "EVA": 41, "SPD": 34,
+        "armor": 2.5, "luck": 10
+    }
+
+    shields = 7350
+    hull = 6300
+
+    def __init__(self, hullnumber, name):
+        super().__init__(hullnumber, name)
+        #eleven mainGuns in 3 triple turrets and 1 double turret
+        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3', '-T4']]
+        self.mainArm = [tripleThorCannonMKVIII(turretCases[0]), doubleArcThrowerMKIV(turretCases[1]), 
+                            doubleArcThrowerMKIV(turretCases[2]), tripleThorCannonMKVIII(turretCases[3])]
+
+        VoltageClass.ammount += 1
+
+#Dynamo Class Strikecruiser
+class DynamoClass(Strikecruiser):
+    ammount = 0
+    shipStats = {
+        "FP": 197, "ACC": 42, "EVA": 39, "SPD": 33,
+        "armor": 2.5, "luck": 10
+    }
+
+    shields = 7100
+    hull = 6200
+
+    def __init__(self, hullnumber, name):
+        super().__init__(hullnumber, name)
+        #eleven mainGuns in 3 triple turrets and 1 double turret
+        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3']]
+        self.mainArm = [quadrupleThorCannonMKVIII(turretCases[0]), quadrupleThorCannonMKVIII(turretCases[1]),
+                        doubleArcThrowerMKIV(turretCases[2])]
+
+        DynamoClass.ammount += 1
+
+"""--<->----------------------------STRIKECRUISERS------------------------------<->--"""
+
+#Apocalypse Class Heavycrusier
+class ApocalypseClass(Heavycruiser):
+    ammount = 0
+    shipStats = {
+        "FP": 205, "ACC": 35, "EVA": 32, "SPD": 25,
+        "armor": 2.5, "luck": 10
+    }
+    
+    shields = 6860
+    hull = 7700
+
+    def __init__(self, hullnumber, name):
+        super().__init__(hullnumber, name)
+        #fifteen mainGuns in 5 triple turrets
+        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3', '-T4', '-T5']]
+        self.mainArm = [tripleThorCannonMKVIII(x) for x in turretCases] 
+
+        ApocalypseClass.ammount += 1
 
 """--<->--------------------------DESTROYERS---------------------------<->--"""
 
+#Johnston Class destroyer
 class JohnstonClass(Destroyer):
     ammount = 0
     shipStats = {
-         "FP": 67, "ACC": 48, "EVA": 68, "SPD": 55,
+        "FP": 67, "ACC": 48, "EVA": 66, "SPD": 55,
         "armor": 1, "luck": 10
     }
     
@@ -141,3 +245,16 @@ class JohnstonClass(Destroyer):
 
         JohnstonClass.ammount += 1
 
+#Shimakaze class destroyer
+class ShimakazeClass(Destroyer):
+    ammount = 0
+    shipStats = {
+        "FP": 47, "ACC": 58, "EVA": 68, "SPD": 61,
+        "armor": 1, "luck": 10
+    }
+
+    def __init__(self, hullnumber, name):
+        super().__init__(hullnumber, name)
+        self.mainArm = [quadBPDLaser(''.join([self.vesselID, '-T1']))]
+
+        ShimakazeClass.ammount += 1
