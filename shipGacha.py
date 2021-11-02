@@ -90,9 +90,9 @@ def gachaOrder(aLib):
     aLib[-1].fullInspect()
 
 
-#ShipLib2 = []
+ShipLib2 = []
 
-#buildShip(ShipLib2, 'FFNF', 'BB')
+buildShip(ShipLib2, 'IJN', 'CA')
 #gachaOrder(ShipLib2)
 #gachaShip(ShipLib2)
 #ShipLib2[-1].fullInspect()

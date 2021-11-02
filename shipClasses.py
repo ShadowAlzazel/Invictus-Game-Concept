@@ -8,19 +8,25 @@ from shipArmaments import *
 class EssexClass(Battleship):
     ammount = 0
     shipStats = {
-        "FP": 325, "ACC": 43, "EVA": 30, "SPD": 25,
-        "armor": 3, "luck": 10
+        "FP": 445, "ACC": 43, "EVA": 30, "SPD": 25,
+        "armor": 3.2, "luck": 10
     }
 
-    shields = 12500
-    hull = 10000
+    shields = 15500
+    hull = 12000
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        #Nine mainGuns in 3 triple turrets
-        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3']]
-        self.mainArm = [tripleZeusCannonMKVI(x) for x in turretCases]
+        vID = self.vesselID
 
+        self.primaryBattery = [triple_M22_ThorGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,5)]
+        self.secondaryBattery = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+        self.broadsideBattery = []
+        for x in range(1, 25):
+            if x <= 16:
+                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+            elif x <= 24:
+                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
         EssexClass.ammount += 1
 
 
@@ -34,75 +40,105 @@ class EssexClass(Battleship):
 class AmagiClass(Battleship):
     ammount = 0
     shipStats = {
-        "FP": 305, "ACC": 44, "EVA": 33, "SPD": 27,
-        "armor": 3, "luck": 10
+        "FP": 425, "ACC": 44, "EVA": 31, "SPD": 27,
+        "armor": 3.2, "luck": 10
     }
 
-    shields = 11000
-    hull = 9500
+    shields = 14000
+    hull = 13500
     
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        #Eight mainGuns in 4 double turrets
-        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3', '-T4']]
-        self.mainArm = [doubleZeusCannonMKVI(x) for x in turretCases]
-        
+        vID = self.vesselID
+
+        self.primaryBattery = [double_M22_ThorGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,7)]
+        self.secondaryBattery = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+        self.broadsideBattery = []
+        for x in range(1, 25):
+            if x <= 16:
+                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+            elif x <= 24:
+                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
         AmagiClass.ammount += 1
 
 #Vittorio Veneto Class Battleship
 class VittorioVenetoClass(Battleship):
     ammount = 0
     shipStats = {
-        "FP": 313, "ACC": 43, "EVA": 29, "SPD": 24,
-        "armor": 3, "luck": 10
+        "FP": 433, "ACC": 43, "EVA": 29, "SPD": 24,
+        "armor": 3.2, "luck": 10
     }
 
-    shields = 10500
-    hull = 11000
+    shields = 12500
+    hull = 13000
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        #Nine mainGuns in 3 triple turrets
-        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3']]
-        self.mainArm = [tripleZeusCannonMKVI(x) for x in turretCases]
+        vID = self.vesselID
 
+        self.primaryBattery = [triple_M22_ThorGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,5)]
+        self.secondaryBattery = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+        self.broadsideBattery = []
+        for x in range(1, 25):
+            if x <= 16:
+                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+            elif x <= 24:
+                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
         VittorioVenetoClass.ammount += 1
 
 #Hood Class Battleship
 class HoodClass(Battleship):
     ammount = 0
     shipStats = {
-        "FP": 325, "ACC": 46, "EVA": 34, "SPD": 27,
-        "armor": 3, "luck": 10
+        "FP": 424, "ACC": 46, "EVA": 31, "SPD": 27,
+        "armor": 3.2, "luck": 10
     }
 
-    shields = 10500
-    hull = 8500
+    shields = 12800
+    hull = 11700
     
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        #Eight mainGuns in 4 double turrets
-        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3', '-T4']]
-        self.mainArm = [doubleZeusCannonMKVI(x) for x in turretCases]
-        
+        vID = self.vesselID
+
+        self.primaryBattery = [double_M22_ThorGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,7)]
+        self.secondaryBattery = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+        self.broadsideBattery = []
+        for x in range(1, 25):
+            if x <= 16:
+                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+            elif x <= 24:
+                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
         HoodClass.ammount += 1
 
 #Prince of Wales Class Battleship
 class PrinceOfWalesClass(Battleship):
     ammount = 0
     shipStats = {
-        "FP": 325, "ACC": 44, "EVA": 32, "SPD": 24,
-        "armor": 3, "luck": 10
+        "FP": 444, "ACC": 44, "EVA": 30, "SPD": 26,
+        "armor": 3.2, "luck": 10
     }
 
-    shields = 11000
-    hull = 10500
+    shields = 13200
+    hull = 12500
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        #Eight mainGuns in 2 quadruple turrets
-        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2']]
-        self.mainArm = [quadrupleZeusCannonMKVI(x) for x in turretCases]
+        vID = self.vesselID
+
+        self.primaryBattery = []
+        for x in range(1, 5):
+            if x <= 2:
+                self.primaryBattery.append(double_M22_ThorGigaGuns(vID, ''.join(['T', str(x)])))
+            elif x <= 4:
+                self.primaryBattery.append(quadruple_M22_ThorGigaGuns(vID, ''.join(['T', str(x)])))
+        self.secondaryBattery = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+        self.broadsideBattery = []
+        for x in range(1, 25):
+            if x <= 16:
+                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+            elif x <= 24:
+                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
         
         PrinceOfWalesClass.ammount += 1  
 
@@ -110,18 +146,35 @@ class PrinceOfWalesClass(Battleship):
 class NewJerseyClass(Battleship):
     ammount = 0 
     shipStats = {
-        "FP": 356, "ACC": 48, "EVA": 34, "SPD": 29,
-        "armor": 3, "luck": 10
+        "FP": 488, "ACC": 48, "EVA": 34, "SPD": 28,
+        "armor": 3.3, "luck": 10
     }
 
     shields = 16200
-    hull = 14250
+    hull = 15250
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        #nine mainGuns in 3 triple turrets
-        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3']]
-        self.mainArm = [tripleZeusCannonMKVII(x) for x in turretCases]   
+        vID = self.vesselID
+
+        self.primaryBattery = []
+        for x in range(1, 5):
+            if x <= 2:
+                self.primaryBattery.append(quadruple_M22_ThorGigaGuns(vID, ''.join(['T', str(x)])))
+            elif x <= 4:
+                self.primaryBattery.append(triple_M26_ZeusCannons(vID, ''.join(['T', str(x)])))
+        self.secondaryBattery = []
+        for x in range(1,7):
+            if x <= 2:
+                self.secondaryBattery.append(quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])))
+            elif x <= 6:
+                self.secondaryBattery.append(triple_L13_HadronLance(vID, ''.join(['S', str(x)])))
+        self.broadsideBattery = []
+        for x in range(1, 33):
+            if x <= 20:
+                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+            elif x <= 32:
+                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))   
 
         NewJerseyClass.ammount += 1    
 
@@ -135,14 +188,33 @@ class ZenithClass(Battlecruiser):
         "armor": 3, "luck": 10
     }
 
-    shields = 9100
-    hull = 8150
+    shields = 8700
+    hull = 8550
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        #seven mainGuns in 1 triple turret and 2 double turrets
-        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3']]
-        self.mainArm = [doubleArcThrowerMKV(turretCases[0]), doubleArcThrowerMKV(turretCases[1]), tripleZeusCannonMKVI(turretCases[2])]
+        vID = self.vesselID
+
+        self.primaryBattery = []
+        for x in range(1, 6):
+            if x <= 3:
+                self.primaryBattery.append(double_A17_HAT3ArcThrowers(vID, ''.join(['T', str(x)])))
+            elif x <= 5:
+                self.primaryBattery.append(triple_L18_DeuteriumLance(vID, ''.join(['T', str(x)])))
+        self.secondaryBattery = []
+        for x in range(1,6):
+            if x <= 2:
+                self.secondaryBattery.append(quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])))
+            elif x <= 4:
+                self.secondaryBattery.append(triple_A11_TeslaArcThrowers(vID, ''.join(['S', str(x)])))
+            elif x <= 5: 
+                 self.secondaryBattery.append(triple_L13_HadronLance(vID, ''.join(['S', str(x)])))
+        self.broadsideBattery = []
+        for x in range(1, 17):
+            if x <= 8:
+                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+            elif x <= 16:
+                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
 
         ZenithClass.ammount += 1
 
@@ -150,7 +222,7 @@ class ZenithClass(Battlecruiser):
 class EclipseClass(Battlecruiser):
     ammount = 0
     shipStats = {
-        "FP": 277, "ACC": 49, "EVA": 38, "SPD": 31,
+        "FP": 287, "ACC": 49, "EVA": 38, "SPD": 31,
         "armor": 3, "luck": 10
     }
 
@@ -159,12 +231,51 @@ class EclipseClass(Battlecruiser):
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        #seven mainGuns in 1 triple turret and 2 double turrets
-        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3']]
-        self.mainArm = [doubleZeusCannonMKVI(turretCases[0]), doubleZeusCannonMKVI(turretCases[1]), tripleArcThrowerMKV(turretCases[2])]
+        vID = self.vesselID
 
+        self.primaryBattery = []
+        for x in range(1, 5):
+            if x <= 2:
+                self.primaryBattery.append(triple_L18_DeuteriumLance(vID, ''.join(['T', str(x)])))
+            elif x <= 4:
+                self.primaryBattery.append(double_M22_ThorGigaGuns(vID, ''.join(['T', str(x)])))
+        self.secondaryBattery = [quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+        self.broadsideBattery = []
+        for x in range(1, 17):
+            if x <= 8:
+                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+            elif x <= 12:
+                self.broadsideBattery.append(double_A5_WaveArcThrowers(vID, ''.join(['B', str(x)])))
+            elif x <= 16:
+                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+        
         EclipseClass.ammount += 1
 
+#Penumbra Class Battlecruiser
+class PenumbraClass(Battlecruiser):
+    ammount = 0
+    shipStats = {
+        "FP": 321, "ACC": 49, "EVA": 36, "SPD": 30,
+        "armor": 3, "luck": 10
+    }
+
+    shields = 8800
+    hull = 8470
+
+    def __init__(self, hullnumber, name):
+        super().__init__(hullnumber, name)
+        vID = self.vesselID
+
+        self.primaryBattery = [double_L18_DeuteriumLance(vID, ''.join(['T', str(x)])) for x in range(1,7)]
+        self.secondaryBattery = [quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])) for x in range(1,3)]
+        self.broadsideBattery = []
+        for x in range(1, 17):
+            if x <= 8:
+                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+            elif x <= 16:
+                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+
+        PenumbraClass.ammount += 1
 
 """--<->----------------------------STRIKECRUISERS------------------------------<->--"""
 
@@ -181,12 +292,24 @@ class VoltageClass(Strikecruiser):
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        #eleven mainGuns in 3 triple turrets and 1 double turret
-        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3', '-T4']]
-        self.mainArm = [tripleThorCannonMKVIII(turretCases[0]), doubleArcThrowerMKIV(turretCases[1]), 
-                            doubleArcThrowerMKIV(turretCases[2]), tripleThorCannonMKVIII(turretCases[3])]
+        vID = self.vesselID
+
+        self.primaryBattery = []
+        for x in range(1, 5):
+            if x <= 2:
+                self.primaryBattery.append(triple_L13_HadronLance(vID, ''.join(['T', str(x)])))
+            elif x <= 4:
+                self.primaryBattery.append(triple_A11_TeslaArcThrowers(vID, ''.join(['T', str(x)])))
+        self.secondaryBattery = [triple_M7_TitanAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1,3)]
+        self.broadsideBattery = []
+        for x in range(1, 9):
+            if x <= 4:
+                self.broadsideBattery.append(double_M4_ShredderAutoGuns(vID, ''.join(['B', str(x)])))
+            elif x <= 8:
+                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
 
         VoltageClass.ammount += 1
+
 
 #Dynamo Class Strikecruiser
 class DynamoClass(Strikecruiser):
@@ -201,31 +324,49 @@ class DynamoClass(Strikecruiser):
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        #eleven mainGuns in 3 triple turrets and 1 double turret
-        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3']]
-        self.mainArm = [quadrupleThorCannonMKVIII(turretCases[0]), quadrupleThorCannonMKVIII(turretCases[1]),
-                        doubleArcThrowerMKIV(turretCases[2])]
+        vID = self.vesselID
+        
+        self.primaryBattery = []
+        for x in range(1, 5):
+            if x <= 2:
+                self.primaryBattery.append(triple_M12_NeutronLauchers(vID, ''.join(['T', str(x)])))
+            elif x <= 4:
+                self.primaryBattery.append(triple_A11_TeslaArcThrowers(vID, ''.join(['T', str(x)])))
+        self.secondaryBattery = [triple_A6_LaserLance(vID, ''.join(['S', str(x)])) for x in range(1,3)]
+        self.broadsideBattery = []
+        for x in range(1, 9):
+            if x <= 4:
+                self.broadsideBattery.append(double_M4_ShredderAutoGuns(vID, ''.join(['B', str(x)])))
+            elif x <= 8:
+                self.broadsideBattery.append(double_A5_WaveArcThrowers(vID, ''.join(['B', str(x)])))
 
         DynamoClass.ammount += 1
 
-"""--<->----------------------------STRIKECRUISERS------------------------------<->--"""
+"""--<->----------------------------HEAVYCRUISERS------------------------------<->--"""
 
 #Apocalypse Class Heavycrusier
 class ApocalypseClass(Heavycruiser):
     ammount = 0
     shipStats = {
-        "FP": 205, "ACC": 35, "EVA": 32, "SPD": 25,
+        "FP": 215, "ACC": 36, "EVA": 32, "SPD": 26,
         "armor": 2.5, "luck": 10
     }
     
-    shields = 6860
+    shields = 7660
     hull = 7700
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        #fifteen mainGuns in 5 triple turrets
-        turretCases = [''.join([self.vesselID, x]) for x in ['-T1', '-T2', '-T3', '-T4', '-T5']]
-        self.mainArm = [tripleThorCannonMKVIII(x) for x in turretCases] 
+        vID = self.vesselID
+
+        self.primaryBattery = [triple_M12_NeutronLauchers(vID, ''.join(['T', str(x)])) for x in range(1,6)]
+        self.secondaryBattery = [triple_M7_TitanAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1,4)] 
+        self.broadsideBattery = []
+        for x in range(1, 11):
+            if x <= 8:
+                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+            elif x <= 10:
+                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
 
         ApocalypseClass.ammount += 1
 
@@ -241,7 +382,10 @@ class JohnstonClass(Destroyer):
     
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        self.mainArm = [quadBPDLaser(''.join([self.vesselID, '-T1']))]
+        vID = self.vesselID
+        self.primaryBattery = [double_M6_TitanAutoCannons(vID, 'T1'), double_M4_ShredderAutoGuns(vID, 'T2')]
+        self.secondaryBattery = []
+        self.broadsideBattery = []
 
         JohnstonClass.ammount += 1
 
@@ -255,6 +399,9 @@ class ShimakazeClass(Destroyer):
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
-        self.mainArm = [quadBPDLaser(''.join([self.vesselID, '-T1']))]
+        vID = self.vesselID
+        self.primaryBattery = [double_M6_TitanAutoCannons(vID, 'T1'), double_M4_ShredderAutoGuns(vID, 'T2')]
+        self.secondaryBattery = []
+        self.broadsideBattery = []
 
         ShimakazeClass.ammount += 1

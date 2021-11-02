@@ -9,6 +9,8 @@ class Ship:
         "armor": 1, "luck": 10
     }
 
+    joinTurNam = lambda s, n: ''.join([s, n])
+
     def __init__(self, hullnumber, name):
         self.command = 'ASCS'
         self.name = name
@@ -29,8 +31,8 @@ class Ship:
         print("Ship Stats:")
         print(self.shipStats)
         print("Primary Armament:")
-        for x in self.mainArm:
-            print(x.armaID, x.gunStats)
+        for x in self.primaryBattery:
+            print(x.batteryID, x.gunStats)
         print("Shield Capcity at", "%.2f%%" % ((self.shields / self.__class__.shields) * 100.0), end=', ')
         print("with", self.shields // 1, "out of", self.__class__.shields, "remaining")
         print("Hull Integrity at", "%.2f%%" % ((self.hull / self.__class__.hull) * 100.0), end=', ')
@@ -47,14 +49,14 @@ class Ship:
             self.hull -= truDmgN / self.shipStats["armor"]
         else: 
             print(self.name, "has been destryed!")
-            del self
+            
 
 
     def selfRepair(self):
         self.hull = self.__class__.hull
         print(self.name, "Repaired!")
 
-"""--------------------------------------------------------------------------------------"""
+"""---------------------------------------SHIP-TYPES------------------------------------------"""
 
 #Battleship
 class Battleship(Ship):
