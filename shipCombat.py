@@ -98,9 +98,10 @@ class ACombatGame:
                 stepTime = varTime
                 timeSec += 1
                 self.runGame(timeSec, m)
-                print(n)
+                print("Calculations:", n)
                 n = 0
 
+    #Passes a query based combat system
     def testCombatGame(self, m = 2):
         noQuery = ['No', 'no', 'N', 'n']
         insQuery = ['I', 'Inspect', 'i', 'inspect', 'ins']
