@@ -9,8 +9,9 @@ with open("sortedShipNames.json", "r") as sortedShipNamesFile:
 with open("currentShipClasses.json", "r") as currentShipClassesFile:
     currentShipClasses = json.load(currentShipClassesFile)
 
-aSubCat = ['IJN', 'KMS', 'HMS', 'FFNF']
-aTypes = ['BB','BC','CS','CA','DD']
+aSubCat = ['IJN', 'KMS', 'HMS', 'FFNF', 'USS']
+aTypes = ['CVA', 'BB', 'BC', 'CS', 'CA', 'CVL', 'CL', 'DD']
+cTypes = ['BB', 'BC', 'CS', 'CA', 'DD']
 
 
 def getClass(strShipClass):
@@ -18,7 +19,7 @@ def getClass(strShipClass):
 
 
 #Get random name from json file
-def ranShipName():
+def randShipName():
     x = aSubCat[randint(0, len(aSubCat) - 1)]
     y = aTypes[randint(0, len(aTypes) - 1)]
     q = randint(0, len(sortedShipNames[0][x][y]) - 1)
@@ -28,8 +29,8 @@ def ranShipName():
 
 
 #Get random Class from json file
-def ranShipClass():
-    x = aTypes[randint(0, len(aTypes) - 1)]
+def randShipClass():
+    x = cTypes[randint(0, len(cTypes) - 1)]
     q = randint(0, len(currentShipClasses[0][x]) - 1)
 
     rClass = currentShipClasses[0][x][q]
@@ -37,7 +38,7 @@ def ranShipClass():
 
 
 #random stats
-def ranShipStats(aShip):
+def randShipStats(aShip):
     aShip.shipStats['FP'] += (randint(-5, 5))
     aShip.shipStats['ACC'] += (randint(-2, 2))
     aShip.shipStats['EVA'] += (randint(-2, 2))
@@ -50,10 +51,10 @@ def gachaShip(givenLib):
     rPenantNum = randint(1, 10000)
     l = len(givenLib)
 
-    gachaClass = getClass(ranShipClass())
-    aGachaShip = gachaClass(rPenantNum, ranShipName())
+    gachaClass = getClass(randShipClass())
+    aGachaShip = gachaClass(rPenantNum, randShipName())
     givenLib.append(aGachaShip)
-    ranShipStats(givenLib[l])
+    randShipStats(givenLib[l])
 
 
 #Create a specific ship
@@ -64,11 +65,11 @@ def buildShip(givenLib, f ,g, rS = False):
     h = randint(0, len(sortedShipNames[0][f][g]) - 1)
     l = len(givenLib)
 
-    gachaClass = getClass(ranShipClass())
+    gachaClass = getClass(randShipClass())
     buildShip = gachaClass(rHullnum, sortedShipNames[0][f][g][h])
     givenLib.append(buildShip)
     if rS == True:
-        ranShipStats(givenLib[l])
+        randShipStats(givenLib[l])
 
 
 def gachaOrder(aLib):
@@ -90,9 +91,9 @@ def gachaOrder(aLib):
     aLib[-1].fullInspect()
 
 
-ShipLib2 = []
+#ShipLib2 = []
 
-buildShip(ShipLib2, 'IJN', 'CA')
+#buildShip(ShipLib2, 'IJN', 'CA')
 #gachaOrder(ShipLib2)
 #gachaShip(ShipLib2)
 #ShipLib2[-1].fullInspect()
