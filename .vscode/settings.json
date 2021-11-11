@@ -1,5 +1,48 @@
 {
+ 
     "files.defaultLanguage": "python",
     // Check if git is enabled
     "git.enabled": true,
+    //Files types exluded from showing
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/.gitmodules":true,
+        "**/*.booproj":true,
+        "**/*.pidb":true,
+        "**/*.suo":true,
+        "**/*.user":true,
+        "**/*.userprefs":true,
+        "**/*.unityproj":true,
+        "**/*.dll":true,
+        "**/*.exe":true,
+        "**/*.pdf":true,
+        "**/*.mid":true,
+        "**/*.midi":true,
+        "**/*.wav":true,
+        "**/*.gif":true,
+        "**/*.ico":true,
+        "**/*.jpg":true,
+        "**/*.jpeg":true,
+        "**/*.png":true,
+        "**/*.psd":true,
+        "**/*.tga":true,
+        "**/*.tif":true,
+        "**/*.tiff":true,
+        "**/*.3ds":true,
+        "**/*.3DS":true,
+        "**/*.fbx":true,
+        "**/*.FBX":true,
+        "**/*.lxo":true,
+        "**/*.LXO":true,
+        "**/*.ma":true,
+        "**/*.MA":true,
+        "**/*.obj":true,
+        "**/*.OBJ":true,
+
+    }
 }

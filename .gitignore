@@ -1,10 +1,16 @@
-# Directories #
-
+# Ignore Virtual Environments 
 .venv
 venv/
 env/
 .env
 
-#Python pycache
-/__pycache__
+# Ignore pycache
+__pycache__/
+*.py[cod]
+*$py.class
 
+# Distribution / packaging
+.Python
+build/
+lib/
+lib64/
