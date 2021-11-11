@@ -1,6 +1,6 @@
 #class for board display
 from gameField.gameHex import spaceGameHex
-from gameField.gameConstants import *
+from gameField.gameAssets import *
 
 class spaceGameBoard:
 
@@ -21,6 +21,5 @@ class spaceGameBoard:
         e = 0
         for row in self.displayBoard:
             for hexes in row:
-                o = hexes
+                gameWindow.blit(HEX_Y_IMG)
             e += 1
-        print(o)

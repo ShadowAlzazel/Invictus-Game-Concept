@@ -1,7 +1,7 @@
 import pygame
 from pygame.constants import K_ESCAPE, KEYDOWN
 from gameField.gameBoard import *
-from gameField.gameConstants import *
+from gameField.gameAssets import *
 
 FPS = 60
 
