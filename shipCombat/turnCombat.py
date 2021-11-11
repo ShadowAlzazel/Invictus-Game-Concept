@@ -174,8 +174,15 @@ class turnCombatGame:
 
         print(aShip.vesselID, aShip.name, "Has done", totalDamage, "Total Damage to", bShip.vesselID, bShip.name)
 
-
+    #fleet Actions
     def fleetActions(self, aFleet):
+        #create/add new actions to fleet ships
+        for t in aFleet.fleetShips:
+            t.shipMovement = t.shipStats['SPD']
+            t.shipAttacks = 1
+            t.reloadGuns()
+            t.shipTurn = True
+
         self.gameSpace.showMap()
         fleetTurn = True
         while fleetTurn:
@@ -193,16 +200,10 @@ class turnCombatGame:
 
     #start a new turn
     def runATurn(self):
-        for t in self.activeShips:
-            t.shipMovement = t.shipStats['SPD']
-            t.shipAttacks = 1
-            t.reloadGuns()
-            t.shipTurn = True
-
         for x in self.activeFleets:
             self.fleetActions(x)
 
-
+    #run game function
     def runGame(self):
         gameRunning = True
         while gameRunning:

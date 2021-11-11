@@ -48,7 +48,7 @@ class zoneSpace:
     def showMapShip(self, aShip):
         showShipVision(self, aShip)
 
-    # add an entity to the zone
+    # add an entity to the zone and a starSpace
     def addCustomEntity(self, aStarSpace, newEntity):
             aStarSpace.addEntity(newEntity) 
             self.hexesFull.append(aStarSpace)

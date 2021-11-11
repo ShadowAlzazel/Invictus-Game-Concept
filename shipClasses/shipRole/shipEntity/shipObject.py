@@ -7,7 +7,7 @@ class Ship:
     ammount = 0
     shiptype = 'CIV'
     shipStats = {
-        "FP": 0, "ACC": 10, "EVA": 10, "SPD": 15,
+        "FP": 10, "ACC": 10, "EVA": 10, "SPD": 15,
         "RDR": 3, "LCK": 10
     }
 
@@ -17,10 +17,10 @@ class Ship:
         self.name = name
         self.hullnumber = hullnumber
         self.vesselID = ''.join([self.shiptype, '-', str(self.hullnumber)])
-        self.placeSpace = []
-        self.radar = []
-        self.primaryBattery = []
-        self.secondaryBattery = []
+        self.placeSpace = []  #starSpace object
+        self.radar = []   #radar object
+        self.primaryBattery = []  #primary guns
+        self.secondaryBattery = []  
         self.broadsideBattery = []
         self.defenses = {'ShieldType': [], 'ArmorType': []}
 
@@ -58,6 +58,7 @@ class Ship:
         for w in readyGunsRange:
             readyRanges.append(w.gunStats['RNG'])
 
+        #find the max range of all guns loaded
         if not specifics:
             targets = self.radar.findRadarTargets(max(readyRanges), self.placeSpace)
             return targets

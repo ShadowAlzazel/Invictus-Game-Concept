@@ -32,6 +32,7 @@ class spaceFleet:
                 print("Spawn Failed")
                 return 
 
+            #spawn the fleet in a zoneSpace
             operationSpace.addCustomEntity(fleetSpawnP, self.fleetShips[k])
             spawning = True
             while spawning:

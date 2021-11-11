@@ -5,7 +5,7 @@ LENGTH = 1000
 WIDTH = 700
 
 SCREEN_RGB = [38, 38, 51]
-GAME_ICON = pygame.image.load('shipIconP2.png')
+GAME_ICON = pygame.image.load('gameField/shipIconP2.png')
 
 FPS = 60
 #start game
@@ -29,3 +29,6 @@ def gameStart():
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 gameRunning = False
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pass
