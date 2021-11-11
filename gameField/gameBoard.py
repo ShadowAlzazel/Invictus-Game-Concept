@@ -1,5 +1,6 @@
-from gameField.gameHex import spaceGameHex
 #class for board display
+from gameField.gameHex import spaceGameHex
+from gameField.gameConstants import *
 
 class spaceGameBoard:
 
@@ -16,6 +17,7 @@ class spaceGameBoard:
     
 
     def drawHexes(self, gameWindow):
+
         e = 0
         for row in self.displayBoard:
             for hexes in row:

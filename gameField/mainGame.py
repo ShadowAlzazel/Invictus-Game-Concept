@@ -1,12 +1,7 @@
 import pygame
 from pygame.constants import K_ESCAPE, KEYDOWN
 from gameField.gameBoard import *
-
-LENGTH = 1000
-WIDTH = 700
-
-SCREEN_RGB = [38, 38, 51]
-GAME_ICON = pygame.image.load('gameField/shipIconP2.png')
+from gameField.gameConstants import *
 
 FPS = 60
 
@@ -22,8 +17,6 @@ def gameStart(aCombatSpace):
     pygame.display.update()
     pygame.display.set_caption("ASCS Fleet Manager")
     pygame.display.set_icon(GAME_ICON)
-    
-    #pygame.display.set_
 
     gameRunning = True
     gameClock = pygame.time.Clock()
