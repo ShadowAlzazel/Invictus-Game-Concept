@@ -1,5 +1,6 @@
 import pygame
 from pygame.constants import K_ESCAPE, KEYDOWN
+from gameField.gameBoard import *
 
 LENGTH = 1000
 WIDTH = 700
@@ -8,12 +9,16 @@ SCREEN_RGB = [38, 38, 51]
 GAME_ICON = pygame.image.load('gameField/shipIconP2.png')
 
 FPS = 60
+
+gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
+gameScreen.fill(SCREEN_RGB)
+
 #start game
-def gameStart(): 
+def gameStart(aCombatSpace): 
     pygame.init()
 
-    gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
-    gameScreen.fill(SCREEN_RGB)
+    combatGameBoard = spaceGameBoard(aCombatSpace)
+
     pygame.display.update()
     pygame.display.set_caption("ASCS Fleet Manager")
     pygame.display.set_icon(GAME_ICON)
@@ -32,3 +37,8 @@ def gameStart():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pass
+
+        combatGameBoard.drawHexes(gameScreen)
+        pygame.display.update()
+
+    pygame.quit()
