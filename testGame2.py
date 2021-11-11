@@ -18,6 +18,7 @@ createShips(f2.fleetShips, 'UVFF', 7)
 f1.spawnFleet(aoe)
 f2.spawnFleet(aoe)
 
+
 #create the game
 civ = turnCombatGame(aoe)
 civ.runGame()

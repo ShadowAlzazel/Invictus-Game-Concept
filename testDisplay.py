@@ -1,0 +1,3 @@
+from gameField import *
+
+gameStart()
