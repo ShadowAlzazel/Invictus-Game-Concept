@@ -10,7 +10,7 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 class double_L18_DeuteriumLance(shipWeapon):
     gunName = 'Double (L18) Deuterium Lance'
     gunStats = {
-        "ATK": 185 * 2, "RLD": 2, "HIT": 85, "RNG": 4
+        "ATK": 206 * 2, "RLD": 2, "HIT": 85, "RNG": 4
     }
     def __init__(self, vesselID, turretDesignation):
         super().__init__(vesselID, turretDesignation)
@@ -19,7 +19,7 @@ class double_L18_DeuteriumLance(shipWeapon):
 class triple_L18_DeuteriumLance(shipWeapon):
     gunName = 'Triple (L18) Deuterium Lance'
     gunStats = {
-        "ATK": 185 * 3, "RLD": 2, "HIT": 85, "RNG": 4
+        "ATK": 206 * 3, "RLD": 2, "HIT": 85, "RNG": 4
     }
     def __init__(self, vesselID, turretDesignation):
         super().__init__(vesselID, turretDesignation)
@@ -28,7 +28,7 @@ class triple_L18_DeuteriumLance(shipWeapon):
 class double_L13_HadronLance(shipWeapon):
     gunName = 'Double (L13) Hadron Lance'
     gunStats = {
-        "ATK": 121 * 2, "RLD": 1, "HIT": 85, "RNG": 3
+        "ATK": 141 * 2, "RLD": 1, "HIT": 85, "RNG": 3
     }
     def __init__(self, vesselID, turretDesignation):
         super().__init__(vesselID, turretDesignation) 
@@ -37,7 +37,7 @@ class double_L13_HadronLance(shipWeapon):
 class triple_L13_HadronLance(shipWeapon):
     gunName = 'Triple (L13) Hadron Lance'
     gunStats = {
-        "ATK": 121 * 3, "RLD": 1, "HIT": 85, "RNG": 3
+        "ATK": 141 * 3, "RLD": 1, "HIT": 85, "RNG": 3
     }
     def __init__(self, vesselID, turretDesignation):
         super().__init__(vesselID, turretDesignation)
