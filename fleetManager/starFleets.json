@@ -1,0 +1,45 @@
+[
+    {
+        "ASC":
+        {
+            "fleetNames":
+            [
+                "Dracnois-17 Astra Fleet"
+            ],
+
+            "Dracnois-17 Astra Fleet":
+            {
+                "shipNames": 
+                [
+                    "Tiamat",
+                    "Vandal",
+                    "Auerlion",
+                    "Scylla",
+                    "PrinceOfWales",
+                    "Indomitable",
+                    "Implecable",
+                    "Indefagitable",
+                    "Invaluable",
+                    "Irresistable"
+                ],
+                "shipClasses":
+                [
+                    "PrinceOfWalesClass", "AmagiClass", "AmagiClass", "PrinceOfWalesClass", "PrinceOfWalesClass",
+                    "IllustriousClass", "IllustriousClass", "IllustriousClass", "IllustriousClass", "IllustriousClass"
+                ],
+                "shipHullnumber":
+                [
+                    3423, 1022, 1042, 3425, 3404, 566, 567, 568, 595, 596
+                ]
+
+            }    
+        },
+
+        "XLF":
+        {
+            "s":"s"
+
+        }
+    
+    }
+]

@@ -1,0 +1,5 @@
+{
+    "files.defaultLanguage": "python",
+    // Check if git is enabled
+    "git.enabled": true,
+}
