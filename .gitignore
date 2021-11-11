@@ -1,4 +1,10 @@
 # Directories #
 
 .venv
-__pycache__
+venv/
+env/
+.env
+
+#Python pycache
+/__pycache__
+
