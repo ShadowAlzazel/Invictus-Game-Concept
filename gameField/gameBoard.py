@@ -42,6 +42,10 @@ class spaceGameBoard:
         # e is for flipping the y coordinate
         e = self.hexesWidth
         n = 0
+        targets = []
+        if shipHex.entity.gunsReady():
+            targets = shipHex.entity.findTargets()
+
         for hex in operationSpace.starSpaceHexes: 
             #indent every second row
             i = 0 
@@ -58,8 +62,12 @@ class spaceGameBoard:
             elif hex.entity.spaceEntity == 'shipObject':
                 if hex.entity.command == 'ASCS':
                     gameWindow.blit(SHIP_HERE_HEX_IMG, (x, y))
-                elif hex.entity.command == 'XNFF':
+                elif hex.entity.command == 'XNFF': #shipHex.entity.command
                     gameWindow.blit(SHIP_ENEMY_HERE_HEX_IMG, (x, y))
+
+                if hex in targets:
+                    gameWindow.blit(HEX_SHIP_TARGET, (x, y))
+                        
 
             n += 1
             if n == self.hexesLength:

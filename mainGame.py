@@ -38,6 +38,8 @@ def gameOperationSpace(turnGame):
             if event.type == KEYDOWN and event.key == K_e:
                 print('Fleet Turn Ended')
                 turnGame.fleetTurn()
+                combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
+
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
@@ -46,11 +48,12 @@ def gameOperationSpace(turnGame):
                     result = turnGame.selectHex(turnGame.opsSpace.starSpaceHexes[hexIndex])
                     if result:
                         combatGameBoard.drawShipActions(gameScreen, turnGame.opsSpace, turnGame.selectedHex)
-
-                pygame.display.update()
+                    else:
+                        combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
+           
                 print(hexIndex)
 
         #combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
-        #pygame.display.update()
+            pygame.display.update()
 
     pygame.quit()
