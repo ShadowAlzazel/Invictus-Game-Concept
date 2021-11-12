@@ -2,7 +2,7 @@
 import pygame
 
 LENGTH = 1000
-WIDTH = 700
+WIDTH = 750
 
 HEX_SIZE = 0
 
