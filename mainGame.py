@@ -1,5 +1,5 @@
 import pygame
-from pygame.constants import K_ESCAPE, KEYDOWN, K_e
+from pygame.constants import K_ESCAPE, KEYDOWN, K_e, K_i
 from gameField import *
 
 #start game
@@ -40,6 +40,9 @@ def gameOperationSpace(turnGame):
                 turnGame.fleetTurn()
                 combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
 
+            if event.type == KEYDOWN and event.key == K_i:
+                if turnGame.selectedHex:
+                    turnGame.selectedHex.entity.fullInspect()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()

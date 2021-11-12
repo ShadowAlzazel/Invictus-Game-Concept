@@ -43,8 +43,9 @@ class spaceGameBoard:
         e = self.hexesWidth
         n = 0
         targets = []
-        if shipHex.entity.gunsReady():
-            targets = shipHex.entity.findTargets()
+        aShip = shipHex.entity
+        if aShip.gunsReady():
+            targets = aShip.findTargets()
 
         for hex in operationSpace.starSpaceHexes: 
             #indent every second row
@@ -57,12 +58,12 @@ class spaceGameBoard:
             x = (self.bordersRowsX) + (n * HEX_SIZE) + i - (HEX_SIZE // 2)
             if hex.empty:
                 gameWindow.blit(EMPTY_HEX_IMG, (x, y))
-                if hex in shipHex.neighbors:
+                if hex in shipHex.neighbors and aShip.shipMovement != 0:
                     gameWindow.blit(HEX_MOVABLE, (x, y))
             elif hex.entity.spaceEntity == 'shipObject':
                 if hex.entity.command == 'ASCS':
                     gameWindow.blit(SHIP_HERE_HEX_IMG, (x, y))
-                elif hex.entity.command == 'XNFF': #shipHex.entity.command
+                elif hex.entity.command == 'XNFF': #aShip.command
                     gameWindow.blit(SHIP_ENEMY_HERE_HEX_IMG, (x, y))
 
                 if hex in targets:
