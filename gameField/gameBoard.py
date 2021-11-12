@@ -1,5 +1,4 @@
 #class for board display
-from gameField.gameHex import spaceGameHex
 from gameField.gameAssets import *
 
 class spaceGameBoard:
@@ -11,8 +10,7 @@ class spaceGameBoard:
         self.displayBoard = []
         newRow = []
         for x in someZone.starSpaceHexes:  
-            z = spaceGameHex(x)
-            newRow.append(z)
+            newRow.append(x)
             if len(newRow) == self.hexesLength:
                 self.displayBoard.append(newRow)
                 newRow = []
@@ -33,9 +31,9 @@ class spaceGameBoard:
             for hex in row:
                 #x coordinate is a proportion of the screen
                 x = ((LENGTH - (64 * self.hexesLength)) // 2) + (n * 64) + i
-                if hex.gameHexSpace.empty:
+                if hex.empty:
                     gameWindow.blit(HEX_Y_IMG, (x, y))
-                elif hex.gameHexSpace.entity.spaceEntity == 'shipObject':
+                elif hex.entity.spaceEntity == 'shipObject':
                     gameWindow.blit(HEX_ENTF_IMG, (x, y))
                 n += 1
 
