@@ -3,24 +3,18 @@ from gameField.gameAssets import *
 
 class spaceGameBoard:
 
-    def __init__(self, someZone):
-        self.gameCombatZone = someZone
-        self.hexesLength = someZone.l
-        self.hexesWidth = someZone.w
-        self.displayBoard = []
-        newRow = []
-        for x in someZone.starSpaceHexes:  
-            newRow.append(x)
-            if len(newRow) == self.hexesLength:
-                self.displayBoard.append(newRow)
-                newRow = []
-    
+    def __init__(self, someZoneSpace):
+        self.combatZoneSpace = someZoneSpace
+        self.hexesLength = someZoneSpace.l
+        self.hexesWidth = someZoneSpace.w
+
 
     def drawHexes(self, gameWindow):
+        displayBoard = self.createDisplayBoard()
 
         # e is for flipping the y coordinate
         e = self.hexesWidth
-        for row in self.displayBoard:
+        for row in displayBoard:
             i = 0  
             y = ((WIDTH - (64 * self.hexesWidth)) // 2) + ((e - 1) * 64)
             n = 0
@@ -38,3 +32,29 @@ class spaceGameBoard:
                 n += 1
 
             e -= 1
+
+
+    def createDisplayBoard(self):
+        newRow = []
+        displayBoard = []
+        for x in self.combatZoneSpace.starSpaceHexes:  
+            newRow.append(x)
+            if len(newRow) == self.hexesLength:
+                displayBoard.append(newRow)
+                newRow = []
+        return displayBoard
+
+
+    def getMousePosEnt(self, position):
+        displayBoard = self.createDisplayBoard()
+        x, y = position
+        i = 0
+        e = ((y - ((WIDTH - (64 * self.hexesWidth)) // 2)) // 64)   #row
+        if not e % 2 == 0:
+            i = 32
+        n = (x - (LENGTH - ((64 * self.hexesLength) // 2) + i)) // 64   #column
+        
+        print(displayBoard[e][n].coord['hexNum'])
+        return displayBoard[e][n]
+
+

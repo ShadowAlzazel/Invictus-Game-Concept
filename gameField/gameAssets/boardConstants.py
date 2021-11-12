@@ -8,6 +8,8 @@ CENTER_Y = WIDTH // 2
 
 HEX_SIZE = 0
 
+FPS = 60
+
 SCREEN_RGB = [38, 38, 51]
 
 

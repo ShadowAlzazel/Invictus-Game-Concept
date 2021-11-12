@@ -3,18 +3,8 @@ from pygame.constants import K_ESCAPE, KEYDOWN
 from gameField.gameBoard import *
 from gameField.gameAssets import *
 
-FPS = 60
-
 gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
 gameScreen.fill(SCREEN_RGB)
-
-
-def getMousePosition(position):
-    x, y = position
-
-
-
-
 
 
 #start game
@@ -38,13 +28,12 @@ def gameStart(aCombatSpace):
             if event.type == pygame.QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 gameRunning = False
 
-           # if event.type == pygame.MOUSEBUTTONDOWN:
-           #     mousePos = pygame.mouse.get_pos()
-           #     xRow, yColumn = getMousePosition(mousePos)
-           #     clickedShip = 0
-
-
-
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                someMousePos = pygame.mouse.get_pos()
+                aMouseHex = combatGameBoard.getMousePosEnt(someMousePos)
+                if not aMouseHex.empty:
+                    combatGameBoard.gameCombatZone.moveEntity(aMouseHex.entity, 'UR')
+                print('Moved')
 
 
         combatGameBoard.drawHexes(gameScreen)
