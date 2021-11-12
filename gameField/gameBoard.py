@@ -3,58 +3,68 @@ from gameField.gameAssets import *
 
 class spaceGameBoard:
 
-    def __init__(self, someZoneSpace):
-        self.combatZoneSpace = someZoneSpace
-        self.hexesLength = someZoneSpace.l
-        self.hexesWidth = someZoneSpace.w
+    def __init__(self, l, w):
+        self.hexesLength = l
+        self.hexesWidth = w
+        self.bordersColumnsY = (WIDTH - (HEX_SIZE * self.hexesWidth)) // 2
+        self.bordersRowsX = (LENGTH - (HEX_SIZE * self.hexesLength)) // 2
 
 
-    def drawHexes(self, gameWindow):
-        displayBoard = self.createDisplayBoard()
-
+    def drawHexes(self, gameWindow, operationSpace):
+        gameWindow.fill(SCREEN_RGB)
         # e is for flipping the y coordinate
         e = self.hexesWidth
-        for row in displayBoard:
-            i = 0  
-            y = ((WIDTH - (64 * self.hexesWidth)) // 2) + ((e - 1) * 64)
-            n = 0
+        n = 0
+        for hex in operationSpace.starSpaceHexes: 
             #indent every second row
+            i = 0 
             if not e % 2 == 0:
                 i = 32
+            #y coordinate
+            y = (self.bordersColumnsY) + ((e - 1) * HEX_SIZE)
+            #x coordinate is a proportion of the screen
+            x = (self.bordersRowsX) + (n * HEX_SIZE) + i - (HEX_SIZE // 2)
+            if hex.empty:
+                gameWindow.blit(HEX_Y_IMG, (x, y))
+            elif hex.entity.spaceEntity == 'shipObject':
+                gameWindow.blit(HEX_ENTF_IMG, (x, y))
 
-            for hex in row:
-                #x coordinate is a proportion of the screen
-                x = ((LENGTH - (64 * self.hexesLength)) // 2) + (n * 64) + i
-                if hex.empty:
-                    gameWindow.blit(HEX_Y_IMG, (x, y))
-                elif hex.entity.spaceEntity == 'shipObject':
-                    gameWindow.blit(HEX_ENTF_IMG, (x, y))
-                n += 1
+            n += 1
+            if n == self.hexesLength:
+                e -= 1
+                n = 0
 
-            e -= 1
-
-
-    def createDisplayBoard(self):
-        newRow = []
-        displayBoard = []
-        for x in self.combatZoneSpace.starSpaceHexes:  
-            newRow.append(x)
-            if len(newRow) == self.hexesLength:
-                displayBoard.append(newRow)
-                newRow = []
-        return displayBoard
-
-
-    def getMousePosEnt(self, position):
-        displayBoard = self.createDisplayBoard()
-        x, y = position
+    def getCoordMouse(self, mousePos):
         i = 0
-        e = ((y - ((WIDTH - (64 * self.hexesWidth)) // 2)) // 64)   #row
-        if not e % 2 == 0:
-            i = 32
-        n = (x - (LENGTH - ((64 * self.hexesLength) // 2) + i)) // 64   #column
-        
-        print(displayBoard[e][n].coord['hexNum'])
-        return displayBoard[e][n]
+        a, b = mousePos
+        aActive = False
+        bActive = False 
+        column, row = 0, 0
+
+        if b in range(self.bordersColumnsY, (HEX_SIZE * self.hexesWidth) + (self.bordersColumnsY)):
+            bActive = True
+            #reverse y coords
+            row = abs(((b - self.bordersColumnsY) // HEX_SIZE) - self.hexesWidth) - 1
+
+            #check even odd
+            if ((b - self.bordersColumnsY) // HEX_SIZE) % 2 == 1:
+                i = HEX_SIZE // 2  
+
+        if a in range((self.bordersRowsX) - i, ((HEX_SIZE * self.hexesLength) + (self.bordersRowsX) - i)):
+            aActive = True
+
+            column = ((a - self.bordersRowsX) + i) // HEX_SIZE
+
+
+        if aActive and bActive:
+            print("Inside active space")
+            indexCoord = (row * self.hexesLength) + column
+            return indexCoord
+        else:
+            print("No Hexes In this space")
+            return -1
+
+
+
 
 

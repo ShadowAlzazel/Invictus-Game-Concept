@@ -8,7 +8,7 @@ class shipHexRadar:
 
 
     def findGunTargets(self, gunRange, shipPlaceSpace, targetShip):
-        nearby = self.findHexes(gunRange, shipPlaceSpace) 
+        nearby = self._findHexes(gunRange, shipPlaceSpace) 
         targets = []
         for k in nearby:
             if k.empty == False and k.entity.command != shipPlaceSpace.entity.command and k.entity == targetShip:
@@ -19,7 +19,7 @@ class shipHexRadar:
 
 
     def findRadarTargets(self, radarRange, shipPlaceSpace):
-        nearby = self.findHexes(radarRange, shipPlaceSpace) 
+        nearby = self._findHexes(radarRange, shipPlaceSpace) 
         targets = []
         for k in nearby:
             if k.empty == False and k.entity.command != shipPlaceSpace.entity.command:
@@ -29,7 +29,7 @@ class shipHexRadar:
         return targets
     
 
-    def findHexes(self, requestedRange, aHexSpace):
+    def _findHexes(self, requestedRange, aHexSpace):
         assert requestedRange != 0
         effRange = requestedRange 
         if effRange > self.radarClass:

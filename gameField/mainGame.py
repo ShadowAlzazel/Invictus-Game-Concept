@@ -3,15 +3,17 @@ from pygame.constants import K_ESCAPE, KEYDOWN
 from gameField.gameBoard import *
 from gameField.gameAssets import *
 
-gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
-gameScreen.fill(SCREEN_RGB)
-
-
 #start game
-def gameStart(aCombatSpace): 
+def gameStart(operationSpace): 
+    gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
+    gameScreen.fill(SCREEN_RGB)
+
+    HEX_ENTF_IMG.convert()
+    HEX_Y_IMG.convert()
+
     pygame.init()
 
-    combatGameBoard = spaceGameBoard(aCombatSpace)
+    combatGameBoard = spaceGameBoard(operationSpace.l, operationSpace.w)
 
     #create window
     pygame.display.update()
@@ -30,13 +32,15 @@ def gameStart(aCombatSpace):
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
-                aMouseHex = combatGameBoard.getMousePosEnt(someMousePos)
-                if not aMouseHex.empty:
-                    combatGameBoard.gameCombatZone.moveEntity(aMouseHex.entity, 'UR')
-                print('Moved')
+                hexIndex  = combatGameBoard.getCoordMouse(someMousePos)
+                if hexIndex >= 0:
+                    print(operationSpace.starSpaceHexes[hexIndex].empty)
+                    if not operationSpace.starSpaceHexes[hexIndex].empty:
+                        operationSpace.moveEntity(operationSpace.starSpaceHexes[hexIndex].entity, 'UR')
 
+                print(hexIndex)
 
-        combatGameBoard.drawHexes(gameScreen)
+        combatGameBoard.drawHexes(gameScreen, operationSpace)
         pygame.display.update()
 
     pygame.quit()
