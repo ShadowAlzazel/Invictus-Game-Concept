@@ -9,7 +9,7 @@ class spaceGameBoard:
         self.bordersColumnsY = (WIDTH - (HEX_SIZE * self.hexesWidth)) // 2
         self.bordersRowsX = (LENGTH - (HEX_SIZE * self.hexesLength)) // 2
 
-
+    #draw hexes on board
     def drawHexes(self, gameWindow, operationSpace):
         gameWindow.fill(SCREEN_RGB)
         # e is for flipping the y coordinate
@@ -29,7 +29,7 @@ class spaceGameBoard:
             elif hex.entity.spaceEntity == 'shipObject':
                 if hex.entity.command == 'ASCS':
                     gameWindow.blit(SHIP_HERE_HEX_IMG, (x, y))
-                elif hex.entity.command == 'XLFF':
+                elif hex.entity.command == 'XNFF':
                     gameWindow.blit(SHIP_ENEMY_HERE_HEX_IMG, (x, y))
 
             n += 1
@@ -55,9 +55,7 @@ class spaceGameBoard:
 
         if a in range((self.bordersRowsX) - i, ((HEX_SIZE * self.hexesLength) + (self.bordersRowsX) - i)):
             aActive = True
-
             column = ((a - self.bordersRowsX) + i) // HEX_SIZE
-
 
         if aActive and bActive:
             indexCoord = (row * self.hexesLength) + column
@@ -65,8 +63,3 @@ class spaceGameBoard:
         else:
             print("No Hexes In this space")
             return -1
-
-
-
-
-

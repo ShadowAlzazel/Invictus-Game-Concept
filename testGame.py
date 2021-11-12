@@ -11,11 +11,11 @@ aoe = createCombatSpace(10, 10, 0)
 fleetASCS = spaceFleet(astraFleets[0]['ASC']['fleetNames'][0], 'ASC')
 fleetLaunch(fleetASCS)
 
-fleetXLFF = spaceFleet('Xtralis Line Frontier Fleet', 'XNFF')
+fleetXLFF = spaceFleet('Xtralis New Frontier Fleet', 'XNFF')
 fleetXLFF.fleetShips.append(VittorioVenetoClass(302, 'Littorio'))
 fleetXLFF.fleetShips.append(VittorioVenetoClass(304, 'Roma Imperio'))
-fleetXLFF.fleetShips[0].command = 'XLFF'
-fleetXLFF.fleetShips[1].command = 'XLFF'
+fleetXLFF.fleetShips[0].command = 'XNFF'
+fleetXLFF.fleetShips[1].command = 'XNFF'
 
 fleetASCS.spawnFleet(aoe)
 fleetXLFF.spawnFleet(aoe)
