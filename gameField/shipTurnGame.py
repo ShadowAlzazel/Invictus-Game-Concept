@@ -15,7 +15,8 @@ class turnCombatGame:
         self.activeFleets = operationSpace.fleetEntities
         self.gameTurn = 0
         self.selectedHex = None 
-        self.currentFleetTurn = 'ASCS'   #WIP make it switch
+        self.currentFleetTurn = 'ASCS'
+        self.currentFleetIndex = 0     #WIP make it switch
         for s in self.activeShips:
             s.shipMovement = 0
             s.shipAttacks = 0
@@ -34,6 +35,7 @@ class turnCombatGame:
             self.selectedHex = aHex
             return True
         return False 
+        
 
     #hit calculator for a gun
     def gunHitCalc(self, gunBattery, aShipACC, bShipEVA):
@@ -192,39 +194,10 @@ class turnCombatGame:
         print(aShip.vesselID, aShip.name, "Has done", totalDamage, "Total Damage to", bShip.vesselID, bShip.name)
 
     #fleet Actions
-    def fleetActions(self, aFleet):
-        #create/add new actions to fleet ships
-        for t in aFleet.fleetShips:
-            t.shipMovement = t.shipStats['SPD']
-            t.shipAttacks = 1
-            t.reloadGuns()
-            t.shipTurn = True
-
-        fleetTurn = True
-        while fleetTurn:
-            n = 0
-            for s in aFleet.fleetShips:
-                if s.shipTurn:
-                    self.shipActions(s)
-                else:
-                    n += 1
-
-            if n == len(aFleet.fleetShips):
-                print("No turns available for all ships in", aFleet.name)      
-                fleetTurn = False   
-
-    #start a new turn
-    def runATurn(self):
-        for x in self.activeFleets:
-            self.fleetActions(x)
-
-    #run game function
-    def runGame(self):
-        gameRunning = True
-        while gameRunning:
-            self.runATurn()
-            play = input("Continue Game?: ")
-            if play in self.Query['No'] or play in self.Query['End']:
-                gameRunning = False
-            else:
-                self.gameTurn += 1
+    def fleetTurn(self):
+        q = self.currentFleetIndex
+        if q == len(self.activeFleets) - 1:
+            self.gameTurn += 1
+            self.currentFleetTurn = self.activeFleets[0]
+        else: 
+            self.currentFleetTurn = self.activeFleets[q + 1] 

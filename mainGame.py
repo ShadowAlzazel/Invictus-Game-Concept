@@ -1,28 +1,10 @@
 import pygame
-from pygame.constants import K_ESCAPE, KEYDOWN
+from pygame.constants import K_ESCAPE, KEYDOWN, K_e 
 from gameField import *
-from spaceField import *
-from shipCreater import *
-
-aoe = createCombatSpace(10, 10, 0)
-
-fleetASCS = []
-fleetASCS.append(NewJerseyClass(99, 'New Jersey'))
-
-
-fleetXLFF = []
-fleetXLFF.append(VittorioVenetoClass(302, 'Littorio'))
-fleetXLFF.append(VittorioVenetoClass(304, 'Roma Imperio'))
-fleetXLFF[0].command = 'XLFF'
-fleetXLFF[1].command = 'XLFF'
-
-aoe.addCustomEntity(aoe.starSpaceHexes[2], fleetXLFF[0])
-aoe.addCustomEntity(aoe.starSpaceHexes[15], fleetXLFF[1])
-aoe.addCustomEntity(aoe.starSpaceHexes[69], fleetASCS[0])
 
 #start game
-def gameStart():
-    turnGame = turnCombatGame(aoe)
+def gameOperationSpace(turnGame):
+    #turnGame = turnCombatGame(aoe)
 
     gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
     gameScreen.fill(SCREEN_RGB)
@@ -50,6 +32,10 @@ def gameStart():
             if event.type == pygame.QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 gameRunning = False
 
+            if event.type == pygame.K_e:
+                turnGame.fleetTurn()
+
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
                 hexIndex = combatGameBoard.getCoordMouse(someMousePos)
@@ -62,5 +48,3 @@ def gameStart():
         pygame.display.update()
 
     pygame.quit()
-
-gameStart()
