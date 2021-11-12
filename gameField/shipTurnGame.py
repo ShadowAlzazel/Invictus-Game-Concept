@@ -15,7 +15,7 @@ class turnCombatGame:
         self.activeFleets = operationSpace.fleetEntities
         self.gameTurn = 0
         self.selectedHex = None 
-        self.currentFleetTurn = 'XLFF'   #None
+        self.currentFleetTurn = 'ASCS'   #WIP make it switch
         for s in self.activeShips:
             s.shipMovement = 0
             s.shipAttacks = 0
@@ -23,8 +23,6 @@ class turnCombatGame:
 
     #select ship
     def selectHex(self, aHex):
-        print('ClickHEx')
-        print(aHex.empty)
         if self.selectedHex:
             result = self._moveShipAction(aHex)
             if not result:
@@ -35,7 +33,6 @@ class turnCombatGame:
         if not aHex.empty and self.currentFleetTurn == aShip.command:
             self.selectedHex = aHex
             return True
-
         return False 
 
     #hit calculator for a gun
@@ -62,7 +59,6 @@ class turnCombatGame:
 
     #all availabe ship action query 
     def shipActions(self, aShip):
-        #self.opsSpace.showMap() 
         shipturnActive = True
 
         while shipturnActive:   

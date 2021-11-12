@@ -6,6 +6,10 @@ from shipCreater import *
 
 aoe = createCombatSpace(10, 10, 0)
 
+fleetASCS = []
+fleetASCS.append(NewJerseyClass(99, 'New Jersey'))
+
+
 fleetXLFF = []
 fleetXLFF.append(VittorioVenetoClass(302, 'Littorio'))
 fleetXLFF.append(VittorioVenetoClass(304, 'Roma Imperio'))
@@ -14,6 +18,7 @@ fleetXLFF[1].command = 'XLFF'
 
 aoe.addCustomEntity(aoe.starSpaceHexes[2], fleetXLFF[0])
 aoe.addCustomEntity(aoe.starSpaceHexes[15], fleetXLFF[1])
+aoe.addCustomEntity(aoe.starSpaceHexes[69], fleetASCS[0])
 
 #start game
 def gameStart():
@@ -22,8 +27,9 @@ def gameStart():
     gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
     gameScreen.fill(SCREEN_RGB)
 
-    HEX_ENTF_IMG.convert()
-    HEX_Y_IMG.convert()
+    EMPTY_HEX_IMG.convert()
+    SHIP_HERE_HEX_IMG.convert()
+    SHIP_ENEMY_HERE_HEX_IMG.convert()
 
     pygame.init()
 
