@@ -1,4 +1,5 @@
 #a turn based combat game
+from gameField.gameBoard import *
 from random import randint
 
 class turnCombatGame:
@@ -9,14 +10,33 @@ class turnCombatGame:
             }
 
     def __init__(self, operationSpace):
-        self.gameSpace = operationSpace
+        self.opsSpace = operationSpace
         self.activeShips = operationSpace.spaceEntities['shipObject']
         self.activeFleets = operationSpace.fleetEntities
         self.gameTurn = 0
+        self.selectedHex = None 
+        self.currentFleetTurn = 'XLFF'   #None
         for s in self.activeShips:
             s.shipMovement = 0
             s.shipAttacks = 0
             s.shipTurn = True 
+
+    #select ship
+    def selectHex(self, aHex):
+        print('ClickHEx')
+        print(aHex.empty)
+        if self.selectedHex:
+            result = self._moveShipAction(aHex)
+            if not result:
+                self.selectedHex = None 
+                self.selectHex(aHex)
+
+        aShip = aHex.entity
+        if not aHex.empty and self.currentFleetTurn == aShip.command:
+            self.selectedHex = aHex
+            return True
+
+        return False 
 
     #hit calculator for a gun
     def gunHitCalc(self, gunBattery, aShipACC, bShipEVA):
@@ -42,7 +62,7 @@ class turnCombatGame:
 
     #all availabe ship action query 
     def shipActions(self, aShip):
-        #self.gameSpace.showMap() 
+        #self.opsSpace.showMap() 
         shipturnActive = True
 
         while shipturnActive:   
@@ -62,11 +82,9 @@ class turnCombatGame:
                 return
 
             elif playerInput in self.Query['Move']:
-                self.gameSpace.showMapShip(aShip) 
                 if aShip.shipMovement != 0:
-                    if self.moveShipAction(aShip):
-                        aShip.shipMovement -= 1
-                        self.gameSpace.showMapShip(aShip) 
+                    if self._moveShipAction(aShip):
+                        aShip.shipMovement -= 1 
                 else: 
                     print("No More Moves Available")
 
@@ -122,9 +140,12 @@ class turnCombatGame:
             #return True 
 
     #move ship on board
-    def moveShipAction(self, aShip):
-        x = self.gameSpace.moveEntity(aShip, input("Direction needed: "))
-        return x
+    def _moveShipAction(self, aHex):
+        result = False
+        if aHex.empty and (aHex in self.selectedHex.neighbors):
+            selectedShip = self.selectedHex.entity
+            result = self.opsSpace.moveClickEntity(selectedShip, aHex) 
+        return result
 
 
     #fire all guns in range 
@@ -183,12 +204,10 @@ class turnCombatGame:
             t.reloadGuns()
             t.shipTurn = True
 
-        self.gameSpace.showMap()
         fleetTurn = True
         while fleetTurn:
             n = 0
             for s in aFleet.fleetShips:
-                self.gameSpace.showMapShip(s)
                 if s.shipTurn:
                     self.shipActions(s)
                 else:

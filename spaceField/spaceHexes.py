@@ -21,7 +21,6 @@ class starSpace:
 
 #operation Space/Zone
 class zoneSpace:
-
     def __init__(self, length, width):
         n = 0
         self.l = length
@@ -45,6 +44,24 @@ class zoneSpace:
             self.hexesFull.append(aStarSpace)
             self.spaceEntities[newEntity.spaceEntity].append(newEntity)
 
+    #click move
+    def moveClickEntity(self, movableEntity, clickHex):
+        oldHexCoord = movableEntity.placeSpace.coord['hexNum']
+        newHexCoord = clickHex.coord['hexNum']
+        if not clickHex.empty:
+            print("Hex Occupied!")
+            return False
+
+        self.hexesFull.remove(self.starSpaceHexes[oldHexCoord])
+        self.hexesFull.append(self.starSpaceHexes[newHexCoord])
+        self.starSpaceHexes[newHexCoord].addEntity(movableEntity)
+        self.starSpaceHexes[oldHexCoord].entity = []
+        self.starSpaceHexes[oldHexCoord].empty = True
+        print("Moved From: Space Hex", oldHexCoord, end=' ')
+        print("To: Space Hex", movableEntity.placeSpace.coord['hexNum'])
+        return True
+
+
 
     #check if the move is valid
     def moveEntity(self, movableEntity, direction):
@@ -55,19 +72,19 @@ class zoneSpace:
         tR = ['TR', 'tr', 'tR', 'R', 'r']
         tL = ['tL', 'tl', 'tL', 'L', 'l']
         curHexCoord = movableEntity.placeSpace.coord['hexNum']
-        x = False
+        result = False
 
         if direction in tR:
             if (curHexCoord + 1) % self.l == 0:
                 print("Cannot move Right! At right border!")
             else:
-                x = self.moveLocation(movableEntity, 'Right')
+                result = self.moveLocation(movableEntity, 'Right')
 
         elif direction in tL:
             if (curHexCoord) % self.l == 0:
                 print("Cannot move Left! At left border!")
             else:
-                x = self.moveLocation(movableEntity, 'Left')
+                result = self.moveLocation(movableEntity, 'Left')
 
         elif direction in uR:
             if (curHexCoord) >= self.l * (self.w - 1):
@@ -75,7 +92,7 @@ class zoneSpace:
             elif (curHexCoord // self.l) % 2 == 1 and (curHexCoord + 1) % self.l == 0:
                 print("Cannot move Up-Right! Even Rank Border Hex!")
             else:
-                x = self.moveLocation(movableEntity, 'UpRight')
+                result = self.moveLocation(movableEntity, 'UpRight')
 
         elif direction in uL:
             if (curHexCoord) >= self.l * (self.w - 1):
@@ -83,7 +100,7 @@ class zoneSpace:
             elif (curHexCoord // self.l) % 2 == 0 and curHexCoord % self.l == 0:
                 print("Cannot move Up-Left! Odd Rank Border Hex!")  
             else:
-                x = self.moveLocation(movableEntity, 'UpLeft') 
+                result = self.moveLocation(movableEntity, 'UpLeft') 
 
         elif direction in dR:
             if (curHexCoord) // self.l == 0:
@@ -91,7 +108,7 @@ class zoneSpace:
             elif (curHexCoord // self.l) % 2 == 1 and (curHexCoord + 1) % self.l == 0:
                 print("Cannot move Down-Right! Even Rank Border Hex!")
             else:
-                x = self.moveLocation(movableEntity, 'DownRight')
+                result = self.moveLocation(movableEntity, 'DownRight')
 
         elif direction in dL: 
             if (curHexCoord) // self.l == 0:
@@ -99,14 +116,13 @@ class zoneSpace:
             elif (curHexCoord // self.l) % 2 == 0 and curHexCoord % self.l == 0:
                 print("Cannot move Down-Left! Odd Rank Border Hex")
             else: 
-                x = self.moveLocation(movableEntity, 'DownLeft')
+                result = self.moveLocation(movableEntity, 'DownLeft')
                  
         else:
-            x = False 
+            result = False 
             print("Directions Unknown")
 
-
-        return x 
+        return result
 
     #move the entity to the corresponding location and change list
     def moveLocation(self, movingEntity, vector):

@@ -1,10 +1,23 @@
 import pygame
 from pygame.constants import K_ESCAPE, KEYDOWN
-from gameField.gameBoard import *
-from gameField.gameAssets import *
+from gameField import *
+from spaceField import *
+from shipCreater import *
+
+aoe = createCombatSpace(10, 10, 0)
+
+fleetXLFF = []
+fleetXLFF.append(VittorioVenetoClass(302, 'Littorio'))
+fleetXLFF.append(VittorioVenetoClass(304, 'Roma Imperio'))
+fleetXLFF[0].command = 'XLFF'
+fleetXLFF[1].command = 'XLFF'
+
+aoe.addCustomEntity(aoe.starSpaceHexes[2], fleetXLFF[0])
+aoe.addCustomEntity(aoe.starSpaceHexes[15], fleetXLFF[1])
 
 #start game
-def gameStart(operationSpace):
+def gameStart():
+    turnGame = turnCombatGame(aoe)
 
     gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
     gameScreen.fill(SCREEN_RGB)
@@ -14,7 +27,7 @@ def gameStart(operationSpace):
 
     pygame.init()
 
-    combatGameBoard = spaceGameBoard(operationSpace.l, operationSpace.w)
+    combatGameBoard = spaceGameBoard(turnGame.opsSpace.l, turnGame.opsSpace.w)
 
     #create window
     pygame.display.update()
@@ -33,15 +46,15 @@ def gameStart(operationSpace):
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
-                hexIndex  = combatGameBoard.getCoordMouse(someMousePos)
+                hexIndex = combatGameBoard.getCoordMouse(someMousePos)
                 if hexIndex >= 0:
-                    print(operationSpace.starSpaceHexes[hexIndex].empty)
-                    if not operationSpace.starSpaceHexes[hexIndex].empty:
-                        operationSpace.moveEntity(operationSpace.starSpaceHexes[hexIndex].entity, 'UR')
+                    turnGame.selectHex(turnGame.opsSpace.starSpaceHexes[hexIndex])
 
                 print(hexIndex)
 
-        combatGameBoard.drawHexes(gameScreen, operationSpace)
+        combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
         pygame.display.update()
 
     pygame.quit()
+
+gameStart()
