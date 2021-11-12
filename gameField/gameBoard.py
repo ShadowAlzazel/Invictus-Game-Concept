@@ -30,7 +30,7 @@ class spaceGameBoard:
                 if hex.entity.command == 'ASCS':
                     gameWindow.blit(SHIP_HERE_HEX_IMG, (x, y))
                 elif hex.entity.command == 'XNFF':
-                    gameWindow.blit(SHIP_ENEMY_HERE_HEX_IMG, (x, y))
+                    gameWindow.blit(ENEMY_SHIP_HERE_HEX_IMG, (x, y))
 
             n += 1
             if n == self.hexesLength:
@@ -59,15 +59,15 @@ class spaceGameBoard:
             if hex.empty:
                 gameWindow.blit(EMPTY_HEX_IMG, (x, y))
                 if hex in shipHex.neighbors and aShip.shipMovement != 0:
-                    gameWindow.blit(HEX_MOVABLE, (x, y))
+                    gameWindow.blit(MOVE_OPTION_HEX_IMG, (x, y))
             elif hex.entity.spaceEntity == 'shipObject':
                 if hex.entity.command == 'ASCS':
                     gameWindow.blit(SHIP_HERE_HEX_IMG, (x, y))
                 elif hex.entity.command == 'XNFF': #aShip.command
-                    gameWindow.blit(SHIP_ENEMY_HERE_HEX_IMG, (x, y))
+                    gameWindow.blit(ENEMY_SHIP_HERE_HEX_IMG, (x, y))
 
                 if hex in targets:
-                    gameWindow.blit(HEX_SHIP_TARGET, (x, y))
+                    gameWindow.blit(SHIP_TARGET_HEX_IMG, (x, y))
                         
 
             n += 1

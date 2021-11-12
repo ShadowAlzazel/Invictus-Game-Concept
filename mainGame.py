@@ -4,29 +4,24 @@ from gameField import *
 
 #start game
 def gameOperationSpace(turnGame):
-    #turnGame = turnCombatGame(aoe)
 
     gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
     gameScreen.fill(SCREEN_RGB)
 
-    EMPTY_HEX_IMG.convert()
-    SHIP_HERE_HEX_IMG.convert()
-    SHIP_ENEMY_HERE_HEX_IMG.convert()
 
+    #start pygame
     pygame.init()
-
     combatGameBoard = spaceGameBoard(turnGame.opsSpace.l, turnGame.opsSpace.w)
 
     #create window
     pygame.display.update()
     pygame.display.set_caption("ASCS Fleet Manager")
     pygame.display.set_icon(GAME_ICON)
+    combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
+    pygame.display.update()
 
     gameRunning = True
     gameClock = pygame.time.Clock()
-
-    combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
-    pygame.display.update()
 
     while gameRunning:
         gameClock.tick(FPS)
