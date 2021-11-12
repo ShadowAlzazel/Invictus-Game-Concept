@@ -25,6 +25,9 @@ def gameOperationSpace(turnGame):
     gameRunning = True
     gameClock = pygame.time.Clock()
 
+    combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
+    pygame.display.update()
+
     while gameRunning:
         gameClock.tick(FPS)
         
@@ -42,11 +45,12 @@ def gameOperationSpace(turnGame):
                 if hexIndex >= 0:
                     result = turnGame.selectHex(turnGame.opsSpace.starSpaceHexes[hexIndex])
                     if result:
-                        combatGameBoard.drawHexes
+                        combatGameBoard.drawShipActions(gameScreen, turnGame.opsSpace, turnGame.selectedHex)
 
+                pygame.display.update()
                 print(hexIndex)
 
-        combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
-        pygame.display.update()
+        #combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
+        #pygame.display.update()
 
     pygame.quit()

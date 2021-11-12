@@ -37,6 +37,36 @@ class spaceGameBoard:
                 e -= 1
                 n = 0
 
+    def drawShipActions(self, gameWindow, operationSpace, shipHex):
+        gameWindow.fill(SCREEN_RGB)
+        # e is for flipping the y coordinate
+        e = self.hexesWidth
+        n = 0
+        for hex in operationSpace.starSpaceHexes: 
+            #indent every second row
+            i = 0 
+            if not e % 2 == 0:
+                i = 32
+            #y coordinate
+            y = (self.bordersColumnsY) + ((e - 1) * HEX_SIZE)
+            #x coordinate is a proportion of the screen
+            x = (self.bordersRowsX) + (n * HEX_SIZE) + i - (HEX_SIZE // 2)
+            if hex.empty:
+                gameWindow.blit(EMPTY_HEX_IMG, (x, y))
+                if hex in shipHex.neighbors:
+                    gameWindow.blit(HEX_MOVABLE, (x, y))
+            elif hex.entity.spaceEntity == 'shipObject':
+                if hex.entity.command == 'ASCS':
+                    gameWindow.blit(SHIP_HERE_HEX_IMG, (x, y))
+                elif hex.entity.command == 'XNFF':
+                    gameWindow.blit(SHIP_ENEMY_HERE_HEX_IMG, (x, y))
+
+            n += 1
+            if n == self.hexesLength:
+                e -= 1
+                n = 0
+
+
     def getCoordMouse(self, mousePos):
         i = 0
         a, b = mousePos
