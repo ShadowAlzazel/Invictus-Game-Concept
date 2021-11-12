@@ -1,6 +1,5 @@
 #space grid in hexes
 from spaceField.spaceBoard import makeGameBoard, showShipVision
-from numpy import array, asanyarray
 
 #hex space
 class starSpace:
@@ -33,14 +32,6 @@ class zoneSpace:
         self.spaceEntities = {'spaceObject': [], 'shipObject': []}
         for n in range(0, self.l * self.w):
             self.starSpaceHexes.append(starSpace(n))
-        starSpaceArray = []
-        lineArray = []
-        for x in self.starSpaceHexes:
-            lineArray.append(x)
-            if len(lineArray) == length:
-                starSpaceArray.append(lineArray)
-                lineArray = []
-        self.hexArray = asanyarray(starSpaceArray)
 
     def showMap(self):
         makeGameBoard(self)
@@ -48,7 +39,7 @@ class zoneSpace:
     def showMapShip(self, aShip):
         showShipVision(self, aShip)
 
-    # add an entity to the zone
+    # add an entity to the zone and a starSpace
     def addCustomEntity(self, aStarSpace, newEntity):
             aStarSpace.addEntity(newEntity) 
             self.hexesFull.append(aStarSpace)
