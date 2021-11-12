@@ -1,19 +1,21 @@
 import pygame
-from pygame.constants import K_ESCAPE, KEYDOWN
-from gameField.gameBoard import *
-from gameField.gameAssets import *
+from pygame.constants import K_ESCAPE, KEYDOWN, K_e 
+from gameField import *
 
 #start game
-def gameStart(operationSpace): 
+def gameOperationSpace(turnGame):
+    #turnGame = turnCombatGame(aoe)
+
     gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
     gameScreen.fill(SCREEN_RGB)
 
-    HEX_ENTF_IMG.convert()
-    HEX_Y_IMG.convert()
+    EMPTY_HEX_IMG.convert()
+    SHIP_HERE_HEX_IMG.convert()
+    SHIP_ENEMY_HERE_HEX_IMG.convert()
 
     pygame.init()
 
-    combatGameBoard = spaceGameBoard(operationSpace.l, operationSpace.w)
+    combatGameBoard = spaceGameBoard(turnGame.opsSpace.l, turnGame.opsSpace.w)
 
     #create window
     pygame.display.update()
@@ -30,17 +32,19 @@ def gameStart(operationSpace):
             if event.type == pygame.QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 gameRunning = False
 
+            if event.type == pygame.K_e:
+                turnGame.fleetTurn()
+
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
-                hexIndex  = combatGameBoard.getCoordMouse(someMousePos)
+                hexIndex = combatGameBoard.getCoordMouse(someMousePos)
                 if hexIndex >= 0:
-                    print(operationSpace.starSpaceHexes[hexIndex].empty)
-                    if not operationSpace.starSpaceHexes[hexIndex].empty:
-                        operationSpace.moveEntity(operationSpace.starSpaceHexes[hexIndex].entity, 'UR')
+                    turnGame.selectHex(turnGame.opsSpace.starSpaceHexes[hexIndex])
 
                 print(hexIndex)
 
-        combatGameBoard.drawHexes(gameScreen, operationSpace)
+        combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
         pygame.display.update()
 
     pygame.quit()

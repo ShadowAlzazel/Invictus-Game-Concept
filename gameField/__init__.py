@@ -1,2 +1,2 @@
-from gameField.mainGame import *
 from gameField.gameBoard import *
+from gameField.shipTurnGame import *

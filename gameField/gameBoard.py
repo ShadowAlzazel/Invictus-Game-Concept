@@ -25,9 +25,12 @@ class spaceGameBoard:
             #x coordinate is a proportion of the screen
             x = (self.bordersRowsX) + (n * HEX_SIZE) + i - (HEX_SIZE // 2)
             if hex.empty:
-                gameWindow.blit(HEX_Y_IMG, (x, y))
+                gameWindow.blit(EMPTY_HEX_IMG, (x, y))
             elif hex.entity.spaceEntity == 'shipObject':
-                gameWindow.blit(HEX_ENTF_IMG, (x, y))
+                if hex.entity.command == 'ASCS':
+                    gameWindow.blit(SHIP_HERE_HEX_IMG, (x, y))
+                elif hex.entity.command == 'XLFF':
+                    gameWindow.blit(SHIP_ENEMY_HERE_HEX_IMG, (x, y))
 
             n += 1
             if n == self.hexesLength:
@@ -57,7 +60,6 @@ class spaceGameBoard:
 
 
         if aActive and bActive:
-            print("Inside active space")
             indexCoord = (row * self.hexesLength) + column
             return indexCoord
         else:

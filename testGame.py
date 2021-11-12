@@ -1,34 +1,26 @@
 from shipCreater import *
+from fleetManager import *
+from fleetLogger import *
+from gameField import *
 from spaceField import *
-from shipCombat import turnCombatGame
+from mainGame import *
 
 
+aoe = createCombatSpace(10, 10, 0)
 
-fleetASCS = []
-fleetASCS.append(EssexClass(66, 'Essex'))
-fleetASCS.append(EssexClass(67, 'Intrepid'))
-fleetASCS.append(ApocalypseClass(89, 'Kirov'))
-fleetASCS.append(ApocalypseClass(101, 'Odessa'))
-fleetASCS.append(NewJerseyClass(69, 'New Jersey'))
+fleetASCS = spaceFleet(astraFleets[0]['ASC']['fleetNames'][0], 'ASC')
+fleetLaunch(fleetASCS)
 
-fleetXLFF = []
-fleetXLFF.append(VittorioVenetoClass(302, 'Littorio'))
-createShips(fleetXLFF, 'XLFF', 4)
+fleetXLFF = spaceFleet('Xtralis Line Frontier Fleet', 'XNFF')
+fleetXLFF.fleetShips.append(VittorioVenetoClass(302, 'Littorio'))
+fleetXLFF.fleetShips.append(VittorioVenetoClass(304, 'Roma Imperio'))
+fleetXLFF.fleetShips[0].command = 'XLFF'
+fleetXLFF.fleetShips[1].command = 'XLFF'
 
-aoe = createCombatSpace(15, 15, 0)
+fleetASCS.spawnFleet(aoe)
+fleetXLFF.spawnFleet(aoe)
 
-m = 1
-for a in fleetASCS:
-    aoe.addCustomEntity(aoe.starSpaceHexes[(m * 15) + 2], a)
-    m += 1
+aTurnGame = turnCombatGame(aoe)
 
-n = 2
-for x in fleetXLFF:
-    print(x)
-    x.command = 'XLFF'
-    aoe.addCustomEntity(aoe.starSpaceHexes[(n * 15) - 3], x)
-    n += 1
-
-
-civ = turnCombatGame(aoe)
-civ.runGame()
+#start game
+gameOperationSpace(aTurnGame)
