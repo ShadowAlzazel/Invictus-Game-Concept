@@ -4,7 +4,8 @@ from gameField.gameBoard import *
 from gameField.gameAssets import *
 
 #start game
-def gameStart(operationSpace): 
+def gameStart(operationSpace):
+
     gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
     gameScreen.fill(SCREEN_RGB)
 
