@@ -20,15 +20,18 @@ class spaceGameBoard:
 
     def drawHexes(self, gameWindow):
 
-        e = 0
+        # e is for flipping the y coordinate
+        e = self.hexesWidth
         for row in self.displayBoard:
-            i = 0
-            y = ((WIDTH - (64 * self.hexesWidth)) // 2) + (e * 64)
+            i = 0  
+            y = ((WIDTH - (64 * self.hexesWidth)) // 2) + ((e - 1) * 64)
             n = 0
+            #indent every second row
             if not e % 2 == 0:
                 i = 32
 
             for hex in row:
+                #x coordinate is a proportion of the screen
                 x = ((LENGTH - (64 * self.hexesLength)) // 2) + (n * 64) + i
                 if hex.gameHexSpace.empty:
                     gameWindow.blit(HEX_Y_IMG, (x, y))
@@ -36,4 +39,4 @@ class spaceGameBoard:
                     gameWindow.blit(HEX_ENTF_IMG, (x, y))
                 n += 1
 
-            e += 1
+            e -= 1
