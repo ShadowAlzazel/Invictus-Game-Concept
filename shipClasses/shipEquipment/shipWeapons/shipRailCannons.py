@@ -12,7 +12,7 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 class triple_M26_ZeusCannons(shipWeapon):
     gunName = 'Triple (M26) Zeus Cannons'
     gunStats = {
-        "ATK": 505 * 3, "RLD": 2, "HIT": 55, "RNG": 7
+        "ATK": 515 * 3, "RLD": 3, "HIT": 55, "RNG": 7
     }
     def __init__(self, vesselID, turretDesignation):
         super().__init__(vesselID, turretDesignation)
@@ -21,7 +21,7 @@ class triple_M26_ZeusCannons(shipWeapon):
 class double_M22_ThorGigaGuns(shipWeapon):
     gunName = 'Double (M22) Thor Giga-Guns'
     gunStats = {
-        "ATK": 348 * 2, "RLD": 2, "HIT": 53, "RNG": 6
+        "ATK": 367 * 2, "RLD": 3, "HIT": 53, "RNG": 6
     }
     def __init__(self, vesselID, turretDesignation):
         super().__init__(vesselID, turretDesignation)
@@ -30,7 +30,7 @@ class double_M22_ThorGigaGuns(shipWeapon):
 class triple_M22_ThorGigaGuns(shipWeapon):
     gunName = 'Triple (M22) Thor Giga-Guns'
     gunStats = {
-        "ATK": 348 * 3, "RLD": 2, "HIT": 53, "RNG": 6
+        "ATK": 367 * 3, "RLD": 3, "HIT": 53, "RNG": 6
     }
     def __init__(self, vesselID, turretDesignation):
         super().__init__(vesselID, turretDesignation)
@@ -39,7 +39,7 @@ class triple_M22_ThorGigaGuns(shipWeapon):
 class quadruple_M22_ThorGigaGuns(shipWeapon):
     gunName = 'Quadruple (M22) Thor Giga-Guns'
     gunStats = {
-        "ATK": 348 * 4, "RLD": 2, "HIT": 53, "RNG": 6
+        "ATK": 367 * 4, "RLD": 3, "HIT": 53, "RNG": 6
     }
     def __init__(self, vesselID, turretDesignation):
         super().__init__(vesselID, turretDesignation)
@@ -57,7 +57,7 @@ class triple_M12_NeutronLauchers(shipWeapon):
 class quadruple_M12_NeutronLauchers(shipWeapon):
     gunName = 'Quadruple (M12) Neutron Launchers'
     gunStats = {
-        "ATK": 156 * 4, "RLD": 1, "HIT": 53, "RNG": 4
+        "ATK": 156 * 4, "RLD": 2, "HIT": 53, "RNG": 4
     }
     def __init__(self, vesselID, turretDesignation):
         super().__init__(vesselID, turretDesignation) 

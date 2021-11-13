@@ -8,6 +8,7 @@ from shipClasses.shipRole import Battlecruiser
 
 #Zenith Class Battlecruiser
 class ZenithClass(Battlecruiser):
+    shipClass = 'ZenithClass' 
     ammount = 0
     shipStats = {       
         "FP": 493, "ACC": 47, "EVA": 37, "SPD": 6,
@@ -48,6 +49,7 @@ class ZenithClass(Battlecruiser):
 
 #Eclipse Class Battlecruiser
 class EclipseClass(Battlecruiser):
+    shipClass = 'EclipseClass' 
     ammount = 0
     shipStats = {       
         "FP": 517, "ACC": 45, "EVA": 35, "SPD": 6,
@@ -83,6 +85,7 @@ class EclipseClass(Battlecruiser):
 
 #Penumbra Class Battlecruiser
 class PenumbraClass(Battlecruiser):
+    shipClass = 'PenumbraClass'
     ammount = 0
     shipStats = {       
         "FP": 505, "ACC": 45, "EVA": 35, "SPD": 6,
@@ -111,6 +114,7 @@ class PenumbraClass(Battlecruiser):
 
 #Illustrious Class Battlecruiser
 class IllustriousClass(Battlecruiser):
+    shipClass = 'IllustriousClass'
     ammount = 0
     shipStats = {       
         "FP": 533, "ACC": 46, "EVA": 32, "SPD": 6,
@@ -127,7 +131,7 @@ class IllustriousClass(Battlecruiser):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['ShieldType'].append(DarkEnergyShieldGen(vID))
         self.defenses['ArmorType'].append(MythrilAlloyArmor(vID))
-        self.primaryBattery = [triple_A6_LaserLance(vID, ''.join(['T', str(x)])) for x in range(1,5)]
+        self.primaryBattery = [triple_L18_DeuteriumLance(vID, ''.join(['T', str(x)])) for x in range(1,5)]
         self.secondaryBattery = [quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         self.broadsideBattery = []
         for x in range(1, 17):

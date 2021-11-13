@@ -11,143 +11,110 @@ class turnCombatGame:
 
     def __init__(self, operationSpace):
         self.opsSpace = operationSpace
-        self.activeShips = operationSpace.spaceEntities['shipObject']
-        self.activeFleets = operationSpace.fleetEntities
+        self.gameShips = operationSpace.spaceEntities['shipObject']
+        self.gameFleets = operationSpace.fleetEntities
         self.gameTurn = 0
-        self.selectedHex = None 
-        self.currentFleetTurn = 'ASCS'
-        self.currentFleetIndex = 0     #WIP make it switch
-        for s in self.activeShips:
-            s.shipMovement = 0
-            s.shipAttacks = 0
-            s.shipTurn = True 
+        self.selectedHex = None #usually a hex
+        self.activeFleet = self.gameFleets[0]
+        self.activeFleetIndex = 0
+        for f in self.gameFleets:
+            self._updateShips(f)     
 
-    #select ship
+
+    #fleet Actions
+    def fleetTurn(self):
+        self.selectedHex = None 
+        q = self.activeFleetIndex
+        if q == len(self.gameFleets) - 1:
+            self.gameTurn += 1
+            self.activeFleetIndex = 0
+            self.activeFleet = self.gameFleets[0]
+        else:
+            self.activeFleetIndex += 1
+            self.activeFleet = self.gameFleets[q + 1]
+
+        self._updateShips(self.activeFleet)
+
+    #update ships in fleet turn
+    def _updateShips(self, aFleet):
+        for s in aFleet.fleetShips:
+            s.shipMovement = s.shipStats['SPD']
+            s.shipAttacks = 1
+            s.shipActive = True
+            s.reloadGuns()
+
+    #select shiphex
     def selectHex(self, aHex):
+        #check if there is a previously selected hex
         if self.selectedHex:
-            result = self._moveShipAction(aHex)
+            #check if hexShip has any actions
+            if self.selectedHex.entity.shipMovement == 0:
+                nearbyShipHexes = self.selectedHex.entity.findTargets()
+                if not nearbyShipHexes:
+                    self.selectedHex.entity.shipActive = False
+
+            result = self._shipActions(aHex)
             if not result:
                 self.selectedHex = None 
                 self.selectHex(aHex)
 
         aShip = aHex.entity
-        if not aHex.empty and self.currentFleetTurn == aShip.command:
+        #can only select a ship
+        if not aHex.empty and self.activeFleet.fleetCommand[0:3] == aShip.command[0:3]:
             self.selectedHex = aHex
             return True
         return False 
         
-
-    #hit calculator for a gun
-    def gunHitCalc(self, gunBattery, aShipACC, bShipEVA):
-        hitRate = (aShipACC - bShipEVA) + gunBattery.gunStats['HIT']
-        randHit = randint(1, 100)
-        if hitRate > randHit:
-            return True
-        else:
+    #all availabe ship actions
+    def _shipActions(self, aHex):
+        result = False
+        if not self.selectedHex.entity.shipActive:
+            print("No possible actions left")
             return False
 
-    #damage calculator for a gun
-    def gunDamageCalc(self, gunBattery, aShipFP, aShipLuck, bShipLuck, batDistro):
-        critRate = aShipLuck - bShipLuck + 5
-        damageMult = 1
-        damage = 0
-        randCrit = randint(1, 100)
-        if critRate > randCrit:
-            damageMult = 1.25 + (aShipLuck / 100)
+        if self.selectedHex.entity.shipMovement != 0:
+            result = self._moveShipAction(aHex)     
+        else:
+            print("No Movements available")   
 
-        damage = (gunBattery.gunStats['ATK'] + (aShipFP // batDistro) * damageMult)
-        return damage
+        if not result:
+            result = self._attackShipAction(aHex)
 
-
-    #all availabe ship action query 
-    def shipActions(self, aShip):
-        shipturnActive = True
-
-        while shipturnActive:   
-            mes = aShip.vesselID + ' ' + aShip.name +  ' ' + "Awaiting Orders...: "
-            playerInput = input(mes)
-
-            if playerInput in self.Query['End']:
-                print("Ship Turn Ended! ")
-                aShip.shipTurn = False
-                shipturnActive = False
-                return 
-
-
-            if playerInput in self.Query['Skip']:
-                print("Ship Skipped! ")
-                shipturnActive = False
-                return
-
-            elif playerInput in self.Query['Move']:
-                if aShip.shipMovement != 0:
-                    if self._moveShipAction(aShip):
-                        aShip.shipMovement -= 1 
-                else: 
-                    print("No More Moves Available")
-
-            elif playerInput in self.Query['Attack']:
-                if aShip.shipAttacks != 0:
-                    if self.attackShipAction(aShip):
-                        aShip.shipAttacks -= 1
-                else: 
-                    print('No Attacks Available')
-
-            elif playerInput in self.Query['Inspect']:
-                aShip.fullInspect()
-
-            elif playerInput in self.Query['AutoAttack']:
-                print("AutoAttack")
+        return result
 
     #attack action; check for minimum  range, and guns in ranges
-    def attackShipAction(self, aShip):
-        nID = 0
+    def _attackShipAction(self, aHex):
+        aShip = self.selectedHex.entity
         if not aShip.gunsReady():
+            aShip.shipAttacks = 0
             print("No guns loaded")
             return True
 
-        nearbyShips = aShip.findTargets()
-        if not nearbyShips:
-            print("No ships in minimmum range")
-            return False 
-        else: 
-            for k in nearbyShips:
-                print("Targets within minimmum range:", k.entity.vesselID, k.entity.name, "At Hex", k.coord['hexNum'], 'TiD:', nID)
-                nID += 1
+        #selected hex must be a target
+        nearbyShipHexes = aShip.findTargets()
+        if not aHex in nearbyShipHexes:
+            return True
 
+        result = self._shipSalvoAction(aShip, aHex.entity)
+        return result
 
-        #authorize attack order
-        authAtk = False
-        numStrings = [str(c) for c in range(0,100)] 
-        while not authAtk:
-            newOrder = input("Choose a target to fire: ")
-            if newOrder in self.Query['No'] or newOrder in self.Query['Skip'] or newOrder in self.Query['End']:
-                print("Fire Sequence Failed")
-                return False
-            elif newOrder in numStrings:
-                authAtk = True  
-            else: 
-                print("Unknown authorization")
-
-        #attack input target and end attacks
-        newOrder = int(newOrder)
-        if newOrder < nID:
-            self.shipSalvoAction(aShip, nearbyShips[newOrder].entity)
-        else:
-            print("Unknown target")
-            #return True 
 
     #move ship on board
     def _moveShipAction(self, aHex):
         result = False
         if aHex.empty and (aHex in self.selectedHex.neighbors):
             selectedShip = self.selectedHex.entity
-            result = self.opsSpace.moveClickEntity(selectedShip, aHex) 
+            if selectedShip.shipMovement != 0:
+                result = self.opsSpace.moveClickEntity(selectedShip, aHex)
+                if result:
+                    selectedShip.shipMovement -= 1
+            else:
+                print("No movements left!") 
         return result
 
 
     #fire all guns in range 
-    def shipSalvoAction(self, aShip, bShip):
+    def _shipSalvoAction(self, aShip, bShip):
         shipExists = [bShip]
         #check if guns are loaded
         gunToFire = []
@@ -171,6 +138,7 @@ class turnCombatGame:
                 print("ship Destroyed!")
             salvoDamage = 0
             trueDamage = 0
+            #find FP distribution ammong batteries
             if aShip.gunInRange(g, bShip):
                 batPow = 0  
                 if g in aShip.primaryBattery:
@@ -192,12 +160,28 @@ class turnCombatGame:
             salvoDamage = 0
 
         print(aShip.vesselID, aShip.name, "Has done", totalDamage, "Total Damage to", bShip.vesselID, bShip.name)
+        return True
 
-    #fleet Actions
-    def fleetTurn(self):
-        q = self.currentFleetIndex
-        if q == len(self.activeFleets) - 1:
-            self.gameTurn += 1
-            self.currentFleetTurn = self.activeFleets[0]
-        else: 
-            self.currentFleetTurn = self.activeFleets[q + 1] 
+    #hit calculator for a gun
+    def gunHitCalc(self, gunBattery, aShipACC, bShipEVA):
+        hitRate = (aShipACC - bShipEVA) + gunBattery.gunStats['HIT']
+        randHit = randint(1, 100)
+        if hitRate > randHit:
+            return True
+        else:
+            return False
+
+    #damage calculator for a gun
+    def gunDamageCalc(self, gunBattery, aShipFP, aShipLuck, bShipLuck, batDistro):
+        critRate = aShipLuck - bShipLuck + 5
+        damageMult = 1
+        damage = 0
+        randCrit = randint(1, 100)
+        if critRate > randCrit:
+            damageMult = 1.25 + (aShipLuck / 100)
+
+        damage = (gunBattery.gunStats['ATK'] + (aShipFP // batDistro) * damageMult)
+        return damage
+
+
+

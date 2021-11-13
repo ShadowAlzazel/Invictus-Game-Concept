@@ -8,6 +8,7 @@ from shipClasses.shipRole import Heavycruiser
 
 #Apocalypse Class Heavycrusier
 class ApocalypseClass(Heavycruiser):
+    shipClass = 'ApocalypseClass'
     ammount = 0
     shipStats = {
         "FP": 350, "ACC": 33, "EVA": 30, "SPD": 5,

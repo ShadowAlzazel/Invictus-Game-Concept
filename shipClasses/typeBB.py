@@ -8,6 +8,7 @@ from shipClasses.shipRole import Battleship
 
 #---------------------------Essex Class Battleship---------------------------
 class EssexClass(Battleship):
+    shipClass = 'EssexClass'
     ammount = 0
     shipStats = {
         "FP": 666, "ACC": 38, "EVA": 30, "SPD": 4,
@@ -42,6 +43,7 @@ class EssexClass(Battleship):
 
 #---------------------------Amagi Class Battleship---------------------------
 class AmagiClass(Battleship):
+    shipClass = 'AmagiClass'
     ammount = 0
     shipStats = {
         "FP": 682, "ACC": 37, "EVA": 31, "SPD": 4,
@@ -69,6 +71,7 @@ class AmagiClass(Battleship):
 
 #---------------------------Vittorio Veneto Class Battleship---------------------------
 class VittorioVenetoClass(Battleship):
+    shipClass = 'VittorioVenetoClass'
     ammount = 0
     shipStats = {
         "FP": 660, "ACC": 35, "EVA": 30, "SPD": 4,
@@ -96,6 +99,7 @@ class VittorioVenetoClass(Battleship):
 
 #--------------------------Hood Class Battleship---------------------------
 class HoodClass(Battleship):
+    shipClass = 'HoodClass'
     ammount = 0
     shipStats = {
         "FP": 685, "ACC": 37, "EVA": 30, "SPD": 4,
@@ -123,6 +127,7 @@ class HoodClass(Battleship):
 
 #--------------------------Prince of Wales Class Battleship---------------------------
 class PrinceOfWalesClass(Battleship):
+    shipClass = 'PrinceOfWalesClass'
     ammount = 0
     shipStats = {
         "FP": 654, "ACC": 36, "EVA": 29, "SPD": 4,
@@ -156,6 +161,7 @@ class PrinceOfWalesClass(Battleship):
 
 #--------------------------New Jersey Class Battleship-----------------------------
 class NewJerseyClass(Battleship):
+    shipClass = 'NewJerseyClass'
     ammount = 0 
     shipStats = {
         "FP": 888, "ACC": 48, "EVA": 34, "SPD": 4,

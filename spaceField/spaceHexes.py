@@ -1,5 +1,4 @@
 #space grid in hexes
-from spaceField.spaceBoard import makeGameBoard, showShipVision
 
 #hex space
 class starSpace:
@@ -55,4 +54,3 @@ class zoneSpace:
         print("Moved From: Space Hex", oldHexCoord, end=' ')
         print("To: Space Hex", movableEntity.placeSpace.coord['hexNum'])
         return True
-        

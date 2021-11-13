@@ -8,6 +8,7 @@ from shipClasses.shipRole import Lightcruiser
 
 #Midnight Class Light Cruiser 
 class MidnightClass(Lightcruiser):
+    shipClass = 'MidnightClass'
     ammount = 0 
     shiptype = 'CL'
     shipStats = {
