@@ -21,7 +21,7 @@ class triple_M26_ZeusCannons(shipWeapon):
 class double_M22_ThorGigaGuns(shipWeapon):
     gunName = 'Double (M22) Thor Giga-Guns'
     gunStats = {
-        "ATK": 348 * 2, "RLD": 3, "HIT": 53, "RNG": 6
+        "ATK": 367 * 2, "RLD": 3, "HIT": 53, "RNG": 6
     }
     def __init__(self, vesselID, turretDesignation):
         super().__init__(vesselID, turretDesignation)
@@ -30,7 +30,7 @@ class double_M22_ThorGigaGuns(shipWeapon):
 class triple_M22_ThorGigaGuns(shipWeapon):
     gunName = 'Triple (M22) Thor Giga-Guns'
     gunStats = {
-        "ATK": 348 * 3, "RLD": 3, "HIT": 53, "RNG": 6
+        "ATK": 367 * 3, "RLD": 3, "HIT": 53, "RNG": 6
     }
     def __init__(self, vesselID, turretDesignation):
         super().__init__(vesselID, turretDesignation)
@@ -39,7 +39,7 @@ class triple_M22_ThorGigaGuns(shipWeapon):
 class quadruple_M22_ThorGigaGuns(shipWeapon):
     gunName = 'Quadruple (M22) Thor Giga-Guns'
     gunStats = {
-        "ATK": 348 * 4, "RLD": 3, "HIT": 53, "RNG": 6
+        "ATK": 367 * 4, "RLD": 3, "HIT": 53, "RNG": 6
     }
     def __init__(self, vesselID, turretDesignation):
         super().__init__(vesselID, turretDesignation)
