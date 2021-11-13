@@ -1,5 +1,6 @@
 #class for board display
 from gameField.gameAssets import *
+from . imgConverter import *
 
 class spaceGameBoard:
 
@@ -8,10 +9,12 @@ class spaceGameBoard:
         self.hexesWidth = w
         self.bordersColumnsY = (WIDTH - (HEX_SIZE * self.hexesWidth)) // 2
         self.bordersRowsX = (LENGTH - (HEX_SIZE * self.hexesLength)) // 2
+        hexImgConverter()
 
     #draw hexes on board
     def drawHexes(self, gameWindow, operationSpace, h=-1):
-        gameWindow.fill(SCREEN_RGB)
+        #gameWindow.fill(SCREEN_RGB)
+        gameWindow.blit(SPACE_BACKGROUND, (0, 0))
         # e is for flipping the y coordinate
         e = self.hexesWidth
         n = 0
@@ -38,7 +41,8 @@ class spaceGameBoard:
                 n = 0
 
     def drawShipActions(self, gameWindow, operationSpace, shipHex):
-        gameWindow.fill(SCREEN_RGB)
+        #gameWindow.fill(SCREEN_RGB)
+        gameWindow.blit(SPACE_BACKGROUND, (0, 0))
         # e is for flipping the y coordinate
         e = self.hexesWidth
         n = 0

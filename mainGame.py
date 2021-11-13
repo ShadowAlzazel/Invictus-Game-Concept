@@ -3,10 +3,11 @@ from pygame.constants import K_ESCAPE, K_F4, K_LALT, KEYDOWN, K_e, K_i
 from gameField import *
 
 #start game
-def gameOperationSpace(turnGame):
+def gameOPS(turnGame):
 
     gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
-    gameScreen.fill(SCREEN_RGB)
+    #gameScreen.fill(SCREEN_RGB)
+    gameScreen.blit(SPACE_BACKGROUND, (0, 0))
 
 
     #start pygame

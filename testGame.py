@@ -22,4 +22,4 @@ fleetXLFF.spawnFleet(aoe)
 aTurnGame = turnCombatGame(aoe)
 
 #start game
-gameOperationSpace(aTurnGame)
+gameOPS(aTurnGame)

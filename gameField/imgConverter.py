@@ -8,3 +8,5 @@ def hexImgConverter():
     MOVE_OPTION_HEX_IMG.convert()
     SHIP_TARGET_HEX_IMG.convert()
     CLICK_HEX_IMG.convert()
+    SPACE_BACKGROUND.convert()
+    
