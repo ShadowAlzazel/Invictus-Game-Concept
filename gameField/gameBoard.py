@@ -10,7 +10,7 @@ class spaceGameBoard:
         self.bordersRowsX = (LENGTH - (HEX_SIZE * self.hexesLength)) // 2
 
     #draw hexes on board
-    def drawHexes(self, gameWindow, operationSpace):
+    def drawHexes(self, gameWindow, operationSpace, h=-1):
         gameWindow.fill(SCREEN_RGB)
         # e is for flipping the y coordinate
         e = self.hexesWidth
@@ -68,12 +68,17 @@ class spaceGameBoard:
 
                 if hex in targets:
                     gameWindow.blit(SHIP_TARGET_HEX_IMG, (x, y))
-                        
 
+            if hex.coord['hexNum'] == shipHex.coord['hexNum']:
+                gameWindow.blit(CLICK_HEX_IMG, (x, y))
+
+            #swicth row
+            #origin at top left
             n += 1
             if n == self.hexesLength:
                 e -= 1
                 n = 0
+        
 
 
     def getCoordMouse(self, mousePos):

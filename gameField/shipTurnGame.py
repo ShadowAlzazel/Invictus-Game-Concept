@@ -14,7 +14,7 @@ class turnCombatGame:
         self.gameShips = operationSpace.spaceEntities['shipObject']
         self.gameFleets = operationSpace.fleetEntities
         self.gameTurn = 0
-        self.selectedHex = None 
+        self.selectedHex = None #usually a hex
         self.activeFleet = self.gameFleets[0]
         self.activeFleetIndex = 0
         for f in self.gameFleets:
@@ -45,7 +45,14 @@ class turnCombatGame:
 
     #select shiphex
     def selectHex(self, aHex):
+        #check if there is a previously selected hex
         if self.selectedHex:
+            #check if hexShip has any actions
+            if self.selectedHex.entity.shipMovement == 0:
+                nearbyShipHexes = self.selectedHex.entity.findTargets()
+                if not nearbyShipHexes:
+                    self.selectedHex.entity.shipActive = False
+
             result = self._shipActions(aHex)
             if not result:
                 self.selectedHex = None 
@@ -62,8 +69,13 @@ class turnCombatGame:
     def _shipActions(self, aHex):
         result = False
         if not self.selectedHex.entity.shipActive:
+            print("No possible actions left")
             return False
-        result = self._moveShipAction(aHex)        
+
+        if self.selectedHex.entity.shipMovement != 0:
+            result = self._moveShipAction(aHex)     
+        else:
+            print("No Movements available")   
 
         if not result:
             result = self._attackShipAction(aHex)
@@ -74,13 +86,13 @@ class turnCombatGame:
     def _attackShipAction(self, aHex):
         aShip = self.selectedHex.entity
         if not aShip.gunsReady():
+            aShip.shipAttacks = 0
             print("No guns loaded")
             return True
 
         #selected hex must be a target
         nearbyShipHexes = aShip.findTargets()
         if not aHex in nearbyShipHexes:
-            print("Out of Target Range")
             return True
 
         result = self._shipSalvoAction(aShip, aHex.entity)
@@ -95,7 +107,9 @@ class turnCombatGame:
             if selectedShip.shipMovement != 0:
                 result = self.opsSpace.moveClickEntity(selectedShip, aHex)
                 if result:
-                    selectedShip.shipMovement -= 1 
+                    selectedShip.shipMovement -= 1
+            else:
+                print("No movements left!") 
         return result
 
 
@@ -124,6 +138,7 @@ class turnCombatGame:
                 print("ship Destroyed!")
             salvoDamage = 0
             trueDamage = 0
+            #find FP distribution ammong batteries
             if aShip.gunInRange(g, bShip):
                 batPow = 0  
                 if g in aShip.primaryBattery:

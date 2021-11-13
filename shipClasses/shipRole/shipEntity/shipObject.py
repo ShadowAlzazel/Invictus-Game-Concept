@@ -60,7 +60,9 @@ class Ship:
 
         #find the max range of all guns loaded
         if not specifics:
-            targets = self.radar.findRadarTargets(max(readyRanges), self.placeSpace)
+            targets = []
+            if readyRanges:
+                targets = self.radar.findRadarTargets(max(readyRanges), self.placeSpace)
             return targets
 
         elif specifics:
