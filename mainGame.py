@@ -1,5 +1,5 @@
 import pygame
-from pygame.constants import K_ESCAPE, KEYDOWN, K_e, K_i
+from pygame.constants import K_ESCAPE, K_F4, K_LALT, KEYDOWN, K_e, K_i
 from gameField import *
 
 #start game
@@ -27,7 +27,7 @@ def gameOperationSpace(turnGame):
         gameClock.tick(FPS)
         
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+            if event.type == pygame.QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE) or ((event.type == KEYDOWN and event.key == K_LALT) and (event.type == KEYDOWN and event.key == K_F4)):
                 gameRunning = False
 
             if event.type == KEYDOWN and event.key == K_e:

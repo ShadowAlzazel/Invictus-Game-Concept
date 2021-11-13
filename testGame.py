@@ -6,7 +6,7 @@ from spaceField import *
 from mainGame import *
 
 
-aoe = createCombatSpace(10, 10, 0)
+aoe = createCombatSpace(14, 10, 0)
 
 fleetASCS = spaceFleet(astraFleets[0]['ASC']['fleetNames'][0], 'ASC')
 fleetLaunch(fleetASCS)
