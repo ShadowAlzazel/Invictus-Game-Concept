@@ -88,12 +88,12 @@ class turnCombatGame:
         if not aShip.gunsReady():
             aShip.shipAttacks = 0
             print("No guns loaded")
-            return True
+            return False
 
         #selected hex must be a target
         nearbyShipHexes = aShip.findTargets()
         if not aHex in nearbyShipHexes:
-            return True
+            return False
 
         result = self._shipSalvoAction(aShip, aHex.entity)
         return result
