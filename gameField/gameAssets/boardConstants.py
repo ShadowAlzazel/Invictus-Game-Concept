@@ -1,10 +1,9 @@
 #game constants
-
 LENGTH = 1000
 WIDTH = 750
-CENTER_X = LENGTH // 2
-CENTER_Y = WIDTH // 2
 
-HEX_SIZE = 64
+SCREEN_RGB = [38, 38, 51]
 
 FPS = 60
+
+HEX_SIZE = 64
