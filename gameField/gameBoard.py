@@ -16,7 +16,7 @@ SPACE_BACKGROUND = pygame.image.load('gameField/gameAssets/spaceBackground1.png'
 # thanks to astrellon3 
 
 #----------------------------------------------------------------------
-FIT_SPACE = pygame.transform.scale(SPACE_BACKGROUND, (LENGTH, WIDTH))
+FIT_SPACE = pygame.transform.smoothscale(SPACE_BACKGROUND, (LENGTH, WIDTH))
 
 
 class spaceGameBoard:
@@ -25,18 +25,22 @@ class spaceGameBoard:
         self.hexesLength = l
         self.hexesWidth = w
         self.hexSize = hexSize
+        self.windowMoveX = 0
+        self.windowMoveY = 0
+        self.centerHex = -1
         self.EMPTY_HEX_IMG = EMPTY_HEX_IMG
         self.ASCS_SHIP_HEX_IMG = ASCS_SHIP_HEX_IMG
         self.XNFF_SHIP_HEX_IMG = XNFF_SHIP_HEX_IMG
         self.MOVE_OPTION_HEX_IMG = MOVE_OPTION_HEX_IMG
         self.SHIP_TARGET_HEX_IMG = SHIP_TARGET_HEX_IMG
         self.CLICK_HEX_IMG = CLICK_HEX_IMG
-        self.bordersColumnsY = (WIDTH - (self.hexSize * self.hexesWidth)) // 2
-        self.bordersRowsX = (LENGTH - (self.hexSize * self.hexesLength)) // 2
+        self.bordersColumnsY = ((WIDTH - (self.hexSize * self.hexesWidth)) // 2) - self.windowMoveY
+        self.bordersRowsX = ((LENGTH - (self.hexSize * self.hexesLength)) // 2) + self.windowMoveX
 
     #draw hexes on board
     def drawHexes(self, gameWindow, operationSpace, shipHex=[]):
         gameWindow.blit(FIT_SPACE, (0, 0))
+        #check of shipClicked
         shipClicked = False
         if shipHex and not shipHex.empty:
             targets = []
@@ -44,6 +48,10 @@ class spaceGameBoard:
             if aShip.gunsReady():
                 targets = aShip.findTargets()
             shipClicked = True
+
+        if self.centerHex > -1:
+            #self.windowMoveX = 
+            0
 
         # e is for flipping the y coordinate
         e = self.hexesWidth
@@ -54,9 +62,9 @@ class spaceGameBoard:
             if not e % 2 == 0:
                 i = self.hexSize // 2
             #y coordinate
-            y = (self.bordersColumnsY) + ((e - 1) * self.hexSize)
+            y = (self.bordersColumnsY) + ((e - 1) * self.hexSize) + self.windowMoveY
             #x coordinate is a proportion of the screen
-            x = (self.bordersRowsX) + (n * self.hexSize) + i - (self.hexSize // 2)
+            x = (self.bordersRowsX) + (n * self.hexSize) + i - (self.hexSize // 2) + self.windowMoveX
             if hex.empty:
                 gameWindow.blit(self.EMPTY_HEX_IMG, (x, y))
                 if shipClicked:
@@ -97,18 +105,18 @@ class spaceGameBoard:
         bActive = False 
         column, row = 0, 0
 
-        if b in range(self.bordersColumnsY, (self.hexSize * self.hexesWidth) + (self.bordersColumnsY)):
+        if b in range(self.bordersColumnsY + self.windowMoveY, (self.hexSize * self.hexesWidth) + (self.bordersColumnsY) + self.windowMoveY):
             bActive = True
             #reverse y coords
-            row = abs(((b - self.bordersColumnsY) // self.hexSize) - self.hexesWidth) - 1
+            row = abs(((b - (self.bordersColumnsY + self.windowMoveY)) // self.hexSize) - self.hexesWidth) - 1
 
-            #check even odd
-            if ((b - self.bordersColumnsY) // self.hexSize) % 2 == 1:
+            #check even/odd rows
+            if ((b - (self.bordersColumnsY + self.windowMoveY)) // self.hexSize) % 2 == 1:
                 i = self.hexSize // 2  
 
-        if a in range((self.bordersRowsX) - i, ((self.hexSize * self.hexesLength) + (self.bordersRowsX) - i)):
+        if a in range((self.bordersRowsX) - i + self.windowMoveX, ((self.hexSize * self.hexesLength) + (self.bordersRowsX) - i) + self.windowMoveX):
             aActive = True
-            column = ((a - self.bordersRowsX) + i) // self.hexSize
+            column = ((a - (self.bordersRowsX + self.windowMoveX)) + i) // self.hexSize
 
         if aActive and bActive:
             indexCoord = (row * self.hexesLength) + column
@@ -118,12 +126,12 @@ class spaceGameBoard:
             return -1
 
     def scaleHexes(self, hexSize):
-        self.EMPTY_HEX_IMG = pygame.transform.scale(EMPTY_HEX_IMG, (hexSize, hexSize))
-        self.ASCS_SHIP_HEX_IMG = pygame.transform.scale(ASCS_SHIP_HEX_IMG, (hexSize, hexSize))
-        self.XNFF_SHIP_HEX_IMG = pygame.transform.scale(XNFF_SHIP_HEX_IMG, (hexSize, hexSize))
-        self.MOVE_OPTION_HEX_IMG = pygame.transform.scale(MOVE_OPTION_HEX_IMG, (hexSize, hexSize))
-        self.SHIP_TARGET_HEX_IMG = pygame.transform.scale(SHIP_TARGET_HEX_IMG, (hexSize, hexSize))
-        self.CLICK_HEX_IMG = pygame.transform.scale(CLICK_HEX_IMG, (hexSize, hexSize))
+        self.EMPTY_HEX_IMG = pygame.transform.smoothscale(EMPTY_HEX_IMG, (hexSize, hexSize))
+        self.ASCS_SHIP_HEX_IMG = pygame.transform.smoothscale(ASCS_SHIP_HEX_IMG, (hexSize, hexSize))
+        self.XNFF_SHIP_HEX_IMG = pygame.transform.smoothscale(XNFF_SHIP_HEX_IMG, (hexSize, hexSize))
+        self.MOVE_OPTION_HEX_IMG = pygame.transform.smoothscale(MOVE_OPTION_HEX_IMG, (hexSize, hexSize))
+        self.SHIP_TARGET_HEX_IMG = pygame.transform.smoothscale(SHIP_TARGET_HEX_IMG, (hexSize, hexSize))
+        self.CLICK_HEX_IMG = pygame.transform.smoothscale(CLICK_HEX_IMG, (hexSize, hexSize))
         self.ASCS_SHIP_HEX_IMG.convert()
         self.EMPTY_HEX_IMG.convert()
         self.XNFF_SHIP_HEX_IMG.convert()

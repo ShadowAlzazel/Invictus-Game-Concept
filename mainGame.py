@@ -1,5 +1,5 @@
 import pygame
-from pygame.constants import K_ESCAPE, K_F4, K_LALT, KEYDOWN, K_e, K_i, K_x, K_z
+from pygame.constants import K_DOWN, K_ESCAPE, K_F4, K_LALT, K_LEFT, K_RIGHT, K_SPACE, K_UP, KEYDOWN, KEYUP, K_e, K_i, K_m, K_r, K_x, K_z
 from gameField import *
 
 #start game
@@ -19,14 +19,29 @@ def gameOPS(turnGame):
     combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
     pygame.display.update()
 
+    #variables
+    moveUp, moveDown, moveLeft, moveRight = False, False, False, False
+
+
+
     gameRunning = True
     gameClock = pygame.time.Clock()
 
     while gameRunning:
         gameClock.tick(FPS)
+
+        if moveUp:
+            combatGameBoard.windowMoveY -= 3
+        if moveDown:
+            combatGameBoard.windowMoveY += 3
+        if moveLeft:
+            combatGameBoard.windowMoveX -= 3
+        if moveRight:
+            combatGameBoard.windowMoveX += 3
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE) or ((event.type == KEYDOWN and event.key == K_LALT) and (event.type == KEYDOWN and event.key == K_F4)):
+                print("Quiting")
                 gameRunning = False
 
             if event.type == KEYDOWN and event.key == K_e:
@@ -40,25 +55,46 @@ def gameOPS(turnGame):
 
             if event.type == KEYDOWN and event.key == K_z:
                 combatGameBoard.zoomInHex()
-                combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace, turnGame.selectedHex)
 
             if event.type == KEYDOWN and event.key == K_x:
                 combatGameBoard.zoomOutHex()
-                combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace, turnGame.selectedHex)
+
+            if event.type == KEYDOWN and event.key == K_UP:
+                moveUp = True
+            if event.type == KEYUP and event.key == K_UP:
+                moveUp = False
+
+            if event.type == KEYDOWN and event.key == K_DOWN:
+                moveDown = True
+            if event.type == KEYUP and event.key == K_DOWN:
+                moveDown = False
+
+            if event.type == KEYDOWN and event.key == K_LEFT:
+                moveLeft = True
+            if event.type == KEYUP and event.key == K_LEFT:
+                moveLeft = False
+
+            if event.type == KEYDOWN and event.key == K_RIGHT:
+                moveRight = True
+            if event.type == KEYUP and event.key == K_RIGHT:
+                moveRight = False
+
+            if event.type == KEYDOWN and event.key == K_m:
+                combatGameBoard.windowMoveX = 0
+                combatGameBoard.windowMoveY = 0
+
+            if event.type == KEYDOWN and event.key == K_SPACE:
+                if turnGame.selectedHex:
+                    combatGameBoard.centerHex = turnGame.selectedHex.coord['hexNum']
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
                 hexIndex = combatGameBoard.getCoordMouse(someMousePos)
                 if hexIndex >= 0:
                     turnGame.selectHex(turnGame.opsSpace.starSpaceHexes[hexIndex])
-                combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace, turnGame.selectedHex)
-           
                 print(hexIndex)
 
-        #combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
-            pygame.display.update()
-
-
-
+        combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace, turnGame.selectedHex)    
+        pygame.display.update()
 
     pygame.quit()
