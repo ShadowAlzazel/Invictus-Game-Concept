@@ -6,9 +6,7 @@ from gameField import *
 def gameOPS(turnGame):
 
     gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
-    #gameScreen.fill(SCREEN_RGB)
     gameScreen.blit(FIT_SPACE, (0, 0))
-
 
     #start pygame
     pygame.init()
@@ -23,13 +21,6 @@ def gameOPS(turnGame):
 
     gameRunning = True
     gameClock = pygame.time.Clock()
-
-    def selectHexDraw():
-        if turnGame.selectedHex:
-            combatGameBoard.drawShipActions(gameScreen, turnGame.opsSpace, turnGame.selectedHex)
-        else:
-            combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
-
 
     while gameRunning:
         gameClock.tick(FPS)
@@ -49,18 +40,18 @@ def gameOPS(turnGame):
 
             if event.type == KEYDOWN and event.key == K_z:
                 combatGameBoard.zoomInHex()
-                selectHexDraw()
+                combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace, turnGame.selectedHex)
 
             if event.type == KEYDOWN and event.key == K_x:
                 combatGameBoard.zoomOutHex()
-                selectHexDraw()
+                combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace, turnGame.selectedHex)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
                 hexIndex = combatGameBoard.getCoordMouse(someMousePos)
                 if hexIndex >= 0:
                     turnGame.selectHex(turnGame.opsSpace.starSpaceHexes[hexIndex])
-                    selectHexDraw()
+                combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace, turnGame.selectedHex)
            
                 print(hexIndex)
 
