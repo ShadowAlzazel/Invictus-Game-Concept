@@ -22,8 +22,6 @@ def gameOPS(turnGame):
     #variables
     moveUp, moveDown, moveLeft, moveRight = False, False, False, False
 
-
-
     gameRunning = True
     gameClock = pygame.time.Clock()
 

@@ -25,17 +25,19 @@ class spaceGameBoard:
         self.hexesLength = l
         self.hexesWidth = w
         self.hexSize = hexSize
+        #movement variables
         self.windowMoveX = 0
         self.windowMoveY = 0
         self.centerHex = -1
+        self.bordersColumnsY = ((WIDTH - (self.hexSize * self.hexesWidth)) // 2) - self.windowMoveY
+        self.bordersRowsX = ((LENGTH - (self.hexSize * self.hexesLength)) // 2) + self.windowMoveX
+        #images
         self.EMPTY_HEX_IMG = EMPTY_HEX_IMG
         self.ASCS_SHIP_HEX_IMG = ASCS_SHIP_HEX_IMG
         self.XNFF_SHIP_HEX_IMG = XNFF_SHIP_HEX_IMG
         self.MOVE_OPTION_HEX_IMG = MOVE_OPTION_HEX_IMG
         self.SHIP_TARGET_HEX_IMG = SHIP_TARGET_HEX_IMG
         self.CLICK_HEX_IMG = CLICK_HEX_IMG
-        self.bordersColumnsY = ((WIDTH - (self.hexSize * self.hexesWidth)) // 2) - self.windowMoveY
-        self.bordersRowsX = ((LENGTH - (self.hexSize * self.hexesLength)) // 2) + self.windowMoveX
         self.scaleHexes(self.hexSize)
 
     #draw hexes on board
