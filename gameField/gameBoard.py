@@ -36,6 +36,7 @@ class spaceGameBoard:
         self.CLICK_HEX_IMG = CLICK_HEX_IMG
         self.bordersColumnsY = ((WIDTH - (self.hexSize * self.hexesWidth)) // 2) - self.windowMoveY
         self.bordersRowsX = ((LENGTH - (self.hexSize * self.hexesLength)) // 2) + self.windowMoveX
+        self.scaleHexes(self.hexSize)
 
     #draw hexes on board
     def drawHexes(self, gameWindow, operationSpace, shipHex=[]):
