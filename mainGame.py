@@ -1,5 +1,5 @@
 import pygame
-from pygame.constants import K_DOWN, K_ESCAPE, K_F4, K_LALT, K_LEFT, K_RIGHT, K_SPACE, K_UP, KEYDOWN, KEYUP, K_e, K_i, K_m, K_r, K_x, K_z
+from pygame.constants import K_DOWN, K_ESCAPE, K_F4, K_LALT, K_LEFT, K_RIGHT, K_SPACE, K_UP, KEYDOWN, KEYUP, K_c, K_e, K_i, K_m, K_r, K_x, K_z
 from gameField import *
 
 #start game
@@ -79,11 +79,11 @@ def gameOPS(turnGame):
             if event.type == KEYUP and event.key == K_RIGHT:
                 moveRight = False
 
-            if event.type == KEYDOWN and event.key == K_m:
+            if event.type == KEYDOWN and event.key == K_SPACE:
                 combatGameBoard.windowMoveX = 0
                 combatGameBoard.windowMoveY = 0
 
-            if event.type == KEYDOWN and event.key == K_SPACE:
+            if event.type == KEYDOWN and event.key == K_c:
                 if turnGame.selectedHex:
                     combatGameBoard.centerHex = turnGame.selectedHex.coord['hexNum']
 

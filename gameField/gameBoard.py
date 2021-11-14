@@ -51,7 +51,9 @@ class spaceGameBoard:
 
         if self.centerHex > -1:
             #self.windowMoveX = 
-            0
+            self.windowMoveX = int((self.hexesLength / 2) - ((self.centerHex % self.hexesLength) + 1)) * self.hexSize
+            self.windowMoveY = int(((self.centerHex // self.hexesLength)) - (self.hexesWidth / 2)) * self.hexSize
+            self.centerHex = -1
 
         # e is for flipping the y coordinate
         e = self.hexesWidth
