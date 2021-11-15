@@ -102,8 +102,12 @@ class turnCombatGame:
     #move ship on board
     def _moveShipAction(self, aHex):
         result = False
-        if aHex.empty and (aHex in self.selectedHex.neighbors) and not (aHex.directions[self.selectedHex.entity.orientation] == self.selectedHex.coord['hexNum']):
-            selectedShip = self.selectedHex.entity
+        selectedShip = self.selectedHex.entity
+        #check if selcted hex direction does not match orientation
+        if aHex.empty and (aHex in self.selectedHex.neighbors) and (aHex.directions[selectedShip.orientation] != self.selectedHex.coord['hexNum'] or selectedShip.shiptype == 'DD' or selectedShip.shiptype == 'CS'):
+            if selectedShip.shiptype == 'BB' and self.opsSpace.starSpaceHexes[aHex.directions[selectedShip.orientation]] in self.selectedHex.neighbors:
+                return result
+
             if selectedShip.shipMovement != 0:
                 result = self.opsSpace.moveClickEntity(selectedShip, aHex)
                 if result:
@@ -182,6 +186,3 @@ class turnCombatGame:
 
         damage = (gunBattery.gunStats['ATK'] + (aShipFP // batDistro) * damageMult)
         return damage
-
-
-

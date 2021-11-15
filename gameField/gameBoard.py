@@ -1,5 +1,6 @@
 #class for board display
 import pygame
+from pygame.transform import rotate
 from gameField.gameAssets import *
 
 GAME_ICON = pygame.image.load('gameField/gameAssets/shipIconP2.png')
@@ -60,7 +61,7 @@ class spaceGameBoard:
             self.windowMoveY = int(((self.centerHex // self.hexesLength)) - (self.hexesWidth / 2) + 0.5) * self.hexSize
             self.centerHex = -1
 
-        # e is for flipping the y coordinate
+        #e is for flipping the y coordinate
         e = self.hexesWidth
         n = 0
         for hex in operationSpace.starSpaceHexes: 
@@ -68,23 +69,24 @@ class spaceGameBoard:
             i = 0 
             if not e % 2 == 0:
                 i = self.hexSize // 2
-            #y coordinate
+            #y coordinate, #x coordinate is a proportion of the screen
             y = (self.bordersColumnsY) + ((e - 1) * self.hexSize) + self.windowMoveY
-            #x coordinate is a proportion of the screen
             x = (self.bordersRowsX) + (n * self.hexSize) + i - (self.hexSize // 2) + self.windowMoveX
-            #draw hex grid
+            #draw hex on grid
             gameWindow.blit(self.EMPTY_HEX_IMG, (x, y))
 
             if hex.empty:
                 if shipClicked:
-                    if hex in shipHex.neighbors and aShip.shipMovement != 0 and not (hex.directions[aShip.orientation] == shipHex.coord['hexNum']):
-                        gameWindow.blit(self.MOVE_OPTION_HEX_IMG, (x, y))
+                    if hex in shipHex.neighbors and aShip.shipMovement != 0 and (hex.directions[aShip.orientation] != shipHex.coord['hexNum'] or aShip.shiptype == 'DD' or aShip.shiptype == 'CS'):
+                        if not (aShip.shiptype == 'BB' and operationSpace.starSpaceHexes[hex.directions[aShip.orientation]] in shipHex.neighbors):
+                            gameWindow.blit(self.MOVE_OPTION_HEX_IMG, (x, y))
 
             elif hex.entity.spaceEntity == 'shipObject':
                 if hex.entity.command == 'ASCS':
                     self.orientationRotation(hex.entity)
                     gameWindow.blit(self.ASCS_SHIP_HEX_IMG, (x, y))
                 elif hex.entity.command == 'XNFF':
+                    self.orientationRotation(hex.entity)
                     gameWindow.blit(self.XNFF_SHIP_HEX_IMG, (x, y))
 
                 if shipClicked:
@@ -95,42 +97,14 @@ class spaceGameBoard:
                 if hex.coord['hexNum'] == shipHex.coord['hexNum']:
                     gameWindow.blit(self.CLICK_HEX_IMG, (x, y))
 
+            #iterate
             n += 1
             if n == self.hexesLength:
                 e -= 1
                 n = 0
 
-    def zoomInHex(self):
-        self.hexSize += 16
-        self.scaleHexes(self.hexSize)
-
-    def zoomOutHex(self):
-        self.hexSize -= 16
-        self.scaleHexes(self.hexSize)
-
-    def orientationRotation(self, aShip):
-        if aShip.orientation == 'R':
-            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, -90.0)
-        elif aShip.orientation == 'L':
-            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, -270.0)
-        elif aShip.orientation == 'UR':
-            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, -30.0)
-        elif aShip.orientation == 'UL':
-            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, -330.0)
-        elif aShip.orientation == 'DR':
-            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, -150.0)
-        elif aShip.orientation == 'DL':
-            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, -210.0)
-
-    def rotateCenter(self, aImage, anAngle):
-        origRect = aImage.get_rect()
-        rotImage = pygame.transform.rotate(aImage, anAngle)
-        rotRect = origRect.copy()
-        rotRect.center = rotImage.get_rect().center
-        rotImage = rotImage.subsurface(rotRect).copy()
-        return rotImage
-        
-    def getCoordMouse(self, mousePos):
+    #get hexNums from coord mouse
+    def getMouseHex(self, mousePos):
         i = 0
         a, b = mousePos
         aActive = False
@@ -141,7 +115,6 @@ class spaceGameBoard:
             bActive = True
             #reverse y coords
             row = abs(((b - (self.bordersColumnsY + self.windowMoveY)) // self.hexSize) - self.hexesWidth) - 1
-
             #check even/odd rows
             if ((b - (self.bordersColumnsY + self.windowMoveY)) // self.hexSize) % 2 == 1:
                 i = self.hexSize // 2  
@@ -157,6 +130,34 @@ class spaceGameBoard:
             print("No Hexes In this space")
             return -1
 
+    #WIP zoom in
+    def zoomInHex(self):
+        self.hexSize += 16
+        self.scaleHexes(self.hexSize)
+
+    #WIP zoom out
+    def zoomOutHex(self):
+        self.hexSize -= 16
+        self.scaleHexes(self.hexSize)
+
+    #rotate an image based on ship orientation
+    def orientationRotation(self, aShip):
+        orients = {'R': -90.0, 'L': -270.0, 'UR': -30.0, 'UL': -330.0, 'DR': -150.0, 'DL': -210.0}
+        if aShip.command == 'ASCS':
+            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, orients[aShip.orientation]) 
+        elif aShip.command == 'XNFF':
+            self.XNFF_SHIP_HEX_IMG = self.rotateCenter(XNFF_SHIP_HEX_IMG, orients[aShip.orientation])
+
+    #rotate an image with pivot center
+    def rotateCenter(self, aImage, anAngle):
+        origRect = aImage.get_rect()
+        rotImage = pygame.transform.rotate(aImage, anAngle)
+        rotRect = origRect.copy()
+        rotRect.center = rotImage.get_rect().center
+        rotImage = rotImage.subsurface(rotRect).copy()
+        return rotImage
+        
+    #scale the hexes
     def scaleHexes(self, hexSize):
         self.EMPTY_HEX_IMG = pygame.transform.smoothscale(EMPTY_HEX_IMG, (hexSize, hexSize))
         self.ASCS_SHIP_HEX_IMG = pygame.transform.smoothscale(ASCS_SHIP_HEX_IMG, (hexSize, hexSize))

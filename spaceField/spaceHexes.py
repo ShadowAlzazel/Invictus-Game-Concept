@@ -6,7 +6,7 @@ class starSpace:
         self.coord = {'hexNum': hexNumber}
         self.entity = []
         self.neighbors = []
-        self.directions = {'R': [], 'L': [], 'UR': [], 'UL': [], 'DR': [], 'DL': []}
+        self.directions = {'R': 0, 'L': -1, 'UR': 0, 'UL': 0, 'DR': -1, 'DL': -1}
         self.empty = True
 
     def addEntity(self, newEntity):

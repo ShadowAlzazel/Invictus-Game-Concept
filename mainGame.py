@@ -89,7 +89,7 @@ def gameOPS(turnGame):
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
-                hexIndex = combatGameBoard.getCoordMouse(someMousePos)
+                hexIndex = combatGameBoard.getMouseHex(someMousePos)
                 if hexIndex >= 0:
                     turnGame.selectHex(turnGame.opsSpace.starSpaceHexes[hexIndex])
                 print(hexIndex)
