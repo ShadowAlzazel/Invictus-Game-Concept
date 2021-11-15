@@ -72,14 +72,17 @@ class spaceGameBoard:
             y = (self.bordersColumnsY) + ((e - 1) * self.hexSize) + self.windowMoveY
             #x coordinate is a proportion of the screen
             x = (self.bordersRowsX) + (n * self.hexSize) + i - (self.hexSize // 2) + self.windowMoveX
+            #draw hex grid
+            gameWindow.blit(self.EMPTY_HEX_IMG, (x, y))
+
             if hex.empty:
-                gameWindow.blit(self.EMPTY_HEX_IMG, (x, y))
                 if shipClicked:
-                    if hex in shipHex.neighbors and aShip.shipMovement != 0:
+                    if hex in shipHex.neighbors and aShip.shipMovement != 0 and not (hex.directions[aShip.orientation] == shipHex.coord['hexNum']):
                         gameWindow.blit(self.MOVE_OPTION_HEX_IMG, (x, y))
 
             elif hex.entity.spaceEntity == 'shipObject':
                 if hex.entity.command == 'ASCS':
+                    self.orientationRotation(hex.entity)
                     gameWindow.blit(self.ASCS_SHIP_HEX_IMG, (x, y))
                 elif hex.entity.command == 'XNFF':
                     gameWindow.blit(self.XNFF_SHIP_HEX_IMG, (x, y))
@@ -105,6 +108,28 @@ class spaceGameBoard:
         self.hexSize -= 16
         self.scaleHexes(self.hexSize)
 
+    def orientationRotation(self, aShip):
+        if aShip.orientation == 'R':
+            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, -90.0)
+        elif aShip.orientation == 'L':
+            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, -270.0)
+        elif aShip.orientation == 'UR':
+            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, -30.0)
+        elif aShip.orientation == 'UL':
+            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, -330.0)
+        elif aShip.orientation == 'DR':
+            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, -150.0)
+        elif aShip.orientation == 'DL':
+            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, -210.0)
+
+    def rotateCenter(self, aImage, anAngle):
+        origRect = aImage.get_rect()
+        rotImage = pygame.transform.rotate(aImage, anAngle)
+        rotRect = origRect.copy()
+        rotRect.center = rotImage.get_rect().center
+        rotImage = rotImage.subsurface(rotRect).copy()
+        return rotImage
+        
     def getCoordMouse(self, mousePos):
         i = 0
         a, b = mousePos

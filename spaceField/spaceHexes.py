@@ -6,7 +6,7 @@ class starSpace:
         self.coord = {'hexNum': hexNumber}
         self.entity = []
         self.neighbors = []
-        self.directions = {}
+        self.directions = {'R': [], 'L': [], 'UR': [], 'UL': [], 'DR': [], 'DL': []}
         self.empty = True
 
     def addEntity(self, newEntity):
@@ -46,6 +46,10 @@ class zoneSpace:
         if not clickHex.empty:
             print("Hex Occupied!")
             return False
+
+        for key in self.starSpaceHexes[oldHexCoord].directions:
+            if self.starSpaceHexes[oldHexCoord].directions[key] == newHexCoord:
+                movableEntity.orientation = key
 
         self.hexesFull.remove(self.starSpaceHexes[oldHexCoord])
         self.hexesFull.append(self.starSpaceHexes[newHexCoord])

@@ -18,10 +18,11 @@ class Ship:
         self.hullnumber = hullnumber
         self.vesselID = ''.join([self.shiptype, '-', str(self.hullnumber)])
         self.placeSpace = []  #starSpace object
-        self.radar = []   #radar object
+        self.radar = []  #radar object
         self.primaryBattery = []  #primary guns
         self.secondaryBattery = []  
         self.broadsideBattery = []
+        self.orientation = 'R'
         self.defenses = {'ShieldType': [], 'ArmorType': []}
 
         print("New Ship Launched", end=': ')

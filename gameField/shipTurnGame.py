@@ -102,7 +102,7 @@ class turnCombatGame:
     #move ship on board
     def _moveShipAction(self, aHex):
         result = False
-        if aHex.empty and (aHex in self.selectedHex.neighbors):
+        if aHex.empty and (aHex in self.selectedHex.neighbors) and not (aHex.directions[self.selectedHex.entity.orientation] == self.selectedHex.coord['hexNum']):
             selectedShip = self.selectedHex.entity
             if selectedShip.shipMovement != 0:
                 result = self.opsSpace.moveClickEntity(selectedShip, aHex)

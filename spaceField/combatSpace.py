@@ -23,31 +23,38 @@ def createCombatSpace(length, width, density):
         #check for right hex border
         if not (hexCoord + 1) % length == 0:
             j = newZone.starSpaceHexes[hexCoord + hexMoves['Right']]
+            starSpaceHex.directions['R'] = j.coord['hexNum']
             neighbors.append(j)
+
 
         #check for left hex borders
         if not hexCoord % length == 0:
             j = newZone.starSpaceHexes[hexCoord + hexMoves['Left']]
+            starSpaceHex.directions['L'] = j.coord['hexNum']
             neighbors.append(j)
 
         #check for up-right hex borders
         if not (hexCoord >= length * (width - 1)) and not ((hexCoord // length) % 2 == 1 and (hexCoord + 1) % length == 0):
             j = newZone.starSpaceHexes[hexCoord + hexMoves['UpRight']]
+            starSpaceHex.directions['UR'] = j.coord['hexNum']
             neighbors.append(j)
         
         #check for up-left hex borders
         if not (hexCoord) >= length * (width - 1) and not((hexCoord // length) % 2 == 0 and hexCoord % length == 0):
             j = newZone.starSpaceHexes[hexCoord + hexMoves['UpLeft']]
+            starSpaceHex.directions['UL'] = j.coord['hexNum']
             neighbors.append(j)
 
         #check for down-right hex borders
         if not (hexCoord) // length == 0 and not ((hexCoord // length) % 2 == 1 and (hexCoord + 1) % length == 0):
             j = newZone.starSpaceHexes[hexCoord + hexMoves['DownRight']]
+            starSpaceHex.directions['DR'] = j.coord['hexNum']
             neighbors.append(j)
 
         #check for down-left hex borders
         if not (hexCoord) // length == 0 and not ((hexCoord // length) % 2 == 0 and hexCoord % length == 0):
             j = newZone.starSpaceHexes[hexCoord + hexMoves['DownLeft']]
+            starSpaceHex.directions['DL'] = j.coord['hexNum']
             neighbors.append(j)
 
         return neighbors
@@ -60,6 +67,5 @@ def createCombatSpace(length, width, density):
     #make neighbors for starSpaceHexes
     for z in newZone.starSpaceHexes:
         z.neighbors = getNeighbors(z)
-
 
     return newZone
