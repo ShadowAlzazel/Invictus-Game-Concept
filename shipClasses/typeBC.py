@@ -70,7 +70,7 @@ class EclipseClass(Battlecruiser):
             if x <= 2:
                 self.primaryBattery.append(triple_L18_DeuteriumLance(vID, ''.join(['T', str(x)])))
             elif x <= 4:
-                self.primaryBattery.append(double_M22_ThorGigaGuns(vID, ''.join(['T', str(x)])))
+                self.primaryBattery.append(double_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])))
         self.secondaryBattery = [quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         self.broadsideBattery = []
         for x in range(1, 17):
@@ -88,7 +88,7 @@ class PenumbraClass(Battlecruiser):
     shipClass = 'PenumbraClass'
     ammount = 0
     shipStats = {       
-        "FP": 505, "ACC": 45, "EVA": 35, "SPD": 6,
+        "FP": 545, "ACC": 48, "EVA": 35, "SPD": 6,
         "RDR": 5, "LCK": 10
     }
 
@@ -117,7 +117,7 @@ class IllustriousClass(Battlecruiser):
     shipClass = 'IllustriousClass'
     ammount = 0
     shipStats = {       
-        "FP": 533, "ACC": 46, "EVA": 32, "SPD": 6,
+        "FP": 523, "ACC": 46, "EVA": 32, "SPD": 6,
         "RDR": 5, "LCK": 10
     }
 
