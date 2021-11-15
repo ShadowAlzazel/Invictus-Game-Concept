@@ -51,9 +51,11 @@ def gameOPS(turnGame):
                 if turnGame.selectedHex:
                     turnGame.selectedHex.entity.fullInspect()
 
+            #zooming
             if event.type == KEYDOWN and event.key == K_z:
                 combatGameBoard.zoomInHex()
 
+            #window movement
             if event.type == KEYDOWN and event.key == K_x:
                 combatGameBoard.zoomOutHex()
 

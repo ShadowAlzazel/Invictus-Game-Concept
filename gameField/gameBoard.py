@@ -53,9 +53,11 @@ class spaceGameBoard:
             shipClicked = True
 
         if self.centerHex > -1:
-            #self.windowMoveX = 
-            self.windowMoveX = int((self.hexesLength / 2) - ((self.centerHex % self.hexesLength) + 1)) * self.hexSize
-            self.windowMoveY = int(((self.centerHex // self.hexesLength)) - (self.hexesWidth / 2)) * self.hexSize
+            c = 0
+            if (self.centerHex // self.hexesLength) % 2 != 0:
+                c = 32
+            self.windowMoveX = int((self.hexesLength / 2) - ((self.centerHex % self.hexesLength) + 1)) * self.hexSize + c
+            self.windowMoveY = int(((self.centerHex // self.hexesLength)) - (self.hexesWidth / 2) + 0.5) * self.hexSize
             self.centerHex = -1
 
         # e is for flipping the y coordinate
