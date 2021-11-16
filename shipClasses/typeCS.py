@@ -1,12 +1,9 @@
-#Started 11/5/2021 
-#from . shipEquipment import *
-#from . shipRole import Strikecruiser
 from shipClasses.shipEquipment import *
 from shipClasses.shipRole import Strikecruiser
 
-"""--<->----------------------------STRIKECRUISERS------------------------------<->--"""
+#strike cruisers
 
-#Voltage Class Strikecruiser
+#----------------------------------Voltage Class Strikecruiser-----------------------------------
 class VoltageClass(Strikecruiser):
     shipClass = 'VoltageClass'
     ammount = 0
@@ -23,24 +20,23 @@ class VoltageClass(Strikecruiser):
         super().__init__(hullnumber, name)
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['ShieldType'].append(HyperShieldGen(vID))
-        self.defenses['ArmorType'].append(OrichalcumAlloyArmor(vID))
-        self.primaryBattery = []
+        self.defenses['shieldType'].append(HyperShieldGen(vID))
+        self.defenses['armorType'].append(OrichalcumAlloyArmor(vID))
+        
         for x in range(1, 5):
             if x <= 2:
-                self.primaryBattery.append(triple_L13_HadronLance(vID, ''.join(['T', str(x)])))
+                self.armaments['primaryBattery'].append(triple_L13_HadronLance(vID, ''.join(['T', str(x)])))
             elif x <= 4:
-                self.primaryBattery.append(triple_A11_TeslaArcThrowers(vID, ''.join(['T', str(x)])))
-        self.secondaryBattery = [triple_M7_TitanAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1,3)]
-        self.broadsideBattery = []
+                self.armaments['primaryBattery'].append(triple_A11_TeslaArcThrowers(vID, ''.join(['T', str(x)])))
+        self.armaments['secondaryBattery'] = [triple_M7_TitanAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1,3)]
         for x in range(1, 9):
             if x <= 4:
-                self.broadsideBattery.append(double_M4_ShredderAutoGuns(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_M4_ShredderAutoGuns(vID, ''.join(['B', str(x)])))
             elif x <= 8:
-                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
 
 
-#Dynamo Class Strikecruiser
+#-------------------------------------Dynamo Class Strikecruiser----------------------------------------
 class DynamoClass(Strikecruiser):
     shipClass = 'DynamoClass'
     ammount = 0
@@ -57,18 +53,16 @@ class DynamoClass(Strikecruiser):
         super().__init__(hullnumber, name)
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['ShieldType'].append(HyperShieldGen(vID))
-        self.defenses['ArmorType'].append(OrichalcumAlloyArmor(vID))
-        self.primaryBattery = []
+        self.defenses['shieldType'].append(HyperShieldGen(vID))
+        self.defenses['armorType'].append(OrichalcumAlloyArmor(vID))
         for x in range(1, 5):
             if x <= 2:
-                self.primaryBattery.append(triple_M12_NeutronLauchers(vID, ''.join(['T', str(x)])))
+                self.armaments['primaryBattery'].append(triple_M12_NeutronLauchers(vID, ''.join(['T', str(x)])))
             elif x <= 4:
-                self.primaryBattery.append(triple_A11_TeslaArcThrowers(vID, ''.join(['T', str(x)])))
-        self.secondaryBattery = [triple_A6_LaserLance(vID, ''.join(['S', str(x)])) for x in range(1,3)]
-        self.broadsideBattery = []
+                self.armaments['primaryBattery'].append(triple_A11_TeslaArcThrowers(vID, ''.join(['T', str(x)])))
+        self.armaments['secondaryBattery'] = [triple_A6_LaserLance(vID, ''.join(['S', str(x)])) for x in range(1,3)]
         for x in range(1, 9):
             if x <= 4:
-                self.broadsideBattery.append(double_M4_ShredderAutoGuns(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_M4_ShredderAutoGuns(vID, ''.join(['B', str(x)])))
             elif x <= 8:
-                self.broadsideBattery.append(double_A5_WaveArcThrowers(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_A5_WaveArcThrowers(vID, ''.join(['B', str(x)])))

@@ -1,6 +1,3 @@
-#Started 11/5/2021
-#from . shipEquipment import *
-#from . shipRole import Battleship
 from shipClasses.shipEquipment import *
 from shipClasses.shipRole import Battleship
 
@@ -20,26 +17,19 @@ class EssexClass(Battleship):
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
+        EssexClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['ShieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['ArmorType'].append(DurasteelArmor(vID))
-        self.primaryBattery = [triple_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,5)]
-        self.secondaryBattery = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
-        self.broadsideBattery = []
+        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
+        self.defenses['armorType'].append(DurasteelArmor(vID))
+        self.armaments['primaryBattery'] = [triple_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,5)]
+        self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
             if x <= 16:
-                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 24:
-                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
-        EssexClass.ammount += 1
-
-
-    """
-    def EssexBarrage(self):
-        e = self.FP * 200
-        print("Essex Barrage! Dmg:", e)
-    """
+                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+        
 
 #---------------------------Amagi Class Battleship---------------------------
 class AmagiClass(Battleship):
@@ -55,19 +45,19 @@ class AmagiClass(Battleship):
     
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
+        AmagiClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['ShieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['ArmorType'].append(DurasteelArmor(vID))
-        self.primaryBattery = [double_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,7)]
-        self.secondaryBattery = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
-        self.broadsideBattery = []
+        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
+        self.defenses['armorType'].append(DurasteelArmor(vID))
+        self.armaments['primaryBattery'] = [double_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,7)]
+        self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
             if x <= 16:
-                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 24:
-                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
-        AmagiClass.ammount += 1
+                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+    
 
 #---------------------------Vittorio Veneto Class Battleship---------------------------
 class VittorioVenetoClass(Battleship):
@@ -83,19 +73,20 @@ class VittorioVenetoClass(Battleship):
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
+        VittorioVenetoClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['ShieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['ArmorType'].append(DurasteelArmor(vID))
-        self.primaryBattery = [triple_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,5)]
-        self.secondaryBattery = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
-        self.broadsideBattery = []
+        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
+        self.defenses['armorType'].append(DurasteelArmor(vID))
+        self.armaments['primaryBattery'] = [triple_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,5)]
+        self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+        
         for x in range(1, 25):
             if x <= 16:
-                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 24:
-                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
-        VittorioVenetoClass.ammount += 1
+                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+
 
 #--------------------------Hood Class Battleship---------------------------
 class HoodClass(Battleship):
@@ -111,19 +102,20 @@ class HoodClass(Battleship):
     
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
+        HoodClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['ShieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['ArmorType'].append(DurasteelArmor(vID))
-        self.primaryBattery = [double_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,7)]
-        self.secondaryBattery = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
-        self.broadsideBattery = []
+        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
+        self.defenses['armorType'].append(DurasteelArmor(vID))
+        self.armaments['primaryBattery'] = [double_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,7)]
+        self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+        
         for x in range(1, 25):
             if x <= 16:
-                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 24:
-                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
-        HoodClass.ammount += 1
+                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+
 
 #--------------------------Prince of Wales Class Battleship---------------------------
 class PrinceOfWalesClass(Battleship):
@@ -139,25 +131,23 @@ class PrinceOfWalesClass(Battleship):
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
+        PrinceOfWalesClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['ShieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['ArmorType'].append(DurasteelArmor(vID))
-        self.primaryBattery = []
+        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
+        self.defenses['armorType'].append(DurasteelArmor(vID))
         for x in range(1, 5):
             if x <= 2:
-                self.primaryBattery.append(double_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])))
+                self.armaments['primaryBattery'].append(double_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])))
             elif x <= 4:
-                self.primaryBattery.append(quadruple_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])))
-        self.secondaryBattery = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
-        self.broadsideBattery = []
+                self.armaments['primaryBattery'].append(quadruple_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])))
+        self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
             if x <= 16:
-                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 24:
-                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
-        
-        PrinceOfWalesClass.ammount += 1  
+                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+          
 
 #--------------------------New Jersey Class Battleship-----------------------------
 class NewJerseyClass(Battleship):
@@ -173,27 +163,25 @@ class NewJerseyClass(Battleship):
 
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
+        NewJerseyClass.ammount += 1 
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['ShieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['ArmorType'].append(DarkNeutronianArmor(vID))
-        self.primaryBattery = []
+        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
+        self.defenses['armorType'].append(DarkNeutronianArmor(vID))
         for x in range(1, 5):
             if x <= 2:
-                self.primaryBattery.append(quadruple_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])))
+                self.armaments['primaryBattery'].append(quadruple_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])))
             elif x <= 4:
-                self.primaryBattery.append(triple_M26_ZeusCannons(vID, ''.join(['T', str(x)])))
-        self.secondaryBattery = []
+                self.armaments['primaryBattery'].append(triple_M26_ZeusCannons(vID, ''.join(['T', str(x)])))
+
         for x in range(1,7):
             if x <= 2:
-                self.secondaryBattery.append(quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])))
+                self.armaments['secondaryBattery'].append(quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])))
             elif x <= 6:
-                self.secondaryBattery.append(triple_L13_HadronLance(vID, ''.join(['S', str(x)])))
-        self.broadsideBattery = []
+                self.armaments['secondaryBattery'].append(triple_L13_HadronLance(vID, ''.join(['S', str(x)])))
+        
         for x in range(1, 33):
             if x <= 20:
-                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 32:
-                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))   
-
-        NewJerseyClass.ammount += 1    
+                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))   

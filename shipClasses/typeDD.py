@@ -23,8 +23,8 @@ class JohnstonClass(Destroyer):
         self.defenses['ShieldType'].append(LumioneShieldGen(vID))
         self.defenses['ArmorType'].append(TitaniumArmor(vID))
         self.primaryBattery = [double_M6_TitanAutoCannons(vID, 'T1'), double_M4_ShredderAutoGuns(vID, 'T2')]
-        self.secondaryBattery = []
-        self.broadsideBattery = []
+        
+        
 
 #Shimakaze class destroyer
 class ShimakazeClass(Destroyer):
@@ -43,5 +43,5 @@ class ShimakazeClass(Destroyer):
         self.defenses['ShieldType'].append(LumioneShieldGen(vID))
         self.defenses['ArmorType'].append(TitaniumArmor(vID))
         self.primaryBattery = [double_M6_TitanAutoCannons(vID, 'T1'), double_M4_ShredderAutoGuns(vID, 'T2')]
-        self.secondaryBattery = []
-        self.broadsideBattery = []
+        
+        
