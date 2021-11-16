@@ -18,4 +18,4 @@ fleetXNFF.spawnFleet(aoe, 114)
 aTurnGame = turnCombatGame(aoe)
 
 #start game
-gameOPS(aTurnGame)
+levelGame(aTurnGame)

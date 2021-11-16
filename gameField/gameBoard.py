@@ -1,6 +1,5 @@
 #class for board display
 import pygame
-from pygame.transform import rotate
 from gameField.gameAssets import *
 
 GAME_ICON = pygame.image.load('gameField/gameAssets/shipIconP2.png')
@@ -11,6 +10,13 @@ MOVE_OPTION_HEX_IMG = pygame.image.load('gameField/gameAssets/emptyHexMovable.pn
 SHIP_TARGET_HEX_IMG = pygame.image.load('gameField/gameAssets/hexTarget.png')
 CLICK_HEX_IMG = pygame.image.load('gameField/gameAssets/clickHex.png')
 SPACE_BACKGROUND = pygame.image.load('gameField/gameAssets/spaceBackground1.png')
+ANI_HEX_1 = pygame.image.load('gameField/gameAssets/gridAni_1.png')
+ANI_HEX_2 = pygame.image.load('gameField/gameAssets/gridAni_2.png')
+ANI_HEX_3 = pygame.image.load('gameField/gameAssets/gridAni_3.png')
+ANI_HEX_4 = pygame.image.load('gameField/gameAssets/gridAni_4.png')
+ANI_HEX_5 = pygame.image.load('gameField/gameAssets/gridAni_5.png')
+ANI_HEX_6 = pygame.image.load('gameField/gameAssets/gridAni_6.png')
+ANI_HEX_7 = pygame.image.load('gameField/gameAssets/gridAni_7.png')
 
 # Note:
 # SPACE_BACKGROUND is a downloaded image from https://www.reddit.com/r/PixelArt/comments/f1wg26/space_background/
@@ -41,11 +47,18 @@ class spaceGameBoard:
         self.MOVE_OPTION_HEX_IMG = MOVE_OPTION_HEX_IMG
         self.SHIP_TARGET_HEX_IMG = SHIP_TARGET_HEX_IMG
         self.CLICK_HEX_IMG = CLICK_HEX_IMG
+        #animation
+        self.aniList = [ANI_HEX_1, ANI_HEX_2, ANI_HEX_3, ANI_HEX_4, ANI_HEX_5, ANI_HEX_6, ANI_HEX_7]
+        self.C_ANI_HEX = ANI_HEX_1
+        self.counterA = 0
+        self.counterC = 0
+        #scale
         self.scaleHexes(self.hexSize)
 
     #draw hexes on board
     def drawHexes(self, gameWindow, operationSpace, shipHex=[]):
         gameWindow.blit(FIT_SPACE, (0, 0))
+
         #check of shipClicked
         shipClicked = False
         if shipHex and not shipHex.empty:
@@ -75,7 +88,7 @@ class spaceGameBoard:
             y = (self.bordersColumnsY) + ((e - 1) * self.hexSize) + self.windowMoveY
             x = (self.bordersRowsX) + (n * self.hexSize) + i - (self.hexSize // 2) + self.windowMoveX
             #draw hex on grid
-            gameWindow.blit(self.EMPTY_HEX_IMG, (x, y))
+            gameWindow.blit(self.C_ANI_HEX, (x, y))
 
             if hex.empty:
                 if shipClicked:
@@ -159,18 +172,29 @@ class spaceGameBoard:
         rotRect.center = rotImage.get_rect().center
         rotImage = rotImage.subsurface(rotRect).copy()
         return rotImage
-        
+
+    def aniHexes(self):
+        w = self.counterA 
+        w = w % 14 
+        if w > 6:
+            w = 14 - w - 1
+        print(w)
+        self.aniList[w].convert()
+        aniImg = pygame.transform.smoothscale(self.aniList[w], (self.hexSize, self.hexSize))
+        self.C_ANI_HEX = aniImg
+        self.counterA += 1
+       
     #scale the hexes
     def scaleHexes(self, hexSize):
-        self.EMPTY_HEX_IMG = pygame.transform.smoothscale(EMPTY_HEX_IMG, (hexSize, hexSize))
-        self.ASCS_SHIP_HEX_IMG = pygame.transform.smoothscale(ASCS_SHIP_HEX_IMG, (hexSize, hexSize))
-        self.XNFF_SHIP_HEX_IMG = pygame.transform.smoothscale(XNFF_SHIP_HEX_IMG, (hexSize, hexSize))
-        self.MOVE_OPTION_HEX_IMG = pygame.transform.smoothscale(MOVE_OPTION_HEX_IMG, (hexSize, hexSize))
-        self.SHIP_TARGET_HEX_IMG = pygame.transform.smoothscale(SHIP_TARGET_HEX_IMG, (hexSize, hexSize))
-        self.CLICK_HEX_IMG = pygame.transform.smoothscale(CLICK_HEX_IMG, (hexSize, hexSize))
         self.ASCS_SHIP_HEX_IMG.convert()
         self.EMPTY_HEX_IMG.convert()
         self.XNFF_SHIP_HEX_IMG.convert()
         self.MOVE_OPTION_HEX_IMG.convert()
         self.SHIP_TARGET_HEX_IMG.convert()
         self.CLICK_HEX_IMG.convert()
+        self.EMPTY_HEX_IMG = pygame.transform.smoothscale(EMPTY_HEX_IMG, (hexSize, hexSize))
+        self.ASCS_SHIP_HEX_IMG = pygame.transform.smoothscale(ASCS_SHIP_HEX_IMG, (hexSize, hexSize))
+        self.XNFF_SHIP_HEX_IMG = pygame.transform.smoothscale(XNFF_SHIP_HEX_IMG, (hexSize, hexSize))
+        self.MOVE_OPTION_HEX_IMG = pygame.transform.smoothscale(MOVE_OPTION_HEX_IMG, (hexSize, hexSize))
+        self.SHIP_TARGET_HEX_IMG = pygame.transform.smoothscale(SHIP_TARGET_HEX_IMG, (hexSize, hexSize))
+        self.CLICK_HEX_IMG = pygame.transform.smoothscale(CLICK_HEX_IMG, (hexSize, hexSize))
