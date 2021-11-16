@@ -11,7 +11,7 @@ class JohnstonClass(Destroyer):
     shipClass = 'JohnstonClass'
     ammount = 0
     shipStats = {
-        "FP": 67, "ACC": 48, "EVA": 66, "SPD": 55,
+        "FP": 67, "ACC": 48, "EVA": 66, "SPD": 9,
         "RDR": 5, "LCK": 10
     }
     

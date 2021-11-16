@@ -35,7 +35,9 @@ class spaceGameBoard:
         #images
         self.EMPTY_HEX_IMG = EMPTY_HEX_IMG
         self.ASCS_SHIP_HEX_IMG = ASCS_SHIP_HEX_IMG
+        self.ROT_ASCS_SHIP_HEX_IMG = ASCS_SHIP_HEX_IMG
         self.XNFF_SHIP_HEX_IMG = XNFF_SHIP_HEX_IMG
+        self.ROT_XNFF_SHIP_HEX_IMG = XNFF_SHIP_HEX_IMG
         self.MOVE_OPTION_HEX_IMG = MOVE_OPTION_HEX_IMG
         self.SHIP_TARGET_HEX_IMG = SHIP_TARGET_HEX_IMG
         self.CLICK_HEX_IMG = CLICK_HEX_IMG
@@ -84,10 +86,10 @@ class spaceGameBoard:
             elif hex.entity.spaceEntity == 'shipObject':
                 if hex.entity.command == 'ASCS':
                     self.orientationRotation(hex.entity)
-                    gameWindow.blit(self.ASCS_SHIP_HEX_IMG, (x, y))
-                elif hex.entity.command == 'XNFF':
+                    gameWindow.blit(self.ROT_ASCS_SHIP_HEX_IMG, (x, y))
+                elif hex.entity.command == 'XNFFS':
                     self.orientationRotation(hex.entity)
-                    gameWindow.blit(self.XNFF_SHIP_HEX_IMG, (x, y))
+                    gameWindow.blit(self.ROT_XNFF_SHIP_HEX_IMG, (x, y))
 
                 if shipClicked:
                     if hex in targets:
@@ -143,10 +145,11 @@ class spaceGameBoard:
     #rotate an image based on ship orientation
     def orientationRotation(self, aShip):
         orients = {'R': -90.0, 'L': -270.0, 'UR': -30.0, 'UL': -330.0, 'DR': -150.0, 'DL': -210.0}
+        self.scaleHexes(self.hexSize)
         if aShip.command == 'ASCS':
-            self.ASCS_SHIP_HEX_IMG = self.rotateCenter(ASCS_SHIP_HEX_IMG, orients[aShip.orientation]) 
-        elif aShip.command == 'XNFF':
-            self.XNFF_SHIP_HEX_IMG = self.rotateCenter(XNFF_SHIP_HEX_IMG, orients[aShip.orientation])
+            self.ROT_ASCS_SHIP_HEX_IMG = self.rotateCenter(self.ASCS_SHIP_HEX_IMG, orients[aShip.orientation]) 
+        elif aShip.command == 'XNFFS':
+            self.ROT_XNFF_SHIP_HEX_IMG = self.rotateCenter(self.XNFF_SHIP_HEX_IMG, orients[aShip.orientation])
 
     #rotate an image with pivot center
     def rotateCenter(self, aImage, anAngle):

@@ -65,13 +65,13 @@
             }    
         },
 
-        "XLF":
+        "XNFF":
         {
             "fleetNames":
             [
-                "Test Fleet XLF"
+                "Test Fleet XNFF"
             ],
-            "Test Fleet XLF":
+            "Test Fleet XNFF":
             {
                 "shipNames":
                 [
