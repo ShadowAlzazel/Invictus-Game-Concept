@@ -3,7 +3,7 @@
 #hex space
 class starSpace:
     def __init__(self, hexNumber): 
-        self.coord = {'hexNum': hexNumber}
+        self.hexCoord = hexNumber
         self.entity = []
         self.neighbors = []
         self.directions = {'R': 0, 'L': -1, 'UR': 0, 'UL': 0, 'DR': -1, 'DL': -1}
@@ -11,7 +11,7 @@ class starSpace:
 
     def addEntity(self, newEntity):
         if self.empty:
-            newEntity.placeSpace = self
+            newEntity.placeHex = self
             self.entity = newEntity
             self.empty = False
         else:
@@ -25,12 +25,12 @@ class zoneSpace:
         n = 0
         self.l = length
         self.w = width
-        self.starSpaceHexes = []
+        self.starHexes = []
         self.hexesFull = []
         self.fleetEntities = []
         self.spaceEntities = {'spaceObject': [], 'shipObject': []}
         for n in range(0, self.l * self.w):
-            self.starSpaceHexes.append(starSpace(n))
+            self.starHexes.append(starSpace(n))
 
 
     # add an entity to the zone and a starSpace
@@ -41,21 +41,21 @@ class zoneSpace:
 
     #click move
     def moveClickEntity(self, movableEntity, clickHex):
-        oldHexCoord = movableEntity.placeSpace.coord['hexNum']
-        newHexCoord = clickHex.coord['hexNum']
+        oldHexCoord = movableEntity.placeHex.hexCoord
+        newHexCoord = clickHex.hexCoord
         if not clickHex.empty:
             print("Hex Occupied!")
             return False
 
-        for key in self.starSpaceHexes[oldHexCoord].directions:
-            if self.starSpaceHexes[oldHexCoord].directions[key] == newHexCoord:
+        for key in self.starHexes[oldHexCoord].directions:
+            if self.starHexes[oldHexCoord].directions[key] == newHexCoord:
                 movableEntity.orientation = key
 
-        self.hexesFull.remove(self.starSpaceHexes[oldHexCoord])
-        self.hexesFull.append(self.starSpaceHexes[newHexCoord])
-        self.starSpaceHexes[newHexCoord].addEntity(movableEntity)
-        self.starSpaceHexes[oldHexCoord].entity = []
-        self.starSpaceHexes[oldHexCoord].empty = True
+        self.hexesFull.remove(self.starHexes[oldHexCoord])
+        self.hexesFull.append(self.starHexes[newHexCoord])
+        self.starHexes[newHexCoord].addEntity(movableEntity)
+        self.starHexes[oldHexCoord].entity = []
+        self.starHexes[oldHexCoord].empty = True
         print("Moved From: Space Hex", oldHexCoord, end=' ')
-        print("To: Space Hex", movableEntity.placeSpace.coord['hexNum'])
+        print("To: Space Hex", movableEntity.placeHex.hexCoord)
         return True

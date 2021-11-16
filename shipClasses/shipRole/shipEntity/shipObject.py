@@ -16,7 +16,7 @@ class Ship:
         self.name = name
         self.hullnumber = hullnumber
         self.vesselID = ''.join([self.shiptype, '-', str(self.hullnumber)])
-        self.coordHex = []  #starSpace object
+        self.placeHex = []  #starSpace object
         self.orientation = 'R'
         self.radar = []  #radar object
         self.armaments = {'primaryBattery': [], 'secondaryBattery': [], 'broadsideBattery': []}
@@ -29,11 +29,11 @@ class Ship:
     #damage function that takes in a value 
     def takeDamage(self, damageNum):
         if self.shields > damageNum:
-            damageS = self.defenses['shieldType'].shieldDamage(damageNum)
+            damageS = self.defenses['shieldType'][0].shieldDamage(damageNum)
             self.shields -= damageS
             return damageS
         elif self.hull > damageNum:
-            damageH = self.defenses['armorType'].armorDamage(damageNum) - self.shields
+            damageH = self.defenses['armorType'][0].armorDamage(damageNum) - self.shields
             self.shields = 0
             self.hull -= damageH
             return damageH
@@ -43,7 +43,7 @@ class Ship:
 
 
     #full self repair
-    def selfReset(self):
+    def shipReset(self):
         self.hull = self.__class__.hull
         self.shields = self.__class__.shields
         print(self.name, "Reset!")
@@ -59,13 +59,13 @@ class Ship:
         #find the max range of all guns loaded
         targets = []
         if readyRanges:
-            targets = self.radar.findRadarTargets(max(readyRanges), self.placeSpace)
+            targets = self.radar.findRadarTargets(max(readyRanges), self.placeHex)
         return targets
 
 
     #check if gun in range of a target ship
     def gunInRange(self, gunBattery, targetShip):
-        if not self.radar.findGunTargets(gunBattery.gunStats['RNG'], self.placeSpace, targetShip):
+        if not self.radar.findGunTargets(gunBattery.gunStats['RNG'], self.placeHex, targetShip):
             return False 
         else:
             return True
@@ -74,16 +74,18 @@ class Ship:
     #chech all guns ready to fire
     def gunsReady(self):
         gunsPrimed = []
-        for gun in self.armaments.values():
-            if gun.gunLoadTime == gun.gunStats['RLD']:
-                gunsPrimed.append(gun)
+        for b in self.armaments.values():
+            for g in b:
+                if g.gunLoadTime == g.gunStats['RLD']:
+                    gunsPrimed.append(g)
         return gunsPrimed
 
 
     #reload all guns
     def reloadGuns(self):
-        for gun in self.armaments.values():
-            gun.reloadGun()
+        for b in self.armaments.values():
+            for g in b:
+                g.reloadGun()
 
 
     #inspection function to look at stats
@@ -96,7 +98,7 @@ class Ship:
         print("Ship Stats:")
         print(self.shipStats)
         print("Primary Armament:")
-        for x in self.primaryBattery:
+        for x in self.armaments['primaryBattery']:
             print(x.gunName, "in Turret", x.batteryID)
         print("Ship Defenses:")
         print(self.defenses['ArmorType'][0].armorName)

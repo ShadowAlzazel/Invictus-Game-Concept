@@ -28,19 +28,19 @@ class spaceFleet:
             k, n = 0, 1
             if start == -1: 
                 r = randint(0, (operationSpace.l * operationSpace.w) - 1)
-                if operationSpace.starSpaceHexes[r].empty:
-                    fleetSpawnP = operationSpace.starSpaceHexes[r]
+                if operationSpace.starHexes[r].empty:
+                    fleetSpawnP = operationSpace.starHexes[r]
                 else:
                     print("Spawn Failed")
                     return 
             elif start > 0:
-                fleetSpawnP = operationSpace.starSpaceHexes[start]
+                fleetSpawnP = operationSpace.starHexes[start]
 
             #spawn the fleet in a zoneSpace
             operationSpace.addCustomEntity(fleetSpawnP, self.fleetShips[k])
             spawning = True
             while spawning:
-                for hex in self.fleetShips[k].placeSpace.neighbors:
+                for hex in self.fleetShips[k].placeHex.neighbors:
                     if n == len(self.fleetShips):
                         spawning = False
                     elif hex.empty:

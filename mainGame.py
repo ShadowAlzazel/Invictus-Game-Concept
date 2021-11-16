@@ -85,13 +85,13 @@ def gameOPS(turnGame):
 
             if event.type == KEYDOWN and event.key == K_c:
                 if turnGame.selectedHex:
-                    combatGameBoard.centerHex = turnGame.selectedHex.coord['hexNum']
+                    combatGameBoard.centerHex = turnGame.selectedHex.hexCoord
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
                 hexIndex = combatGameBoard.getMouseHex(someMousePos)
                 if hexIndex >= 0:
-                    turnGame.selectHex(turnGame.opsSpace.starSpaceHexes[hexIndex])
+                    turnGame.selectHex(turnGame.opsSpace.starHexes[hexIndex])
                 print(hexIndex)
 
         combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace, turnGame.selectedHex)    

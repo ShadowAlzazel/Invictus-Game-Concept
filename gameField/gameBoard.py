@@ -66,7 +66,7 @@ class spaceGameBoard:
         #e is for flipping the y coordinate
         e = self.hexesWidth
         n = 0
-        for hex in operationSpace.starSpaceHexes: 
+        for hex in operationSpace.starHexes: 
             #indent every second row
             i = 0 
             if not e % 2 == 0:
@@ -79,8 +79,8 @@ class spaceGameBoard:
 
             if hex.empty:
                 if shipClicked:
-                    if hex in shipHex.neighbors and aShip.shipMovement != 0 and (hex.directions[aShip.orientation] != shipHex.coord['hexNum'] or aShip.shiptype == 'DD' or aShip.shiptype == 'CS'):
-                        if not (aShip.shiptype == 'BB' and operationSpace.starSpaceHexes[hex.directions[aShip.orientation]] in shipHex.neighbors):
+                    if hex in shipHex.neighbors and aShip.shipMovement != 0 and (hex.directions[aShip.orientation] != shipHex.hexCoord or aShip.shiptype == 'DD' or aShip.shiptype == 'CS'):
+                        if not (aShip.shiptype == 'BB' and operationSpace.starHexes[hex.directions[aShip.orientation]] in shipHex.neighbors):
                             gameWindow.blit(self.MOVE_OPTION_HEX_IMG, (x, y))
 
             elif hex.entity.spaceEntity == 'shipObject':
@@ -96,7 +96,7 @@ class spaceGameBoard:
                         gameWindow.blit(self.SHIP_TARGET_HEX_IMG, (x, y))
         
             if shipClicked:
-                if hex.coord['hexNum'] == shipHex.coord['hexNum']:
+                if hex.hexCoord == shipHex.hexCoord:
                     gameWindow.blit(self.CLICK_HEX_IMG, (x, y))
 
             #iterate

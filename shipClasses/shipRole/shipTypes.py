@@ -15,8 +15,8 @@ class Battleship(Ship):
     hull = 17500
 
     def __init__(self, hullnumber, name):
-        Battleship.ammount += 1
         super().__init__(hullnumber, name)
+        Battleship.ammount += 1
         print(self.shiptype, '-', hullnumber, sep='')
 
 
@@ -33,8 +33,8 @@ class Battlecruiser(Ship):
     hull = 12500
 
     def __init__(self, hullnumber, name):
-        Battlecruiser.ammount += 1
         super().__init__(hullnumber, name)
+        Battlecruiser.ammount += 1
         print(self.shiptype, '-', hullnumber, sep='')
 
 
@@ -51,8 +51,8 @@ class Strikecruiser(Ship):
     hull = 8500
 
     def __init__(self, hullnumber, name):
-        Strikecruiser.ammount += 1
         super().__init__(hullnumber, name)
+        Strikecruiser.ammount += 1
         print(self.shiptype, '-', hullnumber, sep='')
 
 
@@ -69,8 +69,8 @@ class Heavycruiser(Ship):
     hull = 10000
 
     def __init__(self, hullnumber, name):
-        Heavycruiser.ammount += 1
         super().__init__(hullnumber, name)
+        Heavycruiser.ammount += 1
         print(self.shiptype, '-', hullnumber, sep='')
 
 
@@ -105,6 +105,6 @@ class Destroyer(Ship):
     hull = 2500
 
     def __init__(self, hullnumber, name):
-        Destroyer.ammount += 1
         super().__init__(hullnumber, name)
+        Destroyer.ammount += 1
         print(self.shiptype, '-', hullnumber, sep='')
