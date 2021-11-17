@@ -3,21 +3,27 @@ from pygame.constants import K_DOWN, K_ESCAPE, K_F4, K_LALT, K_LEFT, K_RIGHT, K_
 from gameField import *
 
 #start game
-def gameOPS(turnGame):
+def levelGame(turnLevel):
 
+    
     gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
     gameScreen.blit(FIT_SPACE, (0, 0))
 
     #start pygame
     pygame.init()
-    combatGameBoard = spaceGameBoard(turnGame.opsSpace.l, turnGame.opsSpace.w, HEX_SIZE)
+    combatGameBoard = spaceGameBoard(turnLevel.opsSpace.l, turnLevel.opsSpace.w, HEX_SIZE)
 
     #create window
     pygame.display.update()
     pygame.display.set_caption("ASCS Fleet Manager")
     pygame.display.set_icon(GAME_ICON)
-    combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
+
+    animateGridHexes = pygame.USEREVENT + 1
+    pygame.time.set_timer(animateGridHexes, 250)
+
+    combatGameBoard.drawHexes(gameScreen, turnLevel.opsSpace)
     pygame.display.update()
+
 
     #variables
     moveUp, moveDown, moveLeft, moveRight = False, False, False, False
@@ -42,23 +48,7 @@ def gameOPS(turnGame):
                 print("Quiting")
                 gameRunning = False
 
-            if event.type == KEYDOWN and event.key == K_e:
-                print('Fleet Turn Ended')
-                turnGame.fleetTurn()
-                combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace)
-
-            if event.type == KEYDOWN and event.key == K_i:
-                if turnGame.selectedHex:
-                    turnGame.selectedHex.entity.fullInspect()
-
-            #zooming
-            if event.type == KEYDOWN and event.key == K_z:
-                combatGameBoard.zoomInHex()
-
             #window movement
-            if event.type == KEYDOWN and event.key == K_x:
-                combatGameBoard.zoomOutHex()
-
             if event.type == KEYDOWN and event.key == K_UP:
                 moveUp = True
             if event.type == KEYUP and event.key == K_UP:
@@ -79,22 +69,43 @@ def gameOPS(turnGame):
             if event.type == KEYUP and event.key == K_RIGHT:
                 moveRight = False
 
+            #reset window
             if event.type == KEYDOWN and event.key == K_SPACE:
                 combatGameBoard.windowMoveX = 0
                 combatGameBoard.windowMoveY = 0
 
+            if event.type == KEYDOWN and event.key == K_e:
+                print('Fleet Turn Ended')
+                turnLevel.fleetTurn()
+                combatGameBoard.drawHexes(gameScreen, turnLevel.opsSpace)
+
+            if event.type == KEYDOWN and event.key == K_i:
+                if turnLevel.selectedHex:
+                    turnLevel.selectedHex.entity.fullInspect()
+
+            #zooming
+            if event.type == KEYDOWN and event.key == K_z:
+                combatGameBoard.zoomInHex()
+
+            if event.type == KEYDOWN and event.key == K_x:
+                combatGameBoard.zoomOutHex()
+
             if event.type == KEYDOWN and event.key == K_c:
-                if turnGame.selectedHex:
-                    combatGameBoard.centerHex = turnGame.selectedHex.coord['hexNum']
+                if turnLevel.selectedHex:
+                    combatGameBoard.centerHex = turnLevel.selectedHex.hexCoord
+
+            if event.type == animateGridHexes:
+                combatGameBoard.aniHexes()
+                combatGameBoard.drawHexes(gameScreen, turnLevel.opsSpace, turnLevel.selectedHex) 
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
-                hexIndex = combatGameBoard.getCoordMouse(someMousePos)
+                hexIndex = combatGameBoard.getMouseHex(someMousePos)
                 if hexIndex >= 0:
-                    turnGame.selectHex(turnGame.opsSpace.starSpaceHexes[hexIndex])
+                    turnLevel.selectHex(turnLevel.opsSpace.starHexes[hexIndex])
                 print(hexIndex)
 
-        combatGameBoard.drawHexes(gameScreen, turnGame.opsSpace, turnGame.selectedHex)    
+        combatGameBoard.drawHexes(gameScreen, turnLevel.opsSpace, turnLevel.selectedHex)    
         pygame.display.update()
 
     pygame.quit()

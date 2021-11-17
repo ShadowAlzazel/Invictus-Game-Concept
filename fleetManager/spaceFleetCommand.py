@@ -20,23 +20,27 @@ class spaceFleet:
                 self.fleetLogs = astraFleets[0][fleetCommand][name]
         
 
-    def spawnFleet(self, operationSpace, formation = 0):
+    def spawnFleet(self, operationSpace, start=-1, formation=0):
         operationSpace.fleetEntities.append(self)
 
         if formation == 0:  #cluster
+
             k, n = 0, 1
-            r = randint(0, (operationSpace.l * operationSpace.w) - 1)
-            if operationSpace.starSpaceHexes[r].empty:
-                fleetSpawnP = operationSpace.starSpaceHexes[r]
-            else:
-                print("Spawn Failed")
-                return 
+            if start == -1: 
+                r = randint(0, (operationSpace.l * operationSpace.w) - 1)
+                if operationSpace.starHexes[r].empty:
+                    fleetSpawnP = operationSpace.starHexes[r]
+                else:
+                    print("Spawn Failed")
+                    return 
+            elif start > 0:
+                fleetSpawnP = operationSpace.starHexes[start]
 
             #spawn the fleet in a zoneSpace
             operationSpace.addCustomEntity(fleetSpawnP, self.fleetShips[k])
             spawning = True
             while spawning:
-                for hex in self.fleetShips[k].placeSpace.neighbors:
+                for hex in self.fleetShips[k].placeHex.neighbors:
                     if n == len(self.fleetShips):
                         spawning = False
                     elif hex.empty:

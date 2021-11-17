@@ -3,6 +3,19 @@
     "files.defaultLanguage": "python",
     // Check if git is enabled
     "git.enabled": true,
+    //color customizations
+    "editor.tokenColorCustomizations": {
+        "[GitHub Dark]": {
+            "textMateRules": [
+                {
+                    "scope": "support.type.property-name.json.comments",
+                    "settings": {
+                        "foreground": "#ff8f8f"
+                    }
+                }
+            ]
+        }
+    },
     //Files types exluded from showing
     "files.exclude": {
         "**/.git": true,

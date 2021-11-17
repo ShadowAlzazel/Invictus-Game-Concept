@@ -1,12 +1,9 @@
-#Started 11/5/2021
-#from . shipEquipment import *
-#from . shipRole import Lightcruiser
 from shipClasses.shipEquipment import *
 from shipClasses.shipRole import Lightcruiser
 
-"""--<->----------------------------LIGHTCRUISERS------------------------------<->--"""
+#light cruisers
 
-#Midnight Class Light Cruiser 
+#-----------------------------------Midnight Class Light Cruiser--------------------------------- 
 class MidnightClass(Lightcruiser):
     shipClass = 'MidnightClass'
     ammount = 0 
@@ -24,9 +21,8 @@ class MidnightClass(Lightcruiser):
         super().__init__(hullnumber, name)
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['ShieldType'].append(HyperShieldGen(vID))
-        self.defenses['ArmorType'].append(TitaniumArmor(vID))
-        self.primaryBattery = [triple_A6_LaserLance(vID, ''.join(['T', str(x)])) for x in range(1, 5)]
-        self.secondaryBattery = [double_M4_ShredderAutoGuns(vID, ''.join(['S', str(x)])) for x in range(1, 3)] 
-        self.broadsideBattery = [quad_BPoDS(vID, ''.join(['S', str(x)])) for x in range(1, 5)]
-
+        self.defenses['shieldType'].append(HyperShieldGen(vID))
+        self.defenses['armorType'].append(TitaniumArmor(vID))
+        self.armaments['primaryBattery'] = [triple_L6_ParticleLance(vID, ''.join(['T', str(x)])) for x in range(1, 5)]
+        self.armaments['secondaryBattery'] = [double_M4_ShredderAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1, 3)] 
+        self.armaments['broadsideBattery'] = [quad_BPoDS(vID, ''.join(['S', str(x)])) for x in range(1, 5)]

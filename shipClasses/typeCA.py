@@ -1,12 +1,9 @@
-#Started 11/5/2021 
-#from . shipEquipment import *
-#from . shipRole import Heavycruiser
 from shipClasses.shipEquipment import *
 from shipClasses.shipRole import Heavycruiser
 
-"""--<->----------------------------HEAVYCRUISERS------------------------------<->--"""
+#Heavy cruisers
 
-#Apocalypse Class Heavycrusier
+#--------------------------Apocalypse Class Heavycrusier------------------------------
 class ApocalypseClass(Heavycruiser):
     shipClass = 'ApocalypseClass'
     ammount = 0
@@ -23,13 +20,12 @@ class ApocalypseClass(Heavycruiser):
         super().__init__(hullnumber, name)
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['ShieldType'].append(HyperShieldGen(vID))
-        self.defenses['ArmorType'].append(CarbonNanoThreadsArmor(vID))
-        self.primaryBattery = [triple_M12_NeutronLauchers(vID, ''.join(['T', str(x)])) for x in range(1,6)]
-        self.secondaryBattery = [triple_M7_TitanAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1,4)] 
-        self.broadsideBattery = []
+        self.defenses['shieldType'].append(HyperShieldGen(vID))
+        self.defenses['armorType'].append(CarbonNanoThreadsArmor(vID))
+        self.armaments['primaryBattery'] = [triple_M12_GaussCannons(vID, ''.join(['T', str(x)])) for x in range(1,6)]
+        self.armaments['secondaryBattery'] = [triple_M7_TitanAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1,4)] 
         for x in range(1, 11):
             if x <= 8:
-                self.broadsideBattery.append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 10:
-                self.broadsideBattery.append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
