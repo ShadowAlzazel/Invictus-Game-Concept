@@ -6,3 +6,4 @@ from shipClasses.shipEquipment.shipWeapons.shipMissiles import *
 from shipClasses.shipEquipment.shipWeapons.shipPlasmaAccelerators import *
 from shipClasses.shipEquipment.shipWeapons.shipTorpedoes import *
 from shipClasses.shipEquipment.shipWeapons.shipEnergyLasers import *
+from shipClasses.shipEquipment.shipWeapons.shipMatterFluxers import *

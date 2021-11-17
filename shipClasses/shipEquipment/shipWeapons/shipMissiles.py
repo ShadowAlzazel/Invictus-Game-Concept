@@ -3,18 +3,23 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 
 #"""--------------------------------SHIP-MISSILES------------------------------"""
 #variable launch systems
+#nth Cells
+#A - antimatter - annihilation
+#N - thermonuclear - devestation
+#S - micro-singularity - eradication
+#B - biological and chemical - desolation
 
-class VLS21_antimatterMissiles(shipWeapon):
+class VLS_21C_AnnihilationMissiles(shipWeapon):
     gunStats = {
-        "ATK": 372, "RLD": 6, "HIT": 65, "RNG": 4, "QNT": 21
+        "ATK": 292, "RLD": 6, "HIT": 50, "RNG": 4, "QNT": 21
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
 
 
-class VLS35_nuclearMissiles(shipWeapon):
+class VLS_35C_DevestationMissiles(shipWeapon):
     gunStats = {
-        "ATK": 172, "RLD": 6, "HIT": 65, "RNG": 3, "QNT": 35
+        "ATK": 122, "RLD": 6, "HIT": 50, "RNG": 3, "QNT": 35
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)

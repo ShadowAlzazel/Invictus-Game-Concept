@@ -1,7 +1,7 @@
 #Ion Lances
 from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 
-#"""--<->----------------------------Ion-Lances------------------------------<->--"""
+#"""--<->----------------------------ION-LANCES------------------------------<->--"""
 #Chained-Ions Beams
 #chains energized ions and light particles in high energy states to weaponize it
 

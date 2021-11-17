@@ -1,10 +1,9 @@
 #Energy Lasers
 from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 
-#"""--<->----------------------------Energy-Lasers------------------------------<->--"""
+#"""--<->----------------------------ENERGY-LASERS------------------------------<->--"""
 #Energy Laser:
 #charged and energized electromagnetic waves
-
 
 class triple_L16_GammaRayLasers(shipWeapon):
     gunName = 'Triple (L16) Gamma Ray Lasers'

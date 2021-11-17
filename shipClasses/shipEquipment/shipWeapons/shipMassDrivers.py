@@ -1,8 +1,8 @@
 #mass cannons
 from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 
-#"""--<->----------------------------Mass-Driver-Cannons------------------------------<->--"""
-#mass cannons
+#"""--<->----------------------------MASS-DRIVERS------------------------------<->--"""
+#mass drivers accelerate kinetic ammunition 
 
 class triple_M26_ZeusCannons(shipWeapon):
     gunName = 'Triple (M26) Zeus Cannons'
