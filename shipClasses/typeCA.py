@@ -22,7 +22,7 @@ class ApocalypseClass(Heavycruiser):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(HyperShieldGen(vID))
         self.defenses['armorType'].append(CarbonNanoThreadsArmor(vID))
-        self.armaments['primaryBattery'] = [triple_M12_NeutronLauchers(vID, ''.join(['T', str(x)])) for x in range(1,6)]
+        self.armaments['primaryBattery'] = [triple_M12_GaussCannons(vID, ''.join(['T', str(x)])) for x in range(1,6)]
         self.armaments['secondaryBattery'] = [triple_M7_TitanAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1,4)] 
         for x in range(1, 11):
             if x <= 8:

@@ -5,8 +5,8 @@
 
 class shipWeapon:
 
-    def __init__(self, vesselID, turretDesignation):
-        self.batteryID = '-'.join([vesselID, turretDesignation])
+    def __init__(self, vesselID, batteryNumber):
+        self.batteryID = '-'.join([vesselID, batteryNumber])
         self.gunLoadTime = 100 #preloaded
 
     def reloadGun(self):

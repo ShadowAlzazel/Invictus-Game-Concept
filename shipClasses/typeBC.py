@@ -31,7 +31,7 @@ class ZenithClass(Battlecruiser):
         
         for x in range(1,6):
             if x <= 2:
-                self.armaments['secondaryBattery'].append(quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])))
+                self.armaments['secondaryBattery'].append(quadruple_M12_GaussCannons(vID, ''.join(['S', str(x)])))
             elif x <= 4:
                 self.armaments['secondaryBattery'].append(triple_A11_TeslaArcThrowers(vID, ''.join(['S', str(x)])))
             elif x <= 5: 
@@ -67,8 +67,8 @@ class EclipseClass(Battlecruiser):
             if x <= 2:
                 self.armaments['primaryBattery'].append(triple_L18_DeuteriumLance(vID, ''.join(['T', str(x)])))
             elif x <= 4:
-                self.armaments['primaryBattery'].append(double_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])))
-        self.armaments['secondaryBattery'] = [quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+                self.armaments['primaryBattery'].append(double_M22_GigaRailCannons(vID, ''.join(['T', str(x)])))
+        self.armaments['secondaryBattery'] = [quadruple_M12_GaussCannons(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 17):
             if x <= 8:
                 self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
@@ -98,7 +98,7 @@ class PenumbraClass(Battlecruiser):
         self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
         self.defenses['armorType'].append(MythrilAlloyArmor(vID))
         self.armaments['primaryBattery'] = [double_L18_DeuteriumLance(vID, ''.join(['T', str(x)])) for x in range(1,7)]
-        self.armaments['secondaryBattery'] = [quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])) for x in range(1,3)]
+        self.armaments['secondaryBattery'] = [quadruple_M12_GaussCannons(vID, ''.join(['S', str(x)])) for x in range(1,3)]
         for x in range(1, 17):
             if x <= 8:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
@@ -126,7 +126,7 @@ class IllustriousClass(Battlecruiser):
         self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
         self.defenses['armorType'].append(MythrilAlloyArmor(vID))
         self.armaments['primaryBattery'] = [triple_L18_DeuteriumLance(vID, ''.join(['T', str(x)])) for x in range(1,5)]
-        self.armaments['secondaryBattery'] = [quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+        self.armaments['secondaryBattery'] = [quadruple_M12_GaussCannons(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 17):
             if x <= 8:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))

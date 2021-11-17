@@ -19,7 +19,7 @@ class JohnstonClass(Destroyer):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(LumioneShieldGen(vID))
         self.defenses['armorType'].append(TitaniumArmor(vID))
-        self.armaments['primaryBattery'] = [double_M6_TitanAutoCannons(vID, 'T1'), double_M4_ShredderAutoGuns(vID, 'T2')]
+        self.armaments['primaryBattery'] = [double_M6_TitanAutoCannons(vID, 'T1'), double_M4_ShredderAutoCannons(vID, 'T2')]
         
         
 
@@ -39,6 +39,6 @@ class ShimakazeClass(Destroyer):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(LumioneShieldGen(vID))
         self.defenses['armorType'].append(TitaniumArmor(vID))
-        self.armaments['primaryBattery'] = [double_M6_TitanAutoCannons(vID, 'T1'), double_M4_ShredderAutoGuns(vID, 'T2')]
+        self.armaments['primaryBattery'] = [double_M6_TitanAutoCannons(vID, 'T1'), double_M4_ShredderAutoCannons(vID, 'T2')]
         
         

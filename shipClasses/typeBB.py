@@ -22,7 +22,7 @@ class EssexClass(Battleship):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
         self.defenses['armorType'].append(DurasteelArmor(vID))
-        self.armaments['primaryBattery'] = [triple_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,5)]
+        self.armaments['primaryBattery'] = [triple_M22_GigaRailCannons(vID, ''.join(['T', str(x)])) for x in range(1,5)]
         self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
             if x <= 16:
@@ -50,7 +50,7 @@ class AmagiClass(Battleship):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
         self.defenses['armorType'].append(DurasteelArmor(vID))
-        self.armaments['primaryBattery'] = [double_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,7)]
+        self.armaments['primaryBattery'] = [double_M22_GigaRailCannons(vID, ''.join(['T', str(x)])) for x in range(1,7)]
         self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
             if x <= 16:
@@ -78,7 +78,7 @@ class VittorioVenetoClass(Battleship):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
         self.defenses['armorType'].append(DurasteelArmor(vID))
-        self.armaments['primaryBattery'] = [triple_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,5)]
+        self.armaments['primaryBattery'] = [triple_M22_GigaRailCannons(vID, ''.join(['T', str(x)])) for x in range(1,5)]
         self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
             if x <= 16:
@@ -106,7 +106,7 @@ class HoodClass(Battleship):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
         self.defenses['armorType'].append(DurasteelArmor(vID))
-        self.armaments['primaryBattery'] = [double_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])) for x in range(1,7)]
+        self.armaments['primaryBattery'] = [double_M22_GigaRailCannons(vID, ''.join(['T', str(x)])) for x in range(1,7)]
         self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
             if x <= 16:
@@ -136,9 +136,9 @@ class PrinceOfWalesClass(Battleship):
         self.defenses['armorType'].append(DurasteelArmor(vID))
         for x in range(1, 5):
             if x <= 2:
-                self.armaments['primaryBattery'].append(double_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])))
+                self.armaments['primaryBattery'].append(double_M22_GigaRailCannons(vID, ''.join(['T', str(x)])))
             elif x <= 4:
-                self.armaments['primaryBattery'].append(quadruple_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])))
+                self.armaments['primaryBattery'].append(quadruple_M22_GigaRailCannons(vID, ''.join(['T', str(x)])))
         self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
             if x <= 16:
@@ -168,13 +168,13 @@ class NewJerseyClass(Battleship):
         self.defenses['armorType'].append(DarkNeutronianArmor(vID))
         for x in range(1, 5):
             if x <= 2:
-                self.armaments['primaryBattery'].append(quadruple_M22_MjolnirGigaGuns(vID, ''.join(['T', str(x)])))
+                self.armaments['primaryBattery'].append(quadruple_M22_GigaRailCannons(vID, ''.join(['T', str(x)])))
             elif x <= 4:
                 self.armaments['primaryBattery'].append(triple_M26_ZeusCannons(vID, ''.join(['T', str(x)])))
 
         for x in range(1,7):
             if x <= 2:
-                self.armaments['secondaryBattery'].append(quadruple_M12_NeutronLauchers(vID, ''.join(['S', str(x)])))
+                self.armaments['secondaryBattery'].append(quadruple_M12_GaussCannons(vID, ''.join(['S', str(x)])))
             elif x <= 6:
                 self.armaments['secondaryBattery'].append(triple_L13_HadronLance(vID, ''.join(['S', str(x)])))
         for x in range(1, 33):

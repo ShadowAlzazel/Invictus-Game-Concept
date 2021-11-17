@@ -31,7 +31,7 @@ class VoltageClass(Strikecruiser):
         self.armaments['secondaryBattery'] = [triple_M7_TitanAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1,3)]
         for x in range(1, 9):
             if x <= 4:
-                self.armaments['broadsideBattery'].append(double_M4_ShredderAutoGuns(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_M4_ShredderAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 8:
                 self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
 
@@ -57,12 +57,12 @@ class DynamoClass(Strikecruiser):
         self.defenses['armorType'].append(OrichalcumAlloyArmor(vID))
         for x in range(1, 5):
             if x <= 2:
-                self.armaments['primaryBattery'].append(triple_M12_NeutronLauchers(vID, ''.join(['T', str(x)])))
+                self.armaments['primaryBattery'].append(triple_M12_GaussCannons(vID, ''.join(['T', str(x)])))
             elif x <= 4:
                 self.armaments['primaryBattery'].append(triple_A11_TeslaArcThrowers(vID, ''.join(['T', str(x)])))
         self.armaments['secondaryBattery'] = [triple_A6_LaserLance(vID, ''.join(['S', str(x)])) for x in range(1,3)]
         for x in range(1, 9):
             if x <= 4:
-                self.armaments['broadsideBattery'].append(double_M4_ShredderAutoGuns(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_M4_ShredderAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 8:
                 self.armaments['broadsideBattery'].append(double_A5_WaveArcThrowers(vID, ''.join(['B', str(x)])))

@@ -12,8 +12,8 @@ class double_A17_HAT3ArcThrowers(shipWeapon):
     gunStats = {
         "ATK": 529 * 2, "RLD": 3, "HIT": 51, "RNG": 2
     }
-    def __init__(self, vesselID, turretDesignation):
-        super().__init__(vesselID, turretDesignation)
+    def __init__(self, vesselID, batteryNumber):
+        super().__init__(vesselID, batteryNumber)
 
 
 class triple_A17_HAT3ArcThrowers(shipWeapon):
@@ -21,8 +21,8 @@ class triple_A17_HAT3ArcThrowers(shipWeapon):
     gunStats = {
         "ATK": 529 * 3, "RLD": 3, "HIT": 51, "RNG": 2
     }
-    def __init__(self, vesselID, turretDesignation):
-        super().__init__(vesselID, turretDesignation)
+    def __init__(self, vesselID, batteryNumber):
+        super().__init__(vesselID, batteryNumber)
 
 
 class triple_A11_TeslaArcThrowers(shipWeapon):
@@ -30,8 +30,8 @@ class triple_A11_TeslaArcThrowers(shipWeapon):
     gunStats = {
         "ATK": 297 * 3, "RLD": 3, "HIT": 51, "RNG": 2
     }
-    def __init__(self, vesselID, turretDesignation):
-        super().__init__(vesselID, turretDesignation)
+    def __init__(self, vesselID, batteryNumber):
+        super().__init__(vesselID, batteryNumber)
 
 
 class double_A5_WaveArcThrowers(shipWeapon):
@@ -39,5 +39,5 @@ class double_A5_WaveArcThrowers(shipWeapon):
     gunStats = {
         "ATK": 177 * 2, "RLD": 2, "HIT": 51, "RNG": 1
     }
-    def __init__(self, vesselID, turretDesignation):
-        super().__init__(vesselID, turretDesignation)
+    def __init__(self, vesselID, batteryNumber):
+        super().__init__(vesselID, batteryNumber)
