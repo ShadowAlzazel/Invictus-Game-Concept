@@ -28,7 +28,7 @@ class EssexClass(Battleship):
             if x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 24:
-                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
         
 
 #---------------------------Amagi Class Battleship---------------------------
@@ -56,7 +56,7 @@ class AmagiClass(Battleship):
             if x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 24:
-                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
     
 
 #---------------------------Vittorio Veneto Class Battleship---------------------------
@@ -84,7 +84,7 @@ class VittorioVenetoClass(Battleship):
             if x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 24:
-                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
 
 
 #--------------------------Hood Class Battleship---------------------------
@@ -112,7 +112,7 @@ class HoodClass(Battleship):
             if x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 24:
-                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
 
 
 #--------------------------Prince of Wales Class Battleship---------------------------
@@ -144,7 +144,7 @@ class PrinceOfWalesClass(Battleship):
             if x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 24:
-                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
           
 
 #--------------------------New Jersey Class Battleship-----------------------------
@@ -181,4 +181,4 @@ class NewJerseyClass(Battleship):
             if x <= 20:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 32:
-                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))   
+                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))   

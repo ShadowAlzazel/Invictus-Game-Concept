@@ -33,7 +33,7 @@ class VoltageClass(Strikecruiser):
             if x <= 4:
                 self.armaments['broadsideBattery'].append(double_M4_ShredderAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 8:
-                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
 
 
 #-------------------------------------Dynamo Class Strikecruiser----------------------------------------
@@ -60,9 +60,9 @@ class DynamoClass(Strikecruiser):
                 self.armaments['primaryBattery'].append(triple_M12_GaussCannons(vID, ''.join(['T', str(x)])))
             elif x <= 4:
                 self.armaments['primaryBattery'].append(triple_A11_TeslaArcThrowers(vID, ''.join(['T', str(x)])))
-        self.armaments['secondaryBattery'] = [triple_A6_LaserLance(vID, ''.join(['S', str(x)])) for x in range(1,3)]
+        self.armaments['secondaryBattery'] = [triple_L6_ParticleLance(vID, ''.join(['S', str(x)])) for x in range(1,3)]
         for x in range(1, 9):
             if x <= 4:
                 self.armaments['broadsideBattery'].append(double_M4_ShredderAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 8:
-                self.armaments['broadsideBattery'].append(double_A5_WaveArcThrowers(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_A5_ArcThrowers(vID, ''.join(['B', str(x)])))

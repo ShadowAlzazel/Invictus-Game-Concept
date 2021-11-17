@@ -41,7 +41,7 @@ class ZenithClass(Battlecruiser):
             if x <= 8:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 16:
-                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
 
 
 #-----------------------------Eclipse Class Battlecruiser-------------------------
@@ -71,9 +71,9 @@ class EclipseClass(Battlecruiser):
         self.armaments['secondaryBattery'] = [quadruple_M12_GaussCannons(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 17):
             if x <= 8:
-                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
             elif x <= 12:
-                self.armaments['broadsideBattery'].append(double_A5_WaveArcThrowers(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_A5_ArcThrowers(vID, ''.join(['B', str(x)])))
             elif x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
         
@@ -103,7 +103,7 @@ class PenumbraClass(Battlecruiser):
             if x <= 8:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 16:
-                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
 
 
 #---------------------------Illustrious Class Battlecruiser--------------------------------------
@@ -131,4 +131,4 @@ class IllustriousClass(Battlecruiser):
             if x <= 8:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 16:
-                self.armaments['broadsideBattery'].append(double_A5_LaserLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))

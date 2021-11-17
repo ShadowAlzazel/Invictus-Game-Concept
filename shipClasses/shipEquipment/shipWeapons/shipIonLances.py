@@ -2,10 +2,8 @@
 from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 
 #"""--<->----------------------------Ion-Lasers------------------------------<->--"""
-#Chained-Ionic-Particles-Lasers:
-#Deuterium Lance L16-23 'Uses special fusion chambers to create chians of super heated deuterium and electrons'
-#Hadron Lance L8-15 'Uses special particle accelerators to create a plasma chian from hydrogen'
-#Laser Lance L2-7 'Uses superenergized electro-magnetic particles'
+#Chained-Ions Beams
+
 
 class double_L18_DeuteriumLance(shipWeapon):
     gunName = 'Double (L18) Deuterium Lance'
@@ -43,7 +41,7 @@ class triple_L13_HadronLance(shipWeapon):
         super().__init__(vesselID, batteryNumber)
 
 
-class triple_A6_LaserLance(shipWeapon):
+class triple_L6_ParticleLance(shipWeapon):
     gunName = 'Triple (L6) Laser Lance'
     gunStats = {
         "ATK": 58 * 3, "RLD": 1, "HIT": 85, "RNG": 2
@@ -52,7 +50,7 @@ class triple_A6_LaserLance(shipWeapon):
         super().__init__(vesselID, batteryNumber)
 
 
-class double_A5_LaserLance(shipWeapon):
+class double_L6_ParticleLance(shipWeapon):
     gunName = 'Double (L5) Laser Lance'
     gunStats = {
         "ATK": 40 * 2, "RLD": 1, "HIT": 85, "RNG": 2

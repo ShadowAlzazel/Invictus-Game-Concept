@@ -101,8 +101,8 @@ class Ship:
         for x in self.armaments['primaryBattery']:
             print(x.gunName, "in Turret", x.batteryID)
         print("Ship Defenses:")
-        print(self.defenses['ArmorType'][0].armorName)
-        print(self.defenses['ShieldType'][0].shieldName)
+        print(self.defenses['armorType'][0].armorName)
+        print(self.defenses['shieldType'][0].shieldName)
         print("Shield Capcity at", "%.2f%%" % ((self.shields / self.__class__.shields) * 100.0), end=', ')
         print("with", self.shields // 1, "out of", self.__class__.shields, "remaining")
         print("Hull Integrity at", "%.2f%%" % ((self.hull / self.__class__.hull) * 100.0), end=', ')
