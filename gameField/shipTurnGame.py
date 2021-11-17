@@ -149,17 +149,16 @@ class turnCombatGame:
                 elif g in aShip.armaments['broadsideBattery']:
                     batPow = aShip.shipStats['FP'] // len(aShip.armaments['broadsideBattery'])
 
-                if self.gunHitCalc(g, aShip.shipStats['ACC'], bShip.shipStats['EVA']) == True:
-                    salvoDamage += self.gunDamageCalc(g, aShip.shipStats['FP'], aShip.shipStats['LCK'], bShip.shipStats['LCK'], batPow)
+                for a in range(0, g.gunStats['QNT']):
+                    if self.gunHitCalc(g, aShip.shipStats['ACC'], bShip.shipStats['EVA']) == True:
+                        salvoDamage += self.gunDamageCalc(g, aShip.shipStats['FP'], aShip.shipStats['LCK'], bShip.shipStats['LCK'], batPow)
 
                 trueDamage = bShip.takeDamage(salvoDamage)
                 if trueDamage > 0:
                     print(g.batteryID, "Has Hit", bShip.name, "For", trueDamage, "Damage!")
                 g.gunLoadTime = 0
-
             totalDamage += trueDamage
             salvoDamage = 0
-
         print(aShip.vesselID, aShip.name, "Has done", totalDamage, "Total Damage to", bShip.vesselID, bShip.name)
         return True
 

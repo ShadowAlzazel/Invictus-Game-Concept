@@ -101,7 +101,7 @@ class Destroyer(Ship):
         "RDR": 5, "LCK": 10
     }
     
-    shields = 3500
+    shields = 3300
     hull = 2500
 
     def __init__(self, hullnumber, name):

@@ -178,7 +178,7 @@ class spaceGameBoard:
         w = w % 14 
         if w > 6:
             w = 14 - w - 1
-        print(w)
+        #print(w)
         self.aniList[w].convert()
         aniImg = pygame.transform.smoothscale(self.aniList[w], (self.hexSize, self.hexSize))
         self.C_ANI_HEX = aniImg

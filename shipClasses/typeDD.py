@@ -12,6 +12,9 @@ class JohnstonClass(Destroyer):
         "RDR": 5, "LCK": 10
     }
     
+    shields = 3350
+    hull = 2600
+
     def __init__(self, hullnumber, name):
         JohnstonClass.ammount += 1
         super().__init__(hullnumber, name)
@@ -19,7 +22,13 @@ class JohnstonClass(Destroyer):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(LumioneShieldGen(vID))
         self.defenses['armorType'].append(TitaniumArmor(vID))
-        self.armaments['primaryBattery'] = [double_M6_TitanAutoCannons(vID, 'T1'), double_M4_ShredderAutoCannons(vID, 'T2')]
+        for x in range(1,7):
+            if x <= 4:
+                self.armaments['primaryBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['T', str(x)])))
+            elif x <= 6:
+                self.armaments['primaryBattery'].append(double_M4_ShredderAutoCannons(vID, ''.join(['T', str(x)])))
+        self.armaments['secondaryBattery'] = [VLS35_nuclearMissiles(vID, 'M1'), VLS21_antimatterMissiles(vID, 'M2')]
+        
         
         
 
@@ -32,6 +41,9 @@ class ShimakazeClass(Destroyer):
         "RDR": 5, "LCK": 10
     }
 
+    shields = 3600
+    hull = 2300
+
     def __init__(self, hullnumber, name):
         ShimakazeClass.ammount += 1
         super().__init__(hullnumber, name)
@@ -39,6 +51,11 @@ class ShimakazeClass(Destroyer):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(LumioneShieldGen(vID))
         self.defenses['armorType'].append(TitaniumArmor(vID))
-        self.armaments['primaryBattery'] = [double_M6_TitanAutoCannons(vID, 'T1'), double_M4_ShredderAutoCannons(vID, 'T2')]
+        for x in range(1,7):
+            if x <= 2:
+                self.armaments['primaryBattery'].append(triple_L4_WaveLasers(vID, ''.join(['T', str(x)])))
+            elif x <= 6:
+                self.armaments['primaryBattery'].append(double_M4_ShredderAutoCannons(vID, ''.join(['T', str(x)])))
+        self.armaments['secondaryBattery'] = [FLP5_devestatorTorpedoes(vID, 'M1'), VLS21_antimatterMissiles(vID, 'M2')]
         
         

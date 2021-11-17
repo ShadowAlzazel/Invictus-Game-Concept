@@ -23,6 +23,6 @@ class MidnightClass(Lightcruiser):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(HyperShieldGen(vID))
         self.defenses['armorType'].append(TitaniumArmor(vID))
-        self.armaments['primaryBattery'] = [triple_L6_ParticleLance(vID, ''.join(['T', str(x)])) for x in range(1, 5)]
-        self.armaments['secondaryBattery'] = [double_M4_ShredderAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1, 3)] 
-        self.armaments['broadsideBattery'] = [quad_BPoDS(vID, ''.join(['S', str(x)])) for x in range(1, 5)]
+        self.armaments['primaryBattery'] = [triple_L6_ParticleLance(vID, ''.join(['T', str(x)])) for x in range(1, 7)]
+        self.armaments['secondaryBattery'] = [double_M4_ShredderAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1, 5)] 
+        self.armaments['broadsideBattery'] = [quad_BPoDS(vID, ''.join(['S', str(x)])) for x in range(1, 7)]
