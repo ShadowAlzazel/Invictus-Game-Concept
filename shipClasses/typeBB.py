@@ -165,7 +165,7 @@ class NewJerseyClass(Battleship):
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['armorType'].append(DarkNeutronianArmor(vID))
+        self.defenses['armorType'].append(DarkNeutroniumArmor(vID))
         for x in range(1, 5):
             if x <= 2:
                 self.armaments['primaryBattery'].append(quadruple_M22_GigaRailCannons(vID, ''.join(['T', str(x)])))

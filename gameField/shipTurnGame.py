@@ -42,6 +42,7 @@ class turnCombatGame:
             s.shipAttacks = 1
             s.shipActive = True
             s.reloadGuns()
+            s.rechargeDef()
 
 
     #select shiphex
@@ -162,7 +163,7 @@ class turnCombatGame:
                     self.opsSpace.starHexes[m].entity = []
                     self.opsSpace.starHexes[m].empty = True
                     trueDamage = 0
-                    del bShip
+                    #del bShip
                     return True
 
                 if trueDamage > 0:

@@ -79,7 +79,7 @@ class Lightcruiser(Ship):
     ammount = 0 
     shiptype = 'CL'
     shipStats = {
-        "FP": 200, "ACC": 35, "EVA": 45, "SPD": 6,
+        "FP": 200, "ACC": 35, "EVA": 45, "SPD": 7,
         "RDR": 5, "LCK": 10
     }
     
@@ -97,7 +97,7 @@ class Destroyer(Ship):
     ammount = 0
     shiptype = 'DD'
     shipStats = {
-        "FP": 100, "ACC": 45, "EVA": 65, "SPD": 7,
+        "FP": 100, "ACC": 45, "EVA": 65, "SPD": 8,
         "RDR": 5, "LCK": 10
     }
     

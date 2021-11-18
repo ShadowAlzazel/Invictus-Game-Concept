@@ -96,6 +96,12 @@ class Ship:
                 g.reloadGun()
 
 
+    #recharge shields and repair armor
+    def rechargeDef(self):
+        self.shields += self.defenses['shieldType'][0].rechargeRate
+        self.defenses['armorType'][0].armorIntegrity += self.defenses['armorType'][0].armorRegen
+
+
     #inspection function to look at stats
     def fullInspect(self):
         print("--<->---------------------------------------------------------------------<->--")

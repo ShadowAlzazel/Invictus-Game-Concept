@@ -4,10 +4,11 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 #"""--------------------------------SHIP-MISSILES------------------------------"""
 #variable launch systems
 #nth Cells
-#A - antimatter - annihilation
-#N - thermonuclear - devestation
-#S - micro-singularity - eradication
-#B - biological and chemical - desolation
+#antimatter - annihilation
+#thermonuclear - devestation
+#micro-singularity - eradication
+#biological and chemical - desolation
+#
 
 class VLS_21C_AnnihilationMissiles(shipWeapon):
     gunStats = {
