@@ -1,7 +1,7 @@
 import sys
 from shipClasses import *
 
-#creates a ships from fleet log
+#creates ships from fleet log
 def fleetLaunch(aFleet):
 
     def getSomeClass(nameOfShipClass):
@@ -13,6 +13,8 @@ def fleetLaunch(aFleet):
             aClass = getSomeClass(aFleet.fleetLogs['shipClasses'][n])
             newShip = aClass(aFleet.fleetLogs['shipHullnumber'][n], aShips)
             newShip.command = ''.join([aFleet.fleetCommand, 'S'])
+            #newShip.fleet
             aFleet.fleetShips.append(newShip)
             n += 1
+        aFleet.flagship = aFleet.fleetShips[0]
 

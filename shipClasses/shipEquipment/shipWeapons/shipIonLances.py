@@ -9,7 +9,7 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 class double_L18_DeuteriumLance(shipWeapon):
     gunName = 'Double (L18) Deuterium Lance'
     gunStats = {
-        "ATK": 206, "RLD": 2, "HIT": 85, "RNG": 4, "QNT": 2
+        "ATK": 206, "RLD": 2, "HIT": 85, "RNG": 3, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
@@ -43,18 +43,18 @@ class triple_L13_HadronLance(shipWeapon):
 
 
 class triple_L6_ParticleLance(shipWeapon):
-    gunName = 'Triple (L6) Laser Lance'
+    gunName = 'Triple (L6) Particle Lance'
     gunStats = {
-        "ATK": 58, "RLD": 1, "HIT": 85, "RNG": 2, "QNT": 3
+        "ATK": 52, "RLD": 1, "HIT": 85, "RNG": 2, "QNT": 3
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
 
 
 class double_L6_ParticleLance(shipWeapon):
-    gunName = 'Double (L5) Laser Lance'
+    gunName = 'Double (L5) Particle Lance'
     gunStats = {
-        "ATK": 40, "RLD": 1, "HIT": 85, "RNG": 2, "QNT": 2
+        "ATK": 52, "RLD": 1, "HIT": 85, "RNG": 2, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)

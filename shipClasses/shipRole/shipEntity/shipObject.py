@@ -12,7 +12,9 @@ class Ship:
 
     def __init__(self, hullnumber, name):
         Ship.ammount += 1
+        self.operational = True
         self.command = 'ASCS'
+        self.fleetName = 'FleetNull'
         self.name = name
         self.hullnumber = hullnumber
         self.vesselID = ''.join([self.shiptype, '-', str(self.hullnumber)])
@@ -38,8 +40,14 @@ class Ship:
             self.hull -= damageH
             return damageH
         else: 
+            self.hull = 0
             print(self.vesselID, self.command, self.name, "has been destryed!")
-            del self
+            self._destroyShip()
+
+
+    #destroy ship
+    def _destroyShip(self):
+        self.operational = False
 
 
     #full self repair

@@ -8,7 +8,7 @@ class JohnstonClass(Destroyer):
     shipClass = 'JohnstonClass'
     ammount = 0
     shipStats = {
-        "FP": 67, "ACC": 35, "EVA": 66, "SPD": 9,
+        "FP": 67, "ACC": 35, "EVA": 66, "SPD": 7,
         "RDR": 5, "LCK": 10
     }
     
@@ -37,7 +37,7 @@ class ShimakazeClass(Destroyer):
     shipClass = 'ShimakazeClass'
     ammount = 0
     shipStats = {
-        "FP": 47, "ACC": 35, "EVA": 68, "SPD": 9,
+        "FP": 47, "ACC": 35, "EVA": 68, "SPD": 7,
         "RDR": 5, "LCK": 10
     }
 
@@ -53,7 +53,7 @@ class ShimakazeClass(Destroyer):
         self.defenses['armorType'].append(TitaniumArmor(vID))
         for x in range(1,7):
             if x <= 2:
-                self.armaments['primaryBattery'].append(triple_L4_WaveLasers(vID, ''.join(['T', str(x)])))
+                self.armaments['primaryBattery'].append(triple_L5_WaveLasers(vID, ''.join(['T', str(x)])))
             elif x <= 6:
                 self.armaments['primaryBattery'].append(double_M4_ShredderAutoCannons(vID, ''.join(['T', str(x)])))
         self.armaments['secondaryBattery'] = [FLP5_DevestationTorpedoes(vID, 'M1'), VLS_21C_AnnihilationMissiles(vID, 'M2')]

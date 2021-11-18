@@ -122,7 +122,6 @@ class turnCombatGame:
 
     #fire all guns in range 
     def _shipSalvoAction(self, aShip, bShip):
-        shipExists = [bShip]
         #check if guns are loaded
         gunToFire = aShip.gunsReady()
         broadSideE = 0
@@ -135,8 +134,9 @@ class turnCombatGame:
 
         totalDamage = 0
         for g in gunToFire:
-            if not shipExists:
+            if not bShip.operational:
                 print("ship Destroyed!")
+                return True
             salvoDamage = 0
             trueDamage = 0
             #find FP distribution ammong batteries
@@ -154,6 +154,17 @@ class turnCombatGame:
                         salvoDamage += self.gunDamageCalc(g, aShip.shipStats['FP'], aShip.shipStats['LCK'], bShip.shipStats['LCK'], batPow)
 
                 trueDamage = bShip.takeDamage(salvoDamage)
+                if bShip.operational == False:
+                    m = bShip.placeHex.hexCoord
+                    self.gameShips.remove(bShip) 
+                    #self.opsSpace.spaceEntities['shipObject'].remove(bShip)
+                    self.opsSpace.hexesFull.remove(self.opsSpace.starHexes[m])
+                    self.opsSpace.starHexes[m].entity = []
+                    self.opsSpace.starHexes[m].empty = True
+                    trueDamage = 0
+                    del bShip
+                    return True
+
                 if trueDamage > 0:
                     print(g.batteryID, "Has Hit", bShip.name, "For", trueDamage, "Damage!")
                 g.gunLoadTime = 0

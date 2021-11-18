@@ -35,7 +35,7 @@ class triple_A11_TeslaArcThrowers(shipWeapon):
 
 class double_A8_AmplifiedArcThrowers(shipWeapon):
     gunStats = {
-        "ATK": 237, "RLD": 2, "HIT": 75, "RNG": 1, "QNT": 2
+        "ATK": 237, "RLD": 2, "HIT": 75, "RNG":2, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)  
@@ -44,7 +44,7 @@ class double_A8_AmplifiedArcThrowers(shipWeapon):
 class double_A5_ArcThrowers(shipWeapon):
     gunName = 'Double (A5) Arc-Throwers'
     gunStats = {
-        "ATK": 177, "RLD": 2, "HIT": 75, "RNG": 1, "QNT": 2
+        "ATK": 177, "RLD": 2, "HIT": 75, "RNG": 2, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)

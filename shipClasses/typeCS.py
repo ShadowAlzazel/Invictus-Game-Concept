@@ -8,7 +8,7 @@ class VoltageClass(Strikecruiser):
     shipClass = 'VoltageClass'
     ammount = 0
     shipStats = {
-        "FP": 287, "ACC": 39, "EVA": 41, "SPD": 7,
+        "FP": 287, "ACC": 39, "EVA": 41, "SPD": 6,
         "RDR": 5, "LCK": 10
     }
     
@@ -41,7 +41,7 @@ class DynamoClass(Strikecruiser):
     shipClass = 'DynamoClass'
     ammount = 0
     shipStats = {
-        "FP": 298, "ACC": 40, "EVA": 38, "SPD": 7,
+        "FP": 298, "ACC": 40, "EVA": 38, "SPD": 6,
         "RDR": 5, "LCK": 10
     }
     

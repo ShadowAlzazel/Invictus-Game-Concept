@@ -24,7 +24,6 @@ class spaceFleet:
         operationSpace.fleetEntities.append(self)
 
         if formation == 0:  #cluster
-
             k, n = 0, 1
             if start == -1: 
                 r = randint(0, (operationSpace.l * operationSpace.w) - 1)
@@ -36,7 +35,7 @@ class spaceFleet:
             elif start > 0:
                 fleetSpawnP = operationSpace.starHexes[start]
 
-            #spawn the fleet in a zoneSpace
+            #spawn the fleet in the zoneSpace
             operationSpace.addCustomEntity(fleetSpawnP, self.fleetShips[k])
             spawning = True
             while spawning:

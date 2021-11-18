@@ -5,7 +5,7 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 #Energy Laser:
 #charged and energized electromagnetic waves
 
-class triple_L16_GammaRayLasers(shipWeapon):
+class triple_L17_GammaRayLasers(shipWeapon):
     gunName = 'Triple (L16) Gamma Ray Lasers'
     gunStats = {
         "ATK": 208, "RLD": 1, "HIT": 91, "RNG": 1, "QNT": 3
@@ -14,7 +14,7 @@ class triple_L16_GammaRayLasers(shipWeapon):
         super().__init__(vesselID, batteryNumber)
 
 
-class triple_L12_XRayLasers(shipWeapon):
+class triple_L13_XRayLasers(shipWeapon):
     gunName = 'Triple (L12) X-Ray Lasers'
     gunStats = {
         "ATK": 153, "RLD": 1, "HIT": 94, "RNG": 1, "QNT": 3
@@ -23,7 +23,7 @@ class triple_L12_XRayLasers(shipWeapon):
         super().__init__(vesselID, batteryNumber)
 
 
-class triple_L8_UltravioletLasers(shipWeapon):
+class triple_L9_UltravioletLasers(shipWeapon):
     gunName = 'Triple (L8) Ultraviolet Lasers'
     gunStats = {
         "ATK": 91, "RLD": 1, "HIT": 96, "RNG": 1, "QNT": 3
@@ -32,7 +32,7 @@ class triple_L8_UltravioletLasers(shipWeapon):
         super().__init__(vesselID, batteryNumber)
 
 
-class triple_L4_WaveLasers(shipWeapon):
+class triple_L5_WaveLasers(shipWeapon):
     gunName = 'Triple (L4) Wave Lasers'
     gunStats = {
         "ATK": 49, "RLD": 1, "HIT": 97, "RNG": 1, "QNT": 3

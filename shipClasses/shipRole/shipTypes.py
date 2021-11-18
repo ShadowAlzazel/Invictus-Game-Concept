@@ -25,7 +25,7 @@ class Battlecruiser(Ship):
     ammount = 0
     shiptype = 'BC'
     shipStats = {       
-        "FP": 500, "ACC": 45, "EVA": 35, "SPD": 6,
+        "FP": 500, "ACC": 45, "EVA": 35, "SPD": 5,
         "RDR": 6, "LCK": 10
     }
 
@@ -43,7 +43,7 @@ class Strikecruiser(Ship):
     ammount = 0
     shiptype = 'CS'
     shipStats = {
-        "FP": 280, "ACC": 38, "EVA": 40, "SPD": 7,
+        "FP": 280, "ACC": 38, "EVA": 40, "SPD": 6,
         "RDR": 5, "LCK": 10
     }
     
@@ -79,7 +79,7 @@ class Lightcruiser(Ship):
     ammount = 0 
     shiptype = 'CL'
     shipStats = {
-        "FP": 200, "ACC": 35, "EVA": 45, "SPD": 7,
+        "FP": 200, "ACC": 35, "EVA": 45, "SPD": 6,
         "RDR": 5, "LCK": 10
     }
     
@@ -97,7 +97,7 @@ class Destroyer(Ship):
     ammount = 0
     shiptype = 'DD'
     shipStats = {
-        "FP": 100, "ACC": 45, "EVA": 65, "SPD": 9,
+        "FP": 100, "ACC": 45, "EVA": 65, "SPD": 7,
         "RDR": 5, "LCK": 10
     }
     

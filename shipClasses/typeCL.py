@@ -9,7 +9,7 @@ class MidnightClass(Lightcruiser):
     ammount = 0 
     shiptype = 'CL'
     shipStats = {
-        "FP": 200, "ACC": 35, "EVA": 45, "SPD": 7,
+        "FP": 200, "ACC": 35, "EVA": 45, "SPD": 6,
         "RDR": 5, "LCK": 10
     }
     
