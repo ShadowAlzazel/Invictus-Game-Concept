@@ -55,5 +55,3 @@ class shipHexRadar:
 
             return hexesNearby
         return hexesInRange(effRange, originRing)
-
-

@@ -151,11 +151,11 @@ class turnCombatGame:
                     batPow = aShip.shipStats['FP'] // len(aShip.armaments['broadsideBattery'])
 
                 for a in range(0, g.gunStats['QNT']):
-                    if self.gunHitCalc(g, aShip.shipStats['ACC'], bShip.shipStats['EVA']) == True:
-                        salvoDamage += self.gunDamageCalc(g, aShip.shipStats['FP'], aShip.shipStats['LCK'], bShip.shipStats['LCK'], batPow)
+                    if self.gunHitCalc(g.gunStats['HIT'], aShip.shipStats['ACC'], bShip.shipStats['EVA']) is True:
+                        salvoDamage += self.gunDamageCalc(g.gunStats['ATK'], aShip.shipStats['FP'], aShip.shipStats['LCK'], bShip.shipStats['LCK'], batPow)
 
                 trueDamage = bShip.takeDamage(salvoDamage)
-                if bShip.operational == False:
+                if bShip.operational is False:
                     m = bShip.placeHex.hexCoord
                     self.gameShips.remove(bShip) 
                     #self.opsSpace.spaceEntities['shipObject'].remove(bShip)
@@ -176,8 +176,8 @@ class turnCombatGame:
 
 
     #hit calculator for a gun
-    def gunHitCalc(self, gunBattery, aShipACC, bShipEVA):
-        hitRate = (aShipACC - bShipEVA) + gunBattery.gunStats['HIT']
+    def gunHitCalc(self, aShipGunHit, aShipACC, bShipEVA):
+        hitRate = (aShipACC - bShipEVA) + aShipGunHit
         randHit = randint(1, 100)
         if hitRate > randHit:
             return True
@@ -186,13 +186,13 @@ class turnCombatGame:
 
 
     #damage calculator for a gun
-    def gunDamageCalc(self, gunBattery, aShipFP, aShipLuck, bShipLuck, batDistro):
-        critRate = aShipLuck - bShipLuck + 5
+    def gunDamageCalc(self, aShipGunAtk, aShipFP, aShipLCK, bShipLCK, batDistro):
+        critRate = aShipLCK - bShipLCK + 5
         damageMult = 1
         damage = 0
         randCrit = randint(1, 100)
         if critRate > randCrit:
-            damageMult = 1.25 + (aShipLuck / 100)
+            damageMult = 1.25 + (aShipLCK / 100)
 
-        damage = (gunBattery.gunStats['ATK'] + (aShipFP // batDistro) * damageMult)
+        damage = (aShipGunAtk + (aShipFP // batDistro) * damageMult)
         return damage

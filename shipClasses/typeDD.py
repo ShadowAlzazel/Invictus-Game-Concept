@@ -25,7 +25,7 @@ class JohnstonClass(Destroyer):
         for x in range(1,7):
             if x <= 4:
                 self.armaments['primaryBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['T', str(x)])))
-            elif x <= 6:
+            else:
                 self.armaments['primaryBattery'].append(double_M4_ShredderAutoGuns(vID, ''.join(['T', str(x)])))
         self.armaments['secondaryBattery'] = [VLS_35C_DevestationMissiles(vID, 'M1'), VLS_21C_AnnihilationMissiles(vID, 'M2')]
                 
@@ -52,7 +52,7 @@ class ShimakazeClass(Destroyer):
         for x in range(1,7):
             if x <= 2:
                 self.armaments['primaryBattery'].append(triple_L5_WaveLasers(vID, ''.join(['T', str(x)])))
-            elif x <= 6:
+            else:
                 self.armaments['primaryBattery'].append(double_M4_ShredderAutoGuns(vID, ''.join(['T', str(x)])))
         self.armaments['secondaryBattery'] = [FLP5_DevestationTorpedoes(vID, 'M1'), VLS_21C_AnnihilationMissiles(vID, 'M2')]
         

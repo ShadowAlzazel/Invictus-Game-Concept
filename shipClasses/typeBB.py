@@ -27,7 +27,7 @@ class EssexClass(Battleship):
         for x in range(1, 25):
             if x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
-            elif x <= 24:
+            else:
                 self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
         
 
@@ -55,7 +55,7 @@ class AmagiClass(Battleship):
         for x in range(1, 25):
             if x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
-            elif x <= 24:
+            else:
                 self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
     
 
@@ -83,7 +83,7 @@ class VittorioVenetoClass(Battleship):
         for x in range(1, 25):
             if x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
-            elif x <= 24:
+            else:
                 self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
 
 
@@ -111,7 +111,7 @@ class HoodClass(Battleship):
         for x in range(1, 25):
             if x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
-            elif x <= 24:
+            else:
                 self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
 
 
@@ -137,13 +137,13 @@ class PrinceOfWalesClass(Battleship):
         for x in range(1, 5):
             if x <= 2:
                 self.armaments['primaryBattery'].append(double_M22_GigaRailCannons(vID, ''.join(['T', str(x)])))
-            elif x <= 4:
+            else:
                 self.armaments['primaryBattery'].append(quadruple_M22_GigaRailCannons(vID, ''.join(['T', str(x)])))
         self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
             if x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
-            elif x <= 24:
+            else:
                 self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
           
 
@@ -169,16 +169,15 @@ class NewJerseyClass(Battleship):
         for x in range(1, 5):
             if x <= 2:
                 self.armaments['primaryBattery'].append(quadruple_M22_GigaRailCannons(vID, ''.join(['T', str(x)])))
-            elif x <= 4:
+            else:
                 self.armaments['primaryBattery'].append(triple_M26_ZeusCannons(vID, ''.join(['T', str(x)])))
-
         for x in range(1,7):
             if x <= 2:
                 self.armaments['secondaryBattery'].append(quadruple_M12_GaussCannons(vID, ''.join(['S', str(x)])))
-            elif x <= 6:
+            else:
                 self.armaments['secondaryBattery'].append(triple_L13_HadronLance(vID, ''.join(['S', str(x)])))
         for x in range(1, 33):
             if x <= 20:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
-            elif x <= 32:
+            else:
                 self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))   

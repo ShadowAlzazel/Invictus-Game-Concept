@@ -32,7 +32,7 @@ class VoltageClass(Strikecruiser):
         for x in range(1, 9):
             if x <= 4:
                 self.armaments['broadsideBattery'].append(double_M4_ShredderAutoGuns(vID, ''.join(['B', str(x)])))
-            elif x <= 8:
+            else:
                 self.armaments['broadsideBattery'].append(double_L5_WaveLasers(vID, ''.join(['B', str(x)])))
 
 
@@ -64,5 +64,5 @@ class DynamoClass(Strikecruiser):
         for x in range(1, 9):
             if x <= 4:
                 self.armaments['broadsideBattery'].append(double_L5_WaveLasers(vID, ''.join(['B', str(x)])))
-            elif x <= 8:
+            else:
                 self.armaments['broadsideBattery'].append(double_A5_ArcThrowers(vID, ''.join(['B', str(x)])))
