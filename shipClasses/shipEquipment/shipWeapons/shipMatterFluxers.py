@@ -8,7 +8,7 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 class double_F20_MatterDisentegrators(shipWeapon):
     gunName = 'Double (F20) Matter Disentegrators'
     gunStats = {
-        "ATK": 835, "RLD": 4, "HIT": 75, "RNG": 2, "QNT": 2
+        "ATK": 1285, "RLD": 4, "HIT": 75, "RNG": 2, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber) 
@@ -17,7 +17,7 @@ class double_F20_MatterDisentegrators(shipWeapon):
 class double_F14_MatterErasers(shipWeapon):
     gunName = 'Double (F14) Matter Erasers'
     gunStats = {
-        "ATK": 565, "RLD": 4, "HIT": 75, "RNG": 2, "QNT": 2
+        "ATK": 775, "RLD": 4, "HIT": 75, "RNG": 2, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber) 
@@ -26,7 +26,7 @@ class double_F14_MatterErasers(shipWeapon):
 class double_F8_MatterFluxers(shipWeapon):
     gunName = 'Double (F8) Matter Fluxers'
     gunStats = {
-        "ATK": 216, "RLD": 4, "HIT": 75, "RNG": 2, "QNT": 2
+        "ATK": 396, "RLD": 4, "HIT": 75, "RNG": 2, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber) 

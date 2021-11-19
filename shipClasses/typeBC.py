@@ -94,7 +94,7 @@ class PenumbraClass(Battlecruiser):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
         self.defenses['armorType'].append(MythrilAlloyArmor(vID))
-        for x in range(1, 7):
+        for x in range(1, 5):
             if x <= 4:
                 self.armaments['primaryBattery'].append(double_F20_MatterDisentegrators(vID, ''.join(['T', str(x)])))
             else:
