@@ -4,6 +4,10 @@
 #All batteries designed for a single case
 
 class shipWeapon:
+    gunName = 'shipWeapon'
+    gunStats = {
+        "ATK": 32, "RLD": 1, "HIT": 64, "RNG": 1, "QNT": 1
+    }
 
     def __init__(self, vesselID, batteryNumber):
         self.batteryID = '-'.join([vesselID, batteryNumber])

@@ -32,21 +32,21 @@ class LumioneShieldGen(shieldGen):
 
 
 class HyperShieldGen(shieldGen):
-
     shieldName = 'Hyper Shield-Generator'
     energyField = 50
     ringField = 1600
     rechargeRate = 200
+
     def __init__(self, vesselID):
         super().__init__(vesselID)
 
 
 
 class DarkEnergyShieldGen(shieldGen):
-
     shieldName = 'Dark Energy Shield-Generator'
     energyField = 70
     ringField = 3000
     rechargeRate = 300
+
     def __init__(self, vesselID):
         super().__init__(vesselID)

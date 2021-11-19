@@ -71,6 +71,18 @@ class Ship:
         return targets
 
 
+    #find ranges 
+    def rangeFinder(self, targetShip):
+        for x in range(1, self.shipStats['RDR'] + 1):
+            print(x)
+            targets = []
+            targets = self.radar.findRadarTargets(x, self.placeHex)
+            print(targets)
+            if targetShip.placeHex in targets:
+                print('IN')
+                return x
+
+
     #check if gun in range of a target ship
     def gunInRange(self, gunBattery, targetShip):
         if not self.radar.findGunTargets(gunBattery.gunStats['RNG'], self.placeHex, targetShip):

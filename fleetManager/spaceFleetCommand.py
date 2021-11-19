@@ -22,7 +22,6 @@ class spaceFleet:
 
     def spawnFleet(self, operationSpace, start=-1, formation=0):
         operationSpace.fleetEntities.append(self)
-
         if formation == 0:  #cluster
             k, n = 0, 1
             if start == -1: 
@@ -46,5 +45,3 @@ class spaceFleet:
                         operationSpace.addCustomEntity(hex, self.fleetShips[n])
                         n += 1
                 k += 1
-
-

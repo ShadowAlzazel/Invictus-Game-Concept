@@ -39,9 +39,19 @@ def getSize(obj_0):
 
 fleetASCS = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
 fleetLaunch(fleetASCS)
-print('size of ASCS', getSize(fleetASCS)) 
+print('Size of ASCS:', getSize(fleetASCS)) 
 
 
 fleetXNFF = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
 fleetLaunch(fleetXNFF)
-print('size of XNFF', getSize(fleetXNFF)) 
+print('Size of XNFF:', getSize(fleetXNFF)) 
+w = fleetXNFF.fleetShips[8].armaments['broadsideBattery'][0]
+print('Size of XNFF[0]:', getSize(w)) 
+
+
+
+#aoe = createCombatSpace(14, 10, 0)
+#
+#fleetASCS.spawnFleet(aoe, 30)
+#fleetXNFF.spawnFleet(aoe, 114)
+#print('Size of AOE:', getSize(aoe)) 

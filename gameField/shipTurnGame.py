@@ -3,11 +3,11 @@ from gameField.gameBoard import *
 from random import randint
 
 class turnCombatGame:
-    Query = {'No': ['No', 'no', 'N', 'n'], 'Yes': ['Yes', 'yes', 'Y', 'y'], 
-            'Inspect': ['I', 'Inspect', 'i', 'inspect', 'ins'], 'Skip': ['Skip', 'skip', 'S', 's'],
-            'Move': ['Move', 'move', 'm', 'M'], 'End': ['End', 'end', 'finish', 'Finish', 'E', 'e'],
-            'Attack': ['Attack', 'attack', 'atk', 'Atk', 'a', 'A', 'ATK'], 'AutoAttack': ['AutAttack', 'autoattack', 'auto', 'aa', 'AA']
-            }
+    #Query = {'No': ['No', 'no', 'N', 'n'], 'Yes': ['Yes', 'yes', 'Y', 'y'], 
+    #        'Inspect': ['I', 'Inspect', 'i', 'inspect', 'ins'], 'Skip': ['Skip', 'skip', 'S', 's'],
+    #        'Move': ['Move', 'move', 'm', 'M'], 'End': ['End', 'end', 'finish', 'Finish', 'E', 'e'],
+    #        'Attack': ['Attack', 'attack', 'atk', 'Atk', 'a', 'A', 'ATK'], 'AutoAttack': ['AutAttack', 'autoattack', 'auto', 'aa', 'AA']
+    #        }
 
     def __init__(self, operationSpace):
         self.opsSpace = operationSpace
@@ -75,11 +75,13 @@ class turnCombatGame:
             print("No possible actions left")
             return False
 
+        #check if moves available
         if self.selectedHex.entity.shipMovement != 0:
             result = self._moveShipAction(aHex)     
         else:
             print("No Movements available")   
 
+        #if no movement triggered, check for attacks
         if not result:
             result = self._attackShipAction(aHex)
 
@@ -133,6 +135,9 @@ class turnCombatGame:
                     gunToFire.remove(s)
                 broadSideE += 1
 
+        #get the distance
+        bDistance = aShip.rangeFinder(bShip)
+
         totalDamage = 0
         for g in gunToFire:
             if not bShip.operational:
@@ -140,8 +145,8 @@ class turnCombatGame:
                 return True
             salvoDamage = 0
             trueDamage = 0
-            #find FP distribution ammong batteries
-            if aShip.gunInRange(g, bShip):
+            if g.gunStats['RNG'] >= bDistance:
+                #find FP distribution ammong batteries
                 batPow = 0  
                 if g in aShip.armaments['primaryBattery']:
                     batPow = aShip.shipStats['FP'] // len(aShip.armaments['primaryBattery'])
@@ -155,10 +160,9 @@ class turnCombatGame:
                         salvoDamage += self.gunDamageCalc(g.gunStats['ATK'], aShip.shipStats['FP'], aShip.shipStats['LCK'], bShip.shipStats['LCK'], batPow)
 
                 trueDamage = bShip.takeDamage(salvoDamage)
-                if bShip.operational is False:
+                if not bShip.operational:
                     m = bShip.placeHex.hexCoord
                     self.gameShips.remove(bShip) 
-                    #self.opsSpace.spaceEntities['shipObject'].remove(bShip)
                     self.opsSpace.hexesFull.remove(self.opsSpace.starHexes[m])
                     self.opsSpace.starHexes[m].entity = []
                     self.opsSpace.starHexes[m].empty = True

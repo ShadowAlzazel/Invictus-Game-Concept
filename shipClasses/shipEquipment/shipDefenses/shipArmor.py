@@ -2,6 +2,7 @@
 
 #"""--------------------------------ARMOR-OBJECT----------------------------------"""
 class armor:
+    armorName = 'armor'
     armorValue = 1
     armorRegen = 0
 
