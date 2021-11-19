@@ -7,22 +7,22 @@ class shipHexRadar:
         self.equipID = '-'.join([vesselID, 'HXRDR', str(radarClass)])
 
 
-    def findGunTargets(self, gunRange, shipplaceHex, targetShip):
-        nearby = self._findHexes(gunRange, shipplaceHex) 
+    def findGunTargets(self, gunRange, shipPlaceHex, targetShip):
+        nearby = self._findHexes(gunRange, shipPlaceHex) 
+        target = []
+        for k in nearby:
+            if not k.empty and k.entity.command != shipPlaceHex.entity.command and k.entity == targetShip:
+              target.append(k)
+
+        #returns a hexSpace list
+        return target
+
+
+    def findRadarTargets(self, radarRange, shipPlaceHex):
+        nearby = self._findHexes(radarRange, shipPlaceHex) 
         targets = []
         for k in nearby:
-            if k.empty == False and k.entity.command != shipplaceHex.entity.command and k.entity == targetShip:
-              targets.append(k)
-
-        #returns a starSpace
-        return targets
-
-
-    def findRadarTargets(self, radarRange, shipplaceHex):
-        nearby = self._findHexes(radarRange, shipplaceHex) 
-        targets = []
-        for k in nearby:
-            if k.empty == False and k.entity.command != shipplaceHex.entity.command:
+            if not k.empty and k.entity.command != shipPlaceHex.entity.command:
               targets.append(k)
 
         #returns a starSpace
@@ -55,5 +55,3 @@ class shipHexRadar:
 
             return hexesNearby
         return hexesInRange(effRange, originRing)
-
-

@@ -12,7 +12,9 @@ class Ship:
 
     def __init__(self, hullnumber, name):
         Ship.ammount += 1
+        self.operational = True
         self.command = 'ASCS'
+        self.fleetName = 'FleetNull'
         self.name = name
         self.hullnumber = hullnumber
         self.vesselID = ''.join([self.shiptype, '-', str(self.hullnumber)])
@@ -38,8 +40,14 @@ class Ship:
             self.hull -= damageH
             return damageH
         else: 
+            self.hull = 0
             print(self.vesselID, self.command, self.name, "has been destryed!")
-            del self
+            self._destroyShip()
+
+
+    #destroy ship
+    def _destroyShip(self):
+        self.operational = False
 
 
     #full self repair
@@ -61,6 +69,18 @@ class Ship:
         if readyRanges:
             targets = self.radar.findRadarTargets(max(readyRanges), self.placeHex)
         return targets
+
+
+    #find ranges 
+    def rangeFinder(self, targetShip):
+        for x in range(1, self.shipStats['RDR'] + 1):
+            print(x)
+            targets = []
+            targets = self.radar.findRadarTargets(x, self.placeHex)
+            print(targets)
+            if targetShip.placeHex in targets:
+                print('IN')
+                return x
 
 
     #check if gun in range of a target ship
@@ -86,6 +106,12 @@ class Ship:
         for b in self.armaments.values():
             for g in b:
                 g.reloadGun()
+
+
+    #recharge shields and repair armor
+    def rechargeDef(self):
+        self.shields += self.defenses['shieldType'][0].rechargeRate
+        self.defenses['armorType'][0].armorIntegrity += self.defenses['armorType'][0].armorRegen
 
 
     #inspection function to look at stats

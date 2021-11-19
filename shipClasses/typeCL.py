@@ -9,7 +9,7 @@ class MidnightClass(Lightcruiser):
     ammount = 0 
     shiptype = 'CL'
     shipStats = {
-        "FP": 200, "ACC": 35, "EVA": 45, "SPD": 7,
+        "FP": 200, "ACC": 35, "EVA": 49, "SPD": 7,
         "RDR": 5, "LCK": 10
     }
     
@@ -23,6 +23,7 @@ class MidnightClass(Lightcruiser):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(HyperShieldGen(vID))
         self.defenses['armorType'].append(TitaniumArmor(vID))
-        self.armaments['primaryBattery'] = [triple_L6_ParticleLance(vID, ''.join(['T', str(x)])) for x in range(1, 5)]
-        self.armaments['secondaryBattery'] = [double_M4_ShredderAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1, 3)] 
-        self.armaments['broadsideBattery'] = [quad_BPoDS(vID, ''.join(['S', str(x)])) for x in range(1, 5)]
+        self.armaments['primaryBattery'] = [triple_L6_ParticleLance(vID, ''.join(['T', str(x)])) for x in range(1, 7)]
+        self.armaments['secondaryBattery'] = [triple_M5_WraithAutoGuns(vID, ''.join(['S', str(x)])) for x in range(1, 5)] 
+        self.armaments['secondaryBattery'].append(VLS_35C_DevestationMissiles(vID, 'M1'))
+        self.armaments['broadsideBattery'] = [quad_BPoDS(vID, ''.join(['B', str(x)])) for x in range(1, 7)]

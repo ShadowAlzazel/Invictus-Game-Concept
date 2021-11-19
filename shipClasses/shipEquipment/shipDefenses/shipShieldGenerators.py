@@ -2,10 +2,12 @@
 
 #"""---------------------------------SHIELD-OBJECT----------------------------------"""
 class shieldGen:
+    energyField = 10
+    ringField = 100 #initial shield
+    rechargeRate = 100
+
     def __init__(self, vesselID): 
-        self.energyField = 10
         self.damageAbsorbed = 0
-        self.ringField = 500 #initial shield
         self.equipID = '-'.join([vesselID, 'SGEN'])
 
     def shieldDamage(self, damageNum):
@@ -21,26 +23,30 @@ class shieldGen:
 
 class LumioneShieldGen(shieldGen):
     shieldName = 'Lumione Shield-Generator'
-
+    energyField = 30
+    ringField = 250
+    rechargeRate = 100
+    
     def __init__(self, vesselID):
         super().__init__(vesselID)
-        self.energyField = 30
-        self.ringField = 250
 
 
 class HyperShieldGen(shieldGen):
     shieldName = 'Hyper Shield-Generator'
+    energyField = 50
+    ringField = 1600
+    rechargeRate = 200
 
     def __init__(self, vesselID):
         super().__init__(vesselID)
-        self.energyField = 50
-        self.ringField = 1600
+
 
 
 class DarkEnergyShieldGen(shieldGen):
     shieldName = 'Dark Energy Shield-Generator'
+    energyField = 70
+    ringField = 3000
+    rechargeRate = 300
 
     def __init__(self, vesselID):
         super().__init__(vesselID)
-        self.energyField = 70
-        self.ringField = 3000

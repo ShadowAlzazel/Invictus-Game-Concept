@@ -3,11 +3,11 @@ from gameField.gameBoard import *
 from random import randint
 
 class turnCombatGame:
-    Query = {'No': ['No', 'no', 'N', 'n'], 'Yes': ['Yes', 'yes', 'Y', 'y'], 
-            'Inspect': ['I', 'Inspect', 'i', 'inspect', 'ins'], 'Skip': ['Skip', 'skip', 'S', 's'],
-            'Move': ['Move', 'move', 'm', 'M'], 'End': ['End', 'end', 'finish', 'Finish', 'E', 'e'],
-            'Attack': ['Attack', 'attack', 'atk', 'Atk', 'a', 'A', 'ATK'], 'AutoAttack': ['AutAttack', 'autoattack', 'auto', 'aa', 'AA']
-            }
+    #Query = {'No': ['No', 'no', 'N', 'n'], 'Yes': ['Yes', 'yes', 'Y', 'y'], 
+    #        'Inspect': ['I', 'Inspect', 'i', 'inspect', 'ins'], 'Skip': ['Skip', 'skip', 'S', 's'],
+    #        'Move': ['Move', 'move', 'm', 'M'], 'End': ['End', 'end', 'finish', 'Finish', 'E', 'e'],
+    #        'Attack': ['Attack', 'attack', 'atk', 'Atk', 'a', 'A', 'ATK'], 'AutoAttack': ['AutAttack', 'autoattack', 'auto', 'aa', 'AA']
+    #        }
 
     def __init__(self, operationSpace):
         self.opsSpace = operationSpace
@@ -42,6 +42,7 @@ class turnCombatGame:
             s.shipAttacks = 1
             s.shipActive = True
             s.reloadGuns()
+            s.rechargeDef()
 
 
     #select shiphex
@@ -74,11 +75,13 @@ class turnCombatGame:
             print("No possible actions left")
             return False
 
+        #check if moves available
         if self.selectedHex.entity.shipMovement != 0:
             result = self._moveShipAction(aHex)     
         else:
             print("No Movements available")   
 
+        #if no movement triggered, check for attacks
         if not result:
             result = self._attackShipAction(aHex)
 
@@ -122,7 +125,6 @@ class turnCombatGame:
 
     #fire all guns in range 
     def _shipSalvoAction(self, aShip, bShip):
-        shipExists = [bShip]
         #check if guns are loaded
         gunToFire = aShip.gunsReady()
         broadSideE = 0
@@ -133,14 +135,18 @@ class turnCombatGame:
                     gunToFire.remove(s)
                 broadSideE += 1
 
+        #get the distance
+        bDistance = aShip.rangeFinder(bShip)
+
         totalDamage = 0
         for g in gunToFire:
-            if not shipExists:
+            if not bShip.operational:
                 print("ship Destroyed!")
+                return True
             salvoDamage = 0
             trueDamage = 0
-            #find FP distribution ammong batteries
-            if aShip.gunInRange(g, bShip):
+            if g.gunStats['RNG'] >= bDistance:
+                #find FP distribution ammong batteries
                 batPow = 0  
                 if g in aShip.armaments['primaryBattery']:
                     batPow = aShip.shipStats['FP'] // len(aShip.armaments['primaryBattery'])
@@ -149,24 +155,33 @@ class turnCombatGame:
                 elif g in aShip.armaments['broadsideBattery']:
                     batPow = aShip.shipStats['FP'] // len(aShip.armaments['broadsideBattery'])
 
-                if self.gunHitCalc(g, aShip.shipStats['ACC'], bShip.shipStats['EVA']) == True:
-                    salvoDamage += self.gunDamageCalc(g, aShip.shipStats['FP'], aShip.shipStats['LCK'], bShip.shipStats['LCK'], batPow)
+                for a in range(0, g.gunStats['QNT']):
+                    if self.gunHitCalc(g.gunStats['HIT'], aShip.shipStats['ACC'], bShip.shipStats['EVA']) is True:
+                        salvoDamage += self.gunDamageCalc(g.gunStats['ATK'], aShip.shipStats['FP'], aShip.shipStats['LCK'], bShip.shipStats['LCK'], batPow)
 
                 trueDamage = bShip.takeDamage(salvoDamage)
+                if not bShip.operational:
+                    m = bShip.placeHex.hexCoord
+                    self.gameShips.remove(bShip) 
+                    self.opsSpace.hexesFull.remove(self.opsSpace.starHexes[m])
+                    self.opsSpace.starHexes[m].entity = []
+                    self.opsSpace.starHexes[m].empty = True
+                    trueDamage = 0
+                    #del bShip
+                    return True
+
                 if trueDamage > 0:
                     print(g.batteryID, "Has Hit", bShip.name, "For", trueDamage, "Damage!")
                 g.gunLoadTime = 0
-
             totalDamage += trueDamage
             salvoDamage = 0
-
         print(aShip.vesselID, aShip.name, "Has done", totalDamage, "Total Damage to", bShip.vesselID, bShip.name)
         return True
 
 
     #hit calculator for a gun
-    def gunHitCalc(self, gunBattery, aShipACC, bShipEVA):
-        hitRate = (aShipACC - bShipEVA) + gunBattery.gunStats['HIT']
+    def gunHitCalc(self, aShipGunHit, aShipACC, bShipEVA):
+        hitRate = (aShipACC - bShipEVA) + aShipGunHit
         randHit = randint(1, 100)
         if hitRate > randHit:
             return True
@@ -175,13 +190,13 @@ class turnCombatGame:
 
 
     #damage calculator for a gun
-    def gunDamageCalc(self, gunBattery, aShipFP, aShipLuck, bShipLuck, batDistro):
-        critRate = aShipLuck - bShipLuck + 5
+    def gunDamageCalc(self, aShipGunAtk, aShipFP, aShipLCK, bShipLCK, batDistro):
+        critRate = aShipLCK - bShipLCK + 5
         damageMult = 1
         damage = 0
         randCrit = randint(1, 100)
         if critRate > randCrit:
-            damageMult = 1.25 + (aShipLuck / 100)
+            damageMult = 1.25 + (aShipLCK / 100)
 
-        damage = (gunBattery.gunStats['ATK'] + (aShipFP // batDistro) * damageMult)
+        damage = (aShipGunAtk + (aShipFP // batDistro) * damageMult)
         return damage

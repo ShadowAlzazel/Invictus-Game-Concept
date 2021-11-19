@@ -2,6 +2,7 @@
 
 #hex space
 class starSpace:
+
     def __init__(self, hexNumber): 
         self.hexCoord = hexNumber
         self.entity = []
@@ -21,6 +22,7 @@ class starSpace:
 
 #operation Space/Zone
 class zoneSpace:
+    
     def __init__(self, length, width):
         n = 0
         self.l = length
