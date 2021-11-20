@@ -79,6 +79,7 @@ def combatGameMenu(gameScreen):
         if button2.collidepoint((mx, my)):
             if mouseClick:
                 #WIP currently testing presets
+                #have different buttons change level number and create levels
                 level = 77 
                 combatGame(gameScreen, level)
 

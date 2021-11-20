@@ -1,8 +1,5 @@
 #fleet tester
-from fleetManager import *
-from fleetLogger import *
-from spaceField import *
-from shipCreater import *
+from levelGames import *
 
 from collections import deque
 from collections.abc import Set, Mapping
@@ -37,21 +34,8 @@ def getSize(obj_0):
     return inner(obj_0)
 
 
-fleetASCS = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
-fleetLaunch(fleetASCS)
-print('Size of ASCS:', getSize(fleetASCS)) 
+fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
+fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
+level1 = level(14, 10, 0 ,(fleet1, fleet2), [40, 104])
 
-
-fleetXNFF = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
-fleetLaunch(fleetXNFF)
-print('Size of XNFF:', getSize(fleetXNFF)) 
-w = fleetXNFF.fleetShips[8].armaments['broadsideBattery'][0]
-print('Size of XNFF[0]:', getSize(w)) 
-
-print(fleetXNFF.fleetShips[11].armaments)
-
-#aoe = createCombatSpace(14, 10, 0)
-#
-#fleetASCS.spawnFleet(aoe, 30)
-#fleetXNFF.spawnFleet(aoe, 114)
-#print('Size of AOE:', getSize(aoe)) 
+print('Size of Level:', getSize(level1))
