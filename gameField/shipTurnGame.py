@@ -118,6 +118,13 @@ class turnCombatGame:
                 result = self.opsSpace.moveClickEntity(selectedShip, aHex)
                 if result:
                     selectedShip.shipMovement -= 1
+                    #check if hex controlled
+                    if selectedShip.shipMovement != 0:
+                        enemyControlled = selectedShip.radar.findRadarTargets(1, aHex)
+                        enemyNearby = selectedShip.findTargets(1)
+                        if enemyControlled or enemyNearby:
+                            selectedShip.shipMovement -= 1
+
             else:
                 print("No movements left!") 
         return result

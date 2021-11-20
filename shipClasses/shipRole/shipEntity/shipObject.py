@@ -25,8 +25,7 @@ class Ship:
         self.defenses = {'shieldType': [], 'armorType': []}
 
         print("New Ship Launched", end=': ')
-        print(self.command, '-', name, sep='', end=', ')
-
+        print(self.command, '-', name, sep='', end=', ') 
 
     #damage function that takes in a value 
     def takeDamage(self, damageNum):
@@ -58,28 +57,27 @@ class Ship:
 
 
     #find targets in minimum range 
-    def findTargets(self):
-        gunsReadyInRange = self.gunsReady()
-        readyRanges = []
-        for w in gunsReadyInRange:
-            readyRanges.append(w.gunStats['RNG'])
+    def findTargets(self, n=0):
+        targetRanges, targets = [], []
 
         #find the max range of all guns loaded
-        targets = []
-        if readyRanges:
-            targets = self.radar.findRadarTargets(max(readyRanges), self.placeHex)
+        if not n:
+            gunsReadyInRange = self.gunsReady()
+            for w in gunsReadyInRange:
+                targetRanges.append(w.gunStats['RNG'])
+        elif n:
+            targetRanges = [n]
+
+        if targetRanges:
+            targets = self.radar.findRadarTargets(max(targetRanges), self.placeHex)
         return targets
 
 
     #find ranges 
     def rangeFinder(self, targetShip):
         for x in range(1, self.shipStats['RDR'] + 1):
-            print(x)
-            targets = []
             targets = self.radar.findRadarTargets(x, self.placeHex)
-            print(targets)
             if targetShip.placeHex in targets:
-                print('IN')
                 return x
 
 
@@ -110,8 +108,11 @@ class Ship:
 
     #recharge shields and repair armor
     def rechargeDef(self):
-        self.shields += self.defenses['shieldType'][0].rechargeRate
-        self.defenses['armorType'][0].armorIntegrity += self.defenses['armorType'][0].armorRegen
+        if self.__class__.shields > self.shields + self.defenses['shieldType'][0].rechargeRate:
+            self.shields += self.defenses['shieldType'][0].rechargeRate
+
+        if self.defenses['armorType'][0].armorIntegrity < 100 - self.defenses['armorType'][0].armorRegen:
+            self.defenses['armorType'][0].armorIntegrity += self.defenses['armorType'][0].armorRegen
 
 
     #inspection function to look at stats

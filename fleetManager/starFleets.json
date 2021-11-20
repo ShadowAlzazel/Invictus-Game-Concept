@@ -5,18 +5,19 @@
             "fleetNames":
             [
                 "Dracnois-17 Astra Fleet",
-                "Test Fleet ASC"
+                "Test Fleet ASC",
+                "Trappist-1 Astra Fleet"
             ],
 
             "Dracnois-17 Astra Fleet":
             {
                 "shipNames": 
                 [
+                    "PrinceOfWales",
                     "Tiamat",
+                    "Scylla",
                     "Vandal",
                     "Auerlion",
-                    "Scylla",
-                    "PrinceOfWales",
                     "Indomitable",
                     "Implecable",
                     "Indefagitable",
@@ -25,12 +26,12 @@
                 ],
                 "shipClasses":
                 [
-                    "PrinceOfWalesClass", "AmagiClass", "AmagiClass", "PrinceOfWalesClass", "PrinceOfWalesClass",
+                    "PrinceOfWalesClass", "PrinceOfWalesClass", "PrinceOfWalesClass", "AmagiClass", "AmagiClass", 
                     "IllustriousClass", "IllustriousClass", "IllustriousClass", "IllustriousClass", "IllustriousClass"
                 ],
                 "shipHullnumber":
                 [
-                    23, 622, 642, 25, 21, 666, 667, 668, 695, 696
+                    21, 23, 25, 622, 642, 666, 667, 668, 695, 696
                 ]
             },
             "Test Fleet ASC":
@@ -61,6 +62,24 @@
                 "shipHullnumber":
                 [
                     69, 634, 1342, 1356, 1605, 1604, 2492, 2493, 2494, 2497, 5570, 5413, 5025, 5530, 5320  
+                ]
+            },
+            "Trappist-1 Astra Fleet":
+            {
+                "shipNames": 
+                [
+                    "Devestator",
+                    "Marauder",
+                    "Berserker" 
+
+                ],
+                "shipClasses":
+                [
+                    "DevestatorClass", "DevestatorClass", "DevestatorClass"
+                ],
+                "shipHullnumber":
+                [
+                    2008, 2009, 2013
                 ]
             }    
         },

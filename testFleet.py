@@ -48,7 +48,7 @@ print('Size of XNFF:', getSize(fleetXNFF))
 w = fleetXNFF.fleetShips[8].armaments['broadsideBattery'][0]
 print('Size of XNFF[0]:', getSize(w)) 
 
-
+print(fleetXNFF.fleetShips[11].armaments)
 
 #aoe = createCombatSpace(14, 10, 0)
 #

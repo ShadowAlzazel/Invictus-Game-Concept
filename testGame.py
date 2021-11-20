@@ -7,14 +7,24 @@ from mainGame import *
 
 aoe = createCombatSpace(14, 10, 0)
 
-fleetASCS = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
-fleetLaunch(fleetASCS) 
+#fleetASCS = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
+#fleetLaunch(fleetASCS) 
+
+fleet2 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][0], 'ASC')
+fleetLaunch(fleet2)
+for s in fleet2.fleetShips:
+    s.orientation = 'L'
 
 fleetXNFF = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
 fleetLaunch(fleetXNFF) 
 
-fleetASCS.spawnFleet(aoe, 30)
-fleetXNFF.spawnFleet(aoe, 114)
+
+#fleetASCS.spawnFleet(aoe, 30)
+
+fleet2.spawnFleet(aoe, 40)
+fleetXNFF.spawnFleet(aoe, 104)
+
+
 
 aTurnGame = turnCombatGame(aoe)
 

@@ -15,7 +15,7 @@ class armor:
         if damageNum / (self.armorIntegrity + 1) > self.armorIntegrity + 1:
             self.armorIntegrity = 0
         elif self.armorIntegrity != 0:
-            self.armorIntegrity -= damageNum / (self.armorIntegrity * self.armorValue) #decrerase armor integrity over exposure and hits
+            self.armorIntegrity -= trueDamage / (self.armorIntegrity * self.armorValue) #decrerase armor integrity over exposure and hits
         self.armorIntegrity
         return trueDamage
 

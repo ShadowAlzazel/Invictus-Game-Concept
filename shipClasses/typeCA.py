@@ -28,4 +28,4 @@ class ApocalypseClass(Heavycruiser):
             if x <= 8:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 10:
-                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))

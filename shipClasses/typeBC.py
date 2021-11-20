@@ -22,18 +22,12 @@ class ZenithClass(Battlecruiser):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
         self.defenses['armorType'].append(MythrilAlloyArmor(vID))
-        for x in range(1, 6):
-            if x <= 3:
-                self.armaments['primaryBattery'].append(double_A17_HAT3ArcThrowers(vID, ''.join(['T', str(x)])))
+        for x in range(1, 5):
+            if x <= 2:
+                self.armaments['primaryBattery'].append(triple_P18_NovaPhasers(vID, ''.join(['T', str(x)])))
             else:
                 self.armaments['primaryBattery'].append(triple_L18_DeuteriumLance(vID, ''.join(['T', str(x)])))
-        for x in range(1,6):
-            if x <= 2:
-                self.armaments['secondaryBattery'].append(quadruple_M12_GaussCannons(vID, ''.join(['S', str(x)])))
-            elif x <= 4:
-                self.armaments['secondaryBattery'].append(triple_A11_TeslaArcThrowers(vID, ''.join(['S', str(x)])))
-            else: 
-                 self.armaments['secondaryBattery'].append(triple_L13_HadronLance(vID, ''.join(['S', str(x)])))
+        self.armaments['secondaryBattery'] = [triple_P12_SolarPhasers(vID, ''.join(['S', str(x)])) for x in range(1,3)]
         for x in range(1, 17):
             if x <= 8:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
@@ -65,14 +59,13 @@ class EclipseClass(Battlecruiser):
                 self.armaments['primaryBattery'].append(triple_L18_DeuteriumLance(vID, ''.join(['T', str(x)])))
             else:
                 self.armaments['primaryBattery'].append(double_M22_GigaRailCannons(vID, ''.join(['T', str(x)])))
-        self.armaments['secondaryBattery'] = [quadruple_M12_GaussCannons(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+        self.armaments['secondaryBattery'] = [quadruple_M12_GaussCannons(vID, ''.join(['S', str(x)])) for x in range(1,3)]
         for x in range(1, 17):
             if x <= 8:
-                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
-            elif x <= 12:
-                self.armaments['broadsideBattery'].append(double_A5_ArcThrowers(vID, ''.join(['B', str(x)])))
-            else:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+            else:
+                self.armaments['broadsideBattery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))
+
         
 
 #--------------------------------Penumbra Class Battlecruiser------------------------------------
@@ -94,7 +87,7 @@ class PenumbraClass(Battlecruiser):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
         self.defenses['armorType'].append(MythrilAlloyArmor(vID))
-        for x in range(1, 7):
+        for x in range(1, 5):
             if x <= 4:
                 self.armaments['primaryBattery'].append(double_F20_MatterDisentegrators(vID, ''.join(['T', str(x)])))
             else:
@@ -127,7 +120,7 @@ class IllustriousClass(Battlecruiser):
         self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
         self.defenses['armorType'].append(MythrilAlloyArmor(vID))
         self.armaments['primaryBattery'] = [triple_L18_DeuteriumLance(vID, ''.join(['T', str(x)])) for x in range(1,5)]
-        self.armaments['secondaryBattery'] = [quadruple_M12_GaussCannons(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+        self.armaments['secondaryBattery'] = [triple_A11_TeslaArcThrowers(vID, ''.join(['S', str(x)])) for x in range(1,3)]
         for x in range(1, 17):
             if x <= 8:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
