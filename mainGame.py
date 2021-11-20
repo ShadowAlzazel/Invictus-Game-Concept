@@ -1,52 +1,156 @@
 import pygame
-from pygame.constants import K_DOWN, K_ESCAPE, K_F4, K_LALT, K_LEFT, K_RIGHT, K_SPACE, K_UP, KEYDOWN, KEYUP, K_c, K_e, K_i, K_m, K_r, K_x, K_z
+import sys
+from pygame import mouse
+
+from pygame.constants import K_DOWN, K_ESCAPE, K_F4, K_LALT, K_LEFT, K_RIGHT, K_SPACE, K_UP, KEYDOWN, KEYUP, MOUSEBUTTONDOWN, QUIT, K_c, K_e, K_i, K_m, K_r, K_x, K_z
 from gameField import *
+from levelGames import *
 
-#start game
-def levelGame(turnLevel):
-
-    
-    gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
-    gameScreen.blit(FIT_SPACE, (0, 0))
-
-    #start pygame
+#-----------------------------------------------------------------------
+#main game function
+def main():
     pygame.init()
-    combatGameBoard = spaceGameBoard(turnLevel.opsSpace.l, turnLevel.opsSpace.w, HEX_SIZE)
 
-    #create window
-    pygame.display.update()
+    #set up main game screen
     pygame.display.set_caption("ASCS Fleet Manager")
     pygame.display.set_icon(GAME_ICON)
-
-    animateGridHexes = pygame.USEREVENT + 1
-    pygame.time.set_timer(animateGridHexes, 250)
-
-    combatGameBoard.drawHexes(gameScreen, turnLevel.opsSpace)
+    gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
+    gameScreen.blit(FIT_SPACE, (0, 0))
     pygame.display.update()
 
-
     #variables
-    moveUp, moveDown, moveLeft, moveRight = False, False, False, False
+    mainRunning = True
+    mouseClick = False
 
+    #time
+    gameClock = pygame.time.Clock()
+
+    while mainRunning:
+        gameClock.tick(FPS)
+        gameScreen.blit(FIT_SPACE, (0, 0))
+        mx, my = pygame.mouse.get_pos()
+
+        #menu buttons
+        button1 = pygame.Rect(50, 100, 200, 50)
+        button2 = pygame.Rect(50, 200, 200, 50)
+        if button1.collidepoint((mx, my)):
+            if mouseClick: 
+                combatGameMenu(gameScreen)
+
+        pygame.draw.rect(gameScreen, (2, 2, 2), button1)
+
+        #event loop
+        mouseClick = False 
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                print("Quitting...")
+                mainRunning = False 
+
+            if (event.type == KEYDOWN and event.key == K_ESCAPE) or ((event.type == KEYDOWN and event.key == K_LALT) and (event.type == KEYDOWN and event.key == K_F4)):
+                print("Quitting...")
+                mainRunning = False
+
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouseClick = True 
+
+        pygame.display.update()
+    #end game
+    pygame.quit()
+    sys.exit()
+
+
+#------------------------------------------------------------------------------------------
+#menu for combat 
+def combatGameMenu(gameScreen):
+
+    #variables 
     gameRunning = True
+    mouseClick = False 
+
+    #time 
     gameClock = pygame.time.Clock()
 
     while gameRunning:
         gameClock.tick(FPS)
+        gameScreen.blit(FIT_SPACE, (0, 0))
+        mx, my = pygame.mouse.get_pos()
 
-        if moveUp:
-            combatGameBoard.windowMoveY -= 3
-        if moveDown:
-            combatGameBoard.windowMoveY += 3
-        if moveLeft:
-            combatGameBoard.windowMoveX -= 3
-        if moveRight:
-            combatGameBoard.windowMoveX += 3
-        
+        button2 = pygame.Rect(50, 200, 200, 50)
+        if button2.collidepoint((mx, my)):
+            if mouseClick:
+                level = 64 
+                combatGame(gameScreen, level)
+
+        pygame.draw.rect(gameScreen, (2, 2, 2), button2)
+
+        #event loop
+        mouseClick = False 
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE) or ((event.type == KEYDOWN and event.key == K_LALT) and (event.type == KEYDOWN and event.key == K_F4)):
-                print("Quiting")
-                gameRunning = False
+            if event.type == QUIT:
+                print("Quitting...")
+                gameRunning = False 
+
+            if (event.type == KEYDOWN and event.key == K_ESCAPE):
+                print("Quitting...")
+                gameRunning = False 
+
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouseClick = True 
+
+        pygame.display.update() 
+
+
+#-------------------------------------------------------------------------------------------
+#combat game
+def combatGame(gameScreen, pLevel):
+    
+    gameLevel = None 
+    #levels
+    if pLevel == 64:
+        fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
+        fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
+        gameLevel = level(14, 10, 0 ,(fleet1, fleet2), [40, 104])
+
+    
+    combatWindow = spaceWindow(gameLevel.areaOfEngagement.l, gameLevel.areaOfEngagement.w, HEX_SIZE)
+    combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement)
+    pygame.display.update()
+
+    #animation calls
+    animateGridHexes = pygame.USEREVENT + 1
+    pygame.time.set_timer(animateGridHexes, 250)
+
+
+    #variables 
+    gameRunning = True 
+    moveUp, moveDown, moveLeft, moveRight = False, False, False, False
+
+    #time 
+    gameClock = pygame.time.Clock()
+
+    while gameRunning:
+        gameClock.tick(FPS)
+        
+        if moveUp:
+            combatWindow.windowMoveY -= 3
+        if moveDown:
+            combatWindow.windowMoveY += 3
+        if moveLeft:
+            combatWindow.windowMoveX -= 3
+        if moveRight:
+            combatWindow.windowMoveX += 3
+
+        #event loop
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                print("Quitting...")
+                gameRunning = False 
+
+            if (event.type == KEYDOWN and event.key == K_ESCAPE):
+                print("Quitting...")
+                gameRunning = False 
 
             #window movement
             if event.type == KEYDOWN and event.key == K_UP:
@@ -71,41 +175,44 @@ def levelGame(turnLevel):
 
             #reset window
             if event.type == KEYDOWN and event.key == K_SPACE:
-                combatGameBoard.windowMoveX = 0
-                combatGameBoard.windowMoveY = 0
+                combatWindow.windowMoveX = 0
+                combatWindow.windowMoveY = 0
 
             if event.type == KEYDOWN and event.key == K_e:
                 print('Fleet Turn Ended')
-                turnLevel.fleetTurn()
-                combatGameBoard.drawHexes(gameScreen, turnLevel.opsSpace)
+                gameLevel.areaGame.fleetTurn()
+                combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement)
 
             if event.type == KEYDOWN and event.key == K_i:
-                if turnLevel.selectedHex:
-                    turnLevel.selectedHex.entity.fullInspect()
+                if gameLevel.areaGame.selectedHex:
+                    gameLevel.areaGame.selectedHex.entity.fullInspect()
 
             #zooming
             if event.type == KEYDOWN and event.key == K_z:
-                combatGameBoard.zoomInHex()
+                combatWindow.zoomInHex()
 
             if event.type == KEYDOWN and event.key == K_x:
-                combatGameBoard.zoomOutHex()
+                combatWindow.zoomOutHex()
 
             if event.type == KEYDOWN and event.key == K_c:
-                if turnLevel.selectedHex:
-                    combatGameBoard.centerHex = turnLevel.selectedHex.hexCoord
+                if gameLevel.areaGame.selectedHex:
+                    combatWindow.centerHex = gameLevel.areaGame.selectedHex.hexCoord
 
             if event.type == animateGridHexes:
-                combatGameBoard.aniHexes()
-                combatGameBoard.drawHexes(gameScreen, turnLevel.opsSpace, turnLevel.selectedHex) 
+                combatWindow.aniHexes()
+                combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, gameLevel.areaGame.selectedHex)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
-                hexIndex = combatGameBoard.getMouseHex(someMousePos)
+                hexIndex = combatWindow.getMouseHex(someMousePos)
                 if hexIndex >= 0:
-                    turnLevel.selectHex(turnLevel.opsSpace.starHexes[hexIndex])
+                    gameLevel.areaGame.selectHex(gameLevel.areaOfEngagement.starHexes[hexIndex])
                 print(hexIndex)
 
-        combatGameBoard.drawHexes(gameScreen, turnLevel.opsSpace, turnLevel.selectedHex)    
+        combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, gameLevel.areaGame.selectedHex)   
         pygame.display.update()
 
-    pygame.quit()
+
+#-------------------------------------------------------------------------------------------
+if __name__ == '__main__':
+    main()
