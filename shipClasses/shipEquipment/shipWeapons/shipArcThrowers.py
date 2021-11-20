@@ -9,7 +9,7 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 class double_A17_HAT3ArcThrowers(shipWeapon):
     gunName = 'Double (A17) HAT3 Arc-Throwers'
     gunStats = {
-        "ATK": 529, "RLD": 2, "HIT": 79, "RNG": 2, "QNT": 2
+        "ATK": 679, "RLD": 2, "HIT": 79, "RNG": 2, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
@@ -18,7 +18,7 @@ class double_A17_HAT3ArcThrowers(shipWeapon):
 class triple_A17_HAT3ArcThrowers(shipWeapon):
     gunName = 'Triple (A17) HAT3 Arc-Throwers'
     gunStats = {
-        "ATK": 529, "RLD": 2, "HIT": 79, "RNG": 2, "QNT": 3
+        "ATK": 679, "RLD": 2, "HIT": 79, "RNG": 2, "QNT": 3
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
@@ -27,7 +27,7 @@ class triple_A17_HAT3ArcThrowers(shipWeapon):
 class triple_A11_TeslaArcThrowers(shipWeapon):
     gunName = 'Triple (A11) Tesla Arc-Throwers'
     gunStats = {
-        "ATK": 297, "RLD": 2, "HIT": 82, "RNG": 2, "QNT": 3
+        "ATK": 461, "RLD": 2, "HIT": 82, "RNG": 2, "QNT": 3
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
@@ -35,7 +35,7 @@ class triple_A11_TeslaArcThrowers(shipWeapon):
 
 class double_A8_AmplifiedArcThrowers(shipWeapon):
     gunStats = {
-        "ATK": 237, "RLD": 2, "HIT": 82, "RNG":2, "QNT": 2
+        "ATK": 329, "RLD": 2, "HIT": 82, "RNG":2, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)  
@@ -44,7 +44,7 @@ class double_A8_AmplifiedArcThrowers(shipWeapon):
 class double_A5_ArcThrowers(shipWeapon):
     gunName = 'Double (A5) Arc-Throwers'
     gunStats = {
-        "ATK": 177, "RLD": 2, "HIT": 85, "RNG": 1, "QNT": 2
+        "ATK": 187, "RLD": 2, "HIT": 85, "RNG": 1, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)

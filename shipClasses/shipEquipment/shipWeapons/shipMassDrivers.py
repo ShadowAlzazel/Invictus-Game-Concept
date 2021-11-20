@@ -7,7 +7,7 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 class double_M26_ZeusCannons(shipWeapon):
     gunName = 'Double (M26) Zeus Cannons'
     gunStats = {
-        "ATK": 975, "RLD": 2, "HIT": 55, "RNG": 7, "QNT": 2
+        "ATK": 1248, "RLD": 3, "HIT": 55, "RNG": 7, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
@@ -16,7 +16,7 @@ class double_M26_ZeusCannons(shipWeapon):
 class triple_M26_ZeusCannons(shipWeapon):
     gunName = 'Triple (M26) Zeus Cannons'
     gunStats = {
-        "ATK": 975, "RLD": 2, "HIT": 55, "RNG": 7, "QNT": 3
+        "ATK": 1248, "RLD": 3, "HIT": 55, "RNG": 7, "QNT": 3
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
@@ -25,7 +25,7 @@ class triple_M26_ZeusCannons(shipWeapon):
 class double_M22_GigaRailCannons(shipWeapon):
     gunName = 'Double (M22) Giga Rail Cannons'
     gunStats = {
-        "ATK": 727, "RLD": 2, "HIT": 55, "RNG": 6, "QNT": 2
+        "ATK": 1035, "RLD": 2, "HIT": 55, "RNG": 6, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
@@ -34,7 +34,7 @@ class double_M22_GigaRailCannons(shipWeapon):
 class triple_M22_GigaRailCannons(shipWeapon):
     gunName = 'Triple (M22) Giga Rail Cannons'
     gunStats = {
-        "ATK": 727, "RLD": 2, "HIT": 55, "RNG": 6, "QNT": 3
+        "ATK": 1035, "RLD": 2, "HIT": 55, "RNG": 6, "QNT": 3
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
@@ -43,7 +43,7 @@ class triple_M22_GigaRailCannons(shipWeapon):
 class quadruple_M22_GigaRailCannons(shipWeapon):
     gunName = 'Quadruple (M22) Giga Rail Cannons'
     gunStats = {
-        "ATK": 727, "RLD": 2, "HIT": 55, "RNG": 6, "QNT": 4
+        "ATK": 1035, "RLD": 2, "HIT": 55, "RNG": 6, "QNT": 4
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
@@ -52,7 +52,7 @@ class quadruple_M22_GigaRailCannons(shipWeapon):
 class triple_M16_RailCannons(shipWeapon):
     gunName = 'Triple (M16) Rail Cannons'
     gunStats = {
-        "ATK": 512, "RLD": 2, "HIT": 55, "RNG": 5, "QNT": 3
+        "ATK": 612, "RLD": 2, "HIT": 55, "RNG": 5, "QNT": 3
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)

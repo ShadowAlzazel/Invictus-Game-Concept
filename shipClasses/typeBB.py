@@ -106,13 +106,13 @@ class HoodClass(Battleship):
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
         self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
         self.defenses['armorType'].append(DurasteelArmor(vID))
-        self.armaments['primaryBattery'] = [double_M22_GigaRailCannons(vID, ''.join(['T', str(x)])) for x in range(1,7)]
+        self.armaments['primaryBattery'] = [double_P22_PulsarPhasers(vID, ''.join(['T', str(x)])) for x in range(1,7)]
         self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
             if x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             else:
-                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))
 
 
 #--------------------------Prince of Wales Class Battleship---------------------------
@@ -120,7 +120,7 @@ class PrinceOfWalesClass(Battleship):
     shipClass = 'PrinceOfWalesClass'
     ammount = 0
     shipStats = {
-        "FP": 654, "ACC": 36, "EVA": 29, "SPD": 4,
+        "FP": 704, "ACC": 36, "EVA": 29, "SPD": 4,
         "RDR": 6, "LCK": 10
     }
 
@@ -144,7 +144,7 @@ class PrinceOfWalesClass(Battleship):
             if x <= 16:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             else:
-                self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
+                self.armaments['broadsideBattery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))
           
 
 #--------------------------New Jersey Class Battleship-----------------------------

@@ -13,11 +13,11 @@
             {
                 "shipNames": 
                 [
+                    "PrinceOfWales",
                     "Tiamat",
+                    "Scylla",
                     "Vandal",
                     "Auerlion",
-                    "Scylla",
-                    "PrinceOfWales",
                     "Indomitable",
                     "Implecable",
                     "Indefagitable",
@@ -26,12 +26,12 @@
                 ],
                 "shipClasses":
                 [
-                    "PrinceOfWalesClass", "AmagiClass", "AmagiClass", "PrinceOfWalesClass", "PrinceOfWalesClass",
+                    "PrinceOfWalesClass", "PrinceOfWalesClass", "PrinceOfWalesClass", "AmagiClass", "AmagiClass", 
                     "IllustriousClass", "IllustriousClass", "IllustriousClass", "IllustriousClass", "IllustriousClass"
                 ],
                 "shipHullnumber":
                 [
-                    23, 622, 642, 25, 21, 666, 667, 668, 695, 696
+                    21, 23, 25, 622, 642, 666, 667, 668, 695, 696
                 ]
             },
             "Test Fleet ASC":

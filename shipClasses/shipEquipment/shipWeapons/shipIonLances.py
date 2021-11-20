@@ -9,7 +9,7 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 class double_L18_DeuteriumLance(shipWeapon):
     gunName = 'Double (L18) Deuterium Lance'
     gunStats = {
-        "ATK": 426, "RLD": 2, "HIT": 85, "RNG": 3, "QNT": 2
+        "ATK": 586, "RLD": 2, "HIT": 85, "RNG": 3, "QNT": 2
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
@@ -18,7 +18,7 @@ class double_L18_DeuteriumLance(shipWeapon):
 class triple_L18_DeuteriumLance(shipWeapon):
     gunName = 'Triple (L18) Deuterium Lance'
     gunStats = {
-        "ATK": 426, "RLD": 2, "HIT": 85, "RNG": 4, "QNT": 3
+        "ATK": 586, "RLD": 2, "HIT": 85, "RNG": 4, "QNT": 3
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
