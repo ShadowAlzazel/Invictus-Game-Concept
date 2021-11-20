@@ -16,11 +16,11 @@ fleetLaunch(fleet2)
 fleetXNFF = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
 fleetLaunch(fleetXNFF) 
 
-
-
 #fleetASCS.spawnFleet(aoe, 30)
-fleetXNFF.spawnFleet(aoe, 104)
+
 fleet2.spawnFleet(aoe, 40)
+fleetXNFF.spawnFleet(aoe, 104)
+
 
 
 aTurnGame = turnCombatGame(aoe)

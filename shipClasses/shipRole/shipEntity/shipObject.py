@@ -76,12 +76,8 @@ class Ship:
     #find ranges 
     def rangeFinder(self, targetShip):
         for x in range(1, self.shipStats['RDR'] + 1):
-            print(x)
-            targets = []
             targets = self.radar.findRadarTargets(x, self.placeHex)
-            print(targets)
             if targetShip.placeHex in targets:
-                print('IN')
                 return x
 
 
