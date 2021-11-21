@@ -41,7 +41,6 @@ class HyperShieldGen(shieldGen):
         super().__init__(vesselID)
 
 
-
 class DarkEnergyShieldGen(shieldGen):
     shieldName = 'Dark Energy Shield-Generator'
     energyField = 70

@@ -73,7 +73,7 @@ class PenumbraClass(Battlecruiser):
     shipClass = 'PenumbraClass'
     ammount = 0
     shipStats = {       
-        "FP": 545, "ACC": 48, "EVA": 35, "SPD": 5,
+        "FP": 535, "ACC": 48, "EVA": 35, "SPD": 5,
         "RDR": 5, "LCK": 10
     }
 
@@ -105,7 +105,7 @@ class IllustriousClass(Battlecruiser):
     shipClass = 'IllustriousClass'
     ammount = 0
     shipStats = {       
-        "FP": 523, "ACC": 46, "EVA": 32, "SPD": 5,
+        "FP": 513, "ACC": 46, "EVA": 32, "SPD": 5,
         "RDR": 5, "LCK": 10
     }
 
