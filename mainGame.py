@@ -135,7 +135,7 @@ def combatGame(gameScreen, pLevel):
 
     #animation calls
     animateGridHexes = pygame.USEREVENT + 1
-    pygame.time.set_timer(animateGridHexes, 250)
+    pygame.time.set_timer(animateGridHexes, 300)
 
 
     #variables 
