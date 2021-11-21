@@ -7,8 +7,6 @@ from gameField.gameAssets import *
 # thanks to astrellon3 
 
 #----------------------------------------------------------------------
-FIT_SPACE = pygame.transform.smoothscale(SPACE_BACKGROUND, (LENGTH, WIDTH))
-
 
 class spaceWindow:
 

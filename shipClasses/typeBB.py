@@ -120,7 +120,7 @@ class PrinceOfWalesClass(Battleship):
     shipClass = 'PrinceOfWalesClass'
     ammount = 0
     shipStats = {
-        "FP": 704, "ACC": 36, "EVA": 29, "SPD": 4,
+        "FP": 704, "ACC": 35, "EVA": 29, "SPD": 4,
         "RDR": 6, "LCK": 10
     }
 

@@ -1,6 +1,5 @@
 import pygame
 import sys
-from pygame import mouse
 
 from pygame.constants import K_DOWN, K_ESCAPE, K_F4, K_LALT, K_LEFT, K_RIGHT, K_SPACE, K_UP, KEYDOWN, KEYUP, MOUSEBUTTONDOWN, QUIT, K_c, K_e, K_i, K_m, K_r, K_x, K_z
 from gameField import *
@@ -79,7 +78,9 @@ def combatGameMenu(gameScreen):
         button2 = pygame.Rect(50, 200, 200, 50)
         if button2.collidepoint((mx, my)):
             if mouseClick:
-                level = 64 
+                #WIP currently testing presets
+                #have different buttons change level number and create levels
+                level = 77 
                 combatGame(gameScreen, level)
 
         pygame.draw.rect(gameScreen, (2, 2, 2), button2)
@@ -108,12 +109,26 @@ def combatGame(gameScreen, pLevel):
     
     gameLevel = None 
     #levels
-    if pLevel == 64:
+    if pLevel == 43:
+        fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][0], 'ASC')
+        fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
+        gameLevel = level(14, 10, 0 ,(fleet1, fleet2), [70, 104])
+
+    elif pLevel == 64:
         fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
         fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
         gameLevel = level(14, 10, 0 ,(fleet1, fleet2), [40, 104])
 
+    elif pLevel == 77:
+        fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][2], 'ASC')
+        fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
+        gameLevel = level(10, 10, 0 ,(fleet1, fleet2), [25, 85])
+
     
+    if not gameLevel:
+        return
+
+    #create new window
     combatWindow = spaceWindow(gameLevel.areaOfEngagement.l, gameLevel.areaOfEngagement.w, HEX_SIZE)
     combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement)
     pygame.display.update()
@@ -214,5 +229,6 @@ def combatGame(gameScreen, pLevel):
 
 
 #-------------------------------------------------------------------------------------------
+#this is a runnable script
 if __name__ == '__main__':
     main()

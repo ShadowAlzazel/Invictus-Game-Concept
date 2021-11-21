@@ -1,1 +1,2 @@
-from gameField.gameAssets.boardConstants import *
+from gameField.gameAssets.gameConstants import *
+from gameField.gameAssets.gameImages import *
