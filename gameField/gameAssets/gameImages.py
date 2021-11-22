@@ -18,6 +18,10 @@ GRID_HEX_ANI_CLICK = pygame.image.load('gameField/gameAssets/hexClick.png')
 GRID_HEX_ANI_MOVE = pygame.image.load('gameField/gameAssets/hexMove.png')
 GRID_HEX_ANI_TARGET = pygame.image.load('gameField/gameAssets/hexTarget.png')
 
+#Fonts
+FONT_1A = pygame.image.load('gameField/gameAssets/font1div.png')
+FONT_2A = pygame.image.load('gameField/gameAssets/font2div.png')
+
 # Note:
 # SPACE_BACKGROUND is a downloaded image from https://www.reddit.com/r/PixelArt/comments/f1wg26/space_background/
 # thanks to astrellon3 

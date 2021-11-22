@@ -25,6 +25,7 @@ class spaceWindow:
 
         #animations
         self.baseHex = GRID_HEX_BASE_0
+        self.baseHex.convert()
         self.templateHexes = {'aniHexB': GRID_HEX_ANI_B0, 'aniHexEnemy': GRID_HEX_ANI_ENEMY, 'aniHexClick': GRID_HEX_ANI_CLICK, 'aniHexMove': GRID_HEX_ANI_MOVE, 'aniHexTarget': GRID_HEX_ANI_TARGET}
         for val in self.templateHexes.values():
             val.convert()
@@ -159,18 +160,21 @@ class spaceWindow:
         return rotImage
 
     def aniHexes(self):
-
+        x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11, 10, 9 ,8, 7, 6, 5, 4, 3, 2, 1, 0]
         w = self.counterA 
-        w = w % 24 
-        if w > 11:
-            w = 24 - w - 1
+        
+
         for t, a in zip(self.templateHexes.values(), self.animatedHexes.keys()):
         #print(w)
             baseImg = self.baseHex.copy()
             newAniImg = t.copy()
-            baseImg.blit(newAniImg, (0, w))
+            baseImg.blit(newAniImg, (0, x[w]))
             aniImg = pygame.transform.scale(baseImg, (self.hexSize, self.hexSize))
             self.animatedHexes[a] = aniImg
+        
+        if self.counterA == 23:
+            self.counterA = 0
+        else:
             self.counterA += 1
        
     #scale the hexes

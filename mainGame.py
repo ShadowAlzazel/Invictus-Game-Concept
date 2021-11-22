@@ -3,6 +3,7 @@ import sys
 
 from pygame.constants import K_DOWN, K_ESCAPE, K_F4, K_LALT, K_LEFT, K_RIGHT, K_SPACE, K_UP, KEYDOWN, KEYUP, MOUSEBUTTONDOWN, QUIT, K_c, K_e, K_i, K_m, K_r, K_x, K_z
 from gameField import *
+from gameField import gameFont
 from levelGames import *
 
 #-----------------------------------------------------------------------
@@ -16,6 +17,10 @@ def main():
     gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
     gameScreen.blit(FIT_SPACE, (0, 0))
     pygame.display.update()
+
+    global gameFont2A
+    gameFont1A = Font(FONT_1A, 3)
+    gameFont2A = Font(FONT_2A, 3)
 
     #variables
     mainRunning = True
@@ -31,12 +36,12 @@ def main():
 
         #menu buttons
         button1 = pygame.Rect(50, 100, 200, 50)
-        button2 = pygame.Rect(50, 200, 200, 50)
         if button1.collidepoint((mx, my)):
             if mouseClick: 
                 combatGameMenu(gameScreen)
 
         pygame.draw.rect(gameScreen, (2, 2, 2), button1)
+        gameFont2A.renderFont(gameScreen, 'BUTTON', (50, 100))
 
         #event loop
         mouseClick = False 
@@ -67,6 +72,7 @@ def combatGameMenu(gameScreen):
     gameRunning = True
     mouseClick = False 
 
+
     #time 
     gameClock = pygame.time.Clock()
 
@@ -84,6 +90,7 @@ def combatGameMenu(gameScreen):
                 combatGame(gameScreen, level)
 
         pygame.draw.rect(gameScreen, (2, 2, 2), button2)
+        gameFont2A.renderFont(gameScreen, 'BUTTON#', (50, 200))
 
         #event loop
         mouseClick = False 
@@ -135,7 +142,7 @@ def combatGame(gameScreen, pLevel):
 
     #animation calls
     animateGridHexes = pygame.USEREVENT + 1
-    pygame.time.set_timer(animateGridHexes, 300)
+    pygame.time.set_timer(animateGridHexes, 200)
 
 
     #variables 

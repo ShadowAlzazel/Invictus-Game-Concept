@@ -96,6 +96,7 @@ class Ship:
             for g in b:
                 if g.gunLoadTime == g.gunStats['RLD']:
                     gunsPrimed.append(g)
+
         return gunsPrimed
 
 
