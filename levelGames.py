@@ -1,9 +1,9 @@
 #levels 
-from gameField.gameClass import spaceField
+from gameField.spaceGame import turnGame
 from shipCreater import *
 from fleetManager import *
 from fleetLogger import *
-from spaceField import *
+from starSpaces import *
 
 class level():
 
@@ -14,7 +14,7 @@ class level():
         for i, x in enumerate(self.levelFleets):
             fleetLaunch(x)
             x.spawnFleet(self.areaOfEngagement, loc[i])
-        self.areaGame = spaceField(self.areaOfEngagement)
+        self.areaGame = turnGame(self.areaOfEngagement)
 
 
 #fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')

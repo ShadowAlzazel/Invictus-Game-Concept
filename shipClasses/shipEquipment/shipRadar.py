@@ -22,7 +22,7 @@ class shipHexRadar:
         nearby = self._findHexes(radarRange, shipPlaceHex) 
         targets = []
         for k in nearby:
-            if not k.empty and k.entity.command != shipPlaceHex.entity.command:
+            if not k.empty and k.entity.command[0:3] != shipPlaceHex.entity.command[0:3]:
               targets.append(k)
 
         #returns a starSpace

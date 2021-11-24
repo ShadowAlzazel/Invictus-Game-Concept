@@ -1,5 +1,5 @@
-from spaceField.spaceHexes import *
-from spaceField.spaceObjects import *
+from starSpaces.spaceHexes import *
+from starSpaces.spaceObjects import *
 from random import randint
 
 def createCombatSpace(length, width, density):
