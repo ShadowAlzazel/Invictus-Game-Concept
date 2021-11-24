@@ -1,5 +1,5 @@
 #levels 
-from gameField.gameClass import spaceField
+from gameField.gameSpace import spaceField
 from shipCreater import *
 from fleetManager import *
 from fleetLogger import *

@@ -3,7 +3,6 @@ import sys
 
 from pygame.constants import K_DOWN, K_ESCAPE, K_F4, K_LALT, K_LEFT, K_RIGHT, K_SPACE, K_UP, KEYDOWN, KEYUP, MOUSEBUTTONDOWN, QUIT, K_c, K_e, K_i, K_m, K_r, K_x, K_z
 from gameField import *
-from gameField import gameFont
 from levelGames import *
 
 #-----------------------------------------------------------------------
@@ -72,7 +71,6 @@ def combatGameMenu(gameScreen):
     gameRunning = True
     mouseClick = False 
 
-
     #time 
     gameClock = pygame.time.Clock()
 
@@ -90,7 +88,7 @@ def combatGameMenu(gameScreen):
                 combatGame(gameScreen, level)
 
         pygame.draw.rect(gameScreen, (2, 2, 2), button2)
-        gameFont2A.renderFont(gameScreen, 'BUTTON#', (50, 200))
+        gameFont2A.renderFont(gameScreen, 'COMBATGAME', (50, 200))
 
         #event loop
         mouseClick = False 
@@ -120,24 +118,22 @@ def combatGame(gameScreen, pLevel):
         fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][0], 'ASC')
         fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
         gameLevel = level(14, 10, 0 ,(fleet1, fleet2), [70, 104])
-
     elif pLevel == 64:
         fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
         fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
         gameLevel = level(14, 10, 0 ,(fleet1, fleet2), [40, 104])
-
     elif pLevel == 77:
         fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][2], 'ASC')
         fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
         gameLevel = level(10, 10, 0 ,(fleet1, fleet2), [25, 85])
 
-    
     if not gameLevel:
         return
 
     #create new window
+    currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
     combatWindow = spaceWindow(gameLevel.areaOfEngagement.l, gameLevel.areaOfEngagement.w, HEX_SIZE)
-    combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement)
+    combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom)
     pygame.display.update()
 
     #animation calls
@@ -153,6 +149,7 @@ def combatGame(gameScreen, pLevel):
     gameClock = pygame.time.Clock()
 
     while gameRunning:
+        currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
         gameClock.tick(FPS)
         
         if moveUp:
@@ -203,7 +200,7 @@ def combatGame(gameScreen, pLevel):
             if event.type == KEYDOWN and event.key == K_e:
                 print('Fleet Turn Ended')
                 gameLevel.areaGame.fleetTurn()
-                combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement)
+                combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom)
 
             if event.type == KEYDOWN and event.key == K_i:
                 if gameLevel.areaGame.selectedHex:
@@ -222,7 +219,7 @@ def combatGame(gameScreen, pLevel):
 
             if event.type == animateGridHexes:
                 combatWindow.aniHexes()
-                combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, gameLevel.areaGame.selectedHex)
+                combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom, gameLevel.areaGame.selectedHex)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
@@ -231,7 +228,7 @@ def combatGame(gameScreen, pLevel):
                     gameLevel.areaGame.selectHex(gameLevel.areaOfEngagement.starHexes[hexIndex])
                 print(hexIndex)
 
-        combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, gameLevel.areaGame.selectedHex)   
+        combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom, gameLevel.areaGame.selectedHex)   
         pygame.display.update()
 
 

@@ -1,3 +1,3 @@
 from gameField.gameBoard import *
-from gameField.gameClass import *
+from gameField.gameSpace import *
 from gameField.gameFont import Font

@@ -1,5 +1,5 @@
 #class for board display
-import pygame
+#import pygame
 from gameField.gameAssets import *
 
 #----------------------------------------------------------------------
@@ -24,21 +24,22 @@ class spaceWindow:
         self.ROT_XNFF_SHIP_HEX_IMG = XNFF_SHIP_HEX_IMG
 
         #animations
-        self.baseHex = GRID_HEX_BASE_0
+        self.baseHex = GRID_HEX_ANI_BASE
         self.baseHex.convert()
-        self.templateHexes = {'aniHexB': GRID_HEX_ANI_B0, 'aniHexEnemy': GRID_HEX_ANI_ENEMY, 'aniHexClick': GRID_HEX_ANI_CLICK, 'aniHexMove': GRID_HEX_ANI_MOVE, 'aniHexTarget': GRID_HEX_ANI_TARGET}
+        self.templateHexes = {'aniHexB': GRID_HEX_ANI_EMPTY, 'aniHexEnemy': GRID_HEX_ANI_ENEMY, 'aniHexClick': GRID_HEX_ANI_CLICK, 
+                            'aniHexMove': GRID_HEX_ANI_MOVE, 'aniHexTarget': GRID_HEX_ANI_TARGET, 'aniHexAlly': GRID_HEX_ANI_ALLY}
         for val in self.templateHexes.values():
             val.convert()
         self.animatedHexes = {'gridHex': self.templateHexes['aniHexB'], 'enemyHex': self.templateHexes['aniHexEnemy'], 
                             'clickHex': self.templateHexes['aniHexClick'], 'moveHex': self.templateHexes['aniHexMove'], 
-                            'targetHex': self.templateHexes['aniHexTarget']}
+                            'targetHex': self.templateHexes['aniHexTarget'], 'allyHex': self.templateHexes['aniHexAlly']}
         self.counterA = 0
         self.counterC = 0
         #scale
         self.scaleHexes(self.hexSize)
 
     #draw hexes on board
-    def drawHexes(self, gameWindow, operationSpace, shipHex=[]):
+    def drawHexes(self, gameWindow, operationSpace, currentFleet, shipHex=[]):
         gameWindow.blit(FIT_SPACE, (0, 0))
 
         #check of shipClicked
@@ -79,9 +80,15 @@ class spaceWindow:
                             gameWindow.blit(self.animatedHexes['moveHex'], (x, y))
 
             elif hex.entity.spaceEntity == 'shipObject':
-                if shipClicked:
-                    if hex.entity.command != aShip.command:
-                        gameWindow.blit(self.animatedHexes['enemyHex'], (x, y))
+                if currentFleet[0:3] != hex.entity.command[0:3]:
+                    gameWindow.blit(self.animatedHexes['enemyHex'], (x, y))
+                elif currentFleet[0:3] == hex.entity.command[0:3]:
+                    gameWindow.blit(self.animatedHexes['allyHex'], (x, y))
+
+
+                #if shipClicked:
+                #    if hex.entity.command != aShip.command:
+                #        gameWindow.blit(self.animatedHexes['enemyHex'], (x, y))
 
                 if hex.entity.command == 'ASCS':
                     self.orientationRotation(hex.entity)
@@ -163,14 +170,12 @@ class spaceWindow:
         x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11, 10, 9 ,8, 7, 6, 5, 4, 3, 2, 1, 0]
         w = self.counterA 
         
-
-        for t, a in zip(self.templateHexes.values(), self.animatedHexes.keys()):
-        #print(w)
+        for temps, ani in zip(self.templateHexes.values(), self.animatedHexes.keys()):
             baseImg = self.baseHex.copy()
-            newAniImg = t.copy()
+            newAniImg = temps.copy()
             baseImg.blit(newAniImg, (0, x[w]))
             aniImg = pygame.transform.scale(baseImg, (self.hexSize, self.hexSize))
-            self.animatedHexes[a] = aniImg
+            self.animatedHexes[ani] = aniImg
         
         if self.counterA == 23:
             self.counterA = 0

@@ -7,10 +7,10 @@ class Font():
     def __init__(self, fontPath, scale=1):
         self.spacing = 1
         self.characterOrder = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', ' Z', ',', '.', '!', '?', '@', '#', '&', '%']
+        self.fontCharacters = {}
         fontImg = fontPath
         fontImg.convert()
         h = fontImg.get_height()
-        self.fontCharacters = {}
         characterCount = 0
         currentCharacterWidth = 0 
 
@@ -35,6 +35,7 @@ class Font():
         newImage.set_clip(rectClip)
         clipImage = image.subsurface(newImage.get_clip())
         return clipImage.copy()
+
 
     #draw font
     def renderFont(self, surf, text, location):
