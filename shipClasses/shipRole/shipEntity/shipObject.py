@@ -7,7 +7,7 @@ class Ship:
     shiptype = 'CIV'
     shipStats = {
         "FP": 10, "ACC": 10, "EVA": 50, "SPD": 5,
-        "RDR": 3, "LCK": 10
+        "RDR": 3, "LCK": 10, "STH": 1
     }
 
     def __init__(self, hullnumber, name):
@@ -23,9 +23,12 @@ class Ship:
         self.radar = []  #radar object
         self.armaments = {'primaryBattery': [], 'secondaryBattery': [], 'broadsideBattery': []}
         self.defenses = {'shieldType': [], 'armorType': []}
+        self.detected = True 
+        self.revealed = False
 
         print("New Ship Launched", end=': ')
         print(self.command, '-', name, sep='', end=', ') 
+
 
     #damage function that takes in a value 
     def takeDamage(self, damageNum):
@@ -56,38 +59,37 @@ class Ship:
         print(self.name, "Reset!")
 
 
-    #find targets in minimum range 
-    def findTargets(self, n=0):
-        targetRanges, targets = [], []
+    #ping nearby hex to see if controlled
+    def pingNearby(self, aHex):
+        p = self.radar.radarPing(self.placeHex, aHex)
+        return p
 
-        #find the max range of all guns loaded
-        if not n:
-            gunsReadyInRange = self.gunsReady()
-            for w in gunsReadyInRange:
-                targetRanges.append(w.gunStats['RNG'])
-        elif n:
-            targetRanges = [n]
 
-        if targetRanges:
-            targets = self.radar.findRadarTargets(max(targetRanges), self.placeHex)
-        return targets
+    #find targets with radar
+    def detectTargets(self):
+        targetsHexes = self.radar.radarDetection(self.shipStats['RDR'], self.placeHex)
+        return targetsHexes
+
+
+    #find tracked targets within ready gun range 
+    def trackTargets(self):
+        targetRanges = [0]
+        gunsReadyInRange = self.gunsReady()
+        for w in gunsReadyInRange:
+            targetRanges.append(w.gunStats['RNG'])
+
+        if not gunsReadyInRange:
+            targetsHexes = []
+        else:
+            targetsHexes = self.radar.radarTracking(max(targetRanges), self.placeHex)
+        return targetsHexes
 
 
     #find ranges 
-    def rangeFinder(self, targetShip):
-        for x in range(1, self.shipStats['RDR'] + 1):
-            targets = self.radar.findRadarTargets(x, self.placeHex)
-            if targetShip.placeHex in targets:
-                return x
+    def findRange(self, targetShip):
+        r = self.radar.radarAcquisition(self.shipStats['RDR'], self.placeHex, targetShip.placeHex)
+        return r
 
-
-    #check if gun in range of a target ship
-    def gunInRange(self, gunBattery, targetShip):
-        if not self.radar.findGunTargets(gunBattery.gunStats['RNG'], self.placeHex, targetShip):
-            return False 
-        else:
-            return True
-    
 
     #chech all guns ready to fire
     def gunsReady(self):
@@ -96,7 +98,6 @@ class Ship:
             for g in b:
                 if g.gunLoadTime == g.gunStats['RLD']:
                     gunsPrimed.append(g)
-
         return gunsPrimed
 
 

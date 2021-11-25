@@ -8,7 +8,7 @@ class Battleship(Ship):
     shiptype = 'BB'
     shipStats = {
         "FP": 650, "ACC": 35, "EVA": 30, "SPD": 4,
-        "RDR": 7, "LCK": 10
+        "RDR": 7, "LCK": 10, "STH": 0
     }
 
     shields = 45000 
@@ -26,7 +26,7 @@ class Battlecruiser(Ship):
     shiptype = 'BC'
     shipStats = {       
         "FP": 500, "ACC": 45, "EVA": 35, "SPD": 5,
-        "RDR": 6, "LCK": 10
+        "RDR": 6, "LCK": 10, "STH": 0
     }
 
     shields = 27500
@@ -44,7 +44,7 @@ class Strikecruiser(Ship):
     shiptype = 'CS'
     shipStats = {
         "FP": 280, "ACC": 38, "EVA": 40, "SPD": 6,
-        "RDR": 5, "LCK": 10
+        "RDR": 5, "LCK": 10, "STH": 1
     }
     
     shields = 12500
@@ -62,7 +62,7 @@ class Heavycruiser(Ship):
     shiptype = 'CA'
     shipStats = {
         "FP": 350, "ACC": 33, "EVA": 30, "SPD": 5,
-        "RDR": 5, "LCK": 10
+        "RDR": 5, "LCK": 10, "STH": 0
     }
     
     shields = 10000
@@ -80,7 +80,7 @@ class Lightcruiser(Ship):
     shiptype = 'CL'
     shipStats = {
         "FP": 200, "ACC": 35, "EVA": 45, "SPD": 7,
-        "RDR": 5, "LCK": 10
+        "RDR": 5, "LCK": 10, "STH": 2
     }
     
     shields = 7500
@@ -98,7 +98,7 @@ class Destroyer(Ship):
     shiptype = 'DD'
     shipStats = {
         "FP": 100, "ACC": 45, "EVA": 65, "SPD": 8,
-        "RDR": 5, "LCK": 10
+        "RDR": 5, "LCK": 10, "STH": 2
     }
     
     shields = 3300

@@ -9,7 +9,7 @@ class ZenithClass(Battlecruiser):
     ammount = 0
     shipStats = {       
         "FP": 493, "ACC": 47, "EVA": 37, "SPD": 5,
-        "RDR": 5, "LCK": 10
+        "RDR": 5, "LCK": 10, "STH": 0
     }
 
     shields = 27500
@@ -41,7 +41,7 @@ class EclipseClass(Battlecruiser):
     ammount = 0
     shipStats = {       
         "FP": 517, "ACC": 45, "EVA": 35, "SPD": 5,
-        "RDR": 5, "LCK": 10
+        "RDR": 5, "LCK": 10, "STH": 0
     }
 
     shields = 25600
@@ -74,7 +74,7 @@ class PenumbraClass(Battlecruiser):
     ammount = 0
     shipStats = {       
         "FP": 535, "ACC": 48, "EVA": 35, "SPD": 5,
-        "RDR": 5, "LCK": 10
+        "RDR": 5, "LCK": 10, "STH": 0
     }
 
     shields = 23500
@@ -106,7 +106,7 @@ class IllustriousClass(Battlecruiser):
     ammount = 0
     shipStats = {       
         "FP": 513, "ACC": 46, "EVA": 32, "SPD": 5,
-        "RDR": 5, "LCK": 10
+        "RDR": 5, "LCK": 10, "STH": 0
     }
 
     shields = 26600

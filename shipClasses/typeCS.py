@@ -9,7 +9,7 @@ class VoltageClass(Strikecruiser):
     ammount = 0
     shipStats = {
         "FP": 287, "ACC": 39, "EVA": 41, "SPD": 6,
-        "RDR": 5, "LCK": 10
+        "RDR": 5, "LCK": 10, "STH": 1
     }
     
     shields = 12000
@@ -42,7 +42,7 @@ class DynamoClass(Strikecruiser):
     ammount = 0
     shipStats = {
         "FP": 298, "ACC": 40, "EVA": 38, "SPD": 6,
-        "RDR": 5, "LCK": 10
+        "RDR": 5, "LCK": 10, "STH": 1
     }
     
     shields = 13000

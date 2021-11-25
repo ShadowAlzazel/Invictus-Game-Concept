@@ -9,7 +9,7 @@ class EssexClass(Battleship):
     ammount = 0
     shipStats = {
         "FP": 666, "ACC": 38, "EVA": 30, "SPD": 4,
-        "RDR": 7, "LCK": 10
+        "RDR": 7, "LCK": 10, "STH": 0
     }
 
     shields = 46600 
@@ -37,7 +37,7 @@ class AmagiClass(Battleship):
     ammount = 0
     shipStats = {
         "FP": 682, "ACC": 37, "EVA": 31, "SPD": 4,
-        "RDR": 6, "LCK": 10
+        "RDR": 6, "LCK": 10, "STH": 0
     }
 
     shields = 43200 
@@ -65,7 +65,7 @@ class VittorioVenetoClass(Battleship):
     ammount = 0
     shipStats = {
         "FP": 660, "ACC": 35, "EVA": 30, "SPD": 4,
-        "RDR": 6, "LCK": 10
+        "RDR": 6, "LCK": 10, "STH": 0
     }
 
     shields = 42100 
@@ -93,7 +93,7 @@ class HoodClass(Battleship):
     ammount = 0
     shipStats = {
         "FP": 685, "ACC": 37, "EVA": 30, "SPD": 4,
-        "RDR": 6, "LCK": 10
+        "RDR": 6, "LCK": 10, "STH": 0
     }
 
     shields = 45300 
@@ -121,7 +121,7 @@ class PrinceOfWalesClass(Battleship):
     ammount = 0
     shipStats = {
         "FP": 704, "ACC": 35, "EVA": 29, "SPD": 4,
-        "RDR": 6, "LCK": 10
+        "RDR": 6, "LCK": 10, "STH": 0
     }
 
     shields = 42800 
@@ -153,7 +153,7 @@ class NewJerseyClass(Battleship):
     ammount = 0 
     shipStats = {
         "FP": 888, "ACC": 38, "EVA": 28, "SPD": 4,
-        "RDR": 8, "LCK": 10
+        "RDR": 8, "LCK": 10, "STH": 0
     }
 
     shields = 66200
@@ -189,7 +189,7 @@ class DevestatorClass(Battleship):
     ammount = 0 
     shipStats = {
         "FP": 1013, "ACC": 38, "EVA": 30, "SPD": 4,
-        "RDR": 8, "LCK": 10
+        "RDR": 8, "LCK": 10, "STH": 0
     }
 
     shields = 89400

@@ -9,7 +9,7 @@ class ApocalypseClass(Heavycruiser):
     ammount = 0
     shipStats = {
         "FP": 350, "ACC": 33, "EVA": 30, "SPD": 5,
-        "RDR": 5, "LCK": 10
+        "RDR": 5, "LCK": 10, "STH": 0
     }
     
     shields = 10000
