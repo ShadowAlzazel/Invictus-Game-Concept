@@ -39,7 +39,7 @@ def createCombatSpace(length, width, density):
             neighbors.append(j)
         
         #check for up-left hex borders
-        if not (hexCoord) >= length * (width - 1) and not((hexCoord // length) % 2 == 0 and hexCoord % length == 0):
+        if not (hexCoord) >= length * (width - 1) and not ((hexCoord // length) % 2 == 0 and hexCoord % length == 0):
             j = newZone.starHexes[hexCoord + hexMoves['UpLeft']]
             starSpaceHex.directions['UL'] = j.hexCoord
             neighbors.append(j)

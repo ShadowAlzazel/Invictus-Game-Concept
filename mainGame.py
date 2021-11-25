@@ -121,7 +121,7 @@ def combatGame(gameScreen, pLevel):
     elif pLevel == 64:
         fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
         fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
-        gameLevel = level(14, 10, 0 ,(fleet1, fleet2), [40, 104])
+        gameLevel = level(13, 8, 0 ,(fleet1, fleet2), [35, 76])
     elif pLevel == 77:
         fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][2], 'ASC')
         fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')

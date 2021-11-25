@@ -60,7 +60,7 @@ class spaceWindow:
             self.centerHex = -1
 
         #e is for flipping the y coordinate
-        e = self.hexesWidth
+        e = self.hexesWidth + (self.hexesWidth % 2)
         n = 0
         for hex in operationSpace.starHexes: 
             #indent every second row
