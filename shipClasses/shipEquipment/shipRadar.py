@@ -23,13 +23,14 @@ class shipHexRadar:
     #acquires a target and returns a range
     def radarAcquisition(self, radarRange, shipPlaceHex, targetHex):
         nearby, ring = self._findHexes(radarRange, shipPlaceHex) 
-        q = []
-        for j in ring:
-            u = []
-            for l in j:
-                u.append(l.hexCoord)
-            q.append(u)
-        print(q)
+
+        #q = []
+        #for j in ring:
+        #    u = []
+        #    for l in j:
+        #        u.append(l.hexCoord)
+        #    q.append(u)
+        #print(q)
 
         if targetHex.entity.command[0:3] != shipPlaceHex.entity.command[0:3]:
             for z in range(1, radarRange + 1):
@@ -98,10 +99,5 @@ class shipHexRadar:
             if n != effRange:
                 hexesInRange(effRange, newHexRing, n + 1)
 
-            #s = []
-            #for k in newHexRing:
-            #    if k not in hexesNearby:
-            #        hexesNearby.append(k)
-            #nearbyRing.append(newHexRing)
             return hexesNearby, nearbyRing
         return hexesInRange(effRange, [originHex])

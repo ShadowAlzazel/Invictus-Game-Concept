@@ -133,6 +133,7 @@ def combatGame(gameScreen, pLevel):
     #create new window
     currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
     combatWindow = spaceWindow(gameLevel.areaOfEngagement.l, gameLevel.areaOfEngagement.w, HEX_SIZE)
+    gameLevel.areaGame.fleetTurn()
     combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom)
     pygame.display.update()
 

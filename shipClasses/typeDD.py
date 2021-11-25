@@ -9,7 +9,7 @@ class JohnstonClass(Destroyer):
     ammount = 0
     shipStats = {
         "FP": 67, "ACC": 35, "EVA": 66, "SPD": 8,
-        "RDR": 5, "LCK": 10, "STH": 2
+        "RDR": 5, "LCK": 10, "STH": 3
     }
     
     shields = 3350
@@ -36,7 +36,7 @@ class ShimakazeClass(Destroyer):
     ammount = 0
     shipStats = {
         "FP": 47, "ACC": 35, "EVA": 68, "SPD": 8,
-        "RDR": 5, "LCK": 10, "STH": 2
+        "RDR": 5, "LCK": 10, "STH": 3
     }
 
     shields = 3600

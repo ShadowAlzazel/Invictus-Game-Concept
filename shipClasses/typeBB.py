@@ -153,7 +153,7 @@ class NewJerseyClass(Battleship):
     ammount = 0 
     shipStats = {
         "FP": 888, "ACC": 38, "EVA": 28, "SPD": 4,
-        "RDR": 8, "LCK": 10, "STH": 0
+        "RDR": 7, "LCK": 10, "STH": 0
     }
 
     shields = 66200
@@ -189,7 +189,7 @@ class DevestatorClass(Battleship):
     ammount = 0 
     shipStats = {
         "FP": 1013, "ACC": 38, "EVA": 30, "SPD": 4,
-        "RDR": 8, "LCK": 10, "STH": 0
+        "RDR": 7, "LCK": 10, "STH": 0
     }
 
     shields = 89400

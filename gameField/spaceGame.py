@@ -14,8 +14,8 @@ class turnGame:
         self.gameFleets = operationSpace.fleetEntities
         self.gameTurn = 0
         self.selectedHex = None #usually a hex
-        self.activeFleet = self.gameFleets[0]
-        self.activeFleetIndex = 0
+        self.activeFleet = self.gameFleets[-1]
+        self.activeFleetIndex = len(self.gameFleets) - 1
         for f in self.gameFleets:
             self._updateShips(f)
             self._detectingEnemies(f)     
