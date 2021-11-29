@@ -7,3 +7,7 @@ from shipClasses.shipEquipment.shipWeapons.shipPlasmaPhasers import *
 from shipClasses.shipEquipment.shipWeapons.shipTorpedoSystems import *
 from shipClasses.shipEquipment.shipWeapons.shipEnergyLasers import *
 from shipClasses.shipEquipment.shipWeapons.shipMatterFluxers import *
+from shipClasses.shipEquipment.shipWeapons.shipWaveGuns import *
+from shipClasses.shipEquipment.shipWeapons.shipProtonColiders import *
+from shipClasses.shipEquipment.shipWeapons.shipFluidDispeners import *
+from shipClasses.shipEquipment.shipWeapons.shipChakramLaunchers import *
