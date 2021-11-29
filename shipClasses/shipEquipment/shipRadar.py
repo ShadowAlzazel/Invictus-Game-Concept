@@ -1,5 +1,4 @@
-#finds the hexes in range
-
+#ship radar object for hexes
 class shipHexRadar:
 
     def __init__(self, vesselID, radarClass):
