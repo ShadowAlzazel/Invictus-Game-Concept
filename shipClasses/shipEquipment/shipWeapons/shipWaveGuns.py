@@ -1,4 +1,1 @@
-
-
-
-#distorts space using warp technology to launch gravity waves
+#uses warp technology to create sinusodial space-time waves that distort matter
