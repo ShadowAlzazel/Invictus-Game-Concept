@@ -10,13 +10,16 @@ class armor:
         self.armorIntegrity = 100 #%
         self.equipID = '-'.join([vesselID, 'ARMR'])
 
-    def armorDamage(self, damageNum):
-        trueDamage = damageNum / ((1 - (self.armorIntegrity / 100)) + (self.armorValue * (self.armorIntegrity / 100)))
+    def armorDamage(self, damageNum, wPEN=0):
+        p = wPEN
+        if wPEN > self.armorValue:
+            p = self.armorValue 
+
+        trueDamage = damageNum / (1 + ((self.armorValue - p) * (self.armorIntegrity / 100)))
         if damageNum / (self.armorIntegrity + 1) > self.armorIntegrity + 1:
             self.armorIntegrity = 0
         elif self.armorIntegrity != 0:
             self.armorIntegrity -= trueDamage / (self.armorIntegrity * self.armorValue) #decrerase armor integrity over exposure and hits
-        self.armorIntegrity
         return trueDamage
 
 #"""-------------------------------------SHIP-ARMORS------------------------------------"""

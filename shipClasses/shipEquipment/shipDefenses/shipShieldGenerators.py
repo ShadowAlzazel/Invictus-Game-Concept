@@ -10,11 +10,11 @@ class shieldGen:
         self.damageAbsorbed = 0
         self.equipID = '-'.join([vesselID, 'SGEN'])
 
-    def shieldDamage(self, damageNum):
+    def shieldDamage(self, damageNum, wDIS):
         if damageNum < self.energyField or self.damageAbsorbed < self.ringField:
             trueDamage = 0  
         else:
-            trueDamage = damageNum
+            trueDamage = damageNum * wDIS
         self.damageAbsorbed += damageNum
         return trueDamage
 

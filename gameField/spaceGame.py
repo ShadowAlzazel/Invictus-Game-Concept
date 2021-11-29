@@ -189,7 +189,7 @@ class turnGame:
                     if self.gunHitCalc(g.gunStats['HIT'], aShip.shipStats['ACC'], bShip.shipStats['EVA']) is True:
                         salvoDamage += self.gunDamageCalc(g.gunStats['ATK'], aShip.shipStats['FP'], aShip.shipStats['LCK'], bShip.shipStats['LCK'], batPow)
 
-                trueDamage = bShip.takeDamage(salvoDamage)
+                trueDamage = bShip.takeDamage(salvoDamage, g.gunStats['PEN'], g.gunStats['DIS'])
                 if not bShip.operational:
                     m = bShip.placeHex.hexCoord
                     self.gameShips.remove(bShip) 
