@@ -84,7 +84,7 @@ def combatGameMenu(gameScreen):
             if mouseClick:
                 #WIP currently testing presets
                 #have different buttons change level number and create levels
-                level = 77 
+                level = 64 
                 combatGame(gameScreen, level)
 
         pygame.draw.rect(gameScreen, (2, 2, 2), button2)
@@ -121,7 +121,7 @@ def combatGame(gameScreen, pLevel):
     elif pLevel == 64:
         fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
         fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
-        gameLevel = level(14, 10, 0 ,(fleet1, fleet2), [40, 104])
+        gameLevel = level(12, 11, 0 ,(fleet1, fleet2), [35, 76])
     elif pLevel == 77:
         fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][2], 'ASC')
         fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
@@ -133,6 +133,7 @@ def combatGame(gameScreen, pLevel):
     #create new window
     currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
     combatWindow = spaceWindow(gameLevel.areaOfEngagement.l, gameLevel.areaOfEngagement.w, HEX_SIZE)
+    gameLevel.areaGame.fleetTurn()
     combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom)
     pygame.display.update()
 

@@ -14,6 +14,7 @@ class spaceFleet:
         self.fleetLogs = []
         self.fleetShips = []
         self.flagShip = 0
+        self.trackedShipsHexes = []
         if fleetCommand in astraFleets[0]:
             if name in astraFleets[0][fleetCommand]['fleetNames']:
                 self.presetFleet = True

@@ -39,3 +39,5 @@ fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
 level1 = level(14, 10, 0 ,(fleet1, fleet2), [40, 104])
 
 print('Size of Level:', getSize(level1))
+#x = [1, 2]
+#print(x[3])

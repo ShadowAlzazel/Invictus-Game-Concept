@@ -48,7 +48,7 @@ class spaceWindow:
             targets = []
             aShip = shipHex.entity
             if aShip.gunsReady():
-                targets = aShip.findTargets()
+                targets = aShip.trackTargets()
             shipClicked = True
 
         if self.centerHex > -1:
@@ -65,7 +65,7 @@ class spaceWindow:
         for hex in operationSpace.starHexes: 
             #indent every second row
             i = 0 
-            if not e % 2 == 0:
+            if not e % 2 == self.hexesWidth % 2:
                 i = self.hexSize // 2
             #y coordinate, #x coordinate is a proportion of the screen
             y = (self.bordersColumnsY) + ((e - 1) * self.hexSize) + self.windowMoveY
@@ -80,20 +80,15 @@ class spaceWindow:
                             gameWindow.blit(self.animatedHexes['moveHex'], (x, y))
 
             elif hex.entity.spaceEntity == 'shipObject':
-                if currentFleet[0:3] != hex.entity.command[0:3]:
+                if currentFleet[0:3] != hex.entity.command[0:3] and hex.entity.detected:
                     gameWindow.blit(self.animatedHexes['enemyHex'], (x, y))
                 elif currentFleet[0:3] == hex.entity.command[0:3]:
                     gameWindow.blit(self.animatedHexes['allyHex'], (x, y))
 
-
-                #if shipClicked:
-                #    if hex.entity.command != aShip.command:
-                #        gameWindow.blit(self.animatedHexes['enemyHex'], (x, y))
-
-                if hex.entity.command == 'ASCS':
+                if hex.entity.command == 'ASCS' and hex.entity.detected:
                     self.orientationRotation(hex.entity)
                     gameWindow.blit(self.ROT_ASCS_SHIP_HEX_IMG, (x, y))
-                elif hex.entity.command == 'XNFFS':
+                elif hex.entity.command == 'XNFFS' and hex.entity.detected:
                     self.orientationRotation(hex.entity)
                     gameWindow.blit(self.ROT_XNFF_SHIP_HEX_IMG, (x, y))
 
@@ -124,7 +119,7 @@ class spaceWindow:
             #reverse y coords
             row = abs(((b - (self.bordersColumnsY + self.windowMoveY)) // self.hexSize) - self.hexesWidth) - 1
             #check even/odd rows
-            if ((b - (self.bordersColumnsY + self.windowMoveY)) // self.hexSize) % 2 == 1:
+            if ((b - (self.bordersColumnsY + self.windowMoveY)) // self.hexSize) % 2 == (self.hexesWidth + 1) % 2:
                 i = self.hexSize // 2  
 
         if a in range((self.bordersRowsX) - i + self.windowMoveX, ((self.hexSize * self.hexesLength) + (self.bordersRowsX) - i) + self.windowMoveX):

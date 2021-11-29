@@ -10,7 +10,7 @@ class MidnightClass(Lightcruiser):
     shiptype = 'CL'
     shipStats = {
         "FP": 200, "ACC": 35, "EVA": 49, "SPD": 7,
-        "RDR": 5, "LCK": 10
+        "RDR": 5, "LCK": 10, "STH": 2
     }
     
     shields = 7500

@@ -14,10 +14,11 @@ class turnGame:
         self.gameFleets = operationSpace.fleetEntities
         self.gameTurn = 0
         self.selectedHex = None #usually a hex
-        self.activeFleet = self.gameFleets[0]
-        self.activeFleetIndex = 0
+        self.activeFleet = self.gameFleets[-1]
+        self.activeFleetIndex = len(self.gameFleets) - 1
         for f in self.gameFleets:
-            self._updateShips(f)     
+            self._updateShips(f)
+            self._detectingEnemies(f)     
 
 
     #fleet Actions
@@ -32,16 +33,17 @@ class turnGame:
             self.activeFleetIndex += 1
             self.activeFleet = self.gameFleets[q + 1]
         self._updateShips(self.activeFleet)
+        self._detectingEnemies(self.activeFleet)
 
 
     #update ships in fleet turn
     def _updateShips(self, aFleet):
-        for s in aFleet.fleetShips:
-            s.shipMovement = s.shipStats['SPD']
-            s.shipAttacks = 1
-            s.shipActive = True
-            s.reloadGuns()
-            s.rechargeDef()
+        for ships in aFleet.fleetShips:
+            ships.shipMovement = ships.shipStats['SPD']
+            ships.shipAttacks = 1
+            ships.shipActive = True
+            ships.reloadGuns()
+            ships.rechargeDef()
 
 
     #select shiphex
@@ -50,18 +52,20 @@ class turnGame:
         if self.selectedHex:
             #check if hexShip has any actions
             if self.selectedHex.entity.shipMovement == 0:
-                nearbyShipHexes = self.selectedHex.entity.findTargets()
+                #check if any targets available
+                nearbyShipHexes = self.selectedHex.entity.trackTargets()
                 if not nearbyShipHexes:
                     self.selectedHex.entity.shipActive = False
 
             result = self._shipActions(aHex)
+            self._detectingEnemies(self.activeFleet)
             if not result:
                 self.selectedHex = None 
                 self.selectHex(aHex)
 
         aShip = aHex.entity
         #can only select a ship
-        if not aHex.empty and self.activeFleet.fleetCommand[0:3] == aShip.command[0:3]:
+        if not aHex.empty and self.activeFleet.fleetCommand[0:3] == aShip.command[0:3] and aShip.operational:
             self.selectedHex = aHex
             return True
         return False 
@@ -87,6 +91,27 @@ class turnGame:
         return result
 
 
+    #detect ships for fleet
+    def _detectingEnemies(self, aFleet):
+        for s in self.gameShips:
+            if s.command[0:3] != aFleet.fleetCommand[0:3]:
+                s.detected = False
+
+        for u in aFleet.fleetShips:
+            u.detected = True
+
+        u = []
+        for g in aFleet.fleetShips:
+            if g.operational:
+                h = g.detectTargets()
+                for t in h:
+                    if not (t in u):
+                        u.append(t)
+
+        for e in u:
+            e.entity.detected = True
+
+
     #attack action; check for minimum  range, and guns in ranges
     def _attackShipAction(self, aHex):
         aShip = self.selectedHex.entity
@@ -96,7 +121,7 @@ class turnGame:
             return False
 
         #selected hex must be a target
-        nearbyShipHexes = aShip.findTargets()
+        nearbyShipHexes = aShip.trackTargets()
         if not aHex in nearbyShipHexes:
             return False
 
@@ -119,9 +144,8 @@ class turnGame:
                     selectedShip.shipMovement -= 1
                     #check if hex controlled
                     if selectedShip.shipMovement != 0:
-                        enemyControlled = selectedShip.radar.findRadarTargets(1, aHex)
-                        enemyNearby = selectedShip.findTargets(1)
-                        if enemyControlled or enemyNearby:
+                        enemyControlled = selectedShip.pingNearby(aHex)
+                        if enemyControlled:
                             selectedShip.shipMovement -= 1
 
             else:
@@ -142,7 +166,7 @@ class turnGame:
                 broadSideE += 1
 
         #get the distance
-        bDistance = aShip.rangeFinder(bShip)
+        bDistance = aShip.findRange(bShip)
 
         totalDamage = 0
         for g in gunToFire:

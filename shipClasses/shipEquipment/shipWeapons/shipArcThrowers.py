@@ -1,5 +1,6 @@
 #Arc Throwers
 from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
+#import shipClasses.shipEquipment.shipWeapons.weaponEntity as sW 
 
 #"""--<->----------------------------ARC-THROWERS------------------------------<->--"""
 #elctromagnetically charged particles are discharged in massive ammounts

@@ -1,1 +1,1 @@
-from shipClasses.shipEquipment.shipWeapons.weaponEntity.shipWeaponObject import *
+from shipClasses.shipEquipment.shipWeapons.weaponEntity.shipWeaponObject import shipWeapon 
