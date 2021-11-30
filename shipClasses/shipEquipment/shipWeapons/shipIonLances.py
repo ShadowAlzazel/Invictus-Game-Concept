@@ -5,6 +5,14 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 #Chained-Ions Beams
 #chains energized ions and light particles in high energy states to weaponize it
 
+class double_L23_PositroniumLance(shipWeapon):
+    gunName = 'Double (L18) Positronium Lance'
+    gunStats = {
+        "ATK": 886, "RLD": 2, "HIT": 85, "RNG": 3, "QNT": 2, "PEN": 0, "DIS": 1
+    }
+    def __init__(self, vesselID, batteryNumber):
+        super().__init__(vesselID, batteryNumber)
+
 
 class double_L18_DeuteriumLance(shipWeapon):
     gunName = 'Double (L18) Deuterium Lance'

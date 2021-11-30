@@ -9,5 +9,5 @@ from shipClasses.shipEquipment.shipWeapons.shipMissileSystems import *
 from shipClasses.shipEquipment.shipWeapons.shipPlasmaPhasers import *
 from shipClasses.shipEquipment.shipWeapons.shipPointDefense import *
 from shipClasses.shipEquipment.shipWeapons.shipProtonColiders import *
+from shipClasses.shipEquipment.shipWeapons.shipRealmDistorters import *
 from shipClasses.shipEquipment.shipWeapons.shipTorpedoSystems import *
-from shipClasses.shipEquipment.shipWeapons.shipWaveGuns import *

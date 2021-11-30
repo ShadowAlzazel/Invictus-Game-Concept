@@ -12,3 +12,13 @@ class broadside_A6_ChakramLaunchers(shipWeapon):
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
+
+
+class quadruple_A6_ChakramLaunchers(shipWeapon):
+    gunName = 'Quadruple (A6) Chakram Launchers'
+    gunStats = {
+        "ATK": 99, "RLD": 2, "HIT": 79, "RNG": 2, "QNT": 4, "PEN": 2, "DIS": 0.75
+    }
+    def __init__(self, vesselID, batteryNumber):
+        super().__init__(vesselID, batteryNumber)
+
