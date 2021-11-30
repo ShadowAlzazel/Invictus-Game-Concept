@@ -8,6 +8,6 @@ from shipClasses.shipEquipment.shipWeapons.shipMatterFluxers import *
 from shipClasses.shipEquipment.shipWeapons.shipMissileSystems import * 
 from shipClasses.shipEquipment.shipWeapons.shipPlasmaPhasers import *
 from shipClasses.shipEquipment.shipWeapons.shipPointDefense import *
-from shipClasses.shipEquipment.shipWeapons.shipProtonColiders import *
+from shipClasses.shipEquipment.shipWeapons.shipProtonColliders import *
 from shipClasses.shipEquipment.shipWeapons.shipRealmDistorters import *
 from shipClasses.shipEquipment.shipWeapons.shipTorpedoSystems import *
