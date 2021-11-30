@@ -31,13 +31,13 @@ class Ship:
 
 
     #damage function that takes in a value 
-    def takeDamage(self, damageNum):
-        if self.shields > damageNum:
-            damageS = self.defenses['shieldType'][0].shieldDamage(damageNum)
+    def takeDamage(self, damageNum, wPEN=0, wDIS=1):
+        if self.shields > damageNum and wDIS > 0:
+            damageS = self.defenses['shieldType'][0].shieldDamage(damageNum, wDIS)
             self.shields -= damageS
             return damageS
         elif self.hull > damageNum:
-            damageH = self.defenses['armorType'][0].armorDamage(damageNum) - self.shields
+            damageH = self.defenses['armorType'][0].armorDamage(damageNum, wPEN) - self.shields
             self.shields = 0
             self.hull -= damageH
             return damageH

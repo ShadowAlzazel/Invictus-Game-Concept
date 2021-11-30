@@ -5,11 +5,15 @@
 
 class shipWeapon:
     gunName = 'shipWeapon'
+    #Attack, reload, hit, range, quantity, penetration, dissonannce
     gunStats = {
-        "ATK": 32, "RLD": 1, "HIT": 64, "RNG": 1, "QNT": 1
+        "ATK": 32, "RLD": 1, "HIT": 64, "RNG": 1, "QNT": 1, "PEN": 0, "DIS": 1
     }
 
     def __init__(self, vesselID, batteryNumber):
+        assert self.gunStats["DIS"] != 0
+        assert self.gunStats["PEN"] >= 0
+        assert self.gunStats["RLD"] >= 1
         self.batteryID = '-'.join([vesselID, batteryNumber])
         self.gunLoadTime = 100 #preloaded
 

@@ -10,7 +10,7 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 
 class FLP5_DevestationTorpedoes(shipWeapon):
     gunStats = {
-        "ATK": 472, "RLD": 7, "HIT": 55, "RNG": 5, "QNT": 5
+        "ATK": 472, "RLD": 7, "HIT": 55, "RNG": 5, "QNT": 5, "PEN": 0, "DIS": 1
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)
