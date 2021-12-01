@@ -36,7 +36,7 @@ class HarbingerClass(Heavycruiser):
     shipClass = 'HarbingerClass'
     ammount = 0
     shipStats = {
-        "FP": 375, "ACC": 34, "EVA": 30, "SPD": 5,
+        "FP": 377, "ACC": 34, "EVA": 30, "SPD": 5,
         "RDR": 5, "LCK": 10, "STH": 0
     }
     
