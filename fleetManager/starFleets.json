@@ -56,7 +56,7 @@
                 ],
                 "shipClasses":
                 [
-                    "EssexClass", "PenumbraClass", "VoltageClass", "VoltageClass", "ApocalypseClass", "ApocalypseClass",
+                    "EssexClass", "PenumbraClass", "VoltageClass", "VoltageClass", "HarbingerClass", "HarbingerClass",
                     "MidnightClass", "MidnightClass", "MidnightClass", "MidnightClass", "JohnstonClass", "JohnstonClass", "JohnstonClass", "JohnstonClass", "JohnstonClass"
                 ],
                 "shipHullnumber":
