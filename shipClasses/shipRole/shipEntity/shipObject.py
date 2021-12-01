@@ -75,13 +75,12 @@ class Ship:
     def trackTargets(self):
         targetRanges = [0]
         gunsReadyInRange = self.gunsReady()
-        for w in gunsReadyInRange:
-            targetRanges.append(w.gunStats['RNG'])
-
         if not gunsReadyInRange:
-            targetsHexes = []
-        else:
-            targetsHexes = self.radar.radarTracking(max(targetRanges), self.placeHex)
+            return False
+
+        for w in gunsReadyInRange:
+            targetRanges.append(w.gunStats['RNG'])    
+        targetsHexes = self.radar.radarTracking(max(targetRanges), self.placeHex)
         return targetsHexes
 
 

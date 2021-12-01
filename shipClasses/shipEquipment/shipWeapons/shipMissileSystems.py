@@ -20,7 +20,7 @@ class VLS_21C_AnnihilationMissiles(shipWeapon):
 
 class VLS_35C_DevestationMissiles(shipWeapon):
     gunStats = {
-        "ATK": 122, "RLD": 6, "HIT": 40, "RNG": 3, "QNT": 35, "PEN": 0.5, "DIS": 1
+        "ATK": 122, "RLD": 6, "HIT": 40, "RNG": 4, "QNT": 35, "PEN": 0.5, "DIS": 1
     }
     def __init__(self, vesselID, batteryNumber):
         super().__init__(vesselID, batteryNumber)

@@ -31,7 +31,7 @@ class zoneSpace:
         self.hexesFull = []
         self.fleetEntities = []
         self.spaceEntities = {'spaceObject': [], 'shipObject': []}
-        for n in range(0, self.l * self.w):
+        for n in range(self.l * self.w):
             self.starHexes.append(starSpace(n))
 
 

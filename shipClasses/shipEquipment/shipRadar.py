@@ -64,11 +64,9 @@ class shipHexRadar:
 
     #check if the stealth of the ship is within detection range
     def _detectionRange(self, radarRing, eShipHex, detectionRange):
-        s = eShipHex.entity.shipStats['STH']
-        for z in range(1, (detectionRange - s) + 1):
-            if eShipHex in radarRing[z]:
-                return True         
-        return False
+        shipStealth = eShipHex.entity.shipStats['STH']
+        enemyDetected = any(eShipHex in radarRing[z] for z in range(1, (detectionRange - shipStealth) + 1))
+        return enemyDetected
 
 
     #find hexes in rings
@@ -91,7 +89,7 @@ class shipHexRadar:
 
             u = []
             for k in newHexRing:
-                if not (k in hexesNearby):
+                if k not in hexesNearby:
                     hexesNearby.append(k)
                     u.append(k)
             nearbyRing.append(u)

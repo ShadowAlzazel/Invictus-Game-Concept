@@ -35,27 +35,25 @@ def main():
 
         #menu buttons
         button1 = pygame.Rect(50, 100, 200, 50)
-        if button1.collidepoint((mx, my)):
-            if mouseClick: 
-                combatGameMenu(gameScreen)
+        if button1.collidepoint((mx, my)) and mouseClick: 
+            combatGameMenu(gameScreen)
 
         pygame.draw.rect(gameScreen, (2, 2, 2), button1)
         gameFont2A.renderFont(gameScreen, 'BUTTON', (50, 100))
 
         #event loop
-        mouseClick = False 
+        mouseClick = False
         for event in pygame.event.get():
             if event.type == QUIT:
                 print("Quitting...")
                 mainRunning = False 
 
-            if (event.type == KEYDOWN and event.key == K_ESCAPE) or ((event.type == KEYDOWN and event.key == K_LALT) and (event.type == KEYDOWN and event.key == K_F4)):
+            if ((event.type == KEYDOWN and event.key == K_ESCAPE) or (event.type == KEYDOWN and event.key == K_LALT and event.key == K_F4)):
                 print("Quitting...")
                 mainRunning = False
 
-            if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    mouseClick = True 
+            if event.type == MOUSEBUTTONDOWN and event.button == 1:
+                mouseClick = True 
 
         pygame.display.update()
     #end game
@@ -80,18 +78,17 @@ def combatGameMenu(gameScreen):
         mx, my = pygame.mouse.get_pos()
 
         button2 = pygame.Rect(50, 200, 200, 50)
-        if button2.collidepoint((mx, my)):
-            if mouseClick:
-                #WIP currently testing presets
-                #have different buttons change level number and create levels
-                level = 64 
-                combatGame(gameScreen, level)
+        if button2.collidepoint((mx, my)) and mouseClick:
+            #WIP currently testing presets
+            #have different buttons change level number and create levels
+            level = 64 
+            combatGame(gameScreen, level)
 
         pygame.draw.rect(gameScreen, (2, 2, 2), button2)
         gameFont2A.renderFont(gameScreen, 'COMBATGAME', (50, 200))
 
         #event loop
-        mouseClick = False 
+        mouseClick = False
         for event in pygame.event.get():
             if event.type == QUIT:
                 print("Quitting...")
@@ -101,9 +98,8 @@ def combatGameMenu(gameScreen):
                 print("Quitting...")
                 gameRunning = False 
 
-            if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    mouseClick = True 
+            if event.type == MOUSEBUTTONDOWN and event.button == 1:
+                mouseClick = True 
 
         pygame.display.update() 
 
