@@ -20,8 +20,8 @@ class EssexClass(Battleship):
         EssexClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['armorType'].append(DurasteelArmor(vID))
+        self.defenses['shieldType'].append(DarkMatterShieldGen(vID))
+        self.defenses['armorType'].append(AdamantiumAlloyArmor(vID))
         self.armaments['primaryBattery'] = [triple_M22_GigaRailCannons(vID, ''.join(['T', str(x)])) for x in range(1,5)]
         self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
@@ -48,8 +48,8 @@ class AmagiClass(Battleship):
         AmagiClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['armorType'].append(DurasteelArmor(vID))
+        self.defenses['shieldType'].append(DarkMatterShieldGen(vID))
+        self.defenses['armorType'].append(AdamantiumAlloyArmor(vID))
         self.armaments['primaryBattery'] = [double_M22_GigaRailCannons(vID, ''.join(['T', str(x)])) for x in range(1,7)]
         self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
@@ -76,8 +76,8 @@ class VittorioVenetoClass(Battleship):
         VittorioVenetoClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['armorType'].append(DurasteelArmor(vID))
+        self.defenses['shieldType'].append(DarkMatterShieldGen(vID))
+        self.defenses['armorType'].append(AdamantiumAlloyArmor(vID))
         self.armaments['primaryBattery'] = [triple_M22_GigaRailCannons(vID, ''.join(['T', str(x)])) for x in range(1,5)]
         self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
@@ -104,8 +104,8 @@ class HoodClass(Battleship):
         HoodClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['armorType'].append(DurasteelArmor(vID))
+        self.defenses['shieldType'].append(DarkMatterShieldGen(vID))
+        self.defenses['armorType'].append(AdamantiumAlloyArmor(vID))
         self.armaments['primaryBattery'] = [double_P22_PulsarPhasers(vID, ''.join(['T', str(x)])) for x in range(1,7)]
         self.armaments['secondaryBattery'] = [triple_L13_HadronLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
         for x in range(1, 25):
@@ -132,8 +132,8 @@ class PrinceOfWalesClass(Battleship):
         PrinceOfWalesClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['armorType'].append(DurasteelArmor(vID))
+        self.defenses['shieldType'].append(DarkMatterShieldGen(vID))
+        self.defenses['armorType'].append(AdamantiumAlloyArmor(vID))
         for x in range(1, 5):
             if x <= 2:
                 self.armaments['primaryBattery'].append(double_M22_GigaRailCannons(vID, ''.join(['T', str(x)])))
@@ -164,8 +164,8 @@ class NewJerseyClass(Battleship):
         NewJerseyClass.ammount += 1 
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['armorType'].append(AdamantiumAlloyArmor(vID))
+        self.defenses['shieldType'].append(DarkMatterShieldGen(vID))
+        self.defenses['armorType'].append(DarkNeutroniumArmor(vID))
         for x in range(1, 5):
             if x <= 2:
                 self.armaments['primaryBattery'].append(quadruple_M22_GigaRailCannons(vID, ''.join(['T', str(x)])))
@@ -200,7 +200,7 @@ class DevestatorClass(Battleship):
         DevestatorClass.ammount += 1 
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
+        self.defenses['shieldType'].append(DarkMatterShieldGen(vID))
         self.defenses['armorType'].append(DarkNeutroniumArmor(vID))
         for x in range(1, 7):
             if x <= 2:

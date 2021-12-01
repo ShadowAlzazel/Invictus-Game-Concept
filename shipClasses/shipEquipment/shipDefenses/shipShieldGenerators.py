@@ -4,7 +4,7 @@
 class shieldGen:
     energyField = 10
     ringField = 100 #initial shield
-    rechargeRate = 100
+    rechargeRate = 1 #percantage
 
     def __init__(self, vesselID): 
         self.damageAbsorbed = 0
@@ -20,32 +20,71 @@ class shieldGen:
 
 
 #"""-----------------------------------SHIP-SHIELDS-----------------------------------"""
+class AdvancedShieldGen(shieldGen):
+    shieldName = 'Hyper Shield-Generator'
+    energyField = 110
+    ringField = 1800
+    rechargeRate = 0.5
+
+    def __init__(self, vesselID):
+        super().__init__(vesselID)
+        
+
+class MegaShieldGen(shieldGen):
+    shieldName = 'Mega Shield-Generator'
+    energyField = 150
+    ringField = 2200
+    rechargeRate = 0.5
+
+    def __init__(self, vesselID):
+        super().__init__(vesselID)
+
+
+class GigaShieldGen(shieldGen):
+    shieldName = 'Giga Shield-Generator'
+    energyField = 200
+    ringField = 2600
+    rechargeRate = 0.5
+
+    def __init__(self, vesselID):
+        super().__init__(vesselID)
+
 
 class LumioneShieldGen(shieldGen):
     shieldName = 'Lumione Shield-Generator'
     energyField = 30
-    ringField = 250
-    rechargeRate = 100
+    ringField = 550
+    rechargeRate = 1.25
     
     def __init__(self, vesselID):
         super().__init__(vesselID)
 
 
-class HyperShieldGen(shieldGen):
+class HyperiumShieldGen(shieldGen):
     shieldName = 'Hyper Shield-Generator'
     energyField = 50
-    ringField = 1600
-    rechargeRate = 200
+    ringField = 1100
+    rechargeRate = 2
 
     def __init__(self, vesselID):
         super().__init__(vesselID)
 
 
-class DarkEnergyShieldGen(shieldGen):
-    shieldName = 'Dark Energy Shield-Generator'
+class HiggsShieldGen(shieldGen):
+    shieldName = 'Higgs Shield-Generator'
     energyField = 70
+    ringField = 1650
+    rechargeRate = 2.825
+
+    def __init__(self, vesselID):
+        super().__init__(vesselID)
+
+
+class DarkMatterShieldGen(shieldGen):
+    shieldName = 'Dark Energy Shield-Generator'
+    energyField = 120
     ringField = 3000
-    rechargeRate = 300
+    rechargeRate = 3.75
 
     def __init__(self, vesselID):
         super().__init__(vesselID)

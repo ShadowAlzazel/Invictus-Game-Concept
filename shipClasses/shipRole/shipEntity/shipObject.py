@@ -110,8 +110,9 @@ class Ship:
 
     #recharge shields and repair armor
     def rechargeDef(self):
-        if self.__class__.shields > self.shields + self.defenses['shieldType'][0].rechargeRate:
-            self.shields += self.defenses['shieldType'][0].rechargeRate
+        s = (self.__class__.shields * (self.defenses['shieldType'][0].rechargeRate / 100))
+        if self.__class__.shields > self.shields + s:
+            self.shields += s
 
         if self.defenses['armorType'][0].armorIntegrity < 100 - self.defenses['armorType'][0].armorRegen:
             self.defenses['armorType'][0].armorIntegrity += self.defenses['armorType'][0].armorRegen
