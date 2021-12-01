@@ -21,8 +21,8 @@ class MidnightClass(Lightcruiser):
         super().__init__(hullnumber, name)
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(HyperShieldGen(vID))
-        self.defenses['armorType'].append(TitaniumArmor(vID))
+        self.defenses['shieldType'].append(LumioneShieldGen(vID))
+        self.defenses['armorType'].append(CarbonNanoThreadsArmor(vID))
         self.armaments['primaryBattery'] = [triple_L6_ParticleLance(vID, ''.join(['T', str(x)])) for x in range(1, 7)]
         self.armaments['secondaryBattery'] = [triple_M5_WraithAutoGuns(vID, ''.join(['S', str(x)])) for x in range(1, 5)] 
         self.armaments['secondaryBattery'].append(VLS_35C_DevestationMissiles(vID, 'M1'))

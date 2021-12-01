@@ -20,7 +20,7 @@ class JohnstonClass(Destroyer):
         super().__init__(hullnumber, name)
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(LumioneShieldGen(vID))
+        self.defenses['shieldType'].append(AdvancedShieldGen(vID))
         self.defenses['armorType'].append(TitaniumArmor(vID))
         for x in range(1,7):
             if x <= 4:
@@ -47,7 +47,7 @@ class ShimakazeClass(Destroyer):
         super().__init__(hullnumber, name)
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(LumioneShieldGen(vID))
+        self.defenses['shieldType'].append(AdvancedShieldGen(vID))
         self.defenses['armorType'].append(TitaniumArmor(vID))
         for x in range(1,7):
             if x <= 2:

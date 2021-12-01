@@ -20,8 +20,8 @@ class ZenithClass(Battlecruiser):
         ZenithClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['armorType'].append(MythrilAlloyArmor(vID))
+        self.defenses['shieldType'].append(HiggsShieldGen(vID))
+        self.defenses['armorType'].append(NeutroniumArmor(vID))
         for x in range(1, 5):
             if x <= 2:
                 self.armaments['primaryBattery'].append(triple_P18_NovaPhasers(vID, ''.join(['T', str(x)])))
@@ -52,8 +52,8 @@ class EclipseClass(Battlecruiser):
         EclipseClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['armorType'].append(MythrilAlloyArmor(vID))
+        self.defenses['shieldType'].append(HiggsShieldGen(vID))
+        self.defenses['armorType'].append(NeutroniumArmor(vID))
         for x in range(1, 5):
             if x <= 2:
                 self.armaments['primaryBattery'].append(triple_L18_DeuteriumLance(vID, ''.join(['T', str(x)])))
@@ -84,8 +84,8 @@ class PenumbraClass(Battlecruiser):
         PenumbraClass.ammount += 1
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['armorType'].append(MythrilAlloyArmor(vID))
+        self.defenses['shieldType'].append(HiggsShieldGen(vID))
+        self.defenses['armorType'].append(NeutroniumArmor(vID))
         for x in range(1, 5):
             if x <= 4:
                 self.armaments['primaryBattery'].append(double_F20_MatterDisentegrators(vID, ''.join(['T', str(x)])))
@@ -116,8 +116,8 @@ class IllustriousClass(Battlecruiser):
         super().__init__(hullnumber, name)
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(DarkEnergyShieldGen(vID))
-        self.defenses['armorType'].append(MythrilAlloyArmor(vID))
+        self.defenses['shieldType'].append(HiggsShieldGen(vID))
+        self.defenses['armorType'].append(NeutroniumArmor(vID))
         self.armaments['primaryBattery'] = [triple_L18_DeuteriumLance(vID, ''.join(['T', str(x)])) for x in range(1,5)]
         self.armaments['secondaryBattery'] = [triple_A11_TeslaArcThrowers(vID, ''.join(['S', str(x)])) for x in range(1,3)]
         for x in range(1, 17):

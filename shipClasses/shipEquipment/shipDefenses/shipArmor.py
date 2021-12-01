@@ -79,7 +79,7 @@ class DurasteelArmor(armor):
 
 class NeutroniumArmor(armor):
     armorName = 'Neutronium Armor'
-    armorValue = 6.0
+    armorValue = 6.2
     
     def __init__(self, vesselID):
         super().__init__(vesselID)

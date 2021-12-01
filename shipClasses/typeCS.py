@@ -20,8 +20,8 @@ class VoltageClass(Strikecruiser):
         super().__init__(hullnumber, name)
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(HyperShieldGen(vID))
-        self.defenses['armorType'].append(OrichalcumAlloyArmor(vID))
+        self.defenses['shieldType'].append(HyperiumShieldGen(vID))
+        self.defenses['armorType'].append(MythrilAlloyArmor(vID))
         
         for x in range(1, 7):
             if x <= 2:
@@ -53,8 +53,8 @@ class DynamoClass(Strikecruiser):
         super().__init__(hullnumber, name)
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(HyperShieldGen(vID))
-        self.defenses['armorType'].append(OrichalcumAlloyArmor(vID))
+        self.defenses['shieldType'].append(HyperiumShieldGen(vID))
+        self.defenses['armorType'].append(MythrilAlloyArmor(vID))
         for x in range(1, 7):
             if x <= 4:
                 self.armaments['primaryBattery'].append(triple_L13_XRayLasers(vID, ''.join(['T', str(x)])))

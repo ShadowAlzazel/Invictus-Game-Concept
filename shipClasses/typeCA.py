@@ -20,8 +20,8 @@ class ApocalypseClass(Heavycruiser):
         super().__init__(hullnumber, name)
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(HyperShieldGen(vID))
-        self.defenses['armorType'].append(CarbonNanoThreadsArmor(vID))
+        self.defenses['shieldType'].append(GigaShieldGen(vID))
+        self.defenses['armorType'].append(LivingDurasteelArmor(vID))
         self.armaments['primaryBattery'] = [triple_M12_GaussCannons(vID, ''.join(['T', str(x)])) for x in range(1,6)]
         self.armaments['secondaryBattery'] = [triple_M7_TitanAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1,4)] 
         for x in range(1, 11):
@@ -48,8 +48,8 @@ class HarbingerClass(Heavycruiser):
         super().__init__(hullnumber, name)
         vID = self.vesselID
         self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(HyperShieldGen(vID))
-        self.defenses['armorType'].append(CarbonNanoThreadsArmor(vID))
+        self.defenses['shieldType'].append(GigaShieldGen(vID))
+        self.defenses['armorType'].append(LivingDurasteelArmor(vID))
         self.armaments['primaryBattery'] = [triple_A12_ProtonColliders(vID, ''.join(['T', str(x)])) for x in range(1,6)]
         self.armaments['secondaryBattery'] = [triple_P6_PlasmaPhasers(vID, ''.join(['S', str(x)])) for x in range(1,4)] 
         for x in range(1, 11):
