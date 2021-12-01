@@ -62,6 +62,7 @@ class shipHexRadar:
         return targetsSpace
 
 
+    #check if the stealth of the ship is within detection range
     def _detectionRange(self, radarRing, eShipHex, detectionRange):
         s = eShipHex.entity.shipStats['STH']
         for z in range(1, (detectionRange - s) + 1):

@@ -66,7 +66,6 @@ class EclipseClass(Battlecruiser):
             else:
                 self.armaments['broadsideBattery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))
 
-        
 
 #--------------------------------Penumbra Class Battlecruiser------------------------------------
 class PenumbraClass(Battlecruiser):
@@ -100,7 +99,7 @@ class PenumbraClass(Battlecruiser):
                 self.armaments['broadsideBattery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
 
 
-#---------------------------Illustrious Class Battlecruiser--------------------------------------
+#-----------------------------------Illustrious Class Battlecruiser--------------------------------------
 class IllustriousClass(Battlecruiser):
     shipClass = 'IllustriousClass'
     ammount = 0
