@@ -133,7 +133,7 @@ def combatGame(gameScreen, pLevel):
 
     #animation calls
     animateGridHexes = pygame.USEREVENT + 1
-    pygame.time.set_timer(animateGridHexes, 200)
+    pygame.time.set_timer(animateGridHexes, 300)
 
 
     #variables 
@@ -165,7 +165,7 @@ def combatGame(gameScreen, pLevel):
         currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
         
         #move window
-        windowMove = combatWindow.hexSize / 8
+        windowMove = combatWindow.hexSize // 16 
         if moveUp:
             combatWindow.windowMoveY -= windowMove
         if moveDown:
@@ -215,7 +215,7 @@ def combatGame(gameScreen, pLevel):
             if event.type == KEYDOWN and event.key == K_e:
                 print('Fleet Turn Ended')
                 gameLevel.areaGame.fleetTurn()
-                combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom)
+                #combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom)
 
             #inspect
             if event.type == KEYDOWN and event.key == K_i:
@@ -237,7 +237,7 @@ def combatGame(gameScreen, pLevel):
             #check if animatedc
             if event.type == animateGridHexes:
                 combatWindow.aniHexes()
-                combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom, gameLevel.areaGame.selectedHex)
+                #combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom, gameLevel.areaGame.selectedHex)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
@@ -246,7 +246,7 @@ def combatGame(gameScreen, pLevel):
                     gameLevel.areaGame.selectHex(gameLevel.areaOfEngagement.starHexes[hexIndex])
                 print(hexIndex)
 
-        #combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom, gameLevel.areaGame.selectedHex)   
+        combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom, gameLevel.areaGame.selectedHex)   
         pygame.display.update()
 
 

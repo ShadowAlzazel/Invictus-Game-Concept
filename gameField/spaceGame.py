@@ -96,19 +96,16 @@ class turnGame:
         for s in self.gameShips:
             if s.command[0:3] != aFleet.fleetCommand[0:3]:
                 s.detected = False
+            else: 
+                s.detected = True 
 
-        for u in aFleet.fleetShips:
-            u.detected = True
+        enemiesDetected = []
+        for a in aFleet.fleetShips:
+            if a.operational:
+                for x in a.detectTargets():
+                    enemiesDetected.append(x)
 
-        u = []
-        for g in aFleet.fleetShips:
-            if g.operational:
-                h = g.detectTargets()
-                for t in h:
-                    if t not in u:
-                        u.append(t)
-
-        for e in u:
+        for e in set(enemiesDetected):
             e.entity.detected = True
 
 
