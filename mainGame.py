@@ -164,6 +164,7 @@ def combatGame(gameScreen, pLevel):
 
         currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
         
+        #move window
         windowMove = combatWindow.hexSize / 8
         if moveUp:
             combatWindow.windowMoveY -= windowMove
