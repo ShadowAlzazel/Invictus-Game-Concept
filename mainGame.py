@@ -39,7 +39,7 @@ def main():
             combatGameMenu(gameScreen)
 
         pygame.draw.rect(gameScreen, (2, 2, 2), button1)
-        gameFont2A.renderFont(gameScreen, 'BUTTON', (50, 100))
+        gameFont2A.renderFont(gameScreen, 'INVICTUS SAMAR', (50, 100))
 
         #event loop
         mouseClick = False
