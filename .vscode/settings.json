@@ -16,6 +16,7 @@
             ]
         }
     },
+    "editor.tabCompletion": "on",
     //Files types exluded from showing
     "files.exclude": {
         "**/.git": true,

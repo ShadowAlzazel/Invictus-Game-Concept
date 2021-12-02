@@ -15,10 +15,9 @@ class spaceFleet:
         self.fleetShips = []
         self.flagShip = 0
         self.trackedShipsHexes = []
-        if fleetCommand in astraFleets[0]:
-            if name in astraFleets[0][fleetCommand]['fleetNames']:
-                self.presetFleet = True
-                self.fleetLogs = astraFleets[0][fleetCommand][name]
+        if fleetCommand in astraFleets[0] and name in astraFleets[0][fleetCommand]['fleetNames']:
+            self.presetFleet = True
+            self.fleetLogs = astraFleets[0][fleetCommand][name]
         
 
     def spawnFleet(self, operationSpace, start=-1, formation=0):
