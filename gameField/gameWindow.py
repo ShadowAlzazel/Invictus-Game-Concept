@@ -1,6 +1,9 @@
 #class for board display
 #import pygame
 from gameField.gameAssets import *
+from multiprocessing.dummy import Pool as ThreadPool
+#from multiprocessing import Pool 
+from itertools import repeat
 
 #----------------------------------------------------------------------
 
@@ -22,6 +25,12 @@ class spaceWindow:
         self.ROT_ASCS_SHIP_HEX_IMG = ASCS_SHIP_HEX_IMG
         self.XNFF_SHIP_HEX_IMG = XNFF_SHIP_HEX_IMG
         self.ROT_XNFF_SHIP_HEX_IMG = XNFF_SHIP_HEX_IMG
+        #selections
+        self.selectedHexNum = -1
+        self.selectedHex = []
+        self.shipClicked = False 
+        self.targetedHexes = []
+        self.currentFleetCom = 'NNNN'
 
         #animations
         self.baseHex = GRID_HEX_ANI_BASE
@@ -42,6 +51,44 @@ class spaceWindow:
     def drawHexes(self, gameWindow, operationSpace, currentFleet, shipHex=[]):
         gameWindow.blit(FIT_SPACE, (0, 0))
 
+        if self.centerHex > -1:
+            c = 0
+            if (self.centerHex // self.hexesLength) % 2 != 0:
+                c = self.hexSize / 2
+            self.windowMoveX = int((self.hexesLength / 2) - ((self.centerHex % self.hexesLength) + 1)) * self.hexSize + c
+            self.windowMoveY = int(((self.centerHex // self.hexesLength)) - (self.hexesWidth / 2) + 0.5) * self.hexSize
+            self.centerHex = -1
+        """
+        self.targetedHexes,  self.shipClicked = [], False
+        if self.selectedHexNum > -1:
+            self.selectedHex = operationSpace.starHexes[self.selectedHexNum]
+            if not self.selectedHex.empty: 
+                aShip = self.selectedHex.entity
+                self.shipClicked = True
+                if aShip.gunsReady():
+                    self.targetedHexes = aShip.trackTargets()
+                
+
+        self.opsSpace = operationSpace
+
+        dPool = ThreadPool(2)
+        hexResults = dPool.map(self._drawAHex, operationSpace.starHexes)
+        filteredResults = list(filter(None, hexResults))
+        hexImgs, positions = [], []
+        for u in filteredResults:
+            hexImgs.append(u[0])
+            positions.append(u[1])
+        print(hexImgs[0], positions[0])
+
+
+        dPool.map(gameWindow.blit, hexImgs, positions)
+        #s = 1
+        #s[1][1]
+
+        dPool.close()
+        dPool.join()
+
+        """
         #check of shipClicked
         shipClicked = False
         if shipHex and not shipHex.empty:
@@ -51,14 +98,7 @@ class spaceWindow:
                 targets = aShip.trackTargets()
             shipClicked = True
 
-        if self.centerHex > -1:
-            c = 0
-            if (self.centerHex // self.hexesLength) % 2 != 0:
-                c = self.hexSize / 2
-            self.windowMoveX = int((self.hexesLength / 2) - ((self.centerHex % self.hexesLength) + 1)) * self.hexSize + c
-            self.windowMoveY = int(((self.centerHex // self.hexesLength)) - (self.hexesWidth / 2) + 0.5) * self.hexSize
-            self.centerHex = -1
-
+        
         #e is for flipping the y coordinate
         e = self.hexesWidth
         n = 0
@@ -110,6 +150,76 @@ class spaceWindow:
             if n == self.hexesLength:
                 e -= 1
                 n = 0
+        
+        #self.opsSpace = []
+
+    """
+    def drawAHex(self, windowHex):
+        coord = windowHex[1].hexCoord
+        rowHeight = self.hexesWidth - (coord // self.hexesLength) 
+        indent = 0
+        if not rowHeight % 2 == self.hexesWidth % 2:
+            indent = self.hexSize // 2
+
+        y = (self.bordersColumnsY) + (rowHeight * self.hexSize) + self.windowMoveY
+        x = (self.bordersRowsX) + ((coord % self.hexesLength) * self.hexSize) + indent - (self.hexSize // 2) + self.windowMoveX
+        if x < LENGTH + self.hexSize and y < WIDTH + self.hexSize and x > -self.hexSize and y > -self.hexSize:
+            windowHex[0].blit(self.animatedHexes['gridHex'], (x, y))
+        #print((x, y))
+    """
+    #WIP
+    def _getHexImg(self, aHex, hexImg):
+        
+        if aHex.empty: 
+            if self.shipClicked:
+                aShip = self.selectedHex.entity
+                if aHex in self.selectedHex.neighbors and aShip.shipMovement != 0 and (aHex.directions[aShip.orientation] != self.selectedHex.hexCoord or aShip.shiptype == 'DD' or aShip.shiptype == 'CS'):
+                    if not (aShip.shiptype == 'BB' and self.opsSpace.starHexes[hex.directions[aShip.orientation]] in self.selectedHex.neighbors):
+                        hexImg.blit(self.animatedHexes['moveHex'], (0,0))
+
+                #check if ship
+        elif aHex.entity.spaceEntity == 'shipObject':
+            if self.currentFleetCom[0:3] != aHex.entity.command[0:3] and aHex.entity.detected:
+                hexImg.blit(self.animatedHexes['enemyHex'], (0,0))
+            elif self.currentFleetCom[0:3] == aHex.entity.command[0:3]:
+                hexImg.blit(self.animatedHexes['allyHex'], (0,0))
+
+            if aHex.entity.command[0:3] == 'ASC' and aHex.entity.detected:
+                self.orientationRotation(aHex.entity)
+                hexImg.blit(self.ROT_ASCS_SHIP_HEX_IMG, (0,0))
+            elif aHex.entity.command[0:3] == 'XNF' and aHex.entity.detected:
+                self.orientationRotation(aHex.entity)
+                hexImg.blit(self.ROT_XNFF_SHIP_HEX_IMG, (0,0))
+                
+            #check if target in range
+            if self.shipClicked:
+                if aHex in self.targetedHexes:
+                    hexImg.blit(self.animatedHexes['targetHex'], (0,0))
+    
+        #clicked
+        if self.shipClicked:
+            if aHex.hexCoord == self.selectedHex.hexCoord:
+                hexImg.blit(self.animatedHexes['clickHex'], (0,0))
+        
+        
+        return
+
+    #WIP
+    def _drawAHex(self, aHex):
+        coord = aHex.hexCoord
+        rowHeight = self.hexesWidth - (coord // self.hexesLength) - 1
+        indent = 0
+        if rowHeight % 2 == self.hexesWidth % 2:
+            indent = self.hexSize // 2
+
+        y = (self.bordersColumnsY) + (rowHeight * self.hexSize) + self.windowMoveY
+        x = (self.bordersRowsX) + ((coord % self.hexesLength) * self.hexSize) + indent - (self.hexSize // 2) + self.windowMoveX
+        if x < LENGTH + self.hexSize and y < WIDTH + self.hexSize and x > -self.hexSize and y > -self.hexSize:
+            hexImg = self.animatedHexes['gridHex']
+            self._getHexImg(aHex, hexImg)
+            #hexImg = self.animatedHexes['gridHex']
+            return [hexImg, (x, y)]
+
 
     #get hexNums from coord mouse
     def getMouseHex(self, mousePos):

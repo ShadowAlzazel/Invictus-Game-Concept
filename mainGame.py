@@ -79,6 +79,7 @@ def combatGameMenu(gameScreen):
         if button2.collidepoint((mx, my)) and mouseClick:
             #WIP currently testing presets
             #have different buttons change level number and create levels
+
             level = 64 
             combatGame(gameScreen, level)
 
@@ -148,6 +149,7 @@ def combatGame(gameScreen, pLevel):
     a = 0
 
     while gameRunning:
+        gameClock.tick(framerate)
         #frame timing
         dt = time.perf_counter() - lastFrameTime
         dt *= framerate 
@@ -159,10 +161,6 @@ def combatGame(gameScreen, pLevel):
             lastSec = time.perf_counter()
             print("True FPS:", a) 
             a = 0
-
-        gameClock.tick(framerate)
-
-        currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
         
         #move window
         windowMove = combatWindow.hexSize // 16 
@@ -242,11 +240,15 @@ def combatGame(gameScreen, pLevel):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
                 hexIndex = combatWindow.getMouseHex(someMousePos)
+                combatWindow.selectedHexNum = hexIndex
                 if hexIndex >= 0:
                     gameLevel.areaGame.selectHex(gameLevel.areaOfEngagement.starHexes[hexIndex])
                 print(hexIndex)
 
-        combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom, gameLevel.areaGame.selectedHex)   
+        currentFleetComa = gameLevel.areaGame.activeFleet.fleetCommand
+
+        combatWindow.currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
+        combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetComa, gameLevel.areaGame.selectedHex)   
         pygame.display.update()
 
 
