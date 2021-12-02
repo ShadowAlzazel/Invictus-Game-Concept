@@ -12,8 +12,8 @@ class ApocalypseClass(Heavycruiser):
         "RDR": 5, "LCK": 10, "STH": 0
     }
     
-    shields = 10000
-    hull = 10000
+    shields = 11000
+    hull = 10500
 
     def __init__(self, hullnumber, name):
         ApocalypseClass.ammount += 1
@@ -23,7 +23,7 @@ class ApocalypseClass(Heavycruiser):
         self.defenses['shieldType'].append(GigaShieldGen(vID))
         self.defenses['armorType'].append(LivingDurasteelArmor(vID))
         self.armaments['primaryBattery'] = [triple_M12_GaussCannons(vID, ''.join(['T', str(x)])) for x in range(1,6)]
-        self.armaments['secondaryBattery'] = [triple_M7_TitanAutoCannons(vID, ''.join(['S', str(x)])) for x in range(1,4)] 
+        self.armaments['secondaryBattery'] = [triple_P6_PlasmaPhasers(vID, ''.join(['S', str(x)])) for x in range(1,4)] 
         for x in range(1, 11):
             if x <= 8:
                 self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
@@ -40,7 +40,7 @@ class HarbingerClass(Heavycruiser):
         "RDR": 5, "LCK": 10, "STH": 0
     }
     
-    shields = 10000
+    shields = 11300
     hull = 10000
 
     def __init__(self, hullnumber, name):

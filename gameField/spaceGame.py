@@ -105,7 +105,7 @@ class turnGame:
             if g.operational:
                 h = g.detectTargets()
                 for t in h:
-                    if not (t in u):
+                    if t not in u:
                         u.append(t)
 
         for e in u:
@@ -122,7 +122,7 @@ class turnGame:
 
         #selected hex must be a target
         nearbyShipHexes = aShip.trackTargets()
-        if not aHex in nearbyShipHexes:
+        if aHex not in nearbyShipHexes:
             return False
 
         result = self._shipSalvoAction(aShip, aHex.entity)
@@ -213,20 +213,16 @@ class turnGame:
     def gunHitCalc(self, aShipGunHit, aShipACC, bShipEVA):
         hitRate = (aShipACC - bShipEVA) + aShipGunHit
         randHit = randint(1, 100)
-        if hitRate > randHit:
-            return True
-        else:
-            return False
+        gunHit = hitRate > randHit
+        return gunHit
 
 
     #damage calculator for a gun
     def gunDamageCalc(self, aShipGunAtk, aShipFP, aShipLCK, bShipLCK, batDistro):
         critRate = aShipLCK - bShipLCK + 5
         damageMult = 1
-        damage = 0
         randCrit = randint(1, 100)
         if critRate > randCrit:
             damageMult = 1.25 + (aShipLCK / 100)
-
         damage = (aShipGunAtk + (aShipFP // batDistro) * damageMult)
         return damage
