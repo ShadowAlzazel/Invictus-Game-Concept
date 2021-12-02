@@ -1,6 +1,4 @@
-import pygame
-import sys
-
+import pygame, sys, time
 from pygame.constants import K_DOWN, K_ESCAPE, K_F4, K_LALT, K_LEFT, K_RIGHT, K_SPACE, K_UP, KEYDOWN, KEYUP, MOUSEBUTTONDOWN, QUIT, K_c, K_e, K_i, K_m, K_r, K_x, K_z
 from gameField import *
 from levelGames import *
@@ -126,7 +124,7 @@ def combatGame(gameScreen, pLevel):
     if not gameLevel:
         return
 
-    #create new window
+    #create new game window
     currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
     combatWindow = spaceWindow(gameLevel.areaOfEngagement.l, gameLevel.areaOfEngagement.w, HEX_SIZE)
     gameLevel.areaGame.fleetTurn()
@@ -141,22 +139,40 @@ def combatGame(gameScreen, pLevel):
     #variables 
     gameRunning = True 
     moveUp, moveDown, moveLeft, moveRight = False, False, False, False
+    framerate = FPS
 
     #time 
     gameClock = pygame.time.Clock()
+    lastFrameTime = time.perf_counter()
+    lastSec = time.perf_counter()
+    a = 0
 
     while gameRunning:
+        #frame timing
+        dt = time.perf_counter() - lastFrameTime
+        dt *= framerate 
+        lastFrameTime = time.perf_counter()
+
+        #frame counting 
+        a += 1
+        if time.perf_counter() > lastSec + 1:
+            lastSec = time.perf_counter()
+            print("True FPS:", a) 
+            a = 0
+
+        gameClock.tick(framerate)
+
         currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
-        gameClock.tick(FPS)
         
+        windowMove = combatWindow.hexSize / 8
         if moveUp:
-            combatWindow.windowMoveY -= 3
+            combatWindow.windowMoveY -= windowMove
         if moveDown:
-            combatWindow.windowMoveY += 3
+            combatWindow.windowMoveY += windowMove
         if moveLeft:
-            combatWindow.windowMoveX -= 3
+            combatWindow.windowMoveX -= windowMove
         if moveRight:
-            combatWindow.windowMoveX += 3
+            combatWindow.windowMoveX += windowMove
 
         #event loop
         for event in pygame.event.get():
@@ -194,11 +210,13 @@ def combatGame(gameScreen, pLevel):
                 combatWindow.windowMoveX = 0
                 combatWindow.windowMoveY = 0
 
+            #end turn 
             if event.type == KEYDOWN and event.key == K_e:
                 print('Fleet Turn Ended')
                 gameLevel.areaGame.fleetTurn()
                 combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom)
 
+            #inspect
             if event.type == KEYDOWN and event.key == K_i:
                 if gameLevel.areaGame.selectedHex:
                     gameLevel.areaGame.selectedHex.entity.fullInspect()
@@ -210,10 +228,12 @@ def combatGame(gameScreen, pLevel):
             if event.type == KEYDOWN and event.key == K_x:
                 combatWindow.zoomOutHex()
 
+            #center
             if event.type == KEYDOWN and event.key == K_c:
                 if gameLevel.areaGame.selectedHex:
                     combatWindow.centerHex = gameLevel.areaGame.selectedHex.hexCoord
 
+            #check if animatedc
             if event.type == animateGridHexes:
                 combatWindow.aniHexes()
                 combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom, gameLevel.areaGame.selectedHex)
@@ -225,7 +245,7 @@ def combatGame(gameScreen, pLevel):
                     gameLevel.areaGame.selectHex(gameLevel.areaOfEngagement.starHexes[hexIndex])
                 print(hexIndex)
 
-        combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom, gameLevel.areaGame.selectedHex)   
+        #combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom, gameLevel.areaGame.selectedHex)   
         pygame.display.update()
 
 
