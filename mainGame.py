@@ -11,7 +11,7 @@ def main():
     pygame.init()
 
     #set up main game screen
-    pygame.display.set_caption("ASCS Fleet Manager")
+    pygame.display.set_caption("INVICTUS: SAMAR")
     pygame.display.set_icon(GAME_ICON)
     gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
     gameScreen.blit(FIT_SPACE, (0, 0))
@@ -117,7 +117,7 @@ def combatGame(gameScreen, pLevel):
     elif pLevel == 64:
         fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
         fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
-        gameLevel = level(12, 11, 0 ,(fleet1, fleet2), [35, 76])
+        gameLevel = level(15, 12, 0 ,(fleet1, fleet2), [35, 76])
     elif pLevel == 77:
         fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][2], 'ASC')
         fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
