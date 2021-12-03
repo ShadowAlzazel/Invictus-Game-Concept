@@ -75,7 +75,6 @@ class spaceWindow:
         dPool = ThreadPool(2)
         dPool.map(self._drawHex, self.opsSpace.starHexes)
         dPool.close()
-        dPool.join()
 
 
     def _drawHex(self, aHex):
@@ -88,7 +87,6 @@ class spaceWindow:
         y = (self.bordersColumnsY) + (rowHeight * self.hexSize) + self.windowMoveY
         x = (self.bordersRowsX) + ((coord % self.hexesLength) * self.hexSize) + indent - (self.hexSize // 2) + self.windowMoveX
         if x < LENGTH + self.hexSize and y < WIDTH + self.hexSize and x > -self.hexSize and y > -self.hexSize:
-            #check if empty for move
             self.gameScreen.blit(self.animatedHexes['gridHex'], (x, y))
             #check if empty for move
             if aHex.empty:
@@ -104,12 +102,14 @@ class spaceWindow:
                     self.gameScreen.blit(self.animatedHexes['enemyHex'], (x, y))
                 elif self.currentFleetCom[0:3] == aHex.entity.command[0:3]:
                     self.gameScreen.blit(self.animatedHexes['allyHex'], (x, y))
+
                 if aHex.entity.command == 'ASCS' and aHex.entity.detected:
                     self.orientationRotation(aHex.entity)
                     self.gameScreen.blit(self.ROT_ASCS_SHIP_HEX_IMG, (x, y))
                 elif aHex.entity.command == 'XNFFS' and aHex.entity.detected:
                     self.orientationRotation(aHex.entity)
                     self.gameScreen.blit(self.ROT_XNFF_SHIP_HEX_IMG, (x, y))
+                    
                 #check if target in range
                 if self.shipClicked:
                     if aHex in self.targetedHexes:
