@@ -79,7 +79,6 @@ def combatGameMenu(gameScreen):
         if button2.collidepoint((mx, my)) and mouseClick:
             #WIP currently testing presets
             #have different buttons change level number and create levels
-
             level = 64 
             combatGame(gameScreen, level)
 
@@ -127,9 +126,9 @@ def combatGame(gameScreen, pLevel):
 
     #create new game window
     currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
-    combatWindow = spaceWindow(gameLevel.areaOfEngagement.l, gameLevel.areaOfEngagement.w, HEX_SIZE)
+    combatWindow = spaceWindow(gameLevel.areaOfEngagement, gameScreen, HEX_SIZE)
     gameLevel.areaGame.fleetTurn()
-    combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom)
+    combatWindow.drawHexes(currentFleetCom)
     pygame.display.update()
 
     #animation calls
@@ -213,7 +212,7 @@ def combatGame(gameScreen, pLevel):
             if event.type == KEYDOWN and event.key == K_e:
                 print('Fleet Turn Ended')
                 gameLevel.areaGame.fleetTurn()
-                #combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom)
+                
 
             #inspect
             if event.type == KEYDOWN and event.key == K_i:
@@ -235,7 +234,7 @@ def combatGame(gameScreen, pLevel):
             #check if animatedc
             if event.type == animateGridHexes:
                 combatWindow.aniHexes()
-                #combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetCom, gameLevel.areaGame.selectedHex)
+                
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
@@ -245,10 +244,7 @@ def combatGame(gameScreen, pLevel):
                     gameLevel.areaGame.selectHex(gameLevel.areaOfEngagement.starHexes[hexIndex])
                 print(hexIndex)
 
-        currentFleetComa = gameLevel.areaGame.activeFleet.fleetCommand
-
-        combatWindow.currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
-        combatWindow.drawHexes(gameScreen, gameLevel.areaOfEngagement, currentFleetComa, gameLevel.areaGame.selectedHex)   
+        combatWindow.drawHexes(gameLevel.areaGame.activeFleet.fleetCommand, gameLevel.areaGame.selectedHex)   
         pygame.display.update()
 
 
