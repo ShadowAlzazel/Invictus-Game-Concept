@@ -1,9 +1,7 @@
-#class for board display
-#import pygame
+#class for game display
 from gameField.gameAssets import *
 from multiprocessing.dummy import Pool as ThreadPool
 #from multiprocessing import Pool 
-from itertools import repeat
 
 #----------------------------------------------------------------------
 
@@ -109,7 +107,7 @@ class spaceWindow:
                 elif aHex.entity.command == 'XNFFS' and aHex.entity.detected:
                     self.orientationRotation(aHex.entity)
                     self.gameScreen.blit(self.ROT_XNFF_SHIP_HEX_IMG, (x, y))
-                    
+
                 #check if target in range
                 if self.shipClicked:
                     if aHex in self.targetedHexes:
