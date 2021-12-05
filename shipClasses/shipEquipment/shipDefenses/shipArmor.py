@@ -10,7 +10,7 @@ class armor:
         self.armor_integrity = 100 #%
         self.equipment_ID = '-'.join([vessel_ID, 'ARMR'])
 
-    def armorDamage(self, damage_amount, wep_PEN=0):
+    def take_armor_damage(self, damage_amount, wep_PEN=0):
         true_PEN = wep_PEN
         if wep_PEN > self.armor_value:
             true_PEN = self.armor_value 

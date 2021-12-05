@@ -10,7 +10,7 @@ class shieldGen:
         self.damage_deflected = 0
         self.equipment_ID = '-'.join([vessel_ID, 'SGEN'])
 
-    def shieldDamage(self, damage_amount, wep_DIS):
+    def take_shield_damage(self, damage_amount, wep_DIS):
         if damage_amount < self.mitigation_field or self.damage_deflected < self.phase_field:
             true_damage = 0  
         else:

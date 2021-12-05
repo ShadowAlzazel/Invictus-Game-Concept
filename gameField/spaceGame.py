@@ -65,7 +65,7 @@ class turnGame:
 
         some_ship = some_hex.entity
         #can only select a ship
-        if not some_hex.empty and self.active_fleet.fleetCommand[0:3] == some_ship.command[0:3] and some_ship.operational:
+        if not some_hex.empty and self.active_fleet.fleet_command[0:3] == some_ship.command[0:3] and some_ship.operational:
             self.selected_hex = some_hex
             return True
         return False 
@@ -94,7 +94,7 @@ class turnGame:
     #detect ships for fleet
     def _update_detections(self, some_fleet):
         for s in self.game_ships:
-            if s.command[0:3] != some_fleet.fleetCommand[0:3]:
+            if s.command[0:3] != some_fleet.fleet_command[0:3]:
                 s.detected = False
             else: 
                 s.detected = True 
