@@ -121,7 +121,7 @@ def combatGame(game_screen, selcted_level):
 
     #animation calls
     animate_game_hexes = pygame.USEREVENT + 1
-    pygame.time.set_timer(animate_game_hexes, 300)
+    pygame.time.set_timer(animate_game_hexes, 150)
 
 
     #variables 
@@ -159,6 +159,9 @@ def combatGame(game_screen, selcted_level):
             combat_screen.move_window_X -= windowMove
         if move_window_right:
             combat_screen.move_window_X += windowMove
+        
+        if move_window_up or move_window_down or move_window_left or move_window_right:
+            combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
 
         #event loop
         for event in pygame.event.get():
@@ -222,7 +225,7 @@ def combatGame(game_screen, selcted_level):
             #check if animatedc
             if event.type == animate_game_hexes:
                 combat_screen.animate_hexes()
-                
+                combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
@@ -231,8 +234,9 @@ def combatGame(game_screen, selcted_level):
                 if some_hex_coordinate_index >= 0:
                     combat_level.areaGame.select_hex(combat_level.level_hex_map.space_hexes[some_hex_coordinate_index])
                 print(some_hex_coordinate_index)
+                combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
 
-        combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)   
+        #combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)   
         pygame.display.update()
 
 
