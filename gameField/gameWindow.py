@@ -71,7 +71,7 @@ class spaceWindow:
             self.shipClicked = True
 
         dPool = ThreadPool(2)
-        dPool.map(self._drawHex, self.opsSpace.starHexes)
+        dPool.map(self._drawHex, self.opsSpace.space_hexes)
         dPool.close()
 
 
@@ -91,7 +91,7 @@ class spaceWindow:
                 if self.shipClicked:
                     aShip = self.selected_hex.entity
                     if aHex in self.selected_hex.neighbors and aShip.ship_moves != 0 and (aHex.directions[aShip.orientation] != self.selected_hex.hex_coordinate_index or aShip.ship_type == 'DD' or aShip.ship_type == 'CS'):
-                        if not (aShip.ship_type == 'BB' and self.opsSpace.starHexes[aHex.directions[aShip.orientation]] in self.selected_hex.neighbors):
+                        if not (aShip.ship_type == 'BB' and self.opsSpace.space_hexes[aHex.directions[aShip.orientation]] in self.selected_hex.neighbors):
                             self.gameScreen.blit(self.animatedHexes['moveHex'], (x, y))
 
             #check if ship

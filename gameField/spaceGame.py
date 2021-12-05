@@ -8,10 +8,10 @@ class turnGame:
     #        'Attack': ['Attack', 'attack', 'atk', 'Atk', 'a', 'A', 'ATK'], 'AutoAttack': ['AutAttack', 'autoattack', 'auto', 'aa', 'AA']
     #        }
 
-    def __init__(self, hex_map):
-        self.opsSpace = hex_map
-        self.game_ships = hex_map.game_entities['ship_entity']
-        self.game_fleets = hex_map.fleet_entities
+    def __init__(self, new_hex_map):
+        self.opsSpace = new_hex_map
+        self.game_ships = new_hex_map.game_entities['ship_entity']
+        self.game_fleets = new_hex_map.fleet_entities
         self.game_turn = 0
         self.selected_hex = None #usually a hex
         self.active_fleet = self.game_fleets[-1]
@@ -132,7 +132,7 @@ class turnGame:
         selected_ship = self.selected_hex.entity
         #check if selcted hex direction does not match orientation
         if some_hex.empty and (some_hex in self.selected_hex.neighbors) and (some_hex.directions[selected_ship.orientation] != self.selected_hex.hex_coordinate_index or selected_ship.ship_type == 'DD' or selected_ship.ship_type == 'CS'):
-            if selected_ship.ship_type == 'BB' and self.opsSpace.starHexes[some_hex.directions[selected_ship.orientation]] in self.selected_hex.neighbors:
+            if selected_ship.ship_type == 'BB' and self.opsSpace.space_hexes[some_hex.directions[selected_ship.orientation]] in self.selected_hex.neighbors:
                 return result
 
             if selected_ship.ship_moves != 0:
@@ -188,11 +188,11 @@ class turnGame:
 
                 true_damage = enemy_ship.take_damage(salvo_damage, g.gun_stats['PEN'], g.gun_stats['DIS'])
                 if not enemy_ship.operational:
-                    m = enemy_ship.placeHex.hex_coordinate_index
+                    m = enemy_ship.place_hex.hex_coordinate_index
                     self.game_ships.remove(enemy_ship) 
-                    self.opsSpace.hexes_full.remove(self.opsSpace.starHexes[m])
-                    self.opsSpace.starHexes[m].entity = []
-                    self.opsSpace.starHexes[m].empty = True
+                    self.opsSpace.hexes_full.remove(self.opsSpace.space_hexes[m])
+                    self.opsSpace.space_hexes[m].entity = []
+                    self.opsSpace.space_hexes[m].empty = True
                     true_damage = 0
                     #del enemy_ship
                     return True

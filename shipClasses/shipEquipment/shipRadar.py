@@ -36,7 +36,7 @@ class hex_radar:
             if not k.empty and k.entity.command[0:3] != ship_hex_place.entity.command[0:3]:
                 if k.entity.detected or k.entity.revealed:
                     targets_hex_places.append(k)
-        #returns a starSpace
+        #returns a space_hex
         return targets_hex_places
 
 
@@ -49,7 +49,7 @@ class hex_radar:
                 u = self._detect_enemy_limiter(hex_rings, k, radar_range)
                 if u:
                     target_hex_places.append(k)
-        #returns a starSpace
+        #returns a space_hex
         return target_hex_places
 
 

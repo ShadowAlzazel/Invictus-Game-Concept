@@ -8,4 +8,4 @@ class spaceObject():
         spaceObject.ammount += 1
         self.objectNumber = objectNum
         self.name = ''.join(["objects", str(objectNum)])
-        self.placeHex = []
+        self.place_hex = []

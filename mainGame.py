@@ -114,7 +114,7 @@ def combatGame(gameScreen, pLevel):
 
     #create new game window
     currentFleetCom = gameLevel.areaGame.active_fleet.fleetCommand
-    combatWindow = spaceWindow(gameLevel.engagementSpace, gameScreen, HEX_SIZE)
+    combatWindow = spaceWindow(gameLevel.level_hex_map, gameScreen, HEX_SIZE)
     gameLevel.areaGame.next_fleet_turn()
     combatWindow.drawHexes(currentFleetCom)
     pygame.display.update()
@@ -229,7 +229,7 @@ def combatGame(gameScreen, pLevel):
                 hexIndex = combatWindow.getMouseHex(someMousePos)
                 combatWindow.selected_hexNum = hexIndex
                 if hexIndex >= 0:
-                    gameLevel.areaGame.select_hex(gameLevel.engagementSpace.starHexes[hexIndex])
+                    gameLevel.areaGame.select_hex(gameLevel.level_hex_map.space_hexes[hexIndex])
                 print(hexIndex)
 
         combatWindow.drawHexes(gameLevel.areaGame.active_fleet.fleetCommand, gameLevel.areaGame.selected_hex)   

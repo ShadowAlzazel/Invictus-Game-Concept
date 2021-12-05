@@ -18,7 +18,7 @@ class Ship:
         self.name = name
         self.hullnumber = hullnumber
         self.vessel_ID = ''.join([self.ship_type, '-', str(self.hullnumber)])
-        self.placeHex = []  #starSpace object
+        self.place_hex = []  #space_hex object
         self.orientation = 'R'
         self.radar = []  #radar object
         self.armaments = {'primary_battery': [], 'secondary_battery': [], 'broadside_battery': []}
@@ -61,13 +61,13 @@ class Ship:
 
     #ping nearby hex to see if controlled
     def ping_hex(self, some_hex):
-        p = self.radar.radar_pinger(self.placeHex, some_hex)
+        p = self.radar.radar_pinger(self.place_hex, some_hex)
         return p
 
 
     #find targets with radar
     def detect_targets(self):
-        targetsHexes = self.radar.radar_detecter(self.ship_stats['RDR'], self.placeHex)
+        targetsHexes = self.radar.radar_detecter(self.ship_stats['RDR'], self.place_hex)
         return targetsHexes
 
 
@@ -80,13 +80,13 @@ class Ship:
 
         for w in guns_ready_in_range:
             battery_ranges.append(w.gun_stats['RNG'])    
-        targetsHexes = self.radar.radar_tracker(max(battery_ranges), self.placeHex)
+        targetsHexes = self.radar.radar_tracker(max(battery_ranges), self.place_hex)
         return targetsHexes
 
 
     #find ranges 
     def range_finder(self, target_ship):
-        r = self.radar.radar_ballistics_finder(self.ship_stats['RDR'], self.placeHex, target_ship.placeHex)
+        r = self.radar.radar_ballistics_finder(self.ship_stats['RDR'], self.place_hex, target_ship.place_hex)
         return r
 
 

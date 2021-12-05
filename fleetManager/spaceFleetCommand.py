@@ -29,22 +29,22 @@ class spaceFleet:
             #if -1 random spawn
             if start == -1: 
                 r = randint(0, (hex_map.l * hex_map.w) - 1)
-                if hex_map.starHexes[r].empty:
-                    fleetSpawnLoc = hex_map.starHexes[r]
+                if hex_map.space_hexes[r].empty:
+                    fleetSpawnLoc = hex_map.space_hexes[r]
                 else:
                     print("Spawn Failed")
                     return 
             elif start > 0:
-                fleetSpawnLoc = hex_map.starHexes[start]
+                fleetSpawnLoc = hex_map.space_hexes[start]
 
-            #spawn the fleet in the zoneSpace
-            hex_map.addCustomEntity(fleetSpawnLoc, self.fleet_ships[k])
+            #spawn the fleet in the base_hex_map
+            hex_map.add_new_entity(fleetSpawnLoc, self.fleet_ships[k])
             spawning = True
             while spawning:
-                for hex in self.fleet_ships[k].placeHex.neighbors:
+                for hex in self.fleet_ships[k].place_hex.neighbors:
                     if n == len(self.fleet_ships):
                         spawning = False
                     elif hex.empty:
-                        hex_map.addCustomEntity(hex, self.fleet_ships[n])
+                        hex_map.add_new_entity(hex, self.fleet_ships[n])
                         n += 1
                 k += 1
