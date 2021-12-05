@@ -38,7 +38,7 @@ class turnGame:
 
     #update ships in fleet turn
     def _updateShips(self, aFleet):
-        for ships in aFleet.fleetShips:
+        for ships in aFleet.fleet_ships:
             ships.shipMovement = ships.shipStats['SPD']
             ships.shipAttacks = 1
             ships.shipActive = True
@@ -100,7 +100,7 @@ class turnGame:
                 s.detected = True 
 
         enemiesDetected = []
-        for a in aFleet.fleetShips:
+        for a in aFleet.fleet_ships:
             if a.operational:
                 for x in a.detectTargets():
                     enemiesDetected.append(x)

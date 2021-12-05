@@ -18,7 +18,7 @@ class level():
             for i, x in enumerate(starLevels[0]["levels"][levelPaths]["Fleets"]):
                 newFleetCom, newFleetName = x[0], x[1]
                 newFleet = spaceFleet(newFleetName, newFleetCom)
-                fleetLaunch(newFleet)
+                launch_fleet(newFleet)
                 newFleet.spawnFleet(self.engagementSpace, self.fleetSpawns[i])
                 self.levelFleets.append(newFleet)
             self.areaGame = turnGame(self.engagementSpace)
@@ -33,7 +33,7 @@ class level():
     #    self.levelFleets = [x for x in fleets]
     #    self.fleetSpawns = locations 
     #    for i, x in enumerate(self.levelFleets):
-    #        fleetLaunch(x)
+    #        launch_fleet(x)
     #        x.spawnFleet(self.engagementSpace, locations[i])
     #    self.areaGame = turnGame(self.engagementSpace)
 
