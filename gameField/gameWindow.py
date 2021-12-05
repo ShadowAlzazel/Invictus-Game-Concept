@@ -1,6 +1,6 @@
 #class for game display
 from gameField.gameAssets import *
-from multiprocessing.dummy import Pool as ThreadPool
+from multiprocessing.dummy import Pool as thread_pool
 #from multiprocessing import Pool 
 
 #----------------------------------------------------------------------
@@ -35,13 +35,13 @@ class spaceWindow:
         #animations
         self.base_hex_IMG = GRID_HEX_ANI_BASE
         self.base_hex_IMG.convert()
-        self.template_hexes_IMG = {'aniHexB': GRID_HEX_ANI_EMPTY, 'aniHexEnemy': GRID_HEX_ANI_ENEMY, 'aniHexClick': GRID_HEX_ANI_CLICK, 
-                            'aniHexMove': GRID_HEX_ANI_MOVE, 'aniHexTarget': GRID_HEX_ANI_TARGET, 'aniHexAlly': GRID_HEX_ANI_ALLY}
+        self.template_hexes_IMG = {'template_hex_base': GRID_HEX_ANI_EMPTY, 'template_hex_enemy': GRID_HEX_ANI_ENEMY, 'template_hex_clicked': GRID_HEX_ANI_CLICK, 
+                            'template_hex_move': GRID_HEX_ANI_MOVE, 'template_hex_target': GRID_HEX_ANI_TARGET, 'template_hex_ally': GRID_HEX_ANI_ALLY}
         for v in self.template_hexes_IMG.values():
             v.convert()
-        self.animated_hexes_IMG = {'gridHex': self.template_hexes_IMG['aniHexB'], 'enemyHex': self.template_hexes_IMG['aniHexEnemy'], 
-                            'clickHex': self.template_hexes_IMG['aniHexClick'], 'moveHex': self.template_hexes_IMG['aniHexMove'], 
-                            'targetHex': self.template_hexes_IMG['aniHexTarget'], 'allyHex': self.template_hexes_IMG['aniHexAlly']}
+        self.animated_hexes_IMG = {'animated_hex_base': self.template_hexes_IMG['template_hex_base'], 'animated_hex_enemy': self.template_hexes_IMG['template_hex_enemy'], 
+                            'animated_hex_clicked': self.template_hexes_IMG['template_hex_clicked'], 'animated_hex_move': self.template_hexes_IMG['template_hex_move'], 
+                            'animated_hex_target': self.template_hexes_IMG['template_hex_target'], 'animated_hex_ally': self.template_hexes_IMG['template_hex_ally']}
         self.counter_animation_1 = 0
         self.counter_animation_2 = 0
         #scale
@@ -70,7 +70,7 @@ class spaceWindow:
                 self.targets_hexes = some_ship.track_targets()
             self.ship_selected = True
 
-        draw_pool = ThreadPool(2)
+        draw_pool = thread_pool(2)
         draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
         draw_pool.close()
 
@@ -85,7 +85,7 @@ class spaceWindow:
         x = (self.window_border_X) + ((some_hex.hex_coordinate_index % self.hex_map_length) * self.size_hex_IMG) + indent - (self.size_hex_IMG // 2) + self.move_window_X
         #check if hex in render space
         if x < LENGTH + self.size_hex_IMG and y < WIDTH + self.size_hex_IMG and x > -self.size_hex_IMG and y > -self.size_hex_IMG:
-            self.game_screen.blit(self.animated_hexes_IMG['gridHex'], (x, y))
+            self.game_screen.blit(self.animated_hexes_IMG['animated_hex_base'], (x, y))
             #check if empty for move
             if some_hex.empty:
                 if self.ship_selected:
@@ -93,15 +93,18 @@ class spaceWindow:
                     if some_hex in self.selected_hex.neighbors and some_ship.ship_moves != 0 and (
                         some_hex.directions[some_ship.orientation] != self.selected_hex.hex_coordinate_index or some_ship.ship_type == 'DD' or some_ship.ship_type == 'CS'):
                         if not (some_ship.ship_type == 'BB' and self.ops_hex_map.space_hexes[some_hex.directions[some_ship.orientation]] in self.selected_hex.neighbors):
-                            self.game_screen.blit(self.animated_hexes_IMG['moveHex'], (x, y))
+                            self.game_screen.blit(self.animated_hexes_IMG['animated_hex_move'], (x, y))
 
             #check if ship
             elif some_hex.entity.entity_type == 'ship_entity':
+                #check if ally or enemy
                 if self.active_fleet_command[0:3] != some_hex.entity.command[0:3] and some_hex.entity.detected:
-                    self.game_screen.blit(self.animated_hexes_IMG['enemyHex'], (x, y))
+                    self.game_screen.blit(self.animated_hexes_IMG['animated_hex_enemy'], (x, y))
                 elif self.active_fleet_command[0:3] == some_hex.entity.command[0:3]:
-                    self.game_screen.blit(self.animated_hexes_IMG['allyHex'], (x, y))
+                    self.game_screen.blit(self.animated_hexes_IMG['animated_hex_ally'], (x, y))
 
+
+                #WIP special ship images 
                 if some_hex.entity.command == 'ASCS' and some_hex.entity.detected:
                     self.rotation_orientation(some_hex.entity)
                     self.game_screen.blit(self.ROT_ASCS_SHIP_HEX_IMG, (x, y))
@@ -112,12 +115,12 @@ class spaceWindow:
                 #check if target in range
                 if self.ship_selected:
                     if some_hex in self.targets_hexes:
-                        self.game_screen.blit(self.animated_hexes_IMG['targetHex'], (x, y))
+                        self.game_screen.blit(self.animated_hexes_IMG['animated_hex_target'], (x, y))
         
                 #clicked
                 if self.ship_selected:
                     if some_hex.hex_coordinate_index == self.selected_hex.hex_coordinate_index:
-                        self.game_screen.blit(self.animated_hexes_IMG['clickHex'], (x, y))
+                        self.game_screen.blit(self.animated_hexes_IMG['animated_hex_clicked'], (x, y))
         
 
     #get hexNums from coord mouse
