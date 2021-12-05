@@ -60,8 +60,8 @@ class Ship:
 
 
     #ping nearby hex to see if controlled
-    def ping_hex(self, aHex):
-        p = self.radar.radar_pinger(self.placeHex, aHex)
+    def ping_hex(self, some_hex):
+        p = self.radar.radar_pinger(self.placeHex, some_hex)
         return p
 
 

@@ -217,7 +217,7 @@ def combatGame(gameScreen, pLevel):
             #center
             if event.type == KEYDOWN and event.key == K_c:
                 if gameLevel.areaGame.selected_hex:
-                    combatWindow.centerHex = gameLevel.areaGame.selected_hex.hexCoord
+                    combatWindow.centerHex = gameLevel.areaGame.selected_hex.hex_coordinate_index
 
             #check if animatedc
             if event.type == animateGridHexes:

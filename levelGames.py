@@ -12,7 +12,7 @@ class level():
         starLevels = starLevelOpen()
         if levelPaths in starLevels[0]["levels"]:
             self.name = starLevels[0]["levels"][levelPaths]["Name"]
-            self.engagementSpace = createCombatSpace(starLevels[0]["levels"][levelPaths]["Length"], starLevels[0]["levels"][levelPaths]["Width"], starLevels[0]["levels"][levelPaths]["RhoDensity"])
+            self.engagementSpace = create_map_hexes(starLevels[0]["levels"][levelPaths]["Length"], starLevels[0]["levels"][levelPaths]["Width"], starLevels[0]["levels"][levelPaths]["RhoDensity"])
             self.fleetSpawns = starLevels[0]["levels"][levelPaths]["SpawnLocations"]
             self.levelFleets = []
             for i, x in enumerate(starLevels[0]["levels"][levelPaths]["Fleets"]):
@@ -29,7 +29,7 @@ class level():
 
     #def __init__(self, name, length, width, rho, fleets, locations):
     #    self.name = name
-    #    self.engagementSpace =  createCombatSpace(length, width, rho)
+    #    self.engagementSpace =  create_map_hexes(length, width, rho)
     #    self.levelFleets = [x for x in fleets]
     #    self.fleetSpawns = locations 
     #    for i, x in enumerate(self.levelFleets):

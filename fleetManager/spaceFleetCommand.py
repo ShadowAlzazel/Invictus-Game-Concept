@@ -21,30 +21,30 @@ class spaceFleet:
             self.fleet_logs = astraFleets[0][fleetCommand][name]
         
 
-    def spawnFleet(self, map_hexes, start=-1, formation=0):
-        map_hexes.fleet_entities.append(self)
+    def spawnFleet(self, hex_map, start=-1, formation=0):
+        hex_map.fleet_entities.append(self)
         #cluster formation
         if formation == 0:
             k, n = 0, 1
             #if -1 random spawn
             if start == -1: 
-                r = randint(0, (map_hexes.l * map_hexes.w) - 1)
-                if map_hexes.starHexes[r].empty:
-                    fleetSpawnLoc = map_hexes.starHexes[r]
+                r = randint(0, (hex_map.l * hex_map.w) - 1)
+                if hex_map.starHexes[r].empty:
+                    fleetSpawnLoc = hex_map.starHexes[r]
                 else:
                     print("Spawn Failed")
                     return 
             elif start > 0:
-                fleetSpawnLoc = map_hexes.starHexes[start]
+                fleetSpawnLoc = hex_map.starHexes[start]
 
             #spawn the fleet in the zoneSpace
-            map_hexes.addCustomEntity(fleetSpawnLoc, self.fleet_ships[k])
+            hex_map.addCustomEntity(fleetSpawnLoc, self.fleet_ships[k])
             spawning = True
             while spawning:
                 for hex in self.fleet_ships[k].placeHex.neighbors:
                     if n == len(self.fleet_ships):
                         spawning = False
                     elif hex.empty:
-                        map_hexes.addCustomEntity(hex, self.fleet_ships[n])
+                        hex_map.addCustomEntity(hex, self.fleet_ships[n])
                         n += 1
                 k += 1

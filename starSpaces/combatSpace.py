@@ -2,7 +2,7 @@ from starSpaces.spaceHexes import *
 from starSpaces.spaceObjects import *
 from random import randint
 
-def createCombatSpace(length, width, density):
+def create_map_hexes(length, width, density):
     newZone = zoneSpace(length, width)
     area = length * width
     rho = int(((density * 0.01) * area) // 1)
@@ -10,50 +10,50 @@ def createCombatSpace(length, width, density):
 
     #get neighbors function
     def getNeighbors(starSpaceHex):
-        hexCoord = starSpaceHex.hexCoord
+        hex_coordinate_index = starSpaceHex.hex_coordinate_index
         neighbors = []
-        hexMoves = {'Right': 1, 
+        hex_moves = {'Right': 1, 
                     'Left': -1, 
-                    'UpRight': (((hexCoord // length) % 2) + length),
-                    'UpLeft': ((((hexCoord // length) % 2) + length) - 1),
-                    'DownRight': (((hexCoord // length) % 2) - length),
-                    'DownLeft': ((((-(hexCoord // length) % 2)) - length) - 1)
+                    'UpRight': (((hex_coordinate_index // length) % 2) + length),
+                    'UpLeft': ((((hex_coordinate_index // length) % 2) + length) - 1),
+                    'DownRight': (((hex_coordinate_index // length) % 2) - length),
+                    'DownLeft': ((((-(hex_coordinate_index // length) % 2)) - length) - 1)
                     }
 
         #check for right hex border
-        if not (hexCoord + 1) % length == 0:
-            j = newZone.starHexes[hexCoord + hexMoves['Right']]
-            starSpaceHex.directions['R'] = j.hexCoord
+        if not (hex_coordinate_index + 1) % length == 0:
+            j = newZone.starHexes[hex_coordinate_index + hex_moves['Right']]
+            starSpaceHex.directions['R'] = j.hex_coordinate_index
             neighbors.append(j)
 
         #check for left hex borders
-        if not hexCoord % length == 0:
-            j = newZone.starHexes[hexCoord + hexMoves['Left']]
-            starSpaceHex.directions['L'] = j.hexCoord
+        if not hex_coordinate_index % length == 0:
+            j = newZone.starHexes[hex_coordinate_index + hex_moves['Left']]
+            starSpaceHex.directions['L'] = j.hex_coordinate_index
             neighbors.append(j)
 
         #check for up-right hex borders
-        if not (hexCoord >= length * (width - 1)) and not ((hexCoord // length) % 2 == 1 and (hexCoord + 1) % length == 0):
-            j = newZone.starHexes[hexCoord + hexMoves['UpRight']]
-            starSpaceHex.directions['UR'] = j.hexCoord
+        if not (hex_coordinate_index >= length * (width - 1)) and not ((hex_coordinate_index // length) % 2 == 1 and (hex_coordinate_index + 1) % length == 0):
+            j = newZone.starHexes[hex_coordinate_index + hex_moves['UpRight']]
+            starSpaceHex.directions['UR'] = j.hex_coordinate_index
             neighbors.append(j)
         
         #check for up-left hex borders
-        if not (hexCoord) >= length * (width - 1) and not ((hexCoord // length) % 2 == 0 and hexCoord % length == 0):
-            j = newZone.starHexes[hexCoord + hexMoves['UpLeft']]
-            starSpaceHex.directions['UL'] = j.hexCoord
+        if not (hex_coordinate_index) >= length * (width - 1) and not ((hex_coordinate_index // length) % 2 == 0 and hex_coordinate_index % length == 0):
+            j = newZone.starHexes[hex_coordinate_index + hex_moves['UpLeft']]
+            starSpaceHex.directions['UL'] = j.hex_coordinate_index
             neighbors.append(j)
 
         #check for down-right hex borders
-        if not (hexCoord) // length == 0 and not ((hexCoord // length) % 2 == 1 and (hexCoord + 1) % length == 0):
-            j = newZone.starHexes[hexCoord + hexMoves['DownRight']]
-            starSpaceHex.directions['DR'] = j.hexCoord
+        if not (hex_coordinate_index) // length == 0 and not ((hex_coordinate_index // length) % 2 == 1 and (hex_coordinate_index + 1) % length == 0):
+            j = newZone.starHexes[hex_coordinate_index + hex_moves['DownRight']]
+            starSpaceHex.directions['DR'] = j.hex_coordinate_index
             neighbors.append(j)
 
         #check for down-left hex borders
-        if not (hexCoord) // length == 0 and not ((hexCoord // length) % 2 == 0 and hexCoord % length == 0):
-            j = newZone.starHexes[hexCoord + hexMoves['DownLeft']]
-            starSpaceHex.directions['DL'] = j.hexCoord
+        if not (hex_coordinate_index) // length == 0 and not ((hex_coordinate_index // length) % 2 == 0 and hex_coordinate_index % length == 0):
+            j = newZone.starHexes[hex_coordinate_index + hex_moves['DownLeft']]
+            starSpaceHex.directions['DL'] = j.hex_coordinate_index
             neighbors.append(j)
 
         return neighbors

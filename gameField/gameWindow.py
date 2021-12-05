@@ -76,7 +76,7 @@ class spaceWindow:
 
 
     def _drawHex(self, aHex):
-        coord = aHex.hexCoord
+        coord = aHex.hex_coordinate_index
         rowHeight = self.hexesWidth - (coord // self.hexesLength) - 1
         indent = 0
         if rowHeight % 2 == self.hexesWidth % 2:
@@ -90,7 +90,7 @@ class spaceWindow:
             if aHex.empty:
                 if self.shipClicked:
                     aShip = self.selected_hex.entity
-                    if aHex in self.selected_hex.neighbors and aShip.ship_moves != 0 and (aHex.directions[aShip.orientation] != self.selected_hex.hexCoord or aShip.ship_type == 'DD' or aShip.ship_type == 'CS'):
+                    if aHex in self.selected_hex.neighbors and aShip.ship_moves != 0 and (aHex.directions[aShip.orientation] != self.selected_hex.hex_coordinate_index or aShip.ship_type == 'DD' or aShip.ship_type == 'CS'):
                         if not (aShip.ship_type == 'BB' and self.opsSpace.starHexes[aHex.directions[aShip.orientation]] in self.selected_hex.neighbors):
                             self.gameScreen.blit(self.animatedHexes['moveHex'], (x, y))
 
@@ -115,7 +115,7 @@ class spaceWindow:
         
                 #clicked
                 if self.shipClicked:
-                    if aHex.hexCoord == self.selected_hex.hexCoord:
+                    if aHex.hex_coordinate_index == self.selected_hex.hex_coordinate_index:
                         self.gameScreen.blit(self.animatedHexes['clickHex'], (x, y))
         
 
