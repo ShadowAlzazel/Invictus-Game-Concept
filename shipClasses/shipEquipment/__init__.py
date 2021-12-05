@@ -2,4 +2,4 @@
 #from . shipWeapons import *
 from shipClasses.shipEquipment.shipWeapons import *
 from shipClasses.shipEquipment.shipDefenses import *
-from shipClasses.shipEquipment.shipRadar import shipHexRadar
+from shipClasses.shipEquipment.shipRadar import hex_radar

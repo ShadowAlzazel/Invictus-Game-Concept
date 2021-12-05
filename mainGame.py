@@ -37,7 +37,7 @@ def main():
             combatGameMenu(gameScreen)
 
         pygame.draw.rect(gameScreen, (2, 2, 2), button1)
-        gameFont2A.renderFont(gameScreen, 'INVICTUS SAMAR', (50, 100))
+        gameFont2A.render_font(gameScreen, 'INVICTUS SAMAR', (50, 100))
 
         #event loop
         mouseClick = False
@@ -83,7 +83,7 @@ def combatGameMenu(gameScreen):
             combatGame(gameScreen, level)
 
         pygame.draw.rect(gameScreen, (2, 2, 2), button2)
-        gameFont2A.renderFont(gameScreen, 'COMBATGAME', (50, 200))
+        gameFont2A.render_font(gameScreen, 'COMBATGAME', (50, 200))
 
         #event loop
         mouseClick = False
@@ -113,9 +113,9 @@ def combatGame(gameScreen, pLevel):
         return
 
     #create new game window
-    currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
-    combatWindow = spaceWindow(gameLevel.engagementSpace, gameScreen, HEX_SIZE)
-    gameLevel.areaGame.fleetTurn()
+    currentFleetCom = gameLevel.areaGame.active_fleet.fleetCommand
+    combatWindow = spaceWindow(gameLevel.level_hex_map, gameScreen, HEX_SIZE)
+    gameLevel.areaGame.next_fleet_turn()
     combatWindow.drawHexes(currentFleetCom)
     pygame.display.update()
 
@@ -199,13 +199,13 @@ def combatGame(gameScreen, pLevel):
             #end turn 
             if event.type == KEYDOWN and event.key == K_e:
                 print('Fleet Turn Ended')
-                gameLevel.areaGame.fleetTurn()
+                gameLevel.areaGame.next_fleet_turn()
                 
 
             #inspect
             if event.type == KEYDOWN and event.key == K_i:
-                if gameLevel.areaGame.selectedHex:
-                    gameLevel.areaGame.selectedHex.entity.fullInspect()
+                if gameLevel.areaGame.selected_hex:
+                    gameLevel.areaGame.selected_hex.entity.full_inspect()
 
             #zooming
             if event.type == KEYDOWN and event.key == K_z:
@@ -216,8 +216,8 @@ def combatGame(gameScreen, pLevel):
 
             #center
             if event.type == KEYDOWN and event.key == K_c:
-                if gameLevel.areaGame.selectedHex:
-                    combatWindow.centerHex = gameLevel.areaGame.selectedHex.hexCoord
+                if gameLevel.areaGame.selected_hex:
+                    combatWindow.centerHex = gameLevel.areaGame.selected_hex.hex_coordinate_index
 
             #check if animatedc
             if event.type == animateGridHexes:
@@ -227,12 +227,12 @@ def combatGame(gameScreen, pLevel):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
                 hexIndex = combatWindow.getMouseHex(someMousePos)
-                combatWindow.selectedHexNum = hexIndex
+                combatWindow.selected_hexNum = hexIndex
                 if hexIndex >= 0:
-                    gameLevel.areaGame.selectHex(gameLevel.engagementSpace.starHexes[hexIndex])
+                    gameLevel.areaGame.select_hex(gameLevel.level_hex_map.space_hexes[hexIndex])
                 print(hexIndex)
 
-        combatWindow.drawHexes(gameLevel.areaGame.activeFleet.fleetCommand, gameLevel.areaGame.selectedHex)   
+        combatWindow.drawHexes(gameLevel.areaGame.active_fleet.fleetCommand, gameLevel.areaGame.selected_hex)   
         pygame.display.update()
 
 

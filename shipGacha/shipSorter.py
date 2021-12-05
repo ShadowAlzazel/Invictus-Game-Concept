@@ -38,9 +38,9 @@ def randName():
 #"""-------------------------------------RANDOM-STATS--------------------------------------"""
 #Randomize stats slightly
 def randStats(aShip):
-    aShip.shipStats['FP'] += (randint(-20, 20))
-    aShip.shipStats['ACC'] += (randint(-5, 5))
-    aShip.shipStats['EVA'] += (randint(-5, 5))
-    aShip.shipStats['SPD'] += (randint(-1, 1))
-    aShip.shipStats['LCK'] += (randint(-2, 2))
+    aShip.ship_stats['FP'] += (randint(-20, 20))
+    aShip.ship_stats['ACC'] += (randint(-5, 5))
+    aShip.ship_stats['EVA'] += (randint(-5, 5))
+    aShip.ship_stats['SPD'] += (randint(-1, 1))
+    aShip.ship_stats['LCK'] += (randint(-2, 2))
 
