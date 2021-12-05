@@ -150,7 +150,7 @@ def combatGame(game_screen, selcted_level):
             a = 0
         
         #move window
-        windowMove = combat_screen.size_hex_IMG // 16 
+        windowMove = combat_screen.size_of_hexes // 16 
         if move_window_up:
             combat_screen.move_window_Y -= windowMove
         if move_window_down:

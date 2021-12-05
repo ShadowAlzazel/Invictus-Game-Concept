@@ -7,18 +7,18 @@ from multiprocessing.dummy import Pool as thread_pool
 
 class spaceWindow:
 
-    def __init__(self, ops_hex_map, game_screen, size_hex_IMG):
+    def __init__(self, ops_hex_map, game_screen, size_of_hexes):
         self.hex_map_length = ops_hex_map.map_length
         self.hex_map_width = ops_hex_map.map_width
         self.ops_hex_map = ops_hex_map
-        self.size_hex_IMG = size_hex_IMG
+        self.size_of_hexes = size_of_hexes
         self.game_screen = game_screen
         #movement variables
         self.move_window_X = 0
         self.move_window_Y = 0
         self.center_hex = -1
-        self.window_border_Y = ((WIDTH - (self.size_hex_IMG * self.hex_map_width)) // 2) - self.move_window_Y
-        self.window_border_X = ((LENGTH - (self.size_hex_IMG * self.hex_map_length)) // 2) + self.move_window_X
+        self.window_border_Y = ((WIDTH - (self.size_of_hexes * self.hex_map_width)) // 2) - self.move_window_Y
+        self.window_border_X = ((LENGTH - (self.size_of_hexes * self.hex_map_length)) // 2) + self.move_window_X
         #images
         self.EMPTY_HEX_IMG = EMPTY_HEX_IMG
         self.ASCS_SHIP_HEX_IMG = ASCS_SHIP_HEX_IMG
@@ -45,7 +45,7 @@ class spaceWindow:
         self.counter_animation_1 = 0
         self.counter_animation_2 = 0
         #scale
-        self._scale_hexes(self.size_hex_IMG)
+        self._scale_hexes(self.size_of_hexes)
 
     #draw hexes on board
     def draw_hexes(self, active_fleet_command, some_ship_hex=[]):
@@ -56,9 +56,9 @@ class spaceWindow:
         if self.center_hex > -1:
             c = 0
             if (self.center_hex // self.hex_map_length) % 2 != 0:
-                c = self.size_hex_IMG / 2
-            self.move_window_X = int((self.hex_map_length / 2) - ((self.center_hex % self.hex_map_length) + 1)) * self.size_hex_IMG + c
-            self.move_window_Y = int(((self.center_hex // self.hex_map_length)) - (self.hex_map_width / 2) + 0.5) * self.size_hex_IMG
+                c = self.size_of_hexes / 2
+            self.move_window_X = int((self.hex_map_length / 2) - ((self.center_hex % self.hex_map_length) + 1)) * self.size_of_hexes + c
+            self.move_window_Y = int(((self.center_hex // self.hex_map_length)) - (self.hex_map_width / 2) + 0.5) * self.size_of_hexes
             self.center_hex = -1
             
         #check of ship_selected
@@ -79,12 +79,12 @@ class spaceWindow:
         row_height = self.hex_map_width - (some_hex.hex_coordinate_index // self.hex_map_length) - 1
         indent = 0
         if row_height % 2 == self.hex_map_width % 2:
-            indent = self.size_hex_IMG // 2
+            indent = self.size_of_hexes // 2
 
-        y = (self.window_border_Y) + (row_height * self.size_hex_IMG) + self.move_window_Y
-        x = (self.window_border_X) + ((some_hex.hex_coordinate_index % self.hex_map_length) * self.size_hex_IMG) + indent - (self.size_hex_IMG // 2) + self.move_window_X
+        y = (self.window_border_Y) + (row_height * self.size_of_hexes) + self.move_window_Y
+        x = (self.window_border_X) + ((some_hex.hex_coordinate_index % self.hex_map_length) * self.size_of_hexes) + indent - (self.size_of_hexes // 2) + self.move_window_X
         #check if hex in render space
-        if x < LENGTH + self.size_hex_IMG and y < WIDTH + self.size_hex_IMG and x > -self.size_hex_IMG and y > -self.size_hex_IMG:
+        if x < LENGTH + self.size_of_hexes and y < WIDTH + self.size_of_hexes and x > -self.size_of_hexes and y > -self.size_of_hexes:
             self.game_screen.blit(self.animated_hexes_IMG['animated_hex_base'], (x, y))
             #check if empty for move
             if some_hex.empty:
@@ -131,17 +131,17 @@ class spaceWindow:
         b_position_active = False 
         column, row = 0, 0
 
-        if b in range(self.window_border_Y + self.move_window_Y, (self.size_hex_IMG * self.hex_map_width) + (self.window_border_Y) + self.move_window_Y):
+        if b in range(self.window_border_Y + self.move_window_Y, (self.size_of_hexes * self.hex_map_width) + (self.window_border_Y) + self.move_window_Y):
             b_position_active = True
             #reverse y coords
-            row = abs(((b - (self.window_border_Y + self.move_window_Y)) // self.size_hex_IMG) - self.hex_map_width) - 1
+            row = abs(((b - (self.window_border_Y + self.move_window_Y)) // self.size_of_hexes) - self.hex_map_width) - 1
             #check even/odd rows
-            if ((b - (self.window_border_Y + self.move_window_Y)) // self.size_hex_IMG) % 2 == (self.hex_map_width + 1) % 2:
-                i = self.size_hex_IMG // 2  
+            if ((b - (self.window_border_Y + self.move_window_Y)) // self.size_of_hexes) % 2 == (self.hex_map_width + 1) % 2:
+                i = self.size_of_hexes // 2  
 
-        if a in range((self.window_border_X) - i + self.move_window_X, ((self.size_hex_IMG * self.hex_map_length) + (self.window_border_X) - i) + self.move_window_X):
+        if a in range((self.window_border_X) - i + self.move_window_X, ((self.size_of_hexes * self.hex_map_length) + (self.window_border_X) - i) + self.move_window_X):
             a_position_active = True
-            column = ((a - (self.window_border_X + self.move_window_X)) + i) // self.size_hex_IMG
+            column = ((a - (self.window_border_X + self.move_window_X)) + i) // self.size_of_hexes
 
         if a_position_active and b_position_active:
             mouse_hex_coordinate_index = (row * self.hex_map_length) + column
@@ -152,18 +152,18 @@ class spaceWindow:
 
     #WIP zoom in
     def zoom_in_window(self):
-        self.size_hex_IMG += 16
-        self._scale_hexes(self.size_hex_IMG)
+        self.size_of_hexes += 16
+        self._scale_hexes(self.size_of_hexes)
 
     #WIP zoom out
     def zoom_out_window(self):
-        self.size_hex_IMG -= 16
-        self._scale_hexes(self.size_hex_IMG)
+        self.size_of_hexes -= 16
+        self._scale_hexes(self.size_of_hexes)
 
     #rotate an image based on ship orientation
     def rotation_orientation(self, some_ship):
         orients = {'R': -90.0, 'L': -270.0, 'UR': -30.0, 'UL': -330.0, 'DR': -150.0, 'DL': -210.0}
-        self._scale_hexes(self.size_hex_IMG)
+        self._scale_hexes(self.size_of_hexes)
         if some_ship.command == 'ASCS':
             self.ROT_ASCS_SHIP_HEX_IMG = self._rotate_center(self.ASCS_SHIP_HEX_IMG, orients[some_ship.orientation]) 
         elif some_ship.command == 'XNFFS':
@@ -186,7 +186,7 @@ class spaceWindow:
             base_hex_image = self.base_hex_IMG.copy()
             new_animated_hex = temporary_hexes.copy()
             base_hex_image.blit(new_animated_hex, (0, animation_order[w]))
-            new_animated_image = pygame.transform.scale(base_hex_image, (self.size_hex_IMG, self.size_hex_IMG))
+            new_animated_image = pygame.transform.scale(base_hex_image, (self.size_of_hexes, self.size_of_hexes))
             self.animated_hexes_IMG[animated_hex_keys] = new_animated_image
         
         if self.counter_animation_1 == 23:
@@ -195,10 +195,10 @@ class spaceWindow:
             self.counter_animation_1 += 1
        
     #scale the hexes
-    def _scale_hexes(self, size_hex_IMG):
+    def _scale_hexes(self, size_of_hexes):
         self.ASCS_SHIP_HEX_IMG.convert()
         self.EMPTY_HEX_IMG.convert()
         self.XNFF_SHIP_HEX_IMG.convert()
-        self.EMPTY_HEX_IMG = pygame.transform.smoothscale(EMPTY_HEX_IMG, (size_hex_IMG, size_hex_IMG))
-        self.ASCS_SHIP_HEX_IMG = pygame.transform.smoothscale(ASCS_SHIP_HEX_IMG, (size_hex_IMG, size_hex_IMG))
-        self.XNFF_SHIP_HEX_IMG = pygame.transform.smoothscale(XNFF_SHIP_HEX_IMG, (size_hex_IMG, size_hex_IMG))
+        self.EMPTY_HEX_IMG = pygame.transform.smoothscale(EMPTY_HEX_IMG, (size_of_hexes, size_of_hexes))
+        self.ASCS_SHIP_HEX_IMG = pygame.transform.smoothscale(ASCS_SHIP_HEX_IMG, (size_of_hexes, size_of_hexes))
+        self.XNFF_SHIP_HEX_IMG = pygame.transform.smoothscale(XNFF_SHIP_HEX_IMG, (size_of_hexes, size_of_hexes))
