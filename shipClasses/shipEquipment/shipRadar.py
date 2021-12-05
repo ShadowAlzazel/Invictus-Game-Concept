@@ -1,9 +1,9 @@
 #ship radar object for hexes
-class shipHexRadar:
+class hex_radar:
 
-    def __init__(self, vesselID, radarClass):
+    def __init__(self, vesse_ID, radarClass):
         self.radarClass = int(radarClass)
-        self.equipID = '-'.join([vesselID, 'HXRDR', str(radarClass)])
+        self.equipID = '-'.join([vesse_ID, 'HXRDR', str(radarClass)])
 
 
     #ping nearby with radar
@@ -64,7 +64,7 @@ class shipHexRadar:
 
     #check if the stealth of the ship is within detection range
     def _detectionRange(self, radarRing, eShipHex, detectionRange):
-        shipStealth = eShipHex.entity.shipStats['STH']
+        shipStealth = eShipHex.entity.ship_stats['STH']
         enemyDetected = any(eShipHex in radarRing[z] for z in range(1, (detectionRange - shipStealth) + 1))
         return enemyDetected
 

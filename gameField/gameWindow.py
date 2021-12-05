@@ -66,8 +66,8 @@ class spaceWindow:
         if shipHex and not shipHex.empty:
             self.targetedHexes = []
             aShip = shipHex.entity
-            if aShip.gunsReady():
-                self.targetedHexes = aShip.trackTargets()
+            if aShip.guns_primed():
+                self.targetedHexes = aShip.track_targets()
             self.shipClicked = True
 
         dPool = ThreadPool(2)
@@ -90,8 +90,8 @@ class spaceWindow:
             if aHex.empty:
                 if self.shipClicked:
                     aShip = self.selectedHex.entity
-                    if aHex in self.selectedHex.neighbors and aShip.shipMovement != 0 and (aHex.directions[aShip.orientation] != self.selectedHex.hexCoord or aShip.shiptype == 'DD' or aShip.shiptype == 'CS'):
-                        if not (aShip.shiptype == 'BB' and self.opsSpace.starHexes[aHex.directions[aShip.orientation]] in self.selectedHex.neighbors):
+                    if aHex in self.selectedHex.neighbors and aShip.shipMovement != 0 and (aHex.directions[aShip.orientation] != self.selectedHex.hexCoord or aShip.ship_type == 'DD' or aShip.ship_type == 'CS'):
+                        if not (aShip.ship_type == 'BB' and self.opsSpace.starHexes[aHex.directions[aShip.orientation]] in self.selectedHex.neighbors):
                             self.gameScreen.blit(self.animatedHexes['moveHex'], (x, y))
 
             #check if ship

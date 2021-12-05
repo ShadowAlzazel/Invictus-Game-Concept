@@ -7,8 +7,8 @@ from shipClasses.shipRole import Lightcruiser
 class MidnightClass(Lightcruiser):
     shipClass = 'MidnightClass'
     ammount = 0 
-    shiptype = 'CL'
-    shipStats = {
+    ship_type = 'CL'
+    ship_stats = {
         "FP": 200, "ACC": 35, "EVA": 49, "SPD": 7,
         "RDR": 5, "LCK": 10, "STH": 2
     }
@@ -19,11 +19,11 @@ class MidnightClass(Lightcruiser):
     def __init__(self, hullnumber, name):
         MidnightClass.ammount += 1
         super().__init__(hullnumber, name)
-        vID = self.vesselID
-        self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(LumioneShieldGen(vID))
-        self.defenses['armorType'].append(CarbonNanoThreadsArmor(vID))
-        self.armaments['primaryBattery'] = [triple_L6_ParticleLance(vID, ''.join(['T', str(x)])) for x in range(1, 6)]
-        self.armaments['secondaryBattery'] = [triple_M5_WraithAutoGuns(vID, ''.join(['S', str(x)])) for x in range(1, 3)] 
-        self.armaments['secondaryBattery'].append(VLS_35C_DevestationMissiles(vID, 'M1'))
-        self.armaments['broadsideBattery'] = [quad_BPoDS(vID, ''.join(['B', str(x)])) for x in range(1, 7)]
+        vID = self.vesse_ID
+        self.radar = hex_radar(vID, self.ship_stats['RDR'])
+        self.defenses['shield_gen'].append(LumioneShieldGen(vID))
+        self.defenses['armor_type'].append(CarbonNanoThreadsArmor(vID))
+        self.armaments['primary_battery'] = [triple_L6_ParticleLance(vID, ''.join(['T', str(x)])) for x in range(1, 6)]
+        self.armaments['secondary_battery'] = [triple_M5_WraithAutoGuns(vID, ''.join(['S', str(x)])) for x in range(1, 3)] 
+        self.armaments['secondary_battery'].append(VLS_35C_DevestationMissiles(vID, 'M1'))
+        self.armaments['broadside_battery'] = [quad_BPoDS(vID, ''.join(['B', str(x)])) for x in range(1, 7)]

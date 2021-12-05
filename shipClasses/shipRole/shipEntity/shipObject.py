@@ -4,8 +4,8 @@
 class Ship:
     spaceEntity = 'shipObject'
     ammount = 0
-    shiptype = 'CIV'
-    shipStats = {
+    ship_type = 'CIV'
+    ship_stats = {
         "FP": 10, "ACC": 10, "EVA": 50, "SPD": 5,
         "RDR": 3, "LCK": 10, "STH": 1
     }
@@ -17,12 +17,12 @@ class Ship:
         self.fleetName = 'FleetNull'
         self.name = name
         self.hullnumber = hullnumber
-        self.vesselID = ''.join([self.shiptype, '-', str(self.hullnumber)])
+        self.vesse_ID = ''.join([self.ship_type, '-', str(self.hullnumber)])
         self.placeHex = []  #starSpace object
         self.orientation = 'R'
         self.radar = []  #radar object
-        self.armaments = {'primaryBattery': [], 'secondaryBattery': [], 'broadsideBattery': []}
-        self.defenses = {'shieldType': [], 'armorType': []}
+        self.armaments = {'primary_battery': [], 'secondary_battery': [], 'broadside_battery': []}
+        self.defenses = {'shield_gen': [], 'armor_type': []}
         self.detected = True 
         self.revealed = False
 
@@ -31,19 +31,19 @@ class Ship:
 
 
     #damage function that takes in a value 
-    def takeDamage(self, damageNum, wPEN=0, wDIS=1):
-        if self.shields > damageNum and wDIS > 0:
-            damageS = self.defenses['shieldType'][0].shieldDamage(damageNum, wDIS)
-            self.shields -= damageS
-            return damageS
-        elif self.hull > damageNum:
-            damageH = self.defenses['armorType'][0].armorDamage(damageNum, wPEN) - self.shields
+    def takeDamage(self, damage_amount, wep_PEN=0, wep_DIS=1):
+        if self.shields > damage_amount and wep_DIS > 0:
+            damage_to_shields = self.defenses['shield_gen'][0].shieldDamage(damage_amount, wep_DIS)
+            self.shields -= damage_to_shields
+            return damage_to_shields
+        elif self.hull > damage_amount:
+            damage_to_hull = self.defenses['armor_type'][0].armorDamage(damage_amount, wep_PEN) - self.shields
             self.shields = 0
-            self.hull -= damageH
-            return damageH
+            self.hull -= damage_to_hull
+            return damage_to_hull
         else: 
             self.hull = 0
-            print(self.vesselID, self.command, self.name, "has been destryed!")
+            print(self.vesse_ID, self.command, self.name, "has been destryed!")
             self._destroyShip()
 
 
@@ -53,68 +53,68 @@ class Ship:
 
 
     #full self repair
-    def shipReset(self):
+    def reset_ship(self):
         self.hull = self.__class__.hull
         self.shields = self.__class__.shields
         print(self.name, "Reset!")
 
 
     #ping nearby hex to see if controlled
-    def pingNearby(self, aHex):
+    def ping_hex(self, aHex):
         p = self.radar.radarPing(self.placeHex, aHex)
         return p
 
 
     #find targets with radar
-    def detectTargets(self):
-        targetsHexes = self.radar.radarDetection(self.shipStats['RDR'], self.placeHex)
+    def detect_targets(self):
+        targetsHexes = self.radar.radarDetection(self.ship_stats['RDR'], self.placeHex)
         return targetsHexes
 
 
     #find tracked targets within ready gun range 
-    def trackTargets(self):
-        targetRanges = [0]
-        gunsReadyInRange = self.gunsReady()
-        if not gunsReadyInRange:
+    def track_targets(self):
+        battery_ranges = [0]
+        guns_ready_in_range = self.guns_primed()
+        if not guns_ready_in_range:
             return False
 
-        for w in gunsReadyInRange:
-            targetRanges.append(w.gunStats['RNG'])    
-        targetsHexes = self.radar.radarTracking(max(targetRanges), self.placeHex)
+        for w in guns_ready_in_range:
+            battery_ranges.append(w.gun_stats['RNG'])    
+        targetsHexes = self.radar.radarTracking(max(battery_ranges), self.placeHex)
         return targetsHexes
 
 
     #find ranges 
-    def findRange(self, targetShip):
-        r = self.radar.radarAcquisition(self.shipStats['RDR'], self.placeHex, targetShip.placeHex)
+    def range_finder(self, target_ship):
+        r = self.radar.radarAcquisition(self.ship_stats['RDR'], self.placeHex, target_ship.placeHex)
         return r
 
 
     #chech all guns ready to fire
-    def gunsReady(self):
-        gunsPrimed = []
+    def guns_primed(self):
+        primed = []
         for b in self.armaments.values():
             for g in b:
-                if g.gunLoadTime == g.gunStats['RLD']:
-                    gunsPrimed.append(g)
-        return gunsPrimed
+                if g.gun_load_time == g.gun_stats['RLD']:
+                    primed.append(g)
+        return primed
 
 
     #reload all guns
-    def reloadGuns(self):
+    def reload_battery(self):
         for b in self.armaments.values():
             for g in b:
-                g.reloadGun()
+                g.reload_gun()
 
 
     #recharge shields and repair armor
-    def rechargeDef(self):
-        s = (self.__class__.shields * (self.defenses['shieldType'][0].rechargeRate / 100))
-        if self.__class__.shields > self.shields + s:
-            self.shields += s
+    def recharge_defenses(self):
+        regen_ammount = (self.__class__.shields * (self.defenses['shield_gen'][0].shield_regeneration / 100))
+        if self.__class__.shields > self.shields + regen_ammount:
+            self.shields += regen_ammount
 
-        if self.defenses['armorType'][0].armorIntegrity < 100 - self.defenses['armorType'][0].armorRegen:
-            self.defenses['armorType'][0].armorIntegrity += self.defenses['armorType'][0].armorRegen
+        if self.defenses['armor_type'][0].armor_integrity < 100 - self.defenses['armor_type'][0].armor_repair:
+            self.defenses['armor_type'][0].armor_integrity += self.defenses['armor_type'][0].armor_repair
 
 
     #inspection function to look at stats
@@ -123,15 +123,15 @@ class Ship:
         print("Name: ", end='')
         print(self.command,'-' , self.name, sep='')
         print("Vessel Identifier: ", end='')
-        print(self.vesselID)
+        print(self.vesse_ID)
         print("Ship Stats:")
-        print(self.shipStats)
+        print(self.ship_stats)
         print("Primary Armament:")
-        for x in self.armaments['primaryBattery']:
-            print(x.gunName, "in Turret", x.batteryID)
+        for x in self.armaments['primary_battery']:
+            print(x.gunName, "in Turret", x.battery_ID)
         print("Ship Defenses:")
-        print(self.defenses['armorType'][0].armorName)
-        print(self.defenses['shieldType'][0].shieldName)
+        print(self.defenses['armor_type'][0].armor_name)
+        print(self.defenses['shield_gen'][0].shield_name)
         print("Shield Capcity at", "%.2f%%" % ((self.shields / self.__class__.shields) * 100.0), end=', ')
         print("with", self.shields // 1, "out of", self.__class__.shields, "remaining")
         print("Hull Integrity at", "%.2f%%" % ((self.hull / self.__class__.hull) * 100.0), end=', ')

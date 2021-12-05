@@ -7,18 +7,18 @@ from shipClasses.shipEquipment.shipWeapons.weaponEntity import shipWeapon
 
 class broadside_A6_ChakramLaunchers(shipWeapon):
     gunName = 'Broadside (A6) Chakram Launchers'
-    gunStats = {
+    gun_stats = {
         "ATK": 99, "RLD": 2, "HIT": 79, "RNG": 2, "QNT": 24, "PEN": 2, "DIS": 0.75
     }
-    def __init__(self, vesselID, batteryNumber):
-        super().__init__(vesselID, batteryNumber)
+    def __init__(self, vesse_ID, batteryNumber):
+        super().__init__(vesse_ID, batteryNumber)
 
 
 class quadruple_A6_ChakramLaunchers(shipWeapon):
     gunName = 'Quadruple (A6) Chakram Launchers'
-    gunStats = {
+    gun_stats = {
         "ATK": 99, "RLD": 2, "HIT": 79, "RNG": 2, "QNT": 4, "PEN": 2, "DIS": 0.75
     }
-    def __init__(self, vesselID, batteryNumber):
-        super().__init__(vesselID, batteryNumber)
+    def __init__(self, vesse_ID, batteryNumber):
+        super().__init__(vesse_ID, batteryNumber)
 

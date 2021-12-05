@@ -7,7 +7,7 @@ from shipClasses.shipRole import Heavycruiser
 class ApocalypseClass(Heavycruiser):
     shipClass = 'ApocalypseClass'
     ammount = 0
-    shipStats = {
+    ship_stats = {
         "FP": 393, "ACC": 32, "EVA": 29, "SPD": 5,
         "RDR": 5, "LCK": 10, "STH": 0
     }
@@ -18,24 +18,24 @@ class ApocalypseClass(Heavycruiser):
     def __init__(self, hullnumber, name):
         ApocalypseClass.ammount += 1
         super().__init__(hullnumber, name)
-        vID = self.vesselID
-        self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(GigaShieldGen(vID))
-        self.defenses['armorType'].append(LivingDurasteelArmor(vID))
-        self.armaments['primaryBattery'] = [triple_M12_GaussCannons(vID, ''.join(['T', str(x)])) for x in range(1,6)]
-        self.armaments['secondaryBattery'] = [triple_P6_PlasmaPhasers(vID, ''.join(['S', str(x)])) for x in range(1,4)] 
+        vID = self.vesse_ID
+        self.radar = hex_radar(vID, self.ship_stats['RDR'])
+        self.defenses['shield_gen'].append(GigaShieldGen(vID))
+        self.defenses['armor_type'].append(LivingDurasteelArmor(vID))
+        self.armaments['primary_battery'] = [triple_M12_GaussCannons(vID, ''.join(['T', str(x)])) for x in range(1,6)]
+        self.armaments['secondary_battery'] = [triple_P6_PlasmaPhasers(vID, ''.join(['S', str(x)])) for x in range(1,4)] 
         for x in range(1, 11):
             if x <= 8:
-                self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+                self.armaments['broadside_battery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 10:
-                self.armaments['broadsideBattery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))
+                self.armaments['broadside_battery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))
 
 
 #--------------------------Apocalypse Class Heavycrusier------------------------------
 class HarbingerClass(Heavycruiser):
     shipClass = 'HarbingerClass'
     ammount = 0
-    shipStats = {
+    ship_stats = {
         "FP": 377, "ACC": 34, "EVA": 30, "SPD": 5,
         "RDR": 5, "LCK": 10, "STH": 0
     }
@@ -46,14 +46,14 @@ class HarbingerClass(Heavycruiser):
     def __init__(self, hullnumber, name):
         HarbingerClass.ammount += 1
         super().__init__(hullnumber, name)
-        vID = self.vesselID
-        self.radar = shipHexRadar(vID, self.shipStats['RDR'])
-        self.defenses['shieldType'].append(GigaShieldGen(vID))
-        self.defenses['armorType'].append(LivingDurasteelArmor(vID))
-        self.armaments['primaryBattery'] = [triple_A12_ProtonColliders(vID, ''.join(['T', str(x)])) for x in range(1,6)]
-        self.armaments['secondaryBattery'] = [triple_P6_PlasmaPhasers(vID, ''.join(['S', str(x)])) for x in range(1,4)] 
+        vID = self.vesse_ID
+        self.radar = hex_radar(vID, self.ship_stats['RDR'])
+        self.defenses['shield_gen'].append(GigaShieldGen(vID))
+        self.defenses['armor_type'].append(LivingDurasteelArmor(vID))
+        self.armaments['primary_battery'] = [triple_A12_ProtonColliders(vID, ''.join(['T', str(x)])) for x in range(1,6)]
+        self.armaments['secondary_battery'] = [triple_P6_PlasmaPhasers(vID, ''.join(['S', str(x)])) for x in range(1,4)] 
         for x in range(1, 11):
             if x <= 8:
-                self.armaments['broadsideBattery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
+                self.armaments['broadside_battery'].append(double_M6_TitanAutoCannons(vID, ''.join(['B', str(x)])))
             elif x <= 10:
-                self.armaments['broadsideBattery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))
+                self.armaments['broadside_battery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))

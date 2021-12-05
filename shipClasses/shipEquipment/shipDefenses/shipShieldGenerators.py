@@ -4,11 +4,11 @@
 class shieldGen:
     energyField = 10
     ringField = 100 #initial shield
-    rechargeRate = 1 #percantage
+    shield_regeneration = 1 #percantage
 
-    def __init__(self, vesselID): 
+    def __init__(self, vesse_ID): 
         self.damageAbsorbed = 0
-        self.equipID = '-'.join([vesselID, 'SGEN'])
+        self.equipID = '-'.join([vesse_ID, 'SGEN'])
 
     def shieldDamage(self, damageNum, wDIS):
         if damageNum < self.energyField or self.damageAbsorbed < self.ringField:
@@ -21,70 +21,70 @@ class shieldGen:
 
 #"""-----------------------------------SHIP-SHIELDS-----------------------------------"""
 class AdvancedShieldGen(shieldGen):
-    shieldName = 'Hyper Shield-Generator'
+    shield_name = 'Hyper Shield-Generator'
     energyField = 110
     ringField = 1800
-    rechargeRate = 0.5
+    shield_regeneration = 0.5
 
-    def __init__(self, vesselID):
-        super().__init__(vesselID)
+    def __init__(self, vesse_ID):
+        super().__init__(vesse_ID)
         
 
 class MegaShieldGen(shieldGen):
-    shieldName = 'Mega Shield-Generator'
+    shield_name = 'Mega Shield-Generator'
     energyField = 150
     ringField = 2200
-    rechargeRate = 0.5
+    shield_regeneration = 0.5
 
-    def __init__(self, vesselID):
-        super().__init__(vesselID)
+    def __init__(self, vesse_ID):
+        super().__init__(vesse_ID)
 
 
 class GigaShieldGen(shieldGen):
-    shieldName = 'Giga Shield-Generator'
+    shield_name = 'Giga Shield-Generator'
     energyField = 200
     ringField = 2600
-    rechargeRate = 0.5
+    shield_regeneration = 0.5
 
-    def __init__(self, vesselID):
-        super().__init__(vesselID)
+    def __init__(self, vesse_ID):
+        super().__init__(vesse_ID)
 
 
 class LumioneShieldGen(shieldGen):
-    shieldName = 'Lumione Shield-Generator'
+    shield_name = 'Lumione Shield-Generator'
     energyField = 30
     ringField = 550
-    rechargeRate = 1.25
+    shield_regeneration = 1.25
     
-    def __init__(self, vesselID):
-        super().__init__(vesselID)
+    def __init__(self, vesse_ID):
+        super().__init__(vesse_ID)
 
 
 class HyperiumShieldGen(shieldGen):
-    shieldName = 'Hyper Shield-Generator'
+    shield_name = 'Hyper Shield-Generator'
     energyField = 50
     ringField = 1100
-    rechargeRate = 2
+    shield_regeneration = 2
 
-    def __init__(self, vesselID):
-        super().__init__(vesselID)
+    def __init__(self, vesse_ID):
+        super().__init__(vesse_ID)
 
 
 class HiggsShieldGen(shieldGen):
-    shieldName = 'Higgs Shield-Generator'
+    shield_name = 'Higgs Shield-Generator'
     energyField = 70
     ringField = 1650
-    rechargeRate = 2.825
+    shield_regeneration = 2.825
 
-    def __init__(self, vesselID):
-        super().__init__(vesselID)
+    def __init__(self, vesse_ID):
+        super().__init__(vesse_ID)
 
 
 class DarkMatterShieldGen(shieldGen):
-    shieldName = 'Dark Energy Shield-Generator'
+    shield_name = 'Dark Energy Shield-Generator'
     energyField = 120
     ringField = 3000
-    rechargeRate = 3.75
+    shield_regeneration = 3.75
 
-    def __init__(self, vesselID):
-        super().__init__(vesselID)
+    def __init__(self, vesse_ID):
+        super().__init__(vesse_ID)
