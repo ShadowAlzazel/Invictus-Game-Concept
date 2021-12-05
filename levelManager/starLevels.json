@@ -1,0 +1,27 @@
+[
+    {
+        "levels": 
+        {
+            "level_1":
+            {
+                "Name": "Omicron's Concern",
+                "Length": 12, 
+                "Width": 10, 
+                "RhoDensity": 0, 
+                "SpawnLocations": [25, 68], 
+                "Fleets": [["ASC", "Gwenlit Astra Armada"], ["XNFF", "Test Fleet XNFF"]]
+                
+            },
+            "level_Test":
+            {
+                "Name": "Level_Test",
+                "Length": 12, 
+                "Width": 10, 
+                "RhoDensity": 0, 
+                "SpawnLocations": [26, 88], 
+                "Fleets": [["ASC", "Test Fleet ASC"], ["XNFF", "Test Fleet XNFF"]]
+                
+            }
+        }
+    }
+]

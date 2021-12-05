@@ -33,11 +33,5 @@ def getSize(obj_0):
 
     return inner(obj_0)
 
-
-fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
-fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
-level1 = level(14, 10, 0 ,(fleet1, fleet2), [40, 104])
-
-print('Size of Level:', getSize(level1))
-#x = [1, 2]
-#print(x[3])
+uLvl = level("level_Test")
+print('Size of Level:', getSize(uLvl))

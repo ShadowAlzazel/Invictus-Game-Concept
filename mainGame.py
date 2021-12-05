@@ -79,7 +79,7 @@ def combatGameMenu(gameScreen):
         if button2.collidepoint((mx, my)) and mouseClick:
             #WIP currently testing presets
             #have different buttons change level number and create levels
-            level = 64 
+            level = "level_Test" 
             combatGame(gameScreen, level)
 
         pygame.draw.rect(gameScreen, (2, 2, 2), button2)
@@ -108,25 +108,13 @@ def combatGame(gameScreen, pLevel):
     
     gameLevel = None 
     #levels
-    if pLevel == 43:
-        fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][0], 'ASC')
-        fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
-        gameLevel = level(14, 10, 0 ,(fleet1, fleet2), [70, 104])
-    elif pLevel == 64:
-        fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
-        fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
-        gameLevel = level(15, 12, 0 ,(fleet1, fleet2), [35, 76])
-    elif pLevel == 77:
-        fleet1 = spaceFleet(astraFleets[0]['ASC']['fleetNames'][2], 'ASC')
-        fleet2 = spaceFleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
-        gameLevel = level(10, 10, 0 ,(fleet1, fleet2), [25, 85])
-
+    gameLevel = level(pLevel)
     if not gameLevel:
         return
 
     #create new game window
     currentFleetCom = gameLevel.areaGame.activeFleet.fleetCommand
-    combatWindow = spaceWindow(gameLevel.areaOfEngagement, gameScreen, HEX_SIZE)
+    combatWindow = spaceWindow(gameLevel.engagementSpace, gameScreen, HEX_SIZE)
     gameLevel.areaGame.fleetTurn()
     combatWindow.drawHexes(currentFleetCom)
     pygame.display.update()
@@ -241,7 +229,7 @@ def combatGame(gameScreen, pLevel):
                 hexIndex = combatWindow.getMouseHex(someMousePos)
                 combatWindow.selectedHexNum = hexIndex
                 if hexIndex >= 0:
-                    gameLevel.areaGame.selectHex(gameLevel.areaOfEngagement.starHexes[hexIndex])
+                    gameLevel.areaGame.selectHex(gameLevel.engagementSpace.starHexes[hexIndex])
                 print(hexIndex)
 
         combatWindow.drawHexes(gameLevel.areaGame.activeFleet.fleetCommand, gameLevel.areaGame.selectedHex)   
