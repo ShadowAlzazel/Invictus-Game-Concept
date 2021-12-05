@@ -30,7 +30,7 @@ class zoneSpace:
         self.starHexes = []
         self.hexesFull = []
         self.fleetEntities = []
-        self.spaceEntities = {'spaceObject': [], 'shipObject': []}
+        self.spaceEntities = {'spaceObject': [], 'ship_entity': []}
         for n in range(self.l * self.w):
             self.starHexes.append(starSpace(n))
 
@@ -39,7 +39,7 @@ class zoneSpace:
     def addCustomEntity(self, aStarSpace, newEntity):
             aStarSpace.addEntity(newEntity) 
             self.hexesFull.append(aStarSpace)
-            self.spaceEntities[newEntity.spaceEntity].append(newEntity)
+            self.spaceEntities[newEntity.entity_type].append(newEntity)
 
     #click move
     def moveClickEntity(self, movableEntity, clickHex):

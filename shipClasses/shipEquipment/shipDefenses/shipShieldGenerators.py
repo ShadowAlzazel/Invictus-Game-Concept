@@ -6,9 +6,9 @@ class shieldGen:
     ringField = 100 #initial shield
     shield_regeneration = 1 #percantage
 
-    def __init__(self, vesse_ID): 
+    def __init__(self, vessel_ID): 
         self.damageAbsorbed = 0
-        self.equipID = '-'.join([vesse_ID, 'SGEN'])
+        self.equipment_ID = '-'.join([vessel_ID, 'SGEN'])
 
     def shieldDamage(self, damageNum, wDIS):
         if damageNum < self.energyField or self.damageAbsorbed < self.ringField:
@@ -26,8 +26,8 @@ class AdvancedShieldGen(shieldGen):
     ringField = 1800
     shield_regeneration = 0.5
 
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
         
 
 class MegaShieldGen(shieldGen):
@@ -36,8 +36,8 @@ class MegaShieldGen(shieldGen):
     ringField = 2200
     shield_regeneration = 0.5
 
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
 
 
 class GigaShieldGen(shieldGen):
@@ -46,8 +46,8 @@ class GigaShieldGen(shieldGen):
     ringField = 2600
     shield_regeneration = 0.5
 
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
 
 
 class LumioneShieldGen(shieldGen):
@@ -56,8 +56,8 @@ class LumioneShieldGen(shieldGen):
     ringField = 550
     shield_regeneration = 1.25
     
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
 
 
 class HyperiumShieldGen(shieldGen):
@@ -66,8 +66,8 @@ class HyperiumShieldGen(shieldGen):
     ringField = 1100
     shield_regeneration = 2
 
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
 
 
 class HiggsShieldGen(shieldGen):
@@ -76,8 +76,8 @@ class HiggsShieldGen(shieldGen):
     ringField = 1650
     shield_regeneration = 2.825
 
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
 
 
 class DarkMatterShieldGen(shieldGen):
@@ -86,5 +86,5 @@ class DarkMatterShieldGen(shieldGen):
     ringField = 3000
     shield_regeneration = 3.75
 
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)

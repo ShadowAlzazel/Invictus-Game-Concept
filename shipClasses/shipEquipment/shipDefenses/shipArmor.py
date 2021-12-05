@@ -6,9 +6,9 @@ class armor:
     armorValue = 1
     armor_repair = 0
 
-    def __init__(self, vesse_ID):
+    def __init__(self, vessel_ID):
         self.armor_integrity = 100 #%
-        self.equipID = '-'.join([vesse_ID, 'ARMR'])
+        self.equipment_ID = '-'.join([vessel_ID, 'ARMR'])
 
     def armorDamage(self, damageNum, wPEN=0):
         p = wPEN
@@ -28,16 +28,16 @@ class TitaniumArmor(armor):
     armor_name = 'Titanium Armor'
     armorValue = 2
 
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
         
 
 class CarbonNanoThreadsArmor(armor):
     armor_name = 'Carbon-Nanothreads Armor'
     armorValue = 3.25
     
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
         
 
 class OrichalcumAlloyArmor(armor):
@@ -45,8 +45,8 @@ class OrichalcumAlloyArmor(armor):
     armorValue = 3.25
     armor_repair = 1.0
     
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
 
 
 class MythrilAlloyArmor(armor):
@@ -55,8 +55,8 @@ class MythrilAlloyArmor(armor):
     armor_repair = 1.75
 
 
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
     
 
 class LivingDurasteelArmor(armor):
@@ -65,24 +65,24 @@ class LivingDurasteelArmor(armor):
     armor_repair = 2.2
 
 
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
 
 
 class DurasteelArmor(armor):
     armor_name = 'Durasteel Armor'
     armorValue = 5.0
 
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID) 
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID) 
 
 
 class NeutroniumArmor(armor):
     armor_name = 'Neutronium Armor'
     armorValue = 6.2
     
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
         
 
 class AdamantiumAlloyArmor(armor):
@@ -90,13 +90,13 @@ class AdamantiumAlloyArmor(armor):
     armorValue = 6.0
     armor_repair = 2.46
 
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)
 
 
 class DarkNeutroniumArmor(armor):
     armor_name = 'Dark Neutronium Armor'
     armorValue = 7.77
 
-    def __init__(self, vesse_ID):
-        super().__init__(vesse_ID)
+    def __init__(self, vessel_ID):
+        super().__init__(vessel_ID)

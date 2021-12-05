@@ -10,7 +10,7 @@ class turnGame:
 
     def __init__(self, operationSpace):
         self.opsSpace = operationSpace
-        self.gameShips = operationSpace.spaceEntities['shipObject']
+        self.gameShips = operationSpace.spaceEntities['ship_entity']
         self.gameFleets = operationSpace.fleetEntities
         self.gameTurn = 0
         self.selectedHex = None #usually a hex
@@ -202,7 +202,7 @@ class turnGame:
                 g.gun_load_time = 0
             totalDamage += trueDamage
             salvoDamage = 0
-        print(aShip.vesse_ID, aShip.name, "Has done", totalDamage, "Total Damage to", bShip.vesse_ID, bShip.name)
+        print(aShip.vessel_ID, aShip.name, "Has done", totalDamage, "Total Damage to", bShip.vessel_ID, bShip.name)
         return True
 
 

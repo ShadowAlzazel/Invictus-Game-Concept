@@ -10,8 +10,8 @@ class double_A12_ProtonColliders(shipWeapon):
     gun_stats = {
         "ATK": 656, "RLD": 2, "HIT": 69, "RNG": 2, "QNT": 2, "PEN": 1, "DIS": 2
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber)
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber)
 
 
 class triple_A12_ProtonColliders(shipWeapon):
@@ -19,5 +19,5 @@ class triple_A12_ProtonColliders(shipWeapon):
     gun_stats = {
         "ATK": 656, "RLD": 2, "HIT": 69, "RNG": 2, "QNT": 3, "PEN": 1, "DIS": 2
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber)
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber)

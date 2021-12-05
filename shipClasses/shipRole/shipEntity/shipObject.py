@@ -2,7 +2,7 @@
 #"""-------------------------------SHIP-OBJECT-------------------------------------"""
 
 class Ship:
-    spaceEntity = 'shipObject'
+    entity_type = 'ship_entity'
     ammount = 0
     ship_type = 'CIV'
     ship_stats = {
@@ -13,11 +13,11 @@ class Ship:
     def __init__(self, hullnumber, name):
         Ship.ammount += 1
         self.operational = True
-        self.command = 'ASCS'
-        self.fleetName = 'FleetNull'
+        self.command = ''
+        self.fleetName = ''
         self.name = name
         self.hullnumber = hullnumber
-        self.vesse_ID = ''.join([self.ship_type, '-', str(self.hullnumber)])
+        self.vessel_ID = ''.join([self.ship_type, '-', str(self.hullnumber)])
         self.placeHex = []  #starSpace object
         self.orientation = 'R'
         self.radar = []  #radar object
@@ -43,7 +43,7 @@ class Ship:
             return damage_to_hull
         else: 
             self.hull = 0
-            print(self.vesse_ID, self.command, self.name, "has been destryed!")
+            print(self.vessel_ID, self.command, self.name, "has been destryed!")
             self._destroyShip()
 
 
@@ -123,7 +123,7 @@ class Ship:
         print("Name: ", end='')
         print(self.command,'-' , self.name, sep='')
         print("Vessel Identifier: ", end='')
-        print(self.vesse_ID)
+        print(self.vessel_ID)
         print("Ship Stats:")
         print(self.ship_stats)
         print("Primary Armament:")

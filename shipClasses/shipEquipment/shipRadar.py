@@ -1,27 +1,27 @@
 #ship radar object for hexes
 class hex_radar:
 
-    def __init__(self, vesse_ID, radarClass):
-        self.radarClass = int(radarClass)
-        self.equipID = '-'.join([vesse_ID, 'HXRDR', str(radarClass)])
+    def __init__(self, vessel_ID, radar_LIM):
+        self.radar_LIM = int(radar_LIM)
+        self.equipment_ID = '-'.join([vessel_ID, 'HXRDR', str(radar_LIM)])
 
 
     #ping nearby with radar
-    def radarPing(self, shipPlaceHex, aPlaceHex):
-        nearby, ring = self._findHexes(1, shipPlaceHex)
-        nearbyPing, ringPing = self._findHexes(1, aPlaceHex) 
+    def radarPing(self, ship_hex_place, pinged_hex):
+        nearby, ring = self._hex_finder(1, ship_hex_place)
+        nearbyPing, ringPing = self._hex_finder(1, pinged_hex) 
         enemyPing = False 
         for k, u in zip(nearby, nearbyPing):
-            if not k.empty and k.entity.command[0:3] != shipPlaceHex.entity.command[0:3]:
+            if not k.empty and k.entity.command[0:3] != ship_hex_place.entity.command[0:3]:
                 enemyPing = True 
-            if not u.empty and u.entity.command[0:3] != shipPlaceHex.entity.command[0:3]:
+            if not u.empty and u.entity.command[0:3] != ship_hex_place.entity.command[0:3]:
                 enemyPing = True
         return enemyPing
 
 
     #acquires a target and returns a range
-    def radarAcquisition(self, radarRange, shipPlaceHex, targetHex):
-        nearby, ring = self._findHexes(radarRange, shipPlaceHex) 
+    def radarAcquisition(self, radarRange, ship_hex_place, targetHex):
+        nearby, ring = self._hex_finder(radarRange, ship_hex_place) 
 
         #q = []
         #for j in ring:
@@ -31,18 +31,18 @@ class hex_radar:
         #    q.append(u)
         #print(q)
 
-        if targetHex.entity.command[0:3] != shipPlaceHex.entity.command[0:3]:
+        if targetHex.entity.command[0:3] != ship_hex_place.entity.command[0:3]:
             for z in range(1, radarRange + 1):
                 if targetHex in ring[z] and targetHex in nearby:
                     return z
 
 
     #track revealed targets
-    def radarTracking(self, radarRange, shipPlaceHex):
-        nearby, ring = self._findHexes(radarRange, shipPlaceHex) 
+    def radarTracking(self, radarRange, ship_hex_place):
+        nearby, ring = self._hex_finder(radarRange, ship_hex_place) 
         targetsSpace = []
         for k in nearby:
-            if not k.empty and k.entity.command[0:3] != shipPlaceHex.entity.command[0:3]:
+            if not k.empty and k.entity.command[0:3] != ship_hex_place.entity.command[0:3]:
                 if k.entity.detected or k.entity.revealed:
                     targetsSpace.append(k)
         #returns a starSpace
@@ -50,11 +50,11 @@ class hex_radar:
 
 
     #detect targets in range and stealthed
-    def radarDetection(self, radarRange, shipPlaceHex):
-        nearby, ring = self._findHexes(radarRange, shipPlaceHex) 
+    def radarDetection(self, radarRange, ship_hex_place):
+        nearby, ring = self._hex_finder(radarRange, ship_hex_place) 
         targetsSpace = []
         for k in nearby:
-            if not k.empty and k.entity.command[0:3] != shipPlaceHex.entity.command[0:3]:
+            if not k.empty and k.entity.command[0:3] != ship_hex_place.entity.command[0:3]:
                 u = self._detectionRange(ring, k, radarRange)
                 if u:
                     targetsSpace.append(k)
@@ -70,16 +70,16 @@ class hex_radar:
 
 
     #find hexes in rings
-    def _findHexes(self, requestedRange, aHexSpace):
+    def _hex_finder(self, requestedRange, aHexSpace):
         assert requestedRange != 0
         effRange = requestedRange 
-        if effRange > self.radarClass:
-            effRange = self.radarClass
+        if effRange > self.radar_LIM:
+            effRange = self.radar_LIM
         originHex = aHexSpace
         hexesNearby = []
         nearbyRing = [[aHexSpace]]
 
-        def hexesInRange(effRange, someHexRing, n=1): 
+        def hex_finder_recursor(effRange, someHexRing, n=1): 
             prevHexRing = someHexRing
             newHexRing = []
             for z in prevHexRing:
@@ -95,7 +95,7 @@ class hex_radar:
             nearbyRing.append(u)
 
             if n != effRange:
-                hexesInRange(effRange, newHexRing, n + 1)
+                hex_finder_recursor(effRange, newHexRing, n + 1)
 
             return hexesNearby, nearbyRing
-        return hexesInRange(effRange, [originHex])
+        return hex_finder_recursor(effRange, [originHex])

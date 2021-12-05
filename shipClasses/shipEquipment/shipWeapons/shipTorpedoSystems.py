@@ -12,5 +12,5 @@ class FLP5_DevestationTorpedoes(shipWeapon):
     gun_stats = {
         "ATK": 472, "RLD": 7, "HIT": 55, "RNG": 5, "QNT": 5, "PEN": 0, "DIS": 1
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber)
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber)

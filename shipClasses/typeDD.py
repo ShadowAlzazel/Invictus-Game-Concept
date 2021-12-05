@@ -18,7 +18,7 @@ class JohnstonClass(Destroyer):
     def __init__(self, hullnumber, name):
         JohnstonClass.ammount += 1
         super().__init__(hullnumber, name)
-        vID = self.vesse_ID
+        vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(AdvancedShieldGen(vID))
         self.defenses['armor_type'].append(TitaniumArmor(vID))
@@ -45,7 +45,7 @@ class ShimakazeClass(Destroyer):
     def __init__(self, hullnumber, name):
         ShimakazeClass.ammount += 1
         super().__init__(hullnumber, name)
-        vID = self.vesse_ID
+        vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(AdvancedShieldGen(vID))
         self.defenses['armor_type'].append(TitaniumArmor(vID))

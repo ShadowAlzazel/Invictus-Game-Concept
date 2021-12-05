@@ -10,8 +10,8 @@ class double_F20_MatterDisentegrators(shipWeapon):
     gun_stats = {
         "ATK": 1285, "RLD": 4, "HIT": 75, "RNG": 2, "QNT": 2, "PEN": 3, "DIS": 0.5
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber) 
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber) 
 
 
 class double_F14_MatterErasers(shipWeapon):
@@ -19,8 +19,8 @@ class double_F14_MatterErasers(shipWeapon):
     gun_stats = {
         "ATK": 775, "RLD": 4, "HIT": 75, "RNG": 2, "QNT": 2, "PEN": 3, "DIS": 0.5
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber) 
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber) 
 
 
 class double_F8_MatterFluxers(shipWeapon):
@@ -28,5 +28,5 @@ class double_F8_MatterFluxers(shipWeapon):
     gun_stats = {
         "ATK": 396, "RLD": 4, "HIT": 75, "RNG": 2, "QNT": 2, "PEN": 3, "DIS": 0.5
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber) 
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber) 

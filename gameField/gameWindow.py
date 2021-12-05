@@ -95,7 +95,7 @@ class spaceWindow:
                             self.gameScreen.blit(self.animatedHexes['moveHex'], (x, y))
 
             #check if ship
-            elif aHex.entity.spaceEntity == 'shipObject':
+            elif aHex.entity.entity_type == 'ship_entity':
                 if self.currentFleetCom[0:3] != aHex.entity.command[0:3] and aHex.entity.detected:
                     self.gameScreen.blit(self.animatedHexes['enemyHex'], (x, y))
                 elif self.currentFleetCom[0:3] == aHex.entity.command[0:3]:

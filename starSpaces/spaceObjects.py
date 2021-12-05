@@ -1,7 +1,7 @@
 #innanimate objects
 
 class spaceObject():
-    spaceEntity = 'spaceObject'
+    entity_type = 'spaceObject'
     ammount = 0
 
     def __init__(self, objectNum):

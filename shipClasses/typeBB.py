@@ -18,7 +18,7 @@ class EssexClass(Battleship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         EssexClass.ammount += 1
-        vID = self.vesse_ID
+        vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
         self.defenses['armor_type'].append(AdamantiumAlloyArmor(vID))
@@ -46,7 +46,7 @@ class AmagiClass(Battleship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         AmagiClass.ammount += 1
-        vID = self.vesse_ID
+        vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
         self.defenses['armor_type'].append(AdamantiumAlloyArmor(vID))
@@ -74,7 +74,7 @@ class VittorioVenetoClass(Battleship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         VittorioVenetoClass.ammount += 1
-        vID = self.vesse_ID
+        vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
         self.defenses['armor_type'].append(AdamantiumAlloyArmor(vID))
@@ -102,7 +102,7 @@ class HoodClass(Battleship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         HoodClass.ammount += 1
-        vID = self.vesse_ID
+        vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
         self.defenses['armor_type'].append(AdamantiumAlloyArmor(vID))
@@ -130,7 +130,7 @@ class PrinceOfWalesClass(Battleship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         PrinceOfWalesClass.ammount += 1
-        vID = self.vesse_ID
+        vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
         self.defenses['armor_type'].append(AdamantiumAlloyArmor(vID))
@@ -162,7 +162,7 @@ class NewJerseyClass(Battleship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         NewJerseyClass.ammount += 1 
-        vID = self.vesse_ID
+        vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
         self.defenses['armor_type'].append(DarkNeutroniumArmor(vID))
@@ -198,7 +198,7 @@ class DevestatorClass(Battleship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         DevestatorClass.ammount += 1 
-        vID = self.vesse_ID
+        vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
         self.defenses['armor_type'].append(DarkNeutroniumArmor(vID))

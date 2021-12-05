@@ -10,8 +10,8 @@ class triple_L17_GammaRayLasers(shipWeapon):
     gun_stats = {
         "ATK": 468, "RLD": 1, "HIT": 93, "RNG": 1, "QNT": 3, "PEN": 0, "DIS": 2.5
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber)
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber)
 
 
 class double_L13_XRayLasers(shipWeapon):
@@ -19,8 +19,8 @@ class double_L13_XRayLasers(shipWeapon):
     gun_stats = {
         "ATK": 303, "RLD": 1, "HIT": 94, "RNG": 1, "QNT": 2, "PEN": 0, "DIS": 2.5
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber)
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber)
 
 
 class triple_L13_XRayLasers(shipWeapon):
@@ -28,8 +28,8 @@ class triple_L13_XRayLasers(shipWeapon):
     gun_stats = {
         "ATK": 303, "RLD": 1, "HIT": 94, "RNG": 1, "QNT": 3, "PEN": 0, "DIS": 2.5
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber)
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber)
 
 
 class triple_L9_UltravioletLasers(shipWeapon):
@@ -37,8 +37,8 @@ class triple_L9_UltravioletLasers(shipWeapon):
     gun_stats = {
         "ATK": 191, "RLD": 1, "HIT": 96, "RNG": 1, "QNT": 3, "PEN": 0, "DIS": 2.5
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber)
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber)
 
 
 class triple_L5_WaveLasers(shipWeapon):
@@ -46,8 +46,8 @@ class triple_L5_WaveLasers(shipWeapon):
     gun_stats = {
         "ATK": 64, "RLD": 1, "HIT": 97, "RNG": 1, "QNT": 3, "PEN": 0, "DIS": 2.5
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber)
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber)
 
 
 class double_L5_WaveLasers(shipWeapon):
@@ -55,8 +55,8 @@ class double_L5_WaveLasers(shipWeapon):
     gun_stats = {
         "ATK": 64, "RLD": 1, "HIT": 97, "RNG": 1, "QNT": 2, "PEN": 0, "DIS": 2.5
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber)
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber)
 
 
 

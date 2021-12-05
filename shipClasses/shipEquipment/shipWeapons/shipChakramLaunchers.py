@@ -10,8 +10,8 @@ class broadside_A6_ChakramLaunchers(shipWeapon):
     gun_stats = {
         "ATK": 99, "RLD": 2, "HIT": 79, "RNG": 2, "QNT": 24, "PEN": 2, "DIS": 0.75
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber)
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber)
 
 
 class quadruple_A6_ChakramLaunchers(shipWeapon):
@@ -19,6 +19,6 @@ class quadruple_A6_ChakramLaunchers(shipWeapon):
     gun_stats = {
         "ATK": 99, "RLD": 2, "HIT": 79, "RNG": 2, "QNT": 4, "PEN": 2, "DIS": 0.75
     }
-    def __init__(self, vesse_ID, batteryNumber):
-        super().__init__(vesse_ID, batteryNumber)
+    def __init__(self, vessel_ID, batteryNumber):
+        super().__init__(vessel_ID, batteryNumber)
 
