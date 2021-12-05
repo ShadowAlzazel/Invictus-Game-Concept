@@ -1,101 +1,91 @@
 #ship radar object for hexes
 class hex_radar:
 
-    def __init__(self, vessel_ID, radar_LIM):
-        self.radar_LIM = int(radar_LIM)
-        self.equipment_ID = '-'.join([vessel_ID, 'HXRDR', str(radar_LIM)])
+    def __init__(self, vessel_ID, radar_class):
+        self.radar_class = int(radar_class)
+        self.equipment_ID = '-'.join([vessel_ID, 'HXRDR', str(radar_class)])
 
 
     #ping nearby with radar
-    def radarPing(self, ship_hex_place, pinged_hex):
-        nearby, ring = self._hex_finder(1, ship_hex_place)
-        nearbyPing, ringPing = self._hex_finder(1, pinged_hex) 
-        enemyPing = False 
-        for k, u in zip(nearby, nearbyPing):
+    def radar_pinger(self, ship_hex_place, pinged_hex):
+        hexes_nearby, ring = self._hex_finder(1, ship_hex_place)
+        hexes_nearby_ping, ringPing = self._hex_finder(1, pinged_hex) 
+        enemy_pinged = False 
+        for k, u in zip(hexes_nearby, hexes_nearby_ping):
             if not k.empty and k.entity.command[0:3] != ship_hex_place.entity.command[0:3]:
-                enemyPing = True 
+                enemy_pinged = True 
             if not u.empty and u.entity.command[0:3] != ship_hex_place.entity.command[0:3]:
-                enemyPing = True
-        return enemyPing
+                enemy_pinged = True
+        return enemy_pinged
 
 
     #acquires a target and returns a range
-    def radarAcquisition(self, radarRange, ship_hex_place, targetHex):
-        nearby, ring = self._hex_finder(radarRange, ship_hex_place) 
-
-        #q = []
-        #for j in ring:
-        #    u = []
-        #    for l in j:
-        #        u.append(l.hexCoord)
-        #    q.append(u)
-        #print(q)
-
-        if targetHex.entity.command[0:3] != ship_hex_place.entity.command[0:3]:
-            for z in range(1, radarRange + 1):
-                if targetHex in ring[z] and targetHex in nearby:
-                    return z
+    def radar_ballistics_finder(self, radar_range, ship_hex_place, target_hex):
+        hexes_nearby, hex_rings = self._hex_finder(radar_range, ship_hex_place) 
+        if target_hex.entity.command[0:3] != ship_hex_place.entity.command[0:3]:
+            for i in range(1, radar_range + 1):
+                if target_hex in hex_rings[i] and target_hex in hexes_nearby:
+                    return i
 
 
     #track revealed targets
-    def radarTracking(self, radarRange, ship_hex_place):
-        nearby, ring = self._hex_finder(radarRange, ship_hex_place) 
-        targetsSpace = []
-        for k in nearby:
+    def radar_tracker(self, radar_range, ship_hex_place):
+        hexes_nearby, hex_rings = self._hex_finder(radar_range, ship_hex_place) 
+        targets_hex_places = []
+        for k in hexes_nearby:
             if not k.empty and k.entity.command[0:3] != ship_hex_place.entity.command[0:3]:
                 if k.entity.detected or k.entity.revealed:
-                    targetsSpace.append(k)
+                    targets_hex_places.append(k)
         #returns a starSpace
-        return targetsSpace
+        return targets_hex_places
 
 
     #detect targets in range and stealthed
-    def radarDetection(self, radarRange, ship_hex_place):
-        nearby, ring = self._hex_finder(radarRange, ship_hex_place) 
-        targetsSpace = []
-        for k in nearby:
+    def radar_detecter(self, radar_range, ship_hex_place):
+        hexes_nearby, hex_rings = self._hex_finder(radar_range, ship_hex_place) 
+        target_hex_places = []
+        for k in hexes_nearby:
             if not k.empty and k.entity.command[0:3] != ship_hex_place.entity.command[0:3]:
-                u = self._detectionRange(ring, k, radarRange)
+                u = self._detect_enemy_limiter(hex_rings, k, radar_range)
                 if u:
-                    targetsSpace.append(k)
+                    target_hex_places.append(k)
         #returns a starSpace
-        return targetsSpace
+        return target_hex_places
 
 
     #check if the stealth of the ship is within detection range
-    def _detectionRange(self, radarRing, eShipHex, detectionRange):
-        shipStealth = eShipHex.entity.ship_stats['STH']
-        enemyDetected = any(eShipHex in radarRing[z] for z in range(1, (detectionRange - shipStealth) + 1))
-        return enemyDetected
+    def _detect_enemy_limiter(self, hex_ring, enemy_hex_place, detectionRange):
+        enemy_stealth = enemy_hex_place.entity.ship_stats['STH']
+        enemy_detected_bool = any(enemy_hex_place in hex_ring[z] for z in range(1, (detectionRange - enemy_stealth) + 1))
+        return enemy_detected_bool
 
 
     #find hexes in rings
-    def _hex_finder(self, requestedRange, aHexSpace):
-        assert requestedRange != 0
-        effRange = requestedRange 
-        if effRange > self.radar_LIM:
-            effRange = self.radar_LIM
-        originHex = aHexSpace
-        hexesNearby = []
-        nearbyRing = [[aHexSpace]]
+    def _hex_finder(self, requested_range, some_hex_space):
+        assert requested_range != 0
+        range_EFF = requested_range 
+        if range_EFF > self.radar_class:
+            range_EFF = self.radar_class
+        origin_hex = some_hex_space
+        hexes_nearby = []
+        hex_rings = [[some_hex_space]]
 
-        def hex_finder_recursor(effRange, someHexRing, n=1): 
-            prevHexRing = someHexRing
-            newHexRing = []
-            for z in prevHexRing:
+        def hex_finder_recursor(range_EFF, prev_hex_ring, n=1): 
+            new_hex_ring = []
+            for z in prev_hex_ring:
                 for y in z.neighbors:
-                    if y not in newHexRing and y != originHex and y not in prevHexRing:
-                        newHexRing.append(y)
+                    if y not in new_hex_ring and y != origin_hex and y not in prev_hex_ring:
+                        new_hex_ring.append(y)
 
-            u = []
-            for k in newHexRing:
-                if k not in hexesNearby:
-                    hexesNearby.append(k)
-                    u.append(k)
-            nearbyRing.append(u)
+            u_ring = []
+            for k in new_hex_ring:
+                if k not in hexes_nearby:
+                    hexes_nearby.append(k)
+                    u_ring.append(k)
+            hex_rings.append(u_ring)
 
-            if n != effRange:
-                hex_finder_recursor(effRange, newHexRing, n + 1)
+            if n != range_EFF:
+                hex_finder_recursor(range_EFF, new_hex_ring, n + 1)
 
-            return hexesNearby, nearbyRing
-        return hex_finder_recursor(effRange, [originHex])
+            return hexes_nearby, hex_rings
+        return hex_finder_recursor(range_EFF, [origin_hex])

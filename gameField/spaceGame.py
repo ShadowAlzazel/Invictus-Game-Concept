@@ -8,99 +8,99 @@ class turnGame:
     #        'Attack': ['Attack', 'attack', 'atk', 'Atk', 'a', 'A', 'ATK'], 'AutoAttack': ['AutAttack', 'autoattack', 'auto', 'aa', 'AA']
     #        }
 
-    def __init__(self, operationSpace):
-        self.opsSpace = operationSpace
-        self.gameShips = operationSpace.spaceEntities['ship_entity']
-        self.gameFleets = operationSpace.fleetEntities
-        self.gameTurn = 0
-        self.selectedHex = None #usually a hex
-        self.activeFleet = self.gameFleets[-1]
-        self.activeFleetIndex = len(self.gameFleets) - 1
-        for f in self.gameFleets:
-            self._updateShips(f)
-            self._detectingEnemies(f)     
+    def __init__(self, map_hexes):
+        self.opsSpace = map_hexes
+        self.game_ships = map_hexes.game_entities['ship_entity']
+        self.game_fleets = map_hexes.fleet_entities
+        self.game_turn = 0
+        self.selected_hex = None #usually a hex
+        self.active_fleet = self.game_fleets[-1]
+        self.active_fleet_index = len(self.game_fleets) - 1
+        for f in self.game_fleets:
+            self._update_ships(f)
+            self._update_detections(f)     
 
 
     #fleet Actions
-    def fleetTurn(self):
-        self.selectedHex = None 
-        q = self.activeFleetIndex
-        if q == len(self.gameFleets) - 1:
-            self.gameTurn += 1
-            self.activeFleetIndex = 0
-            self.activeFleet = self.gameFleets[0]
+    def next_fleet_turn(self):
+        self.selected_hex = None 
+        q = self.active_fleet_index
+        if q == len(self.game_fleets) - 1:
+            self.game_turn += 1
+            self.active_fleet_index = 0
+            self.active_fleet = self.game_fleets[0]
         else:
-            self.activeFleetIndex += 1
-            self.activeFleet = self.gameFleets[q + 1]
-        self._updateShips(self.activeFleet)
-        self._detectingEnemies(self.activeFleet)
+            self.active_fleet_index += 1
+            self.active_fleet = self.game_fleets[q + 1]
+        self._update_ships(self.active_fleet)
+        self._update_detections(self.active_fleet)
 
 
     #update ships in fleet turn
-    def _updateShips(self, aFleet):
-        for ships in aFleet.fleet_ships:
-            ships.shipMovement = ships.ship_stats['SPD']
-            ships.shipAttacks = 1
-            ships.shipActive = True
-            ships.reload_battery()
-            ships.recharge_defenses()
+    def _update_ships(self, some_fleet):
+        for s in some_fleet.fleet_ships:
+            s.ship_moves = s.ship_stats['SPD']
+            s.ship_attacks = 1
+            s.ship_active = True
+            s.reload_battery()
+            s.recharge_defenses()
 
 
     #select shiphex
-    def selectHex(self, aHex):
+    def select_hex(self, some_hex):
         #check if there is a previously selected hex
-        if self.selectedHex:
+        if self.selected_hex:
             #check if hexShip has any actions
-            if self.selectedHex.entity.shipMovement == 0:
+            if self.selected_hex.entity.ship_moves == 0:
                 #check if any targets available
-                nearbyShipHexes = self.selectedHex.entity.track_targets()
+                nearbyShipHexes = self.selected_hex.entity.track_targets()
                 if not nearbyShipHexes:
-                    self.selectedHex.entity.shipActive = False
+                    self.selected_hex.entity.ship_active = False
 
-            result = self._shipActions(aHex)
-            self._detectingEnemies(self.activeFleet)
+            result = self._shipActions(some_hex)
+            self._update_detections(self.active_fleet)
             if not result:
-                self.selectedHex = None 
-                self.selectHex(aHex)
+                self.selected_hex = None 
+                self.select_hex(some_hex)
 
-        aShip = aHex.entity
+        aShip = some_hex.entity
         #can only select a ship
-        if not aHex.empty and self.activeFleet.fleetCommand[0:3] == aShip.command[0:3] and aShip.operational:
-            self.selectedHex = aHex
+        if not some_hex.empty and self.active_fleet.fleetCommand[0:3] == aShip.command[0:3] and aShip.operational:
+            self.selected_hex = some_hex
             return True
         return False 
         
 
     #all availabe ship actions
-    def _shipActions(self, aHex):
+    def _shipActions(self, some_hex):
         result = False
-        if not self.selectedHex.entity.shipActive:
+        if not self.selected_hex.entity.ship_active:
             print("No possible actions left")
             return False
 
         #check if moves available
-        if self.selectedHex.entity.shipMovement != 0:
-            result = self._moveShipAction(aHex)     
+        if self.selected_hex.entity.ship_moves != 0:
+            result = self._moveShipAction(some_hex)     
         else:
             print("No Movements available")   
 
         #if no movement triggered, check for attacks
         if not result:
-            result = self._attackShipAction(aHex)
+            result = self._attackShipAction(some_hex)
 
         return result
 
 
     #detect ships for fleet
-    def _detectingEnemies(self, aFleet):
-        for s in self.gameShips:
-            if s.command[0:3] != aFleet.fleetCommand[0:3]:
+    def _update_detections(self, some_fleet):
+        for s in self.game_ships:
+            if s.command[0:3] != some_fleet.fleetCommand[0:3]:
                 s.detected = False
             else: 
                 s.detected = True 
 
         enemiesDetected = []
-        for a in aFleet.fleet_ships:
+        for a in some_fleet.fleet_ships:
             if a.operational:
                 for x in a.detect_targets():
                     enemiesDetected.append(x)
@@ -110,40 +110,40 @@ class turnGame:
 
 
     #attack action; check for minimum  range, and guns in ranges
-    def _attackShipAction(self, aHex):
-        aShip = self.selectedHex.entity
+    def _attackShipAction(self, some_hex):
+        aShip = self.selected_hex.entity
         if not aShip.guns_primed():
-            aShip.shipAttacks = 0
+            aShip.ship_attacks = 0
             print("No guns loaded")
             return False
 
         #selected hex must be a target
         nearbyShipHexes = aShip.track_targets()
-        if aHex not in nearbyShipHexes:
+        if some_hex not in nearbyShipHexes:
             return False
 
-        result = self._shipSalvoAction(aShip, aHex.entity)
+        result = self._shipSalvoAction(aShip, some_hex.entity)
         return result
 
 
     #move ship on board
-    def _moveShipAction(self, aHex):
+    def _moveShipAction(self, some_hex):
         result = False
-        selectedShip = self.selectedHex.entity
+        selectedShip = self.selected_hex.entity
         #check if selcted hex direction does not match orientation
-        if aHex.empty and (aHex in self.selectedHex.neighbors) and (aHex.directions[selectedShip.orientation] != self.selectedHex.hexCoord or selectedShip.ship_type == 'DD' or selectedShip.ship_type == 'CS'):
-            if selectedShip.ship_type == 'BB' and self.opsSpace.starHexes[aHex.directions[selectedShip.orientation]] in self.selectedHex.neighbors:
+        if some_hex.empty and (some_hex in self.selected_hex.neighbors) and (some_hex.directions[selectedShip.orientation] != self.selected_hex.hexCoord or selectedShip.ship_type == 'DD' or selectedShip.ship_type == 'CS'):
+            if selectedShip.ship_type == 'BB' and self.opsSpace.starHexes[some_hex.directions[selectedShip.orientation]] in self.selected_hex.neighbors:
                 return result
 
-            if selectedShip.shipMovement != 0:
-                result = self.opsSpace.moveClickEntity(selectedShip, aHex)
+            if selectedShip.ship_moves != 0:
+                result = self.opsSpace.moveClickEntity(selectedShip, some_hex)
                 if result:
-                    selectedShip.shipMovement -= 1
+                    selectedShip.ship_moves -= 1
                     #check if hex controlled
-                    if selectedShip.shipMovement != 0:
-                        enemyControlled = selectedShip.ping_hex(aHex)
+                    if selectedShip.ship_moves != 0:
+                        enemyControlled = selectedShip.ping_hex(some_hex)
                         if enemyControlled:
-                            selectedShip.shipMovement -= 1
+                            selectedShip.ship_moves -= 1
 
             else:
                 print("No movements left!") 
@@ -186,10 +186,10 @@ class turnGame:
                     if self.gunHitCalc(g.gun_stats['HIT'], aShip.ship_stats['ACC'], bShip.ship_stats['EVA']) is True:
                         salvoDamage += self.gunDamageCalc(g.gun_stats['ATK'], aShip.ship_stats['FP'], aShip.ship_stats['LCK'], bShip.ship_stats['LCK'], batPow)
 
-                trueDamage = bShip.takeDamage(salvoDamage, g.gun_stats['PEN'], g.gun_stats['DIS'])
+                trueDamage = bShip.take_damage(salvoDamage, g.gun_stats['PEN'], g.gun_stats['DIS'])
                 if not bShip.operational:
                     m = bShip.placeHex.hexCoord
-                    self.gameShips.remove(bShip) 
+                    self.game_ships.remove(bShip) 
                     self.opsSpace.hexesFull.remove(self.opsSpace.starHexes[m])
                     self.opsSpace.starHexes[m].entity = []
                     self.opsSpace.starHexes[m].empty = True

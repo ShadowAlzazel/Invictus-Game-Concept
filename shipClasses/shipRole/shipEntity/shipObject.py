@@ -31,7 +31,7 @@ class Ship:
 
 
     #damage function that takes in a value 
-    def takeDamage(self, damage_amount, wep_PEN=0, wep_DIS=1):
+    def take_damage(self, damage_amount, wep_PEN=0, wep_DIS=1):
         if self.shields > damage_amount and wep_DIS > 0:
             damage_to_shields = self.defenses['shield_gen'][0].shieldDamage(damage_amount, wep_DIS)
             self.shields -= damage_to_shields
@@ -44,11 +44,11 @@ class Ship:
         else: 
             self.hull = 0
             print(self.vessel_ID, self.command, self.name, "has been destryed!")
-            self._destroyShip()
+            self._destroy_self_ship()
 
 
     #destroy ship
-    def _destroyShip(self):
+    def _destroy_self_ship(self):
         self.operational = False
 
 
@@ -61,13 +61,13 @@ class Ship:
 
     #ping nearby hex to see if controlled
     def ping_hex(self, aHex):
-        p = self.radar.radarPing(self.placeHex, aHex)
+        p = self.radar.radar_pinger(self.placeHex, aHex)
         return p
 
 
     #find targets with radar
     def detect_targets(self):
-        targetsHexes = self.radar.radarDetection(self.ship_stats['RDR'], self.placeHex)
+        targetsHexes = self.radar.radar_detecter(self.ship_stats['RDR'], self.placeHex)
         return targetsHexes
 
 
@@ -80,13 +80,13 @@ class Ship:
 
         for w in guns_ready_in_range:
             battery_ranges.append(w.gun_stats['RNG'])    
-        targetsHexes = self.radar.radarTracking(max(battery_ranges), self.placeHex)
+        targetsHexes = self.radar.radar_tracker(max(battery_ranges), self.placeHex)
         return targetsHexes
 
 
     #find ranges 
     def range_finder(self, target_ship):
-        r = self.radar.radarAcquisition(self.ship_stats['RDR'], self.placeHex, target_ship.placeHex)
+        r = self.radar.radar_ballistics_finder(self.ship_stats['RDR'], self.placeHex, target_ship.placeHex)
         return r
 
 
@@ -118,7 +118,7 @@ class Ship:
 
 
     #inspection function to look at stats
-    def fullInspect(self):
+    def full_inspect(self):
         print("--<->---------------------------------------------------------------------<->--")
         print("Name: ", end='')
         print(self.command,'-' , self.name, sep='')
@@ -128,7 +128,7 @@ class Ship:
         print(self.ship_stats)
         print("Primary Armament:")
         for x in self.armaments['primary_battery']:
-            print(x.gunName, "in Turret", x.battery_ID)
+            print(x.gun_name, "in Turret", x.battery_ID)
         print("Ship Defenses:")
         print(self.defenses['armor_type'][0].armor_name)
         print(self.defenses['shield_gen'][0].shield_name)

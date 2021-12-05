@@ -26,8 +26,8 @@ class spaceWindow:
         self.XNFF_SHIP_HEX_IMG = XNFF_SHIP_HEX_IMG
         self.ROT_XNFF_SHIP_HEX_IMG = XNFF_SHIP_HEX_IMG
         #selections
-        self.selectedHexNum = -1
-        self.selectedHex = []
+        self.selected_hexNum = -1
+        self.selected_hex = []
         self.shipClicked = False 
         self.targetedHexes = []
         self.currentFleetCom = 'NNNN'
@@ -49,7 +49,7 @@ class spaceWindow:
 
     #draw hexes on board
     def drawHexes(self, currentFleetCom, shipHex=[]):
-        self.selectedHex = shipHex
+        self.selected_hex = shipHex
         self.currentFleetCom = currentFleetCom
         self.gameScreen.blit(FIT_SPACE, (0, 0))
 
@@ -89,9 +89,9 @@ class spaceWindow:
             #check if empty for move
             if aHex.empty:
                 if self.shipClicked:
-                    aShip = self.selectedHex.entity
-                    if aHex in self.selectedHex.neighbors and aShip.shipMovement != 0 and (aHex.directions[aShip.orientation] != self.selectedHex.hexCoord or aShip.ship_type == 'DD' or aShip.ship_type == 'CS'):
-                        if not (aShip.ship_type == 'BB' and self.opsSpace.starHexes[aHex.directions[aShip.orientation]] in self.selectedHex.neighbors):
+                    aShip = self.selected_hex.entity
+                    if aHex in self.selected_hex.neighbors and aShip.ship_moves != 0 and (aHex.directions[aShip.orientation] != self.selected_hex.hexCoord or aShip.ship_type == 'DD' or aShip.ship_type == 'CS'):
+                        if not (aShip.ship_type == 'BB' and self.opsSpace.starHexes[aHex.directions[aShip.orientation]] in self.selected_hex.neighbors):
                             self.gameScreen.blit(self.animatedHexes['moveHex'], (x, y))
 
             #check if ship
@@ -115,7 +115,7 @@ class spaceWindow:
         
                 #clicked
                 if self.shipClicked:
-                    if aHex.hexCoord == self.selectedHex.hexCoord:
+                    if aHex.hexCoord == self.selected_hex.hexCoord:
                         self.gameScreen.blit(self.animatedHexes['clickHex'], (x, y))
         
 

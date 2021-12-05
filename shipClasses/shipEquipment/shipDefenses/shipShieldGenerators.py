@@ -2,28 +2,28 @@
 
 #"""---------------------------------SHIELD-OBJECT----------------------------------"""
 class shieldGen:
-    energyField = 10
-    ringField = 100 #initial shield
+    mitigation_field = 10
+    phase_field = 100 #initial shield
     shield_regeneration = 1 #percantage
 
     def __init__(self, vessel_ID): 
-        self.damageAbsorbed = 0
+        self.damage_deflected = 0
         self.equipment_ID = '-'.join([vessel_ID, 'SGEN'])
 
-    def shieldDamage(self, damageNum, wDIS):
-        if damageNum < self.energyField or self.damageAbsorbed < self.ringField:
-            trueDamage = 0  
+    def shieldDamage(self, damage_amount, wep_DIS):
+        if damage_amount < self.mitigation_field or self.damage_deflected < self.phase_field:
+            true_damage = 0  
         else:
-            trueDamage = damageNum * wDIS
-        self.damageAbsorbed += damageNum
-        return trueDamage
+            true_damage = damage_amount * wep_DIS
+        self.damage_deflected += damage_amount
+        return true_damage
 
 
 #"""-----------------------------------SHIP-SHIELDS-----------------------------------"""
 class AdvancedShieldGen(shieldGen):
     shield_name = 'Hyper Shield-Generator'
-    energyField = 110
-    ringField = 1800
+    mitigation_field = 110
+    phase_field = 1800
     shield_regeneration = 0.5
 
     def __init__(self, vessel_ID):
@@ -32,8 +32,8 @@ class AdvancedShieldGen(shieldGen):
 
 class MegaShieldGen(shieldGen):
     shield_name = 'Mega Shield-Generator'
-    energyField = 150
-    ringField = 2200
+    mitigation_field = 150
+    phase_field = 2200
     shield_regeneration = 0.5
 
     def __init__(self, vessel_ID):
@@ -42,8 +42,8 @@ class MegaShieldGen(shieldGen):
 
 class GigaShieldGen(shieldGen):
     shield_name = 'Giga Shield-Generator'
-    energyField = 200
-    ringField = 2600
+    mitigation_field = 200
+    phase_field = 2600
     shield_regeneration = 0.5
 
     def __init__(self, vessel_ID):
@@ -52,8 +52,8 @@ class GigaShieldGen(shieldGen):
 
 class LumioneShieldGen(shieldGen):
     shield_name = 'Lumione Shield-Generator'
-    energyField = 30
-    ringField = 550
+    mitigation_field = 30
+    phase_field = 550
     shield_regeneration = 1.25
     
     def __init__(self, vessel_ID):
@@ -62,8 +62,8 @@ class LumioneShieldGen(shieldGen):
 
 class HyperiumShieldGen(shieldGen):
     shield_name = 'Hyper Shield-Generator'
-    energyField = 50
-    ringField = 1100
+    mitigation_field = 50
+    phase_field = 1100
     shield_regeneration = 2
 
     def __init__(self, vessel_ID):
@@ -72,8 +72,8 @@ class HyperiumShieldGen(shieldGen):
 
 class HiggsShieldGen(shieldGen):
     shield_name = 'Higgs Shield-Generator'
-    energyField = 70
-    ringField = 1650
+    mitigation_field = 70
+    phase_field = 1650
     shield_regeneration = 2.825
 
     def __init__(self, vessel_ID):
@@ -82,8 +82,8 @@ class HiggsShieldGen(shieldGen):
 
 class DarkMatterShieldGen(shieldGen):
     shield_name = 'Dark Energy Shield-Generator'
-    energyField = 120
-    ringField = 3000
+    mitigation_field = 120
+    phase_field = 3000
     shield_regeneration = 3.75
 
     def __init__(self, vessel_ID):
