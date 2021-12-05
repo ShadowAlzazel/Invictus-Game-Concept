@@ -27,19 +27,4 @@ class level():
         else:
             print("Invalid Level")
 
-    #def __init__(self, name, length, width, rho, fleets, locations):
-    #    self.name = name
-    #    self.level_hex_map =  create_map_hexes(length, width, rho)
-    #    self.level_fleets = [x for x in fleets]
-    #    self.fleet_spawn = locations 
-    #    for i, x in enumerate(self.level_fleets):
-    #        launch_fleet(x)
-    #        x.spawn_fleet(self.level_hex_map, locations[i])
-    #    self.areaGame = turnGame(self.level_hex_map)
-
-
-#fleet1 = space_fleet(astraFleets[0]['ASC']['fleetNames'][1], 'ASC')
-#fleet2 = space_fleet(astraFleets[0]['XNFF']['fleetNames'][0], 'XNFF')
-#level1 = level(14, 10, 0 ,(fleet1, fleet2), [40, 104])
-
 #uLvl = level("level_Test")

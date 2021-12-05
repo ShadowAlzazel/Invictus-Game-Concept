@@ -25,13 +25,13 @@ class base_hex_map:
     
     def __init__(self, length, width):
         n = 0
-        self.l = length
-        self.w = width
+        self.map_length = length
+        self.map_width = width
         self.space_hexes = []
         self.hexes_full = []
         self.fleet_entities = []
         self.game_entities = {'spaceObject': [], 'ship_entity': []}
-        for n in range(self.l * self.w):
+        for n in range(length * width):
             self.space_hexes.append(space_hex(n))
 
 
