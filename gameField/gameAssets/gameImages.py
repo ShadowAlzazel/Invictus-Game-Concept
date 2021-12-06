@@ -1,25 +1,22 @@
 import pygame
-from . gameConstants import LENGTH, WIDTH
+from . gameConstants import LENGTH, RES_X, RES_Y, WIDTH
 
 #----------------------------IMAGES-----------------------------------------
 
 GAME_ICON = pygame.image.load('gameField/gameAssets/shipIconP2.png')
 
-#normal hexes
-EMPTY_HEX_IMG = pygame.image.load('gameField/gameAssets/emptyHex.png')
-ASCS_SHIP_HEX_IMG = pygame.image.load('gameField/gameAssets/ASCSshipHex.png')
-XNFF_SHIP_HEX_IMG = pygame.image.load('gameField/gameAssets/XNFFshipHex.png')
+#ship images
+ASCS_SHIP_HEX_IMG = pygame.image.load('gameField/gameAssets/ASC_ship2_icon32.png')
+XNFF_SHIP_HEX_IMG = pygame.image.load('gameField/gameAssets/XNF_ship2_icon32.png')
 
 #Animated Hexes
-GRID_HEX_BASE_0 = pygame.image.load('gameField/gameAssets/hexTemp6.png')
-GRID_HEX_ANI_B0 = pygame.image.load('gameField/gameAssets/hexTemp5.png')
-GRID_HEX_ANI_BASE = pygame.image.load('gameField/gameAssets/hexBase2.png')
-GRID_HEX_ANI_EMPTY = pygame.image.load('gameField/gameAssets/hexEmpty3.png')
-GRID_HEX_ANI_ENEMY = pygame.image.load('gameField/gameAssets/hexEnemy.png')
-GRID_HEX_ANI_ALLY =  pygame.image.load('gameField/gameAssets/hexAlly.png')
-GRID_HEX_ANI_CLICK = pygame.image.load('gameField/gameAssets/hexClick.png')
-GRID_HEX_ANI_MOVE = pygame.image.load('gameField/gameAssets/hexMove.png')
-GRID_HEX_ANI_TARGET = pygame.image.load('gameField/gameAssets/hexTarget.png')
+GRID_HEX_ANI_BASE = pygame.image.load('gameField/gameAssets/hex_base_blue32.png')
+GRID_HEX_ANI_EMPTY = pygame.image.load('gameField/gameAssets/hex_base_floati32.png')
+GRID_HEX_ANI_ENEMY = pygame.image.load('gameField/gameAssets/hex_base_enemy32.png')
+GRID_HEX_ANI_ALLY =  pygame.image.load('gameField/gameAssets/hex_base_ally32.png')
+GRID_HEX_ANI_CLICK = pygame.image.load('gameField/gameAssets/hex_base_click32.png')
+GRID_HEX_ANI_MOVE = pygame.image.load('gameField/gameAssets/hex_base_move32.png')
+GRID_HEX_ANI_TARGET = pygame.image.load('gameField/gameAssets/hex_base_target32.png')
 
 #Fonts
 FONT_1A = pygame.image.load('gameField/gameAssets/font1div.png')
