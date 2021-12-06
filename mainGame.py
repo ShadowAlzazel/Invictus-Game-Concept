@@ -11,47 +11,47 @@ def main():
     #set up main game screen
     pygame.display.set_caption("INVICTUS: SAMAR")
     pygame.display.set_icon(GAME_ICON)
-    gameScreen = pygame.display.set_mode((LENGTH, WIDTH))
-    gameScreen.blit(FIT_SPACE, (0, 0))
+    game_screen = pygame.display.set_mode((LENGTH, WIDTH))
+    game_screen.blit(FIT_SPACE, (0, 0))
     pygame.display.update()
 
-    global gameFont2A
-    gameFont1A = Font(FONT_1A, 3)
-    gameFont2A = Font(FONT_2A, 3)
+    global game_font_2A
+    game_font_1A = Font(FONT_1A, 3)
+    game_font_2A = Font(FONT_2A, 3)
 
     #variables
-    mainRunning = True
-    mouseClick = False
+    main_running = True
+    mouse_clicked = False
 
     #time
-    gameClock = pygame.time.Clock()
+    game_clock = pygame.time.Clock()
 
-    while mainRunning:
-        gameClock.tick(FPS)
-        gameScreen.blit(FIT_SPACE, (0, 0))
+    while main_running:
+        game_clock.tick(FPS)
+        game_screen.blit(FIT_SPACE, (0, 0))
         mx, my = pygame.mouse.get_pos()
 
         #menu buttons
-        button1 = pygame.Rect(50, 100, 200, 50)
-        if button1.collidepoint((mx, my)) and mouseClick: 
-            combatGameMenu(gameScreen)
+        button_menu_start = pygame.Rect(50, 100, 200, 50)
+        if button_menu_start.collidepoint((mx, my)) and mouse_clicked: 
+            combatGameMenu(game_screen)
 
-        pygame.draw.rect(gameScreen, (2, 2, 2), button1)
-        gameFont2A.render_font(gameScreen, 'INVICTUS SAMAR', (50, 100))
+        pygame.draw.rect(game_screen, (2, 2, 2), button_menu_start)
+        game_font_2A.render_font(game_screen, 'INVICTUS SAMAR', (50, 100))
 
         #event loop
-        mouseClick = False
+        mouse_clicked = False
         for event in pygame.event.get():
             if event.type == QUIT:
                 print("Quitting...")
-                mainRunning = False 
+                main_running = False 
 
             if ((event.type == KEYDOWN and event.key == K_ESCAPE) or (event.type == KEYDOWN and event.key == K_LALT and event.key == K_F4)):
                 print("Quitting...")
-                mainRunning = False
+                main_running = False
 
             if event.type == MOUSEBUTTONDOWN and event.button == 1:
-                mouseClick = True 
+                mouse_clicked = True 
 
         pygame.display.update()
     #end game
@@ -61,178 +61,182 @@ def main():
 
 #------------------------------------------------------------------------------------------
 #menu for combat 
-def combatGameMenu(gameScreen):
+def combatGameMenu(game_screen):
 
     #variables 
-    gameRunning = True
-    mouseClick = False 
+    game_running = True
+    mouse_clicked = False 
 
     #time 
-    gameClock = pygame.time.Clock()
+    game_clock = pygame.time.Clock()
 
-    while gameRunning:
-        gameClock.tick(FPS)
-        gameScreen.blit(FIT_SPACE, (0, 0))
+    while game_running:
+        game_clock.tick(FPS)
+        game_screen.blit(FIT_SPACE, (0, 0))
         mx, my = pygame.mouse.get_pos()
 
-        button2 = pygame.Rect(50, 200, 200, 50)
-        if button2.collidepoint((mx, my)) and mouseClick:
+        button_game_selecter = pygame.Rect(50, 200, 200, 50)
+        if button_game_selecter.collidepoint((mx, my)) and mouse_clicked:
             #WIP currently testing presets
             #have different buttons change level number and create levels
             level = "level_Test" 
-            combatGame(gameScreen, level)
+            combatGame(game_screen, level)
 
-        pygame.draw.rect(gameScreen, (2, 2, 2), button2)
-        gameFont2A.render_font(gameScreen, 'COMBATGAME', (50, 200))
+        pygame.draw.rect(game_screen, (2, 2, 2), button_game_selecter)
+        game_font_2A.render_font(game_screen, 'COMBATGAME', (50, 200))
 
         #event loop
-        mouseClick = False
+        mouse_clicked = False
         for event in pygame.event.get():
             if event.type == QUIT:
                 print("Quitting...")
-                gameRunning = False 
+                game_running = False 
 
             if (event.type == KEYDOWN and event.key == K_ESCAPE):
                 print("Quitting...")
-                gameRunning = False 
+                game_running = False 
 
             if event.type == MOUSEBUTTONDOWN and event.button == 1:
-                mouseClick = True 
+                mouse_clicked = True 
 
         pygame.display.update() 
 
 
 #-------------------------------------------------------------------------------------------
 #combat game
-def combatGame(gameScreen, pLevel):
+def combatGame(game_screen, selcted_level):
     
-    gameLevel = None 
+    combat_level = None 
     #levels
-    gameLevel = level(pLevel)
-    if not gameLevel:
+    combat_level = level(selcted_level)
+    if not combat_level:
         return
 
     #create new game window
-    currentFleetCom = gameLevel.areaGame.active_fleet.fleetCommand
-    combatWindow = spaceWindow(gameLevel.level_hex_map, gameScreen, HEX_SIZE)
-    gameLevel.areaGame.next_fleet_turn()
-    combatWindow.drawHexes(currentFleetCom)
+    active_fleet_command = combat_level.areaGame.active_fleet.fleet_command
+    combat_screen = spaceWindow(combat_level.level_hex_map, game_screen, HEX_SIZE)
+    combat_level.areaGame.next_fleet_turn()
+    combat_screen.draw_hexes(active_fleet_command)
     pygame.display.update()
 
     #animation calls
-    animateGridHexes = pygame.USEREVENT + 1
-    pygame.time.set_timer(animateGridHexes, 300)
+    animate_game_hexes = pygame.USEREVENT + 1
+    pygame.time.set_timer(animate_game_hexes, 150)
 
 
     #variables 
-    gameRunning = True 
-    moveUp, moveDown, moveLeft, moveRight = False, False, False, False
+    game_running = True 
+    move_window_up, move_window_down, move_window_left, move_window_right = False, False, False, False
     framerate = FPS
 
     #time 
-    gameClock = pygame.time.Clock()
-    lastFrameTime = time.perf_counter()
-    lastSec = time.perf_counter()
+    game_clock = pygame.time.Clock()
+    last_frame_time = time.perf_counter()
+    last_second = time.perf_counter()
     a = 0
 
-    while gameRunning:
-        gameClock.tick(framerate)
+    while game_running:
+        game_clock.tick(framerate)
         #frame timing
-        dt = time.perf_counter() - lastFrameTime
+        dt = time.perf_counter() - last_frame_time
         dt *= framerate 
-        lastFrameTime = time.perf_counter()
+        last_frame_time = time.perf_counter()
 
         #frame counting 
         a += 1
-        if time.perf_counter() > lastSec + 1:
-            lastSec = time.perf_counter()
+        if time.perf_counter() > last_second + 1:
+            last_second = time.perf_counter()
             print("True FPS:", a) 
             a = 0
         
         #move window
-        windowMove = combatWindow.hexSize // 16 
-        if moveUp:
-            combatWindow.windowMoveY -= windowMove
-        if moveDown:
-            combatWindow.windowMoveY += windowMove
-        if moveLeft:
-            combatWindow.windowMoveX -= windowMove
-        if moveRight:
-            combatWindow.windowMoveX += windowMove
+        windowMove = combat_screen.size_of_hexes // 16 
+        if move_window_up:
+            combat_screen.move_window_Y -= windowMove
+        if move_window_down:
+            combat_screen.move_window_Y += windowMove
+        if move_window_left:
+            combat_screen.move_window_X -= windowMove
+        if move_window_right:
+            combat_screen.move_window_X += windowMove
+        
+        if move_window_up or move_window_down or move_window_left or move_window_right:
+            combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
 
         #event loop
         for event in pygame.event.get():
             if event.type == QUIT:
                 print("Quitting...")
-                gameRunning = False 
+                game_running = False 
 
             if (event.type == KEYDOWN and event.key == K_ESCAPE):
                 print("Quitting...")
-                gameRunning = False 
+                game_running = False 
 
             #window movement
             if event.type == KEYDOWN and event.key == K_UP:
-                moveUp = True
+                move_window_up = True
             if event.type == KEYUP and event.key == K_UP:
-                moveUp = False
+                move_window_up = False
 
             if event.type == KEYDOWN and event.key == K_DOWN:
-                moveDown = True
+                move_window_down = True
             if event.type == KEYUP and event.key == K_DOWN:
-                moveDown = False
+                move_window_down = False
 
             if event.type == KEYDOWN and event.key == K_LEFT:
-                moveLeft = True
+                move_window_left = True
             if event.type == KEYUP and event.key == K_LEFT:
-                moveLeft = False
+                move_window_left = False
 
             if event.type == KEYDOWN and event.key == K_RIGHT:
-                moveRight = True
+                move_window_right = True
             if event.type == KEYUP and event.key == K_RIGHT:
-                moveRight = False
+                move_window_right = False
 
             #reset window
             if event.type == KEYDOWN and event.key == K_SPACE:
-                combatWindow.windowMoveX = 0
-                combatWindow.windowMoveY = 0
+                combat_screen.move_window_X = 0
+                combat_screen.move_window_Y = 0
 
             #end turn 
             if event.type == KEYDOWN and event.key == K_e:
                 print('Fleet Turn Ended')
-                gameLevel.areaGame.next_fleet_turn()
+                combat_level.areaGame.next_fleet_turn()
                 
 
             #inspect
             if event.type == KEYDOWN and event.key == K_i:
-                if gameLevel.areaGame.selected_hex:
-                    gameLevel.areaGame.selected_hex.entity.full_inspect()
+                if combat_level.areaGame.selected_hex:
+                    combat_level.areaGame.selected_hex.entity.full_inspect()
 
             #zooming
             if event.type == KEYDOWN and event.key == K_z:
-                combatWindow.zoomInHex()
+                combat_screen.zoom_in_window()
 
             if event.type == KEYDOWN and event.key == K_x:
-                combatWindow.zoomOutHex()
+                combat_screen.zoom_out_window()
 
             #center
             if event.type == KEYDOWN and event.key == K_c:
-                if gameLevel.areaGame.selected_hex:
-                    combatWindow.centerHex = gameLevel.areaGame.selected_hex.hex_coordinate_index
+                if combat_level.areaGame.selected_hex:
+                    combat_screen.center_hex = combat_level.areaGame.selected_hex.hex_coordinate_index
 
             #check if animatedc
-            if event.type == animateGridHexes:
-                combatWindow.aniHexes()
-                
+            if event.type == animate_game_hexes:
+                combat_screen.animate_hexes()
+                combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
-                hexIndex = combatWindow.getMouseHex(someMousePos)
-                combatWindow.selected_hexNum = hexIndex
-                if hexIndex >= 0:
-                    gameLevel.areaGame.select_hex(gameLevel.level_hex_map.space_hexes[hexIndex])
-                print(hexIndex)
+                some_hex_coordinate_index = combat_screen.get_mouse_hex(someMousePos)
+                combat_screen.selected_hex_index_coordinate = some_hex_coordinate_index
+                if some_hex_coordinate_index >= 0:
+                    combat_level.areaGame.select_hex(combat_level.level_hex_map.space_hexes[some_hex_coordinate_index])
+                print(some_hex_coordinate_index)
+                combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
 
-        combatWindow.drawHexes(gameLevel.areaGame.active_fleet.fleetCommand, gameLevel.areaGame.selected_hex)   
+        #combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)   
         pygame.display.update()
 
 

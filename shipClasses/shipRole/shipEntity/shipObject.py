@@ -33,11 +33,11 @@ class Ship:
     #damage function that takes in a value 
     def take_damage(self, damage_amount, wep_PEN=0, wep_DIS=1):
         if self.shields > damage_amount and wep_DIS > 0:
-            damage_to_shields = self.defenses['shield_gen'][0].shieldDamage(damage_amount, wep_DIS)
+            damage_to_shields = self.defenses['shield_gen'][0].take_shield_damage(damage_amount, wep_DIS)
             self.shields -= damage_to_shields
             return damage_to_shields
         elif self.hull > damage_amount:
-            damage_to_hull = self.defenses['armor_type'][0].armorDamage(damage_amount, wep_PEN) - self.shields
+            damage_to_hull = self.defenses['armor_type'][0].take_armor_damage(damage_amount, wep_PEN) - self.shields
             self.shields = 0
             self.hull -= damage_to_hull
             return damage_to_hull

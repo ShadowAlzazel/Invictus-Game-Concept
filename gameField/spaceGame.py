@@ -9,7 +9,7 @@ class turnGame:
     #        }
 
     def __init__(self, new_hex_map):
-        self.opsSpace = new_hex_map
+        self.ops_hex_map = new_hex_map
         self.game_ships = new_hex_map.game_entities['ship_entity']
         self.game_fleets = new_hex_map.fleet_entities
         self.game_turn = 0
@@ -65,7 +65,7 @@ class turnGame:
 
         some_ship = some_hex.entity
         #can only select a ship
-        if not some_hex.empty and self.active_fleet.fleetCommand[0:3] == some_ship.command[0:3] and some_ship.operational:
+        if not some_hex.empty and self.active_fleet.fleet_command[0:3] == some_ship.command[0:3] and some_ship.operational:
             self.selected_hex = some_hex
             return True
         return False 
@@ -94,7 +94,7 @@ class turnGame:
     #detect ships for fleet
     def _update_detections(self, some_fleet):
         for s in self.game_ships:
-            if s.command[0:3] != some_fleet.fleetCommand[0:3]:
+            if s.command[0:3] != some_fleet.fleet_command[0:3]:
                 s.detected = False
             else: 
                 s.detected = True 
@@ -132,11 +132,11 @@ class turnGame:
         selected_ship = self.selected_hex.entity
         #check if selcted hex direction does not match orientation
         if some_hex.empty and (some_hex in self.selected_hex.neighbors) and (some_hex.directions[selected_ship.orientation] != self.selected_hex.hex_coordinate_index or selected_ship.ship_type == 'DD' or selected_ship.ship_type == 'CS'):
-            if selected_ship.ship_type == 'BB' and self.opsSpace.space_hexes[some_hex.directions[selected_ship.orientation]] in self.selected_hex.neighbors:
+            if selected_ship.ship_type == 'BB' and self.ops_hex_map.space_hexes[some_hex.directions[selected_ship.orientation]] in self.selected_hex.neighbors:
                 return result
 
             if selected_ship.ship_moves != 0:
-                result = self.opsSpace.move_some_entity(selected_ship, some_hex)
+                result = self.ops_hex_map.move_some_entity(selected_ship, some_hex)
                 if result:
                     selected_ship.ship_moves -= 1
                     #check if hex controlled
@@ -190,9 +190,9 @@ class turnGame:
                 if not enemy_ship.operational:
                     m = enemy_ship.place_hex.hex_coordinate_index
                     self.game_ships.remove(enemy_ship) 
-                    self.opsSpace.hexes_full.remove(self.opsSpace.space_hexes[m])
-                    self.opsSpace.space_hexes[m].entity = []
-                    self.opsSpace.space_hexes[m].empty = True
+                    self.ops_hex_map.hexes_full.remove(self.ops_hex_map.space_hexes[m])
+                    self.ops_hex_map.space_hexes[m].entity = []
+                    self.ops_hex_map.space_hexes[m].empty = True
                     true_damage = 0
                     #del enemy_ship
                     return True
