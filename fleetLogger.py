@@ -2,19 +2,17 @@ import sys
 from shipClasses import *
 
 #creates ships from fleet log
-def fleetLaunch(aFleet):
+def launch_fleet(some_fleet):
 
-    def getSomeClass(nameOfShipClass):
-        return getattr(sys.modules[__name__], nameOfShipClass)
+    def get_some_class(class_name):
+        return getattr(sys.modules[__name__], class_name)
 
-    if aFleet.presetFleet:
+    if some_fleet.preset:
         n = 0
-        for aShips in aFleet.fleetLogs['shipNames']:
-            aClass = getSomeClass(aFleet.fleetLogs['shipClasses'][n])
-            newShip = aClass(aFleet.fleetLogs['shipHullnumber'][n], aShips)
-            newShip.command = ''.join([aFleet.fleetCommand, 'S'])
-            #newShip.fleet
-            aFleet.fleetShips.append(newShip)
+        for x_ships in some_fleet.fleet_logs['shipNames']:
+            a_class = get_some_class(some_fleet.fleet_logs['shipClasses'][n])
+            new_ship = a_class(some_fleet.fleet_logs['shipHullnumber'][n], x_ships)
+            new_ship.command = ''.join([some_fleet.fleet_command, 'S'])
+            some_fleet.fleet_ships.append(new_ship)
             n += 1
-        aFleet.flagship = aFleet.fleetShips[0]
-
+        some_fleet.flagship = some_fleet.fleet_ships[0]

@@ -4,45 +4,45 @@ import pygame
 
 class Font():
 
-    def __init__(self, fontPath, scale=1):
+    def __init__(self, font_path, scale=1):
         self.spacing = 1
-        self.characterOrder = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', ' Z', ',', '.', '!', '?', '@', '#', '&', '%']
-        self.fontCharacters = {}
-        fontImg = fontPath
-        fontImg.convert()
-        h = fontImg.get_height()
+        self.character_order = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', ' Z', ',', '.', '!', '?', '@', '#', '&', '%']
+        self.font_characters = {}
+        font_img = font_path
+        font_img.convert()
+        h = font_img.get_height()
         characterCount = 0
         currentCharacterWidth = 0 
 
-        for x in range(fontImg.get_width()):
-            i = fontImg.get_at((x, 0))
+        for x in range(font_img.get_width()):
+            i = font_img.get_at((x, 0))
             if i[0] >= 250 and i[1] >= 250 and i[2] >= 250:
-                chracterImg = self.clipImg(fontImg, x - currentCharacterWidth, 0, currentCharacterWidth, h) 
+                chracterImg = self.clip_image(font_img, x - currentCharacterWidth, 0, currentCharacterWidth, h) 
                 #pygame.transform.scale(chracterImg, (chracterImg.get_width() * scale, h * scale))
-                self.fontCharacters[self.characterOrder[characterCount]] = chracterImg.copy()
-                #pygame.transform.scale(self.fontCharacters[self.characterOrder[characterCount]], (self.fontCharacters[self.characterOrder[characterCount]].get_width() * scale, h * scale))
+                self.font_characters[self.character_order[characterCount]] = chracterImg.copy()
+                #pygame.transform.scale(self.font_characters[self.character_order[characterCount]], (self.font_characters[self.character_order[characterCount]].get_width() * scale, h * scale))
                 currentCharacterWidth = 0
                 characterCount += 1
             else:
                 currentCharacterWidth += 1
-        self.spacingWidth = self.fontCharacters['A'].get_width()
+        self.spacing_width = self.font_characters['A'].get_width()
 
 
     #clip img
-    def clipImg(self, image, x, y, xSize, ySize):
+    def clip_image(self, image, x, y, xSize, ySize):
         newImage = image.copy()
-        rectClip = pygame.Rect(x, y, xSize, ySize)
-        newImage.set_clip(rectClip)
-        clipImage = image.subsurface(newImage.get_clip())
-        return clipImage.copy()
+        rect_clip = pygame.Rect(x, y, xSize, ySize)
+        newImage.set_clip(rect_clip)
+        clipped_image = image.subsurface(newImage.get_clip())
+        return clipped_image.copy()
 
 
     #draw font
-    def renderFont(self, surf, text, location):
+    def render_font(self, surf, text, location):
         xOffset = 0
         for x in text:
             if x != ' ':
-                surf.blit(self.fontCharacters[x], (location[0] + xOffset, location[1]))
-                xOffset += self.fontCharacters[x].get_width() + self.spacing
+                surf.blit(self.font_characters[x], (location[0] + xOffset, location[1]))
+                xOffset += self.font_characters[x].get_width() + self.spacing
             else: 
-                xOffset += self.spacingWidth + self.spacing
+                xOffset += self.spacing_width + self.spacing

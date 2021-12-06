@@ -5,8 +5,8 @@ from shipClasses.shipRole.shipEntity import Ship
 #Battleship
 class Battleship(Ship):
     ammount = 0
-    shiptype = 'BB'
-    shipStats = {
+    ship_type = 'BB'
+    ship_stats = {
         "FP": 650, "ACC": 35, "EVA": 30, "SPD": 4,
         "RDR": 7, "LCK": 10, "STH": 0
     }
@@ -17,14 +17,14 @@ class Battleship(Ship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         Battleship.ammount += 1
-        print(self.shiptype, '-', hullnumber, sep='')
+        print(self.ship_type, '-', hullnumber, sep='')
 
 
 #Battlecruiser
 class Battlecruiser(Ship):
     ammount = 0
-    shiptype = 'BC'
-    shipStats = {       
+    ship_type = 'BC'
+    ship_stats = {       
         "FP": 500, "ACC": 45, "EVA": 35, "SPD": 5,
         "RDR": 6, "LCK": 10, "STH": 0
     }
@@ -35,14 +35,14 @@ class Battlecruiser(Ship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         Battlecruiser.ammount += 1
-        print(self.shiptype, '-', hullnumber, sep='')
+        print(self.ship_type, '-', hullnumber, sep='')
 
 
 #Strikecruiser
 class Strikecruiser(Ship):
     ammount = 0
-    shiptype = 'CS'
-    shipStats = {
+    ship_type = 'CS'
+    ship_stats = {
         "FP": 280, "ACC": 38, "EVA": 40, "SPD": 6,
         "RDR": 5, "LCK": 10, "STH": 1
     }
@@ -53,14 +53,14 @@ class Strikecruiser(Ship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         Strikecruiser.ammount += 1
-        print(self.shiptype, '-', hullnumber, sep='')
+        print(self.ship_type, '-', hullnumber, sep='')
 
 
 #Heavycrusier
 class Heavycruiser(Ship):
     ammount = 0 
-    shiptype = 'CA'
-    shipStats = {
+    ship_type = 'CA'
+    ship_stats = {
         "FP": 350, "ACC": 33, "EVA": 30, "SPD": 5,
         "RDR": 5, "LCK": 10, "STH": 0
     }
@@ -71,14 +71,14 @@ class Heavycruiser(Ship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         Heavycruiser.ammount += 1
-        print(self.shiptype, '-', hullnumber, sep='')
+        print(self.ship_type, '-', hullnumber, sep='')
 
 
 #Lightcruiser
 class Lightcruiser(Ship):
     ammount = 0 
-    shiptype = 'CL'
-    shipStats = {
+    ship_type = 'CL'
+    ship_stats = {
         "FP": 200, "ACC": 35, "EVA": 45, "SPD": 7,
         "RDR": 5, "LCK": 10, "STH": 2
     }
@@ -89,14 +89,14 @@ class Lightcruiser(Ship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         Lightcruiser.ammount += 1
-        print(self.shiptype, '-', hullnumber, sep='') 
+        print(self.ship_type, '-', hullnumber, sep='') 
 
 
 #Destroyers
 class Destroyer(Ship):
     ammount = 0
-    shiptype = 'DD'
-    shipStats = {
+    ship_type = 'DD'
+    ship_stats = {
         "FP": 100, "ACC": 45, "EVA": 65, "SPD": 8,
         "RDR": 5, "LCK": 10, "STH": 2
     }
@@ -107,4 +107,4 @@ class Destroyer(Ship):
     def __init__(self, hullnumber, name):
         super().__init__(hullnumber, name)
         Destroyer.ammount += 1
-        print(self.shiptype, '-', hullnumber, sep='')
+        print(self.ship_type, '-', hullnumber, sep='')

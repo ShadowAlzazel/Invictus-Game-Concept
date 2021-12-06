@@ -1,3 +1,3 @@
 #print("shipRoleModule")
-#from . shipTypes import *
+#from . ship_types import *
 from shipClasses.shipRole.shipTypes import *

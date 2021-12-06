@@ -1,3 +1,3 @@
 #print("shipEntity Module")
-#from . shipObject import *
+#from . ship_entity import *
 from shipClasses.shipRole.shipEntity.shipObject import *
