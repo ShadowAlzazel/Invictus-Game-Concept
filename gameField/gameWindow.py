@@ -20,7 +20,6 @@ class spaceWindow:
         self.window_border_Y = ((WIDTH - (self.size_of_hexes * self.hex_map_width)) // 2) - self.move_window_Y
         self.window_border_X = ((LENGTH - (self.size_of_hexes * self.hex_map_length)) // 2) + self.move_window_X
         #images
-        self.EMPTY_HEX_IMG = EMPTY_HEX_IMG
         self.ASCS_SHIP_HEX_IMG = ASCS_SHIP_HEX_IMG
         self.ROT_ASCS_SHIP_HEX_IMG = ASCS_SHIP_HEX_IMG
         self.XNFF_SHIP_HEX_IMG = XNFF_SHIP_HEX_IMG
@@ -34,11 +33,11 @@ class spaceWindow:
 
         #animations
         self.base_hex_IMG = GRID_HEX_ANI_BASE
-        self.base_hex_IMG.convert()
+        self.base_hex_IMG.convert_alpha()
         self.template_hexes_IMG = {'template_hex_base': GRID_HEX_ANI_EMPTY, 'template_hex_enemy': GRID_HEX_ANI_ENEMY, 'template_hex_clicked': GRID_HEX_ANI_CLICK, 
                             'template_hex_move': GRID_HEX_ANI_MOVE, 'template_hex_target': GRID_HEX_ANI_TARGET, 'template_hex_ally': GRID_HEX_ANI_ALLY}
         for v in self.template_hexes_IMG.values():
-            v.convert()
+            v.convert_alpha()
         self.animated_hexes_IMG = {'animated_hex_base': self.template_hexes_IMG['template_hex_base'], 'animated_hex_enemy': self.template_hexes_IMG['template_hex_enemy'], 
                             'animated_hex_clicked': self.template_hexes_IMG['template_hex_clicked'], 'animated_hex_move': self.template_hexes_IMG['template_hex_move'], 
                             'animated_hex_target': self.template_hexes_IMG['template_hex_target'], 'animated_hex_ally': self.template_hexes_IMG['template_hex_ally']}
@@ -56,7 +55,7 @@ class spaceWindow:
         if self.center_hex > -1:
             c = 0
             if (self.center_hex // self.hex_map_length) % 2 != 0:
-                c = self.size_of_hexes / 2
+                c = int(self.size_of_hexes / 2)
             self.move_window_X = int((self.hex_map_length / 2) - ((self.center_hex % self.hex_map_length) + 1)) * self.size_of_hexes + c
             self.move_window_Y = int(((self.center_hex // self.hex_map_length)) - (self.hex_map_width / 2) + 0.5) * self.size_of_hexes
             self.center_hex = -1
@@ -155,12 +154,12 @@ class spaceWindow:
 
     #WIP zoom in
     def zoom_in_window(self):
-        self.size_of_hexes += 16
+        self.size_of_hexes += 8
         self._scale_hexes(self.size_of_hexes)
 
     #WIP zoom out
     def zoom_out_window(self):
-        self.size_of_hexes -= 16
+        self.size_of_hexes -= 8
         self._scale_hexes(self.size_of_hexes)
 
     #rotate an image based on ship orientation
@@ -182,17 +181,17 @@ class spaceWindow:
         return rotated_image
 
     def animate_hexes(self):
-        animation_order = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11, 10, 9 ,8, 7, 6, 5, 4, 3, 2, 1, 0]
+        animation_order = [0, 1, 2, 3, 4, 5, 5, 4, 3, 2, 1, 0]
         w = self.counter_animation_1 
         
         for temporary_hexes, animated_hex_keys in zip(self.template_hexes_IMG.values(), self.animated_hexes_IMG.keys()):
             base_hex_image = self.base_hex_IMG.copy()
             new_animated_hex = temporary_hexes.copy()
-            base_hex_image.blit(new_animated_hex, (0, animation_order[w]))
+            base_hex_image.blit(new_animated_hex, (0, -animation_order[w]))
             new_animated_image = pygame.transform.scale(base_hex_image, (self.size_of_hexes, self.size_of_hexes))
             self.animated_hexes_IMG[animated_hex_keys] = new_animated_image
         
-        if self.counter_animation_1 == 23:
+        if self.counter_animation_1 == 11:
             self.counter_animation_1 = 0
         else:
             self.counter_animation_1 += 1
@@ -200,8 +199,6 @@ class spaceWindow:
     #scale the hexes
     def _scale_hexes(self, size_of_hexes):
         self.ASCS_SHIP_HEX_IMG.convert()
-        self.EMPTY_HEX_IMG.convert()
         self.XNFF_SHIP_HEX_IMG.convert()
-        self.EMPTY_HEX_IMG = pygame.transform.smoothscale(EMPTY_HEX_IMG, (size_of_hexes, size_of_hexes))
         self.ASCS_SHIP_HEX_IMG = pygame.transform.smoothscale(ASCS_SHIP_HEX_IMG, (size_of_hexes, size_of_hexes))
         self.XNFF_SHIP_HEX_IMG = pygame.transform.smoothscale(XNFF_SHIP_HEX_IMG, (size_of_hexes, size_of_hexes))
