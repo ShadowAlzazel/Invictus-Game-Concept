@@ -1,7 +1,7 @@
 #class for game display
 from gameField.gameAssets import *
 from multiprocessing.dummy import Pool as thread_pool
-#from multiprocessing import Pool 
+from multiprocessing import Pool as process_pool
 
 #----------------------------------------------------------------------
 
@@ -70,9 +70,12 @@ class spaceWindow:
                 self.targets_hexes = some_ship.track_targets()
             self.ship_selected = True
 
-        draw_pool = thread_pool(2)
-        draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
-        draw_pool.close()
+        with thread_pool() as draw_pool:
+            draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
+
+        #draw_pool = thread_pool(2)
+        #draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
+        #draw_pool.close()
 
 
     def _draw_a_hex(self, some_hex):

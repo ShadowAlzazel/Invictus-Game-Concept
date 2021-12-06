@@ -135,6 +135,8 @@ def combatGame(game_screen, selcted_level):
     last_second = time.perf_counter()
     a = 0
 
+    windowMove = combat_screen.size_of_hexes // 16
+
     while game_running:
         game_clock.tick(framerate)
         #frame timing
@@ -149,20 +151,6 @@ def combatGame(game_screen, selcted_level):
             print("True FPS:", a) 
             a = 0
         
-        #move window
-        windowMove = combat_screen.size_of_hexes // 16 
-        if move_window_up:
-            combat_screen.move_window_Y -= windowMove
-        if move_window_down:
-            combat_screen.move_window_Y += windowMove
-        if move_window_left:
-            combat_screen.move_window_X -= windowMove
-        if move_window_right:
-            combat_screen.move_window_X += windowMove
-        
-        if move_window_up or move_window_down or move_window_left or move_window_right:
-            combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
-
         #event loop
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -213,9 +201,13 @@ def combatGame(game_screen, selcted_level):
             #zooming
             if event.type == KEYDOWN and event.key == K_z:
                 combat_screen.zoom_in_window()
+                windowMove = combat_screen.size_of_hexes // 16
+                combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
 
             if event.type == KEYDOWN and event.key == K_x:
                 combat_screen.zoom_out_window()
+                windowMove = combat_screen.size_of_hexes // 16
+                combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
 
             #center
             if event.type == KEYDOWN and event.key == K_c:
@@ -223,7 +215,7 @@ def combatGame(game_screen, selcted_level):
                     combat_screen.center_hex = combat_level.areaGame.selected_hex.hex_coordinate_index
 
             #check if animatedc
-            if event.type == animate_game_hexes:
+            if event.type == animate_game_hexes and not(move_window_right or move_window_left or move_window_up or move_window_down):
                 combat_screen.animate_hexes()
                 combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
 
@@ -236,9 +228,22 @@ def combatGame(game_screen, selcted_level):
                 print(some_hex_coordinate_index)
                 combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
 
-        #combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)   
-        pygame.display.update()
 
+        #move window
+        if move_window_up:
+            combat_screen.move_window_Y -= windowMove
+        if move_window_down:
+            combat_screen.move_window_Y += windowMove
+        if move_window_left:
+            combat_screen.move_window_X -= windowMove
+        if move_window_right:
+            combat_screen.move_window_X += windowMove
+
+        if move_window_right or move_window_left or move_window_up or move_window_down:
+            combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
+
+
+        pygame.display.update()
 
 #-------------------------------------------------------------------------------------------
 #this is a runnable script
