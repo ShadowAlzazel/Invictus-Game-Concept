@@ -8,12 +8,12 @@ from pygame.locals import *
 #main game function
 def main():
     pygame.init()
-    screen_flags = FULLSCREEN | DOUBLEBUF | SCALED
+    screen_flags = FULLSCREEN | SCALED
 
     #set up main game screen
     pygame.display.set_caption("INVICTUS: SAMAR")
     pygame.display.set_icon(GAME_ICON)
-    game_screen = pygame.display.set_mode((LENGTH, WIDTH), screen_flags, 32)
+    game_screen = pygame.display.set_mode((LENGTH, WIDTH), screen_flags, 8)
     game_screen.blit(FIT_SPACE, (0, 0))
     pygame.display.update()
 
@@ -34,12 +34,12 @@ def main():
         mx, my = pygame.mouse.get_pos()
 
         #menu buttons
-        button_menu_start = pygame.Rect(16, 16, 48 * 4, 48)
+        button_menu_start = pygame.Rect((LENGTH // 2) - (48 * 2), WIDTH // 4, 48 * 4, 18)
         if button_menu_start.collidepoint((mx, my)) and mouse_clicked: 
             combatGameMenu(game_screen)
 
         pygame.draw.rect(game_screen, (2, 2, 2), button_menu_start)
-        game_font_2A.render_font(game_screen, 'INVICTUS SAMAR', (16, 16))
+        game_font_2A.render_font(game_screen, 'INVICTUS SAMAR', ((LENGTH // 2) - (48 * 2), WIDTH // 4))
 
         #event loop
         mouse_clicked = False
