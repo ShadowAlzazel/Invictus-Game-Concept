@@ -66,8 +66,8 @@ class Ship:
 
     #find targets with radar
     def detect_targets(self):
-        targetsHexes = self.radar.radar_detecter(self.ship_stats['RDR'], self.place_hex)
-        return targetsHexes
+        targets_hexes = self.radar.radar_detecter(self.ship_stats['RDR'], self.place_hex)
+        return targets_hexes
 
 
     #find tracked targets within ready gun range 
@@ -79,8 +79,8 @@ class Ship:
 
         for w in guns_ready_in_range:
             battery_ranges.append(w.gun_stats['RNG'])    
-        targetsHexes = self.radar.radar_tracker(max(battery_ranges), self.place_hex)
-        return targetsHexes
+        targets_hexes = self.radar.radar_tracker(max(battery_ranges), self.place_hex)
+        return targets_hexes
 
 
     #find ranges 

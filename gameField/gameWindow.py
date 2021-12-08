@@ -72,11 +72,8 @@ class spaceWindow:
         with thread_pool() as draw_pool:
             draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
 
-        #draw_pool = thread_pool(2)
-        #draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
-        #draw_pool.close()
 
-
+    #draw an individual hex
     def _draw_a_hex(self, some_hex):
         row_height = self.hex_map_width - (some_hex.hex_coordinate_index // self.hex_map_length) - 1
         indent = 0
@@ -92,8 +89,7 @@ class spaceWindow:
             if some_hex.empty:
                 if self.ship_selected:
                     some_ship = self.selected_hex.entity
-                    if some_hex in self.selected_hex.neighbors and some_ship.ship_moves != 0 and (
-                        some_hex.directions[some_ship.orientation] != self.selected_hex.hex_coordinate_index or some_ship.ship_type == 'DD' or some_ship.ship_type == 'CS'):
+                    if some_hex in self.selected_hex.neighbors and some_ship.ship_moves != 0 and (some_hex.directions[some_ship.orientation] != self.selected_hex.hex_coordinate_index or some_ship.ship_type == 'DD' or some_ship.ship_type == 'CS'):
                         if not (some_ship.ship_type == 'BB' and self.ops_hex_map.space_hexes[some_hex.directions[some_ship.orientation]] in self.selected_hex.neighbors):
                             self.game_screen.blit(self.animated_hexes_IMG['animated_hex_move'], (x, y))
 
@@ -181,7 +177,7 @@ class spaceWindow:
         return rotated_image
 
     def animate_hexes(self):
-        animation_order = [0, 1, 2, 3, 4, 5, 5, 4, 3, 2, 1, 0]
+        animation_order = [1, 2, 3, 4, 5, 5, 4, 3, 2, 1]
         w = self.counter_animation_1 
         
         for temporary_hexes, animated_hex_keys in zip(self.template_hexes_IMG.values(), self.animated_hexes_IMG.keys()):
@@ -191,7 +187,7 @@ class spaceWindow:
             new_animated_image = pygame.transform.scale(base_hex_image, (self.size_of_hexes, self.size_of_hexes))
             self.animated_hexes_IMG[animated_hex_keys] = new_animated_image
         
-        if self.counter_animation_1 == 11:
+        if self.counter_animation_1 == 9:
             self.counter_animation_1 = 0
         else:
             self.counter_animation_1 += 1

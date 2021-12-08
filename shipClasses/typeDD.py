@@ -5,7 +5,7 @@ from shipClasses.shipRole import Destroyer
 
 #-----------------------------Johnston Class destroyer-------------------------------
 class JohnstonClass(Destroyer):
-    shipClass = 'JohnstonClass'
+    ship_class = 'JohnstonClass'
     ammount = 0
     ship_stats = {
         "FP": 67, "ACC": 35, "EVA": 66, "SPD": 8,
@@ -32,7 +32,7 @@ class JohnstonClass(Destroyer):
 
 #------------------------------------Shimakaze class destroyer---------------------------------------
 class ShimakazeClass(Destroyer):
-    shipClass = 'ShimakazeClass'
+    ship_class = 'ShimakazeClass'
     ammount = 0
     ship_stats = {
         "FP": 47, "ACC": 35, "EVA": 68, "SPD": 8,

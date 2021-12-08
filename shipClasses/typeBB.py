@@ -5,7 +5,7 @@ from shipClasses.shipRole import Battleship
 
 #---------------------------Essex Class Battleship---------------------------
 class EssexClass(Battleship):
-    shipClass = 'EssexClass'
+    ship_class = 'EssexClass'
     ammount = 0
     ship_stats = {
         "FP": 666, "ACC": 38, "EVA": 30, "SPD": 4,
@@ -33,7 +33,7 @@ class EssexClass(Battleship):
 
 #---------------------------Amagi Class Battleship---------------------------
 class AmagiClass(Battleship):
-    shipClass = 'AmagiClass'
+    ship_class = 'AmagiClass'
     ammount = 0
     ship_stats = {
         "FP": 682, "ACC": 37, "EVA": 31, "SPD": 4,
@@ -61,7 +61,7 @@ class AmagiClass(Battleship):
 
 #---------------------------Vittorio Veneto Class Battleship---------------------------
 class VittorioVenetoClass(Battleship):
-    shipClass = 'VittorioVenetoClass'
+    ship_class = 'VittorioVenetoClass'
     ammount = 0
     ship_stats = {
         "FP": 660, "ACC": 35, "EVA": 30, "SPD": 4,
@@ -89,7 +89,7 @@ class VittorioVenetoClass(Battleship):
 
 #--------------------------Hood Class Battleship---------------------------
 class HoodClass(Battleship):
-    shipClass = 'HoodClass'
+    ship_class = 'HoodClass'
     ammount = 0
     ship_stats = {
         "FP": 685, "ACC": 37, "EVA": 30, "SPD": 4,
@@ -117,7 +117,7 @@ class HoodClass(Battleship):
 
 #--------------------------Prince of Wales Class Battleship---------------------------
 class PrinceOfWalesClass(Battleship):
-    shipClass = 'PrinceOfWalesClass'
+    ship_class = 'PrinceOfWalesClass'
     ammount = 0
     ship_stats = {
         "FP": 704, "ACC": 35, "EVA": 29, "SPD": 4,
@@ -149,7 +149,7 @@ class PrinceOfWalesClass(Battleship):
 
 #--------------------------New Jersey Class Battleship-----------------------------
 class NewJerseyClass(Battleship):
-    shipClass = 'NewJerseyClass'
+    ship_class = 'NewJerseyClass'
     ammount = 0 
     ship_stats = {
         "FP": 888, "ACC": 38, "EVA": 28, "SPD": 4,
@@ -185,7 +185,7 @@ class NewJerseyClass(Battleship):
     
 #--------------------------Devestator Class Battleship-----------------------------
 class DevestatorClass(Battleship):
-    shipClass = 'DevestatorClass'
+    ship_class = 'DevestatorClass'
     ammount = 0 
     ship_stats = {
         "FP": 1013, "ACC": 38, "EVA": 30, "SPD": 4,

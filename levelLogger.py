@@ -1,5 +1,5 @@
 #levels 
-from gameField.spaceGame import turnGame
+from gameField.spaceGame import turn_combat_game
 from shipCreater import *
 from fleetManager import *
 from fleetLogger import *
@@ -23,7 +23,7 @@ class level():
                 new_fleet.spawn_fleet(self.level_hex_map, self.fleet_spawn[i])
                 self.level_fleets.append(new_fleet)
                 
-            self.areaGame = turnGame(self.level_hex_map)
+            self.map_game = turn_combat_game(self.level_hex_map)
 
 
         else:
