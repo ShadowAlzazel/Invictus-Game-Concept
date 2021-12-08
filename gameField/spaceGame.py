@@ -1,7 +1,7 @@
 #a turn based combat game
 from random import randint
 
-class turnGame:
+class turn_combat_game:
     #Query = {'No': ['No', 'no', 'N', 'n'], 'Yes': ['Yes', 'yes', 'Y', 'y'], 
     #        'Inspect': ['I', 'Inspect', 'i', 'inspect', 'ins'], 'Skip': ['Skip', 'skip', 'S', 's'],
     #        'Move': ['Move', 'move', 'm', 'M'], 'End': ['End', 'end', 'finish', 'Finish', 'E', 'e'],
@@ -99,13 +99,13 @@ class turnGame:
             else: 
                 s.detected = True 
 
-        enemiesDetected = []
+        updated_enemies_detected = []
         for a in some_fleet.fleet_ships:
             if a.operational:
                 for x in a.detect_targets():
-                    enemiesDetected.append(x)
+                    updated_enemies_detected.append(x)
 
-        for e in set(enemiesDetected):
+        for e in set(updated_enemies_detected):
             e.entity.detected = True
 
 
@@ -195,7 +195,7 @@ class turnGame:
                     self.ops_hex_map.space_hexes[m].empty = True
                     true_damage = 0
                     #del enemy_ship
-                    return True
+                    break 
 
                 if true_damage > 0:
                     print(g.battery_ID, "Has Hit", enemy_ship.name, "For", true_damage, "Damage!")

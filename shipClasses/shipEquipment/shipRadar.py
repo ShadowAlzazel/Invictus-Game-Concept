@@ -54,9 +54,9 @@ class hex_radar:
 
 
     #check if the stealth of the ship is within detection range
-    def _detect_enemy_limiter(self, hex_ring, enemy_hex_place, detectionRange):
+    def _detect_enemy_limiter(self, hex_ring, enemy_hex_place, detection_range):
         enemy_stealth = enemy_hex_place.entity.ship_stats['STH']
-        enemy_detected_bool = any(enemy_hex_place in hex_ring[z] for z in range(1, (detectionRange - enemy_stealth) + 1))
+        enemy_detected_bool = any(enemy_hex_place in hex_ring[z] for z in range(1, (detection_range - enemy_stealth) + 1))
         return enemy_detected_bool
 
 

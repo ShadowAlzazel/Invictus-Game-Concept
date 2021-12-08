@@ -5,7 +5,7 @@ from shipClasses.shipRole import Strikecruiser
 
 #----------------------------------Voltage Class Strikecruiser-----------------------------------
 class VoltageClass(Strikecruiser):
-    shipClass = 'VoltageClass'
+    ship_class = 'VoltageClass'
     ammount = 0
     ship_stats = {
         "FP": 287, "ACC": 39, "EVA": 41, "SPD": 6,
@@ -38,7 +38,7 @@ class VoltageClass(Strikecruiser):
 
 #-------------------------------------Dynamo Class Strikecruiser----------------------------------------
 class DynamoClass(Strikecruiser):
-    shipClass = 'DynamoClass'
+    ship_class = 'DynamoClass'
     ammount = 0
     ship_stats = {
         "FP": 298, "ACC": 40, "EVA": 38, "SPD": 6,

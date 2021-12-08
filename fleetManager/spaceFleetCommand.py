@@ -1,9 +1,6 @@
 import json
 from random import randint
 
-with open("fleetManager\starFleets.json", "r") as astraFleetsFile:
-    astraFleets = json.load(astraFleetsFile)
-
 #fleet which contains ship
 class space_fleet:
     preset = False
@@ -16,10 +13,18 @@ class space_fleet:
         self.flagship = 0
         self.tracked_enemy_hexes = []
         #check if preset fleet
-        if fleet_command in astraFleets[0] and name in astraFleets[0][fleet_command]['fleetNames']:
+        astra_fleet_ledger = self.open_asta_fleets()
+
+        if fleet_command in astra_fleet_ledger[0] and name in astra_fleet_ledger[0][fleet_command]['fleetNames']:
             self.preset = True
-            self.fleet_logs = astraFleets[0][fleet_command][name]
+            self.fleet_logs = astra_fleet_ledger[0][fleet_command][name]
+
         
+    def open_asta_fleets(self):
+        with open("fleetManager\starFleets.json", "r") as astraFleetsFile:
+            astraFleets = json.load(astraFleetsFile)
+        return astraFleets
+
 
     def spawn_fleet(self, hex_map, start=-1, formation=0):
         hex_map.fleet_entities.append(self)

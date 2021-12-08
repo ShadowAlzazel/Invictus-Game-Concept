@@ -5,7 +5,7 @@ from shipClasses.shipRole import Battlecruiser
 
 #----------------------------Zenith Class Battlecruiser--------------------------------
 class ZenithClass(Battlecruiser):
-    shipClass = 'ZenithClass' 
+    ship_class = 'ZenithClass' 
     ammount = 0
     ship_stats = {       
         "FP": 493, "ACC": 47, "EVA": 37, "SPD": 5,
@@ -37,7 +37,7 @@ class ZenithClass(Battlecruiser):
 
 #-----------------------------Eclipse Class Battlecruiser-------------------------
 class EclipseClass(Battlecruiser):
-    shipClass = 'EclipseClass' 
+    ship_class = 'EclipseClass' 
     ammount = 0
     ship_stats = {       
         "FP": 517, "ACC": 45, "EVA": 35, "SPD": 5,
@@ -69,7 +69,7 @@ class EclipseClass(Battlecruiser):
 
 #--------------------------------Penumbra Class Battlecruiser------------------------------------
 class PenumbraClass(Battlecruiser):
-    shipClass = 'PenumbraClass'
+    ship_class = 'PenumbraClass'
     ammount = 0
     ship_stats = {       
         "FP": 535, "ACC": 48, "EVA": 35, "SPD": 5,
@@ -101,7 +101,7 @@ class PenumbraClass(Battlecruiser):
 
 #-----------------------------------Illustrious Class Battlecruiser--------------------------------------
 class IllustriousClass(Battlecruiser):
-    shipClass = 'IllustriousClass'
+    ship_class = 'IllustriousClass'
     ammount = 0
     ship_stats = {       
         "FP": 513, "ACC": 46, "EVA": 32, "SPD": 5,

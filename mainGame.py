@@ -37,7 +37,7 @@ def main():
         #menu buttons
         button_menu_start = pygame.Rect((LENGTH // 2) - (48 * 2), WIDTH // 4, 48 * 4, 18)
         if button_menu_start.collidepoint((mx, my)) and mouse_clicked: 
-            combatGameMenu(game_screen)
+            level_selector(game_screen)
 
         pygame.draw.rect(game_screen, (2, 2, 2), button_menu_start)
         game_font_2A.render_font(game_screen, 'INVICTUS SAMAR', ((LENGTH // 2) - (48 * 2), WIDTH // 4))
@@ -65,7 +65,7 @@ def main():
 
 #------------------------------------------------------------------------------------------
 #menu for combat 
-def combatGameMenu(game_screen):
+def level_selector(game_screen):
 
     #variables 
     game_running = True
@@ -84,7 +84,7 @@ def combatGameMenu(game_screen):
             #WIP currently testing presets
             #have different buttons change level number and create levels
             level = "level_Test" 
-            combatGame(game_screen, level)
+            combat_game(game_screen, level)
 
         pygame.draw.rect(game_screen, (2, 2, 2), button_game_selecter)
         game_font_2A.render_font(game_screen, 'COMBAT GAME L', (16, 32))
@@ -108,19 +108,17 @@ def combatGameMenu(game_screen):
 
 #-------------------------------------------------------------------------------------------
 #combat game
-def combatGame(game_screen, selcted_level):
+def combat_game(game_screen, selcted_level):
     
-    combat_level = None 
     #levels
     combat_level = level(selcted_level)
     if not combat_level:
         return
 
     #create new game window
-    active_fleet_command = combat_level.areaGame.active_fleet.fleet_command
-    combat_screen = spaceWindow(combat_level.level_hex_map, game_screen, HEX_SIZE)
-    combat_level.areaGame.next_fleet_turn()
-    combat_screen.draw_hexes(active_fleet_command)
+    combat_screen = map_screen(combat_level.level_hex_map, game_screen, HEX_SIZE)
+    combat_level.map_game.next_fleet_turn()
+    combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command)
     pygame.display.update()
 
     #animation calls
@@ -139,7 +137,7 @@ def combatGame(game_screen, selcted_level):
     last_second = time.perf_counter()
     a = 0
 
-    windowMove = combat_screen.size_of_hexes // 16
+    move_window_pixels = combat_screen.size_of_hexes // 16
 
     while game_running:
         game_clock.tick(framerate)
@@ -194,56 +192,56 @@ def combatGame(game_screen, selcted_level):
             #end turn 
             if event.type == KEYDOWN and event.key == K_e:
                 print('Fleet Turn Ended')
-                combat_level.areaGame.next_fleet_turn()
+                combat_level.map_game.next_fleet_turn()
 
             #inspect
             if event.type == KEYDOWN and event.key == K_i:
-                if combat_level.areaGame.selected_hex:
-                    combat_level.areaGame.selected_hex.entity.full_inspect()
+                if combat_level.map_game.selected_hex:
+                    combat_level.map_game.selected_hex.entity.full_inspect()
 
             #zooming
             if event.type == KEYDOWN and event.key == K_z:
                 combat_screen.zoom_in_window()
-                windowMove = combat_screen.size_of_hexes // 16
-                combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
+                move_window_pixels = combat_screen.size_of_hexes // 16
+                combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
             if event.type == KEYDOWN and event.key == K_x:
                 combat_screen.zoom_out_window()
-                windowMove = combat_screen.size_of_hexes // 16
-                combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
+                move_window_pixels = combat_screen.size_of_hexes // 16
+                combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
             #center
             if event.type == KEYDOWN and event.key == K_SPACE:
-                if combat_level.areaGame.selected_hex:
-                    combat_screen.center_hex = combat_level.areaGame.selected_hex.hex_coordinate_index
+                if combat_level.map_game.selected_hex:
+                    combat_screen.center_hex = combat_level.map_game.selected_hex.hex_coordinate_index
 
             #check if animatedc
-            if event.type == animate_game_hexes and not(move_window_right or move_window_left or move_window_up or move_window_down):
+            if event.type == animate_game_hexes and not (move_window_right or move_window_left or move_window_up or move_window_down):
                 combat_screen.animate_hexes()
-                combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
+                combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 someMousePos = pygame.mouse.get_pos()
                 some_hex_coordinate_index = combat_screen.get_mouse_hex(someMousePos)
                 combat_screen.selected_hex_index_coordinate = some_hex_coordinate_index
                 if some_hex_coordinate_index >= 0:
-                    combat_level.areaGame.select_hex(combat_level.level_hex_map.space_hexes[some_hex_coordinate_index])
+                    combat_level.map_game.select_hex(combat_level.level_hex_map.space_hexes[some_hex_coordinate_index])
                 print(some_hex_coordinate_index)
-                combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
+                combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
 
         #move window
         if move_window_up:
-            combat_screen.move_window_Y -= windowMove
+            combat_screen.move_window_Y += move_window_pixels
         if move_window_down:
-            combat_screen.move_window_Y += windowMove
+            combat_screen.move_window_Y -= move_window_pixels
         if move_window_left:
-            combat_screen.move_window_X += windowMove
+            combat_screen.move_window_X += move_window_pixels
         if move_window_right:
-            combat_screen.move_window_X -= windowMove
+            combat_screen.move_window_X -= move_window_pixels
 
         if move_window_right or move_window_left or move_window_up or move_window_down:
-            combat_screen.draw_hexes(combat_level.areaGame.active_fleet.fleet_command, combat_level.areaGame.selected_hex)
+            combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
 
         pygame.display.update()

@@ -5,7 +5,7 @@ from shipClasses.shipRole import Heavycruiser
 
 #--------------------------Apocalypse Class Heavycrusier------------------------------
 class ApocalypseClass(Heavycruiser):
-    shipClass = 'ApocalypseClass'
+    ship_class = 'ApocalypseClass'
     ammount = 0
     ship_stats = {
         "FP": 393, "ACC": 32, "EVA": 29, "SPD": 5,
@@ -33,7 +33,7 @@ class ApocalypseClass(Heavycruiser):
 
 #--------------------------Apocalypse Class Heavycrusier------------------------------
 class HarbingerClass(Heavycruiser):
-    shipClass = 'HarbingerClass'
+    ship_class = 'HarbingerClass'
     ammount = 0
     ship_stats = {
         "FP": 377, "ACC": 34, "EVA": 30, "SPD": 5,
