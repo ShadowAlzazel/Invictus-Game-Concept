@@ -15,8 +15,8 @@ class ZenithClass(Battlecruiser):
     shields = 27500
     hull = 11700
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         ZenithClass.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
@@ -47,8 +47,8 @@ class EclipseClass(Battlecruiser):
     shields = 25600
     hull = 13800
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         EclipseClass.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
@@ -79,8 +79,8 @@ class PenumbraClass(Battlecruiser):
     shields = 23500
     hull = 14500
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         PenumbraClass.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
@@ -111,9 +111,9 @@ class IllustriousClass(Battlecruiser):
     shields = 26600
     hull = 16600
 
-    def __init__(self, hullnumber, name):
+    def __init__(self, hullnumber, name, command, fleet_name):
         IllustriousClass.ammount += 1
-        super().__init__(hullnumber, name)
+        super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(HiggsShieldGen(vID))

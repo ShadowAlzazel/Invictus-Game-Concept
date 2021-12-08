@@ -15,9 +15,9 @@ class VoltageClass(Strikecruiser):
     shields = 12000
     hull = 8800
 
-    def __init__(self, hullnumber, name):
+    def __init__(self, hullnumber, name, command, fleet_name):
         VoltageClass.ammount += 1
-        super().__init__(hullnumber, name)
+        super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(HyperiumShieldGen(vID))
@@ -48,9 +48,9 @@ class DynamoClass(Strikecruiser):
     shields = 13000
     hull = 8200
 
-    def __init__(self, hullnumber, name):
+    def __init__(self, hullnumber, name, command, fleet_name):
         DynamoClass.ammount += 1
-        super().__init__(hullnumber, name)
+        super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(HyperiumShieldGen(vID))

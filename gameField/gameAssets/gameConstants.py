@@ -1,6 +1,9 @@
 #game constants
-LENGTH = 456
-WIDTH = 256
+LENGTH = 570
+WIDTH = 320
+#456/246
+#570/320
+#684/384
 
 RES_X = 1920
 RES_Y = 1080

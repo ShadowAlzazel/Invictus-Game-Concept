@@ -15,8 +15,8 @@ class EssexClass(Battleship):
     shields = 46600 
     hull = 18800
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         EssexClass.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
@@ -43,8 +43,8 @@ class AmagiClass(Battleship):
     shields = 43200 
     hull = 16800
     
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         AmagiClass.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
@@ -71,8 +71,8 @@ class VittorioVenetoClass(Battleship):
     shields = 42100 
     hull = 18400
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         VittorioVenetoClass.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
@@ -99,8 +99,8 @@ class HoodClass(Battleship):
     shields = 45300 
     hull = 17600
     
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         HoodClass.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
@@ -127,8 +127,8 @@ class PrinceOfWalesClass(Battleship):
     shields = 42800 
     hull = 18500
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         PrinceOfWalesClass.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
@@ -159,8 +159,8 @@ class NewJerseyClass(Battleship):
     shields = 66200
     hull = 25250
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         NewJerseyClass.ammount += 1 
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
@@ -195,8 +195,8 @@ class DevestatorClass(Battleship):
     shields = 89400
     hull = 30250
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         DevestatorClass.ammount += 1 
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])

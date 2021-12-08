@@ -15,9 +15,9 @@ class JohnstonClass(Destroyer):
     shields = 3350
     hull = 2600
 
-    def __init__(self, hullnumber, name):
+    def __init__(self, hullnumber, name, command, fleet_name):
         JohnstonClass.ammount += 1
-        super().__init__(hullnumber, name)
+        super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(AdvancedShieldGen(vID))
@@ -42,9 +42,9 @@ class ShimakazeClass(Destroyer):
     shields = 3600
     hull = 2300
 
-    def __init__(self, hullnumber, name):
+    def __init__(self, hullnumber, name, command, fleet_name):
         ShimakazeClass.ammount += 1
-        super().__init__(hullnumber, name)
+        super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(AdvancedShieldGen(vID))
