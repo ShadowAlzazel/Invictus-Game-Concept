@@ -37,7 +37,7 @@ def main():
         #menu buttons
         button_menu_start = pygame.Rect((LENGTH // 2) - (48 * 2), WIDTH // 4, 48 * 4, 18)
         if button_menu_start.collidepoint((mx, my)) and mouse_clicked: 
-            combatGameMenu(game_screen)
+            level_selector(game_screen)
 
         pygame.draw.rect(game_screen, (2, 2, 2), button_menu_start)
         game_font_2A.render_font(game_screen, 'INVICTUS SAMAR', ((LENGTH // 2) - (48 * 2), WIDTH // 4))
@@ -65,7 +65,7 @@ def main():
 
 #------------------------------------------------------------------------------------------
 #menu for combat 
-def combatGameMenu(game_screen):
+def level_selector(game_screen):
 
     #variables 
     game_running = True
@@ -84,7 +84,7 @@ def combatGameMenu(game_screen):
             #WIP currently testing presets
             #have different buttons change level number and create levels
             level = "level_Test" 
-            combatGame(game_screen, level)
+            combat_game(game_screen, level)
 
         pygame.draw.rect(game_screen, (2, 2, 2), button_game_selecter)
         game_font_2A.render_font(game_screen, 'COMBAT GAME L', (16, 32))
@@ -108,7 +108,7 @@ def combatGameMenu(game_screen):
 
 #-------------------------------------------------------------------------------------------
 #combat game
-def combatGame(game_screen, selcted_level):
+def combat_game(game_screen, selcted_level):
     
     #levels
     combat_level = level(selcted_level)
