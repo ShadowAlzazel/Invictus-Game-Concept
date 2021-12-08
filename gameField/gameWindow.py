@@ -1,11 +1,10 @@
 #class for game display
 from gameField.gameAssets import *
 from multiprocessing.dummy import Pool as thread_pool
-from multiprocessing import Pool as process_pool
 
 #----------------------------------------------------------------------
 
-class spaceWindow:
+class map_screen:
 
     def __init__(self, ops_hex_map, game_screen, size_of_hexes):
         self.hex_map_length = ops_hex_map.map_length

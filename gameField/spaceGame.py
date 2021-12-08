@@ -195,7 +195,7 @@ class turn_combat_game:
                     self.ops_hex_map.space_hexes[m].empty = True
                     true_damage = 0
                     #del enemy_ship
-                    return True
+                    break 
 
                 if true_damage > 0:
                     print(g.battery_ID, "Has Hit", enemy_ship.name, "For", true_damage, "Damage!")

@@ -8,7 +8,7 @@ def getClass(strShipClass):
     return getattr(sys.modules[__name__], strShipClass)
 
 #Create a random ship using gacha stats to a lib
-def makeRandShip(someLib, sCmd):
+def make_rand_ship(someLib, sCmd):
     someClass = getClass(randShipClass())
     newShip = someClass(randint(1, 10000), randName())
     newShip.command = sCmd
@@ -16,7 +16,7 @@ def makeRandShip(someLib, sCmd):
     someLib.append(newShip)
 
 #create random ships
-def createShips(someShipLib, sCmd, n):
+def create_rand_ships(someShipLib, sCmd, n):
     while n > 0:
-        makeRandShip(someShipLib, sCmd)
+        make_rand_ship(someShipLib, sCmd)
         n -= 1

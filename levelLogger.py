@@ -1,6 +1,6 @@
 #levels 
 from gameField.spaceGame import turn_combat_game
-from shipCreater import *
+#from shipCreater import *
 from fleetManager import *
 from fleetLogger import *
 from starSpaces import *

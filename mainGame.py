@@ -110,17 +110,15 @@ def combatGameMenu(game_screen):
 #combat game
 def combatGame(game_screen, selcted_level):
     
-    combat_level = None 
     #levels
     combat_level = level(selcted_level)
     if not combat_level:
         return
 
     #create new game window
-    active_fleet_command = combat_level.map_game.active_fleet.fleet_command
-    combat_screen = spaceWindow(combat_level.level_hex_map, game_screen, HEX_SIZE)
+    combat_screen = map_screen(combat_level.level_hex_map, game_screen, HEX_SIZE)
     combat_level.map_game.next_fleet_turn()
-    combat_screen.draw_hexes(active_fleet_command)
+    combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command)
     pygame.display.update()
 
     #animation calls
@@ -234,9 +232,9 @@ def combatGame(game_screen, selcted_level):
 
         #move window
         if move_window_up:
-            combat_screen.move_window_Y -= windowMove
-        if move_window_down:
             combat_screen.move_window_Y += windowMove
+        if move_window_down:
+            combat_screen.move_window_Y -= windowMove
         if move_window_left:
             combat_screen.move_window_X += windowMove
         if move_window_right:
