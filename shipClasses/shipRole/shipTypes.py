@@ -14,8 +14,8 @@ class Battleship(Ship):
     shields = 45000 
     hull = 17500
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         Battleship.ammount += 1
         print(self.ship_type, '-', hullnumber, sep='')
 
@@ -32,8 +32,8 @@ class Battlecruiser(Ship):
     shields = 27500
     hull = 12500
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         Battlecruiser.ammount += 1
         print(self.ship_type, '-', hullnumber, sep='')
 
@@ -50,8 +50,8 @@ class Strikecruiser(Ship):
     shields = 12500
     hull = 8500
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         Strikecruiser.ammount += 1
         print(self.ship_type, '-', hullnumber, sep='')
 
@@ -68,8 +68,8 @@ class Heavycruiser(Ship):
     shields = 10000
     hull = 10000
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         Heavycruiser.ammount += 1
         print(self.ship_type, '-', hullnumber, sep='')
 
@@ -86,8 +86,8 @@ class Lightcruiser(Ship):
     shields = 7500
     hull = 7500
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         Lightcruiser.ammount += 1
         print(self.ship_type, '-', hullnumber, sep='') 
 
@@ -104,7 +104,7 @@ class Destroyer(Ship):
     shields = 3300
     hull = 2500
 
-    def __init__(self, hullnumber, name):
-        super().__init__(hullnumber, name)
+    def __init__(self, hullnumber, name, command, fleet_name):
+        super().__init__(hullnumber, name, command, fleet_name)
         Destroyer.ammount += 1
         print(self.ship_type, '-', hullnumber, sep='')

@@ -10,11 +10,11 @@ class Ship:
         "RDR": 3, "LCK": 10, "STH": 1
     }
 
-    def __init__(self, hullnumber, name):
+    def __init__(self, hullnumber, name, command, fleet_name):
         Ship.ammount += 1
         self.operational = True
-        self.command = ''
-        self.fleetName = ''
+        self.command = command
+        self.fleet_name = fleet_name
         self.name = name
         self.hullnumber = hullnumber
         self.vessel_ID = ''.join([self.ship_type, '-', str(self.hullnumber)])

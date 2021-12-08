@@ -15,9 +15,9 @@ class ApocalypseClass(Heavycruiser):
     shields = 11000
     hull = 10500
 
-    def __init__(self, hullnumber, name):
+    def __init__(self, hullnumber, name, command, fleet_name):
         ApocalypseClass.ammount += 1
-        super().__init__(hullnumber, name)
+        super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(GigaShieldGen(vID))
@@ -43,9 +43,9 @@ class HarbingerClass(Heavycruiser):
     shields = 11300
     hull = 10000
 
-    def __init__(self, hullnumber, name):
+    def __init__(self, hullnumber, name, command, fleet_name):
         HarbingerClass.ammount += 1
-        super().__init__(hullnumber, name)
+        super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(GigaShieldGen(vID))

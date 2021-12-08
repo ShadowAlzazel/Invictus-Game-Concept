@@ -16,9 +16,9 @@ class MidnightClass(Lightcruiser):
     shields = 7500
     hull = 7500
 
-    def __init__(self, hullnumber, name):
+    def __init__(self, hullnumber, name, command, fleet_name):
         MidnightClass.ammount += 1
-        super().__init__(hullnumber, name)
+        super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(LumioneShieldGen(vID))
