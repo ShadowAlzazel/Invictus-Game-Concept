@@ -137,7 +137,7 @@ def combatGame(game_screen, selcted_level):
     last_second = time.perf_counter()
     a = 0
 
-    windowMove = combat_screen.size_of_hexes // 16
+    move_window_pixels = combat_screen.size_of_hexes // 16
 
     while game_running:
         game_clock.tick(framerate)
@@ -202,12 +202,12 @@ def combatGame(game_screen, selcted_level):
             #zooming
             if event.type == KEYDOWN and event.key == K_z:
                 combat_screen.zoom_in_window()
-                windowMove = combat_screen.size_of_hexes // 16
+                move_window_pixels = combat_screen.size_of_hexes // 16
                 combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
             if event.type == KEYDOWN and event.key == K_x:
                 combat_screen.zoom_out_window()
-                windowMove = combat_screen.size_of_hexes // 16
+                move_window_pixels = combat_screen.size_of_hexes // 16
                 combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
             #center
@@ -232,13 +232,13 @@ def combatGame(game_screen, selcted_level):
 
         #move window
         if move_window_up:
-            combat_screen.move_window_Y += windowMove
+            combat_screen.move_window_Y += move_window_pixels
         if move_window_down:
-            combat_screen.move_window_Y -= windowMove
+            combat_screen.move_window_Y -= move_window_pixels
         if move_window_left:
-            combat_screen.move_window_X += windowMove
+            combat_screen.move_window_X += move_window_pixels
         if move_window_right:
-            combat_screen.move_window_X -= windowMove
+            combat_screen.move_window_X -= move_window_pixels
 
         if move_window_right or move_window_left or move_window_up or move_window_down:
             combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)

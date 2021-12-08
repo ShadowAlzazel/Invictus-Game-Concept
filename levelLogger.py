@@ -8,15 +8,15 @@ from levelManager import *
 
 class level():
 
-    def __init__(self, levelPaths):
+    def __init__(self, level_path):
         game_levels = starLevelOpen()
-        if levelPaths in game_levels[0]["levels"]:
-            self.name = game_levels[0]["levels"][levelPaths]["Name"]
-            self.level_hex_map = create_map_hexes(game_levels[0]["levels"][levelPaths]["Length"], game_levels[0]["levels"][levelPaths]["Width"], game_levels[0]["levels"][levelPaths]["RhoDensity"])
-            self.fleet_spawn = game_levels[0]["levels"][levelPaths]["SpawnLocations"]
+        if level_path in game_levels[0]["levels"]:
+            self.name = game_levels[0]["levels"][level_path]["Name"]
+            self.level_hex_map = create_map_hexes(game_levels[0]["levels"][level_path]["Length"], game_levels[0]["levels"][level_path]["Width"], game_levels[0]["levels"][level_path]["RhoDensity"])
+            self.fleet_spawn = game_levels[0]["levels"][level_path]["SpawnLocations"]
             self.level_fleets = []
 
-            for i, x in enumerate(game_levels[0]["levels"][levelPaths]["Fleets"]):
+            for i, x in enumerate(game_levels[0]["levels"][level_path]["Fleets"]):
                 new_fleet_command, new_fleet_name = x[0], x[1]
                 new_fleet = space_fleet(new_fleet_name, new_fleet_command)
                 launch_fleet(new_fleet)

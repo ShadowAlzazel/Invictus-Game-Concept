@@ -102,10 +102,10 @@ class map_screen:
 
 
                 #WIP special ship images 
-                if some_hex.entity.command == 'ASCS' and some_hex.entity.detected:
+                if some_hex.entity.command[0:3] == 'ASC' and some_hex.entity.detected:
                     self.rotation_orientation(some_hex.entity)
                     self.game_screen.blit(self.ROT_ASCS_SHIP_HEX_IMG, (x, y))
-                elif some_hex.entity.command == 'XNFFS' and some_hex.entity.detected:
+                elif some_hex.entity.command[0:3] == 'XNF' and some_hex.entity.detected:
                     self.rotation_orientation(some_hex.entity)
                     self.game_screen.blit(self.ROT_XNFF_SHIP_HEX_IMG, (x, y))
 
