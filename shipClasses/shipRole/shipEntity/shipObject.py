@@ -25,8 +25,9 @@ class Ship:
         self.defenses = {'shield_gen': [], 'armor_type': []}
         self.detected = True 
         self.revealed = False
-        print("New Ship Launched", end=': ')
         
+        print("New Ship Launched", end=': ')
+        print(self.command, '-', name, sep='', end=', ')
 
     #damage function that takes in a value 
     def take_damage(self, damage_amount, wep_PEN=0, wep_DIS=1):
