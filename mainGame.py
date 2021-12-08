@@ -1,15 +1,15 @@
 import pygame, sys, time
 from pygame.constants import K_DOWN, K_ESCAPE, K_F4, K_LALT, K_LEFT, K_RIGHT, K_SPACE, K_UP, KEYDOWN, KEYUP, MOUSEBUTTONDOWN, QUIT, K_c, K_e, K_i, K_m, K_r, K_x, K_z
 from gameField import *
-from levelGames import *
+from levelLogger import *
 from pygame.locals import *
 
 #-----------------------------------------------------------------------
 #main game function
 def main():
     pygame.init()
-    #screen_flags = FULLSCREEN | SCALED
-    screen_flags = SCALED 
+    screen_flags = FULLSCREEN | SCALED
+    #screen_flags = SCALED 
 
     #set up main game screen
     pygame.display.set_caption("INVICTUS: SAMAR")
