@@ -1,4 +1,6 @@
 #ship radar object for hexes
+from functools import lru_cache
+
 class hex_radar:
 
     def __init__(self, vessel_ID, radar_class):
@@ -61,6 +63,7 @@ class hex_radar:
 
 
     #find hexes in rings
+    @lru_cache(maxsize=2)
     def _hex_finder(self, requested_range, some_hex_space):
         assert requested_range != 0
         range_EFF = requested_range 
