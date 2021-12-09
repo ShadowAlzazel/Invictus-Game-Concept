@@ -15,7 +15,7 @@ class space_fleet:
         #check if preset fleet
         astra_fleet_ledger = self.open_asta_fleets()
 
-        if fleet_command in astra_fleet_ledger[0] and name in astra_fleet_ledger[0][fleet_command]['fleetNames']:
+        if fleet_command in astra_fleet_ledger[0] and name in astra_fleet_ledger[0][fleet_command]['faction_fleets']:
             self.preset = True
             self.fleet_logs = astra_fleet_ledger[0][fleet_command][name]
 

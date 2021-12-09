@@ -2,7 +2,7 @@
     {
         "ASC":
         {
-            "fleetNames":
+            "faction_fleets":
             [
                 "Dracnois-17 Astra Fleet",
                 "Test Fleet ASC",
@@ -103,7 +103,7 @@
 
         "XNFF":
         {
-            "fleetNames":
+            "faction_fleets":
             [
                 "Test Fleet XNFF"
             ],
