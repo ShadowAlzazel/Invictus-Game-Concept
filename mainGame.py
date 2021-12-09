@@ -193,6 +193,7 @@ def combat_game(game_screen, selcted_level):
             if event.type == KEYDOWN and event.key == K_e:
                 print('Fleet Turn Ended')
                 combat_level.map_game.next_fleet_turn()
+                combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
             #inspect
             if event.type == KEYDOWN and event.key == K_i:

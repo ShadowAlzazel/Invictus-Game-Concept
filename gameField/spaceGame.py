@@ -168,7 +168,7 @@ class turn_combat_game:
         total_damage = 0
         for g in guns_to_fire:
             if not enemy_ship.operational:
-                print("ship Destroyed!")
+                print("Ship Destroyed!")
                 return True
             salvo_damage = 0
             true_damage = 0

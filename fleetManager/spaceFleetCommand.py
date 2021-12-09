@@ -15,7 +15,7 @@ class space_fleet:
         #check if preset fleet
         astra_fleet_ledger = self.open_asta_fleets()
 
-        if fleet_command in astra_fleet_ledger[0] and name in astra_fleet_ledger[0][fleet_command]['fleetNames']:
+        if fleet_command in astra_fleet_ledger[0] and name in astra_fleet_ledger[0][fleet_command]['faction_fleets']:
             self.preset = True
             self.fleet_logs = astra_fleet_ledger[0][fleet_command][name]
 
@@ -33,7 +33,7 @@ class space_fleet:
             k, n = 0, 1
             #if -1 random spawn
             if start == -1: 
-                r = randint(0, (hex_map.l * hex_map.w) - 1)
+                r = randint(0, (hex_map.map_length * hex_map.map_width) - 1)
                 if hex_map.space_hexes[r].empty:
                     fleet_spawn_location = hex_map.space_hexes[r]
                 else:
