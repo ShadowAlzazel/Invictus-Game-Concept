@@ -33,7 +33,7 @@ class space_fleet:
             k, n = 0, 1
             #if -1 random spawn
             if start == -1: 
-                r = randint(0, (hex_map.l * hex_map.w) - 1)
+                r = randint(0, (hex_map.map_length * hex_map.map_width) - 1)
                 if hex_map.space_hexes[r].empty:
                     fleet_spawn_location = hex_map.space_hexes[r]
                 else:

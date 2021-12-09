@@ -3,8 +3,8 @@
 #hex space
 class space_hex:
 
-    def __init__(self, hexNumber): 
-        self.hex_coordinate_index = hexNumber
+    def __init__(self, hex_number): 
+        self.hex_coordinate_index = hex_number
         self.entity = []
         self.neighbors = []
         self.directions = {'R': 0, 'L': -1, 'UR': 0, 'UL': 0, 'DR': -1, 'DL': -1}
