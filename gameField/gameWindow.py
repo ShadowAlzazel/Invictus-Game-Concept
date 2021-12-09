@@ -1,6 +1,9 @@
 #class for game display
 from gameField.gameAssets import *
+
 from multiprocessing.dummy import Pool as thread_pool
+from functools import lru_cache
+from multiprocessing import Manager
 
 #----------------------------------------------------------------------
 
@@ -68,11 +71,15 @@ class map_screen:
                 self.targets_hexes = some_ship.track_targets()
             self.ship_selected = True
 
-        with thread_pool() as draw_pool:
+        with thread_pool(processes=2) as draw_pool:
             draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
+
+        #for x in self.ops_hex_map.space_hexes:
+        #    self._draw_a_hex(x)
 
 
     #draw an individual hex
+    @lru_cache(maxsize=3)
     def _draw_a_hex(self, some_hex):
         row_height = self.hex_map_width - (some_hex.hex_coordinate_index // self.hex_map_length) - 1
         indent = 0
