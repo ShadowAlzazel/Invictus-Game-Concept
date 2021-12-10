@@ -8,8 +8,8 @@ from pygame.locals import *
 #main game function
 def main():
     pygame.init()
-    screen_flags = FULLSCREEN | SCALED
-    #screen_flags = SCALED 
+    #screen_flags = FULLSCREEN | SCALED
+    screen_flags = SCALED 
 
     #set up main game screen
     pygame.display.set_caption("INVICTUS: SAMAR")
@@ -216,8 +216,8 @@ def combat_game(game_screen, selcted_level):
                 if combat_level.map_game.selected_hex:
                     combat_screen.center_hex = combat_level.map_game.selected_hex.hex_coordinate_index
 
-            #check if animatedc
-            if event.type == animate_game_hexes and not (move_window_right or move_window_left or move_window_up or move_window_down):
+            #animate
+            if event.type == animate_game_hexes: # and not (move_window_right or move_window_left or move_window_up or move_window_down)
                 combat_screen.animate_hexes()
                 combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
@@ -243,7 +243,6 @@ def combat_game(game_screen, selcted_level):
 
         if move_window_right or move_window_left or move_window_up or move_window_down:
             combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
-
 
         pygame.display.update()
 

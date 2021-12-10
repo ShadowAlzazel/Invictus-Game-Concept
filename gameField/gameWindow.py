@@ -1,6 +1,9 @@
 #class for game display
 from gameField.gameAssets import *
+
 from multiprocessing.dummy import Pool as thread_pool
+from functools import lru_cache
+from multiprocessing import Manager
 
 #----------------------------------------------------------------------
 
@@ -12,17 +15,20 @@ class map_screen:
         self.ops_hex_map = ops_hex_map
         self.size_of_hexes = size_of_hexes
         self.game_screen = game_screen
+
         #movement variables
         self.move_window_X = 0
         self.move_window_Y = 0
         self.center_hex = -1
         self.window_border_Y = ((WIDTH - (self.size_of_hexes * self.hex_map_width)) // 2) - self.move_window_Y
         self.window_border_X = ((LENGTH - (self.size_of_hexes * self.hex_map_length)) // 2) + self.move_window_X
-        #images
+
+        #ship images
         self.ASCS_SHIP_HEX_IMG = ASCS_SHIP_HEX_IMG
         self.ROT_ASCS_SHIP_HEX_IMG = ASCS_SHIP_HEX_IMG
         self.XNFF_SHIP_HEX_IMG = XNFF_SHIP_HEX_IMG
         self.ROT_XNFF_SHIP_HEX_IMG = XNFF_SHIP_HEX_IMG
+
         #selections
         self.selected_hex_index_coordinate = -1
         self.selected_hex = []
@@ -42,8 +48,10 @@ class map_screen:
                             'animated_hex_target': self.template_hexes_IMG['template_hex_target'], 'animated_hex_ally': self.template_hexes_IMG['template_hex_ally']}
         self.counter_animation_1 = 0
         self.counter_animation_2 = 0
+
         #scale
         self._scale_hexes(self.size_of_hexes)
+
 
     #draw hexes on board
     def draw_hexes(self, active_fleet_command, some_ship_hex=[]):
@@ -68,11 +76,12 @@ class map_screen:
                 self.targets_hexes = some_ship.track_targets()
             self.ship_selected = True
 
-        with thread_pool() as draw_pool:
+        with thread_pool(processes=2) as draw_pool:
             draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
 
 
     #draw an individual hex
+    @lru_cache(maxsize=3)
     def _draw_a_hex(self, some_hex):
         row_height = self.hex_map_width - (some_hex.hex_coordinate_index // self.hex_map_length) - 1
         indent = 0
@@ -118,7 +127,7 @@ class map_screen:
                 if self.ship_selected:
                     if some_hex.hex_coordinate_index == self.selected_hex.hex_coordinate_index:
                         self.game_screen.blit(self.animated_hexes_IMG['animated_hex_clicked'], (x, y))
-        
+
 
     #get hexNums from coord mouse
     def get_mouse_hex(self, mouse_position):
