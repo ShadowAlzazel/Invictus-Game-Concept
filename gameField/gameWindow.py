@@ -169,9 +169,6 @@ class map_screen:
         draw_pool.close()
         draw_pool.join() 
 
-        #with thread_pool(processes=4) as draw_pool:
-        #    draw_pool.map(l_draw_some_hex, map_space_hexes)
-
         #for x in map_space_hexes:
         #    l_draw_some_hex(x)
 
