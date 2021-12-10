@@ -8,8 +8,8 @@ from pygame.locals import *
 #main game function
 def main():
     pygame.init()
-    #screen_flags = FULLSCREEN | SCALED
-    screen_flags = SCALED 
+    screen_flags = FULLSCREEN | SCALED
+    #screen_flags = SCALED 
 
     #set up main game screen
     pygame.display.set_caption("INVICTUS: SAMAR")
