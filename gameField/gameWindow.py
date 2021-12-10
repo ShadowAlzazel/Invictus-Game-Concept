@@ -4,6 +4,7 @@ from gameField.gameAssets import *
 from multiprocessing.dummy import Pool as thread_pool
 from functools import lru_cache
 from multiprocessing import Manager, Process
+from itertools import repeat
 
 #----------------------------------------------------------------------
 
@@ -75,7 +76,9 @@ class map_screen:
 
 
         #rn calling multiple self classes need to change'
-        self._draw_some_hexes(self.ops_hex_map.space_hexes, self.animated_hexes_IMG)
+
+
+        self._distrubute_draw_jobs(self.ops_hex_map.space_hexes, self.game_screen, self.measurements, self.animated_hexes_IMG)
         #draw_pool = thread_pool(processes=2)
         ##draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
         #draw_pool.map(self._draw_some_hexes, self.ops_hex_map.space_hexes)
@@ -91,23 +94,42 @@ class map_screen:
 
 
 
-    @classmethod
-    def _draw_some_hexes(cls, map_space_hexes, animated_hexes_IMG):
-        x = animated_hexes_IMG
-        draw_pool = thread_pool(processes=2)
-        ##draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
-        draw_pool.map(cls._get_hex_x_y, map_space_hexes)
-        draw_pool.close()
-        draw_pool.join() 
+    @staticmethod
+    def _distrubute_draw_jobs(map_space_hexes, game_screen, screen_measurements, animated_hexes_IMG):
 
-        #for x in map_space_hexes:
-        #    cls._get_hex_x_y(x)
-    
+        #get x y coord
+        @lru_cache(maxsize=2)
+        def l_get_hex_x_y(some_hex):
+            nonlocal screen_measurements
+            row_height = screen_measurements['hex_width'] - (some_hex.hex_coordinate_index // screen_measurements['hex_length']) - 1
+            indent = 0
+            if row_height % 2 == screen_measurements['hex_width'] % 2:
+                indent = screen_measurements['hex_pixel_size'] // 2
+
+            y = (screen_measurements['border_Y']) + (row_height * screen_measurements['hex_pixel_size']) + screen_measurements['moved_Y']
+            x = (screen_measurements['border_X']) + ((some_hex.hex_coordinate_index % screen_measurements['hex_length']) * screen_measurements['hex_pixel_size']) + indent - (screen_measurements['hex_pixel_size'] // 2) + screen_measurements['moved_X']
+            return x, y
 
 
+        @lru_cache(maxsize=(LENGTH*2))
+        def l_draw_some_hex(some_hex):
+            nonlocal screen_measurements
+            nonlocal game_screen
+            x, y = l_get_hex_x_y(some_hex)
+            if x < LENGTH + screen_measurements['hex_pixel_size'] and y < WIDTH + screen_measurements['hex_pixel_size'] and x > -screen_measurements['hex_pixel_size'] and y > -screen_measurements['hex_pixel_size']:
+                game_screen.blit(animated_hexes_IMG['animated_hex_base'], (x, y))
 
-    def _l():
-        pass 
+
+        #draw_pool = thread_pool(processes=4)
+        #draw_pool.map(l_draw_some_hex, map_space_hexes)
+        #draw_pool.close()
+        #draw_pool.join() 
+
+        #with thread_pool(processes=4) as draw_pool:
+        #    draw_pool.map(l_draw_some_hex, map_space_hexes)
+
+        for x in map_space_hexes:
+            l_draw_some_hex(x)
 
 
     #draw an individual hex
@@ -160,10 +182,10 @@ class map_screen:
         row_height = screen_measurements['hex_width'] - (some_hex.hex_coordinate_index // screen_measurements['hex_length']) - 1
         indent = 0
         if row_height % 2 == screen_measurements['hex_width'] % 2:
-            indent = screen_measurements['hex_length'] // 2
+            indent = screen_measurements['hex_pixel_size'] // 2
 
-        y = (screen_measurements['border_Y']) + (row_height * screen_measurements['hex_length']) + screen_measurements['moved_Y']
-        x = (screen_measurements['border_X']) + ((some_hex.hex_coordinate_index % screen_measurements['hex_length']) * screen_measurements['hex_length']) + indent - (screen_measurements['hex_length'] // 2) + screen_measurements['moved_X']
+        y = (screen_measurements['border_Y']) + (row_height * screen_measurements['hex_pixel_size']) + screen_measurements['moved_Y']
+        x = (screen_measurements['border_X']) + ((some_hex.hex_coordinate_index % screen_measurements['hex_length']) * screen_measurements['hex_pixel_size']) + indent - (screen_measurements['hex_pixel_size'] // 2) + screen_measurements['moved_X']
         return x, y
 
 
