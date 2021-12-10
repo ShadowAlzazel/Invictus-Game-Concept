@@ -67,6 +67,8 @@ class map_screen:
 
         self._distrubute_draw_jobs(self.ops_hex_map.space_hexes, self.game_screen, self.measurements, self.animated_hexes_IMG, self.ship_selected, 
                                     self.selected_hex, self.active_fleet_command, self.targets_hexes, self.ship_images)
+        return 
+
 
 
     #an environment for threading pool
@@ -89,7 +91,7 @@ class map_screen:
 
 
         #rotate an image
-        #@lru_cache(maxsize=2)
+        @lru_cache(maxsize=2)
         def rotate_a_center(some_image, some_angle):
             original_rectangle = some_image.get_rect()
             rotated_image = pygame.transform.rotate(some_image, some_angle)
@@ -104,7 +106,7 @@ class map_screen:
         def draw_a_ship(some_ship, game_screen, ship_IMG, ship_size, position):
             h = ship_size
             ship_images = ship_IMG
-            some_ship_image = ship_images['ASC_template'].copy()
+            #some_ship_image = ship_images['ASC_template'].copy()
             ship_rotations = {'R': -90.0, 'L': -270.0, 'UR': -30.0, 'UL': -330.0, 'DR': -150.0, 'DL': -210.0}
             #WIP special ship images 
             if some_ship.command[0:3] == 'ASC' and some_ship.detected:
@@ -113,6 +115,7 @@ class map_screen:
                 some_ship_image = ship_images['XNF_template'].copy()
             else:
                 return
+
             some_ship_image.convert()
             rotated_ship_image = rotate_a_center(some_ship_image, ship_rotations[some_ship.orientation])
             scaled_ship_image = pygame.transform.scale(rotated_ship_image, (h, h))
@@ -130,7 +133,7 @@ class map_screen:
             nonlocal targets_hexes
             nonlocal ship_IMG
             x, y = l_get_hex_x_y(some_hex)
-            if x < LENGTH + screen_measurements['hex_pixel_size'] and y < WIDTH + screen_measurements['hex_pixel_size'] and x > -screen_measurements['hex_pixel_size'] and y > -screen_measurements['hex_pixel_size']:
+            if x < LENGTH + (screen_measurements['hex_pixel_size'] // 2) and y < WIDTH + (screen_measurements['hex_pixel_size'] // 2) and x > -(screen_measurements['hex_pixel_size']) and y > -(screen_measurements['hex_pixel_size']):
                 game_screen.blit(animated_hexes_IMG['animated_hex_base'], (x, y))
                 #check if empty for move
                 if some_hex.empty:
@@ -146,7 +149,9 @@ class map_screen:
                         game_screen.blit(animated_hexes_IMG['animated_hex_enemy'], (x, y))
                     elif active_fleet_command[0:3] == some_hex.entity.command[0:3]:
                         game_screen.blit(animated_hexes_IMG['animated_hex_ally'], (x, y))
-                    draw_a_ship(some_hex.entity, game_screen, ship_IMG, screen_measurements['hex_pixel_size'], (x, y))
+
+                    if some_hex.entity.detected:
+                        draw_a_ship(some_hex.entity, game_screen, ship_IMG, screen_measurements['hex_pixel_size'], (x, y))
 
                     #check if target in range
                     if ship_selected:
