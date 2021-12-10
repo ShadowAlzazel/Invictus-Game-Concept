@@ -77,7 +77,7 @@ class map_screen:
                             ship_selected, selected_hex, active_fleet_command, targets_hexes, ship_IMG):
 
         #get x y coord
-        @lru_cache(maxsize=2)
+        @lru_cache(maxsize=3)
         def l_get_hex_x_y(some_hex):
             nonlocal screen_measurements
             row_height = screen_measurements['hex_width'] - (some_hex.hex_coordinate_index // screen_measurements['hex_length']) - 1
