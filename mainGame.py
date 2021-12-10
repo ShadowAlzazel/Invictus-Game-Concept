@@ -137,7 +137,7 @@ def combat_game(game_screen, selcted_level):
     last_second = time.perf_counter()
     a = 0
 
-    move_window_pixels = combat_screen.size_of_hexes // 16
+    move_window_pixels = combat_screen.measurements['hex_pixel_size'] // 16
 
     while game_running:
         game_clock.tick(framerate)
@@ -186,8 +186,8 @@ def combat_game(game_screen, selcted_level):
 
             #reset window
             if event.type == KEYDOWN and event.key == K_c:
-                combat_screen.move_window_X = 0
-                combat_screen.move_window_Y = 0
+                combat_screen.measurements['moved_X'] = 0
+                combat_screen.measurements['moved_Y'] = 0
 
             #end turn 
             if event.type == KEYDOWN and event.key == K_e:
@@ -203,12 +203,12 @@ def combat_game(game_screen, selcted_level):
             #zooming
             if event.type == KEYDOWN and event.key == K_z:
                 combat_screen.zoom_in_window()
-                move_window_pixels = combat_screen.size_of_hexes // 16
+                move_window_pixels = combat_screen.measurements['hex_pixel_size'] // 16
                 combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
             if event.type == KEYDOWN and event.key == K_x:
                 combat_screen.zoom_out_window()
-                move_window_pixels = combat_screen.size_of_hexes // 16
+                move_window_pixels = combat_screen.measurements['hex_pixel_size'] // 16
                 combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
             #center
@@ -233,13 +233,13 @@ def combat_game(game_screen, selcted_level):
 
         #move window
         if move_window_up:
-            combat_screen.move_window_Y += move_window_pixels
+            combat_screen.measurements['moved_Y'] += move_window_pixels
         if move_window_down:
-            combat_screen.move_window_Y -= move_window_pixels
+            combat_screen.measurements['moved_Y'] -= move_window_pixels
         if move_window_left:
-            combat_screen.move_window_X += move_window_pixels
+            combat_screen.measurements['moved_X'] += move_window_pixels
         if move_window_right:
-            combat_screen.move_window_X -= move_window_pixels
+            combat_screen.measurements['moved_X'] -= move_window_pixels
 
         if move_window_right or move_window_left or move_window_up or move_window_down:
             combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)

@@ -10,18 +10,14 @@ from multiprocessing import Manager, Process
 class map_screen:
 
     def __init__(self, ops_hex_map, game_screen, size_of_hexes):
-        self.hex_map_length = ops_hex_map.map_length
-        self.hex_map_width = ops_hex_map.map_width
         self.ops_hex_map = ops_hex_map
-        self.size_of_hexes = size_of_hexes
         self.game_screen = game_screen
 
-        #movement variables
-        self.move_window_X = 0
-        self.move_window_Y = 0
-        self.center_hex = -1
-        self.window_border_Y = ((WIDTH - (self.size_of_hexes * self.hex_map_width)) // 2) - self.move_window_Y
-        self.window_border_X = ((LENGTH - (self.size_of_hexes * self.hex_map_length)) // 2) + self.move_window_X
+        #measurements
+        brd_X = ((LENGTH - (size_of_hexes * ops_hex_map.map_length)) // 2) 
+        brd_Y = ((WIDTH - (size_of_hexes * ops_hex_map.map_width)) // 2) 
+        self.measurements = {'hex_length': ops_hex_map.map_length, 'hex_width': ops_hex_map.map_width, 
+                             'hex_pixel_size': size_of_hexes, 'moved_X': 0, 'moved_Y': 0, 'border_X': brd_X, 'border_Y': brd_Y}
 
         #ship images
         self.ASCS_SHIP_HEX_IMG = ASCS_SHIP_HEX_IMG
@@ -31,6 +27,7 @@ class map_screen:
 
         #selections
         self.selected_hex_index_coordinate = -1
+        self.center_hex = -1
         self.selected_hex = []
         self.ship_selected = False 
         self.targets_hexes = []
@@ -50,7 +47,7 @@ class map_screen:
         self.counter_animation_2 = 0
 
         #scale
-        self._scale_hexes(self.size_of_hexes)
+        self._scale_hexes(self.measurements['hex_pixel_size'])
 
 
     #draw hexes on board
@@ -61,10 +58,10 @@ class map_screen:
 
         if self.center_hex > -1:
             c = 0
-            if (self.center_hex // self.hex_map_length) % 2 != 0:
-                c = int(self.size_of_hexes / 2)
-            self.move_window_X = int((self.hex_map_length / 2) - ((self.center_hex % self.hex_map_length) + 1)) * self.size_of_hexes + c
-            self.move_window_Y = int(((self.center_hex // self.hex_map_length)) - (self.hex_map_width / 2) + 0.5) * self.size_of_hexes
+            if (self.center_hex // self.measurements['hex_length']) % 2 != 0:
+                c = int(self.measurements['hex_pixel_size'] / 2)
+            self.measurements['moved_X'] = int((self.measurements['hex_length'] / 2) - ((self.center_hex % self.measurements['hex_length']) + 1)) * self.measurements['hex_pixel_size'] + c
+            self.measurements['moved_Y'] = int(((self.center_hex // self.measurements['hex_length'])) - (self.measurements['hex_width'] / 2) + 0.5) * self.measurements['hex_pixel_size']
             self.center_hex = -1
             
         #check of ship_selected
@@ -117,8 +114,8 @@ class map_screen:
     @lru_cache(maxsize=1)
     def _draw_a_hex(self, some_hex):
         #check if hex in render space
-        x, y = self._get_hex_x_y(some_hex, self.hex_map_length, self.hex_map_width, self.size_of_hexes, self.window_border_X, self.window_border_Y, self.move_window_X, self.move_window_Y)
-        if x < LENGTH + self.size_of_hexes and y < WIDTH + self.size_of_hexes and x > -self.size_of_hexes and y > -self.size_of_hexes:
+        x, y = self._get_hex_x_y(some_hex, self.measurements['hex_length'], self.measurements['hex_width'], self.measurements['hex_pixel_size'], self.measurements['border_X'], self.measurements['border_Y'], self.measurements['moved_X'], self.measurements['moved_Y'])
+        if x < LENGTH + self.measurements['hex_pixel_size'] and y < WIDTH + self.measurements['hex_pixel_size'] and x > -self.measurements['hex_pixel_size'] and y > -self.measurements['hex_pixel_size']:
             self._blit_a_hex(self.animated_hexes_IMG['animated_hex_base'], self.game_screen, (x, y))
             #check if empty for move
             if some_hex.empty:
@@ -126,7 +123,6 @@ class map_screen:
                     some_ship = self.selected_hex.entity
                     if some_hex in self.selected_hex.neighbors and some_ship.ship_moves != 0 and (some_hex.directions[some_ship.orientation] != self.selected_hex.hex_coordinate_index or some_ship.ship_type == 'DD' or some_ship.ship_type == 'CS'):
                         if not (some_ship.ship_type == 'BB' and self.ops_hex_map.space_hexes[some_hex.directions[some_ship.orientation]] in self.selected_hex.neighbors):
-                            
                             self._blit_a_hex(self.animated_hexes_IMG['animated_hex_move'], self.game_screen, (x, y))
 
             #check if ship
@@ -160,14 +156,14 @@ class map_screen:
     #get x, y and cache it
     @staticmethod
     @lru_cache(maxsize=(LENGTH+1))
-    def _get_hex_x_y(some_hex, hex_map_length, hex_map_width, size_of_hexes, window_border_X, window_border_Y, move_window_X, move_window_Y):
-        row_height = hex_map_width - (some_hex.hex_coordinate_index // hex_map_length) - 1
+    def _get_hex_x_y(some_hex, screen_measurements):
+        row_height = screen_measurements['hex_width'] - (some_hex.hex_coordinate_index // screen_measurements['hex_length']) - 1
         indent = 0
-        if row_height % 2 == hex_map_width % 2:
-            indent = size_of_hexes // 2
+        if row_height % 2 == screen_measurements['hex_width'] % 2:
+            indent = screen_measurements['hex_length'] // 2
 
-        y = (window_border_Y) + (row_height * size_of_hexes) + move_window_Y
-        x = (window_border_X) + ((some_hex.hex_coordinate_index % hex_map_length) * size_of_hexes) + indent - (size_of_hexes // 2) + move_window_X
+        y = (screen_measurements['border_Y']) + (row_height * screen_measurements['hex_length']) + screen_measurements['moved_Y']
+        x = (screen_measurements['border_X']) + ((some_hex.hex_coordinate_index % screen_measurements['hex_length']) * screen_measurements['hex_length']) + indent - (screen_measurements['hex_length'] // 2) + screen_measurements['moved_X']
         return x, y
 
 
@@ -186,20 +182,20 @@ class map_screen:
         b_position_active = False 
         column, row = 0, 0
 
-        if b in range(self.window_border_Y + self.move_window_Y, (self.size_of_hexes * self.hex_map_width) + (self.window_border_Y) + self.move_window_Y):
+        if b in range(self.measurements['border_Y'] + self.measurements['moved_Y'], (self.measurements['hex_pixel_size'] * self.measurements['hex_width']) + (self.measurements['border_Y']) + self.measurements['moved_Y']):
             b_position_active = True
             #reverse y coords
-            row = abs(((b - (self.window_border_Y + self.move_window_Y)) // self.size_of_hexes) - self.hex_map_width) - 1
+            row = abs(((b - (self.measurements['border_Y'] + self.measurements['moved_Y'])) // self.measurements['hex_pixel_size']) - self.measurements['hex_width']) - 1
             #check even/odd rows
-            if ((b - (self.window_border_Y + self.move_window_Y)) // self.size_of_hexes) % 2 == (self.hex_map_width + 1) % 2:
-                i = self.size_of_hexes // 2  
+            if ((b - (self.measurements['border_Y'] + self.measurements['moved_Y'])) // self.measurements['hex_pixel_size']) % 2 == (self.measurements['hex_width'] + 1) % 2:
+                i = self.measurements['hex_pixel_size'] // 2  
 
-        if a in range((self.window_border_X) - i + self.move_window_X, ((self.size_of_hexes * self.hex_map_length) + (self.window_border_X) - i) + self.move_window_X):
+        if a in range((self.measurements['border_X']) - i + self.measurements['moved_X'], ((self.measurements['hex_pixel_size'] * self.measurements['hex_length']) + (self.measurements['border_X']) - i) + self.measurements['moved_X']):
             a_position_active = True
-            column = ((a - (self.window_border_X + self.move_window_X)) + i) // self.size_of_hexes
+            column = ((a - (self.measurements['border_X'] + self.measurements['moved_X'])) + i) // self.measurements['hex_pixel_size']
 
         if a_position_active and b_position_active:
-            mouse_hex_coordinate_index = (row * self.hex_map_length) + column
+            mouse_hex_coordinate_index = (row * self.measurements['hex_length']) + column
             return mouse_hex_coordinate_index
         else:
             print("No Hexes In this space")
@@ -207,18 +203,18 @@ class map_screen:
 
     #WIP zoom in
     def zoom_in_window(self):
-        self.size_of_hexes += 8
-        self._scale_hexes(self.size_of_hexes)
+        self.measurements['hex_pixel_size'] += 8
+        self._scale_hexes(self.measurements['hex_pixel_size'])
 
     #WIP zoom out
     def zoom_out_window(self):
-        self.size_of_hexes -= 8
-        self._scale_hexes(self.size_of_hexes)
+        self.measurements['hex_pixel_size'] -= 8
+        self._scale_hexes(self.measurements['hex_pixel_size'])
 
     #rotate an image based on ship orientation
     def rotation_orientation(self, some_ship):
         orients = {'R': -90.0, 'L': -270.0, 'UR': -30.0, 'UL': -330.0, 'DR': -150.0, 'DL': -210.0}
-        self._scale_hexes(self.size_of_hexes)
+        self._scale_hexes(self.measurements['hex_pixel_size'])
         if some_ship.command == 'ASCS':
             self.ROT_ASCS_SHIP_HEX_IMG = self._rotate_center(self.ASCS_SHIP_HEX_IMG, orients[some_ship.orientation]) 
         elif some_ship.command == 'XNFFS':
@@ -243,7 +239,7 @@ class map_screen:
             base_hex_image = self.base_hex_IMG.copy()
             new_animated_hex = temporary_hexes.copy()
             base_hex_image.blit(new_animated_hex, (0, -animation_order[w]))
-            new_animated_image = pygame.transform.scale(base_hex_image, (self.size_of_hexes, self.size_of_hexes))
+            new_animated_image = pygame.transform.scale(base_hex_image, (self.measurements['hex_pixel_size'], self.measurements['hex_pixel_size']))
             self.animated_hexes_IMG[animated_hex_keys] = new_animated_image
         
         if self.counter_animation_1 == 9:
