@@ -3,7 +3,7 @@ from gameField.gameAssets import *
 
 from multiprocessing.dummy import Pool as thread_pool
 from functools import lru_cache
-from multiprocessing import Manager
+from multiprocessing import Manager, Process
 
 #----------------------------------------------------------------------
 
@@ -76,10 +76,41 @@ class map_screen:
                 self.targets_hexes = some_ship.track_targets()
             self.ship_selected = True
 
+
+        #rn calling multiple self classes need to change'
+        self._draw_some_hexes(self.ops_hex_map.space_hexes, self.animated_hexes_IMG)
+        #draw_pool = thread_pool(processes=2)
+        ##draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
+        #draw_pool.map(self._draw_some_hexes, self.ops_hex_map.space_hexes)
+        #draw_pool.close()
+        #draw_pool.join()
+
         #with thread_pool(processes=2) as draw_pool:
-        #   draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
-        for x in self.ops_hex_map.space_hexes:
-            self._draw_a_hex(x)
+        #    draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
+    
+        
+        #for x in self.ops_hex_map.space_hexes:
+        #    self._draw_a_hex(x)
+
+
+
+    @classmethod
+    def _draw_some_hexes(cls, map_space_hexes, animated_hexes_IMG):
+        x = animated_hexes_IMG
+        draw_pool = thread_pool(processes=2)
+        ##draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
+        draw_pool.map(cls._get_hex_x_y, map_space_hexes)
+        draw_pool.close()
+        draw_pool.join() 
+
+        #for x in map_space_hexes:
+        #    cls._get_hex_x_y(x)
+    
+
+
+
+    def _l():
+        pass 
 
 
     #draw an individual hex
@@ -88,7 +119,6 @@ class map_screen:
         #check if hex in render space
         x, y = self._get_hex_x_y(some_hex, self.hex_map_length, self.hex_map_width, self.size_of_hexes, self.window_border_X, self.window_border_Y, self.move_window_X, self.move_window_Y)
         if x < LENGTH + self.size_of_hexes and y < WIDTH + self.size_of_hexes and x > -self.size_of_hexes and y > -self.size_of_hexes:
-            #self.game_screen.blit(self.animated_hexes_IMG['animated_hex_base'], (x, y))
             self._blit_a_hex(self.animated_hexes_IMG['animated_hex_base'], self.game_screen, (x, y))
             #check if empty for move
             if some_hex.empty:
@@ -96,40 +126,34 @@ class map_screen:
                     some_ship = self.selected_hex.entity
                     if some_hex in self.selected_hex.neighbors and some_ship.ship_moves != 0 and (some_hex.directions[some_ship.orientation] != self.selected_hex.hex_coordinate_index or some_ship.ship_type == 'DD' or some_ship.ship_type == 'CS'):
                         if not (some_ship.ship_type == 'BB' and self.ops_hex_map.space_hexes[some_hex.directions[some_ship.orientation]] in self.selected_hex.neighbors):
-                            #self.game_screen.blit(self.animated_hexes_IMG['animated_hex_move'], (x, y))
+                            
                             self._blit_a_hex(self.animated_hexes_IMG['animated_hex_move'], self.game_screen, (x, y))
 
             #check if ship
             elif some_hex.entity.entity_type == 'ship_entity':
                 #check if ally or enemy
                 if self.active_fleet_command[0:3] != some_hex.entity.command[0:3] and some_hex.entity.detected:
-                    #self.game_screen.blit(self.animated_hexes_IMG['animated_hex_enemy'], (x, y))
                     self._blit_a_hex(self.animated_hexes_IMG['animated_hex_enemy'], self.game_screen, (x, y))
                 elif self.active_fleet_command[0:3] == some_hex.entity.command[0:3]:
-                    #self.game_screen.blit(self.animated_hexes_IMG['animated_hex_ally'], (x, y))
                     self._blit_a_hex(self.animated_hexes_IMG['animated_hex_ally'], self.game_screen, (x, y))
 
 
                 #WIP special ship images 
                 if some_hex.entity.command[0:3] == 'ASC' and some_hex.entity.detected:
                     self.rotation_orientation(some_hex.entity)
-                    #self.game_screen.blit(self.ROT_ASCS_SHIP_HEX_IMG, (x, y))
                     self._blit_a_hex(self.ROT_ASCS_SHIP_HEX_IMG, self.game_screen, (x, y))
                 elif some_hex.entity.command[0:3] == 'XNF' and some_hex.entity.detected:
                     self.rotation_orientation(some_hex.entity)
-                    #self.game_screen.blit(self.ROT_XNFF_SHIP_HEX_IMG, (x, y))
                     self._blit_a_hex(self.ROT_XNFF_SHIP_HEX_IMG, self.game_screen, (x, y))
 
                 #check if target in range
                 if self.ship_selected:
                     if some_hex in self.targets_hexes:
-                        #self.game_screen.blit(self.animated_hexes_IMG['animated_hex_target'], (x, y))
                         self._blit_a_hex(self.animated_hexes_IMG['animated_hex_target'], self.game_screen, (x, y))
         
                 #clicked
                 if self.ship_selected:
                     if some_hex.hex_coordinate_index == self.selected_hex.hex_coordinate_index:
-                        #self.game_screen.blit(self.animated_hexes_IMG['animated_hex_clicked'], (x, y))
                         self._blit_a_hex(self.animated_hexes_IMG['animated_hex_clicked'], self.game_screen, (x, y))
 
 
@@ -201,6 +225,7 @@ class map_screen:
             self.ROT_XNFF_SHIP_HEX_IMG = self._rotate_center(self.XNFF_SHIP_HEX_IMG, orients[some_ship.orientation])
 
     #rotate an image with pivot center
+    #WIP change to class method
     def _rotate_center(self, some_image, some_angle):
         original_rectangle = some_image.get_rect()
         rotated_image = pygame.transform.rotate(some_image, some_angle)
