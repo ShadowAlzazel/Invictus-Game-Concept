@@ -65,50 +65,14 @@ class map_screen:
                 self.targets_hexes = some_ship.track_targets()
             self.ship_selected = True
 
-        self._distrubute_draw_jobs(self.ops_hex_map.space_hexes, self.game_screen, self.measurements, self.animated_hexes_IMG, self.ship_selected, self.selected_hex, self.active_fleet_command, self.targets_hexes)
-        for some_hex in self.ops_hex_map.hexes_full:
-            position = self._get_ship_x_y(some_hex, self.measurements)
-            u = self.measurements['hex_pixel_size']
-            self._draw_ships(some_hex.entity, self.game_screen, self.ship_images, position, self.measurements['hex_pixel_size'])
-
-
-    #draw ships
-    @classmethod
-    #@lru_cache(maxsize=2)
-    def _draw_ships(cls, some_ship, game_screen, n_ship_images, position, hex_size):
-        ship_images = n_ship_images
-        some_ship_image = ship_images['ASC_template'].copy()
-        ship_rotations = {'R': -90.0, 'L': -270.0, 'UR': -30.0, 'UL': -330.0, 'DR': -150.0, 'DL': -210.0}
-        #WIP special ship images 
-        if some_ship.command[0:3] == 'ASC' and some_ship.detected:
-            some_ship_image = ship_images['ASC_template'].copy()
-        elif some_ship.command[0:3] == 'XNF' and some_ship.detected:
-            some_ship_image = ship_images['XNF_template'].copy()
-        else:
-            return
-        
-        rotated_ship_image = cls._rotate_center(some_ship_image, ship_rotations[some_ship.orientation])
-        scaled_ship_image = pygame.transform.scale(rotated_ship_image, (hex_size, hex_size))
-        game_screen.blit(scaled_ship_image, position)
-
-
-    #get x y coord
-    @staticmethod
-    #@lru_cache(maxsize=2)
-    def _get_ship_x_y(some_hex, r):
-        screen_measurements = r
-        row_height = screen_measurements['hex_width'] - (some_hex.hex_coordinate_index // screen_measurements['hex_length']) - 1
-        indent = 0
-        if row_height % 2 == screen_measurements['hex_width'] % 2:
-            indent = screen_measurements['hex_pixel_size'] // 2
-        y = (screen_measurements['border_Y']) + (row_height * screen_measurements['hex_pixel_size']) + screen_measurements['moved_Y']
-        x = (screen_measurements['border_X']) + ((some_hex.hex_coordinate_index % screen_measurements['hex_length']) * screen_measurements['hex_pixel_size']) + indent - (screen_measurements['hex_pixel_size'] // 2) + screen_measurements['moved_X']
-        return x, y
+        self._distrubute_draw_jobs(self.ops_hex_map.space_hexes, self.game_screen, self.measurements, self.animated_hexes_IMG, self.ship_selected, 
+                                    self.selected_hex, self.active_fleet_command, self.targets_hexes, self.ship_images)
 
 
     #an environment for threading pool
     @staticmethod
-    def _distrubute_draw_jobs(map_space_hexes, game_screen, screen_measurements, animated_hexes_IMG, ship_selected, selected_hex, active_fleet_command, targets_hexes):
+    def _distrubute_draw_jobs(map_space_hexes, game_screen, screen_measurements, animated_hexes_IMG, 
+                            ship_selected, selected_hex, active_fleet_command, targets_hexes, ship_IMG):
 
         #get x y coord
         @lru_cache(maxsize=2)
@@ -123,8 +87,40 @@ class map_screen:
             x = (screen_measurements['border_X']) + ((some_hex.hex_coordinate_index % screen_measurements['hex_length']) * screen_measurements['hex_pixel_size']) + indent - (screen_measurements['hex_pixel_size'] // 2) + screen_measurements['moved_X']
             return x, y
 
+
+        #rotate an image
+        #@lru_cache(maxsize=2)
+        def rotate_a_center(some_image, some_angle):
+            original_rectangle = some_image.get_rect()
+            rotated_image = pygame.transform.rotate(some_image, some_angle)
+            rotated_rectangle = original_rectangle.copy()
+            rotated_rectangle.center = rotated_image.get_rect().center
+            rotated_image = rotated_image.subsurface(rotated_rectangle).copy()
+            return rotated_image
+
+
+        #draw a ship function
+        #@lru_cache(maxsize=1)
+        def draw_a_ship(some_ship, game_screen, ship_IMG, ship_size, position):
+            h = ship_size
+            ship_images = ship_IMG
+            some_ship_image = ship_images['ASC_template'].copy()
+            ship_rotations = {'R': -90.0, 'L': -270.0, 'UR': -30.0, 'UL': -330.0, 'DR': -150.0, 'DL': -210.0}
+            #WIP special ship images 
+            if some_ship.command[0:3] == 'ASC' and some_ship.detected:
+                some_ship_image = ship_images['ASC_template'].copy()
+            elif some_ship.command[0:3] == 'XNF' and some_ship.detected:
+                some_ship_image = ship_images['XNF_template'].copy()
+            else:
+                return
+            some_ship_image.convert()
+            rotated_ship_image = rotate_a_center(some_ship_image, ship_rotations[some_ship.orientation])
+            scaled_ship_image = pygame.transform.scale(rotated_ship_image, (h, h))
+            game_screen.blit(scaled_ship_image, position)
+
+
         #main blit call
-        @lru_cache(maxsize=(LENGTH*2))
+        @lru_cache(maxsize=(LENGTH*3))
         def l_draw_some_hex(some_hex):
             nonlocal screen_measurements
             nonlocal game_screen
@@ -132,6 +128,7 @@ class map_screen:
             nonlocal selected_hex
             nonlocal active_fleet_command
             nonlocal targets_hexes
+            nonlocal ship_IMG
             x, y = l_get_hex_x_y(some_hex)
             if x < LENGTH + screen_measurements['hex_pixel_size'] and y < WIDTH + screen_measurements['hex_pixel_size'] and x > -screen_measurements['hex_pixel_size'] and y > -screen_measurements['hex_pixel_size']:
                 game_screen.blit(animated_hexes_IMG['animated_hex_base'], (x, y))
@@ -149,6 +146,7 @@ class map_screen:
                         game_screen.blit(animated_hexes_IMG['animated_hex_enemy'], (x, y))
                     elif active_fleet_command[0:3] == some_hex.entity.command[0:3]:
                         game_screen.blit(animated_hexes_IMG['animated_hex_ally'], (x, y))
+                    draw_a_ship(some_hex.entity, game_screen, ship_IMG, screen_measurements['hex_pixel_size'], (x, y))
 
                     #check if target in range
                     if ship_selected:
@@ -161,7 +159,7 @@ class map_screen:
 
 
         #make a multiprocess pool
-        draw_pool = thread_pool(processes=4)
+        draw_pool = thread_pool(processes=2)
         draw_pool.map(l_draw_some_hex, map_space_hexes)
         draw_pool.close()
         draw_pool.join() 
