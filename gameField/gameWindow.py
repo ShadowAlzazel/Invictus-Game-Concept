@@ -76,57 +76,82 @@ class map_screen:
                 self.targets_hexes = some_ship.track_targets()
             self.ship_selected = True
 
-        with thread_pool(processes=2) as draw_pool:
-            draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
+        #with thread_pool(processes=2) as draw_pool:
+        #   draw_pool.map(self._draw_a_hex, self.ops_hex_map.space_hexes)
+        for x in self.ops_hex_map.space_hexes:
+            self._draw_a_hex(x)
 
 
     #draw an individual hex
-    @lru_cache(maxsize=3)
+    @lru_cache(maxsize=1)
     def _draw_a_hex(self, some_hex):
-        row_height = self.hex_map_width - (some_hex.hex_coordinate_index // self.hex_map_length) - 1
-        indent = 0
-        if row_height % 2 == self.hex_map_width % 2:
-            indent = self.size_of_hexes // 2
-
-        y = (self.window_border_Y) + (row_height * self.size_of_hexes) + self.move_window_Y
-        x = (self.window_border_X) + ((some_hex.hex_coordinate_index % self.hex_map_length) * self.size_of_hexes) + indent - (self.size_of_hexes // 2) + self.move_window_X
         #check if hex in render space
+        x, y = self._get_hex_x_y(some_hex, self.hex_map_length, self.hex_map_width, self.size_of_hexes, self.window_border_X, self.window_border_Y, self.move_window_X, self.move_window_Y)
         if x < LENGTH + self.size_of_hexes and y < WIDTH + self.size_of_hexes and x > -self.size_of_hexes and y > -self.size_of_hexes:
-            self.game_screen.blit(self.animated_hexes_IMG['animated_hex_base'], (x, y))
+            #self.game_screen.blit(self.animated_hexes_IMG['animated_hex_base'], (x, y))
+            self._blit_a_hex(self.animated_hexes_IMG['animated_hex_base'], self.game_screen, (x, y))
             #check if empty for move
             if some_hex.empty:
                 if self.ship_selected:
                     some_ship = self.selected_hex.entity
                     if some_hex in self.selected_hex.neighbors and some_ship.ship_moves != 0 and (some_hex.directions[some_ship.orientation] != self.selected_hex.hex_coordinate_index or some_ship.ship_type == 'DD' or some_ship.ship_type == 'CS'):
                         if not (some_ship.ship_type == 'BB' and self.ops_hex_map.space_hexes[some_hex.directions[some_ship.orientation]] in self.selected_hex.neighbors):
-                            self.game_screen.blit(self.animated_hexes_IMG['animated_hex_move'], (x, y))
+                            #self.game_screen.blit(self.animated_hexes_IMG['animated_hex_move'], (x, y))
+                            self._blit_a_hex(self.animated_hexes_IMG['animated_hex_move'], self.game_screen, (x, y))
 
             #check if ship
             elif some_hex.entity.entity_type == 'ship_entity':
                 #check if ally or enemy
                 if self.active_fleet_command[0:3] != some_hex.entity.command[0:3] and some_hex.entity.detected:
-                    self.game_screen.blit(self.animated_hexes_IMG['animated_hex_enemy'], (x, y))
+                    #self.game_screen.blit(self.animated_hexes_IMG['animated_hex_enemy'], (x, y))
+                    self._blit_a_hex(self.animated_hexes_IMG['animated_hex_enemy'], self.game_screen, (x, y))
                 elif self.active_fleet_command[0:3] == some_hex.entity.command[0:3]:
-                    self.game_screen.blit(self.animated_hexes_IMG['animated_hex_ally'], (x, y))
+                    #self.game_screen.blit(self.animated_hexes_IMG['animated_hex_ally'], (x, y))
+                    self._blit_a_hex(self.animated_hexes_IMG['animated_hex_ally'], self.game_screen, (x, y))
 
 
                 #WIP special ship images 
                 if some_hex.entity.command[0:3] == 'ASC' and some_hex.entity.detected:
                     self.rotation_orientation(some_hex.entity)
-                    self.game_screen.blit(self.ROT_ASCS_SHIP_HEX_IMG, (x, y))
+                    #self.game_screen.blit(self.ROT_ASCS_SHIP_HEX_IMG, (x, y))
+                    self._blit_a_hex(self.ROT_ASCS_SHIP_HEX_IMG, self.game_screen, (x, y))
                 elif some_hex.entity.command[0:3] == 'XNF' and some_hex.entity.detected:
                     self.rotation_orientation(some_hex.entity)
-                    self.game_screen.blit(self.ROT_XNFF_SHIP_HEX_IMG, (x, y))
+                    #self.game_screen.blit(self.ROT_XNFF_SHIP_HEX_IMG, (x, y))
+                    self._blit_a_hex(self.ROT_XNFF_SHIP_HEX_IMG, self.game_screen, (x, y))
 
                 #check if target in range
                 if self.ship_selected:
                     if some_hex in self.targets_hexes:
-                        self.game_screen.blit(self.animated_hexes_IMG['animated_hex_target'], (x, y))
+                        #self.game_screen.blit(self.animated_hexes_IMG['animated_hex_target'], (x, y))
+                        self._blit_a_hex(self.animated_hexes_IMG['animated_hex_target'], self.game_screen, (x, y))
         
                 #clicked
                 if self.ship_selected:
                     if some_hex.hex_coordinate_index == self.selected_hex.hex_coordinate_index:
-                        self.game_screen.blit(self.animated_hexes_IMG['animated_hex_clicked'], (x, y))
+                        #self.game_screen.blit(self.animated_hexes_IMG['animated_hex_clicked'], (x, y))
+                        self._blit_a_hex(self.animated_hexes_IMG['animated_hex_clicked'], self.game_screen, (x, y))
+
+
+    #get x, y and cache it
+    @staticmethod
+    @lru_cache(maxsize=(LENGTH+1))
+    def _get_hex_x_y(some_hex, hex_map_length, hex_map_width, size_of_hexes, window_border_X, window_border_Y, move_window_X, move_window_Y):
+        row_height = hex_map_width - (some_hex.hex_coordinate_index // hex_map_length) - 1
+        indent = 0
+        if row_height % 2 == hex_map_width % 2:
+            indent = size_of_hexes // 2
+
+        y = (window_border_Y) + (row_height * size_of_hexes) + move_window_Y
+        x = (window_border_X) + ((some_hex.hex_coordinate_index % hex_map_length) * size_of_hexes) + indent - (size_of_hexes // 2) + move_window_X
+        return x, y
+
+
+    #blit the hex on screen and cache it
+    @staticmethod
+    @lru_cache(maxsize=2)
+    def _blit_a_hex(some_image, game_screen, hex_position):
+        game_screen.blit(some_image, hex_position)
 
 
     #get hexNums from coord mouse
@@ -184,6 +209,7 @@ class map_screen:
         rotated_image = rotated_image.subsurface(rotated_rectangle).copy()
         return rotated_image
 
+    #animate instance images
     def animate_hexes(self):
         animation_order = [1, 2, 3, 4, 5, 5, 4, 3, 2, 1]
         w = self.counter_animation_1 
