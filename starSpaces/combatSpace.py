@@ -1,6 +1,8 @@
 from starSpaces.spaceHexes import *
 from starSpaces.spaceObjects import *
+
 from random import randint
+from functools import lru_cache
 
 def create_map_hexes(length, width, density):
     new_hex_map = base_hex_map(length, width)
@@ -9,6 +11,7 @@ def create_map_hexes(length, width, density):
     rho_objects = []
 
     #get neighbors function
+    @lru_cache(maxsize=6)
     def get_neighbors(some_space_hex):
         hex_coordinate_index = some_space_hex.hex_coordinate_index
         neighbors = []
