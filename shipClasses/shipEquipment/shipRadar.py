@@ -63,12 +63,11 @@ class hex_radar:
 
 
     #find hexes in rings
+    @staticmethod
     @lru_cache(maxsize=2)
-    def _hex_finder(self, requested_range, some_hex_space):
+    def _hex_finder(requested_range, some_hex_space):
         assert requested_range != 0
         range_EFF = requested_range 
-        if range_EFF > self.radar_class:
-            range_EFF = self.radar_class
         origin_hex = some_hex_space
         hexes_nearby = []
         hex_rings = [[some_hex_space]]
