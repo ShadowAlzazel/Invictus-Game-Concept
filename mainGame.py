@@ -8,14 +8,15 @@ from pygame.locals import *
 #main game function
 def main():
     pygame.init()
-    #screen_flags = FULLSCREEN | SCALED
-    screen_flags = SCALED 
+    screen_flags = FULLSCREEN | SCALED
+    #screen_flags = SCALED 
 
     #set up main game screen
     pygame.display.set_caption("INVICTUS: SAMAR")
     pygame.display.set_icon(GAME_ICON)
     game_screen = pygame.display.set_mode((LENGTH, WIDTH), screen_flags, 8)
     game_screen.blit(FIT_SPACE, (0, 0))
+    pygame.mouse.set_visible(False)
     pygame.display.update()
 
     global game_font_2A
@@ -60,6 +61,8 @@ def main():
             if event.type == MOUSEBUTTONDOWN and event.button == 1:
                 mouse_clicked = True 
 
+        
+        mouse_GUI(game_screen, 'L')
         pygame.display.update()
     #end game
 
@@ -103,6 +106,7 @@ def level_selector(game_screen):
             if event.type == MOUSEBUTTONDOWN and event.button == 1:
                 mouse_clicked = True 
 
+        mouse_GUI(game_screen)
         pygame.display.update() 
 
 
@@ -140,6 +144,9 @@ def combat_game(game_screen, selcted_level):
     move_window_pixels = combat_screen.measurements['hex_pixel_size'] // 16
 
     while game_running:
+        key_update = False 
+        old_mouse_coordinate = (0, 0)
+        animation_update = False 
         game_clock.tick(framerate)
         #frame timing
         dt = time.perf_counter() - last_frame_time
@@ -162,6 +169,9 @@ def combat_game(game_screen, selcted_level):
             if event.type == KEYDOWN and event.key == K_ESCAPE:
                 print("Quitting...")
                 game_running = False 
+
+            if event.type == KEYDOWN:
+                key_update = True
 
             #window movement
             if event.type == KEYDOWN and event.key == K_UP:
@@ -193,7 +203,7 @@ def combat_game(game_screen, selcted_level):
             if event.type == KEYDOWN and event.key == K_e:
                 print('Fleet Turn Ended')
                 combat_level.map_game.next_fleet_turn()
-                combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
+                #combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
             #inspect
             if event.type == KEYDOWN and event.key == K_i:
@@ -204,12 +214,12 @@ def combat_game(game_screen, selcted_level):
             if event.type == KEYDOWN and event.key == K_z:
                 combat_screen.zoom_in_window()
                 move_window_pixels = combat_screen.measurements['hex_pixel_size'] // 16
-                combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
+                #combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
             if event.type == KEYDOWN and event.key == K_x:
                 combat_screen.zoom_out_window()
                 move_window_pixels = combat_screen.measurements['hex_pixel_size'] // 16
-                combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
+                #combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
             #center
             if event.type == KEYDOWN and event.key == K_SPACE:
@@ -219,16 +229,17 @@ def combat_game(game_screen, selcted_level):
             #animate
             if event.type == animate_game_hexes: # and not (move_window_right or move_window_left or move_window_up or move_window_down)
                 combat_screen.animate_hexes()
-                combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
+                animation_update = True 
+                #combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                someMousePos = pygame.mouse.get_pos()
-                some_hex_coordinate_index = combat_screen.get_mouse_hex(someMousePos)
+                some_mouse_hex = pygame.mouse.get_pos()
+                some_hex_coordinate_index = combat_screen.get_mouse_hex(some_mouse_hex)
                 combat_screen.selected_hex_index_coordinate = some_hex_coordinate_index
                 if some_hex_coordinate_index >= 0:
                     combat_level.map_game.select_hex(combat_level.level_hex_map.space_hexes[some_hex_coordinate_index])
                 print(some_hex_coordinate_index)
-                combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
+                #combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
 
         #move window
@@ -241,10 +252,43 @@ def combat_game(game_screen, selcted_level):
         if move_window_right:
             combat_screen.measurements['moved_X'] -= move_window_pixels
 
-        if move_window_right or move_window_left or move_window_up or move_window_down:
+        #if move_window_right or move_window_left or move_window_up or move_window_down:
+        #    combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
+
+        #combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
+        
+        #mouse GUI
+        
+        new_mouse_coordinate = pygame.mouse.get_pos()
+        if new_mouse_coordinate != old_mouse_coordinate or key_update or animation_update:
+            old_mouse_coordinate = new_mouse_coordinate
             combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
+            mouse_hex_coordinate = combat_screen.get_mouse_hex(new_mouse_coordinate)
+            mouse_GUI(game_screen, mouse_hex_coordinate, combat_level.map_game)
 
         pygame.display.update()
+
+
+# -------------------------------MOUSE-FUNCTIONS--------------------------
+#@lru_cache(maxsize=1)
+def mouse_GUI(a_screen, mouse_hex=-1, a_game=None):
+    mouse_circle = pygame.mouse.get_pos()
+    mouse_color = TRUE_WHITE
+
+    if a_game:
+        if a_game.selected_hex:
+            mouse_color = CLICK_YELLOW
+            if mouse_hex > -1 and a_game.ops_hex_map.space_hexes[mouse_hex].entity:
+                if a_game.ops_hex_map.space_hexes[mouse_hex] == a_game.selected_hex:
+                    mouse_color = CLICK_YELLOW
+                elif a_game.ops_hex_map.space_hexes[mouse_hex].entity.command[0:3] == a_game.active_fleet.fleet_command[0:3]:
+                    mouse_color = ALLY_GREEN
+                else: 
+                    mouse_color = TARGET_RED
+    
+    pygame.draw.circle(a_screen, mouse_color, mouse_circle, radius=7, width=1)
+    pygame.draw.circle(a_screen, mouse_color, mouse_circle, radius=4, width=1)
+
 
 #-------------------------------------------------------------------------------------------
 #this is a runnable script
