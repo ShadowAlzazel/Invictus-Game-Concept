@@ -2,7 +2,7 @@
 from gameField.gameAssets import *
 
 from multiprocessing.dummy import Pool as thread_pool
-from functools import lru_cache
+from functools import cache, lru_cache
 
 #----------------------------------------------------------------------
 
@@ -77,7 +77,7 @@ class map_screen:
                             ship_selected, selected_hex, active_fleet_command, targets_hexes, ship_IMG):
 
         #get x y coord
-        @lru_cache(maxsize=3)
+        @cache
         def l_get_hex_x_y(some_hex):
             nonlocal screen_measurements
             row_height = screen_measurements['hex_width'] - (some_hex.hex_coordinate_index // screen_measurements['hex_length']) - 1
@@ -102,7 +102,6 @@ class map_screen:
 
 
         #draw a ship function
-        #@lru_cache(maxsize=1)
         def draw_a_ship(some_ship, game_screen, ship_IMG, ship_size, position):
             h = ship_size
             ship_images = ship_IMG
@@ -123,7 +122,7 @@ class map_screen:
 
 
         #main blit call
-        @lru_cache(maxsize=(LENGTH*3))
+        @cache
         def l_draw_some_hex(some_hex):
             nonlocal screen_measurements
             nonlocal game_screen
@@ -197,7 +196,7 @@ class map_screen:
             mouse_hex_coordinate_index = (row * self.measurements['hex_length']) + column
             return mouse_hex_coordinate_index
         else:
-            print("No Hexes In this space")
+            #print("No Hexes In this space")
             return -1
 
 
