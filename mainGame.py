@@ -258,6 +258,7 @@ def combat_game(game_screen, selcted_level):
         #combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
         
         #mouse GUI
+        
         new_mouse_coordinate = pygame.mouse.get_pos()
         if new_mouse_coordinate != old_mouse_coordinate or key_update or animation_update:
             old_mouse_coordinate = new_mouse_coordinate
