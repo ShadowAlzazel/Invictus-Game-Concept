@@ -31,7 +31,7 @@ def main():
     game_clock = pygame.time.Clock()
 
     while main_running:
-        game_clock.tick(FPS)
+        game_clock.tick(MENU_FPS)
         game_screen.blit(FIT_SPACE, (0, 0))
         mx, my = pygame.mouse.get_pos()
 
@@ -78,7 +78,7 @@ def level_selector(game_screen):
     game_clock = pygame.time.Clock()
 
     while game_running:
-        game_clock.tick(FPS)
+        game_clock.tick(MENU_FPS)
         game_screen.blit(FIT_SPACE, (0, 0))
         mx, my = pygame.mouse.get_pos()
 
@@ -133,7 +133,7 @@ def combat_game(game_screen, selcted_level):
     #variables 
     game_running = True 
     move_window_up, move_window_down, move_window_left, move_window_right = False, False, False, False
-    framerate = FPS
+    framerate = GAME_FPS
 
     #time 
     game_clock = pygame.time.Clock()
@@ -141,17 +141,17 @@ def combat_game(game_screen, selcted_level):
     last_second = time.perf_counter()
     a = 0
 
-    move_window_pixels = combat_screen.measurements['hex_pixel_size'] // 16
-
     while game_running:
+        game_clock.tick(framerate)
         key_update = False 
         old_mouse_coordinate = (0, 0)
         animation_update = False 
-        game_clock.tick(framerate)
+
         #frame timing
         dt = time.perf_counter() - last_frame_time
         dt *= framerate 
         last_frame_time = time.perf_counter()
+        move_window_pixels = combat_screen.measurements['hex_pixel_size'] // 16
 
         #frame counting 
         a += 1
@@ -252,20 +252,15 @@ def combat_game(game_screen, selcted_level):
         if move_window_right:
             combat_screen.measurements['moved_X'] -= move_window_pixels
 
-        #if move_window_right or move_window_left or move_window_up or move_window_down:
-        #    combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
 
-        #combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
-        
         #mouse GUI
-        
         new_mouse_coordinate = pygame.mouse.get_pos()
         if new_mouse_coordinate != old_mouse_coordinate or key_update or animation_update:
-            old_mouse_coordinate = new_mouse_coordinate
             combat_screen.draw_hexes(combat_level.map_game.active_fleet.fleet_command, combat_level.map_game.selected_hex)
             mouse_hex_coordinate = combat_screen.get_mouse_hex(new_mouse_coordinate)
             mouse_GUI(game_screen, mouse_hex_coordinate, combat_level.map_game)
 
+        old_mouse_coordinate = new_mouse_coordinate
         pygame.display.update()
 
 
@@ -286,8 +281,8 @@ def mouse_GUI(a_screen, mouse_hex=-1, a_game=None):
                 else: 
                     mouse_color = TARGET_RED
     
-    pygame.draw.circle(a_screen, mouse_color, mouse_circle, radius=7, width=1)
-    pygame.draw.circle(a_screen, mouse_color, mouse_circle, radius=4, width=1)
+    pygame.draw.circle(a_screen, mouse_color, mouse_circle, radius=3, width=1)
+    pygame.draw.circle(a_screen, mouse_color, mouse_circle, radius=5, width=1)
 
 
 #-------------------------------------------------------------------------------------------
