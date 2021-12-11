@@ -77,7 +77,6 @@ class map_screen:
                             ship_selected, selected_hex, active_fleet_command, targets_hexes, ship_IMG):
 
         #get x y coord
-        @cache
         def l_get_hex_x_y(some_hex):
             nonlocal screen_measurements
             row_height = screen_measurements['hex_width'] - (some_hex.hex_coordinate_index // screen_measurements['hex_length']) - 1
@@ -122,7 +121,7 @@ class map_screen:
 
 
         #main blit call
-        @cache
+        @lru_cache(maxsize=LENGTH*3)
         def l_draw_some_hex(some_hex):
             nonlocal screen_measurements
             nonlocal game_screen
@@ -163,13 +162,13 @@ class map_screen:
 
 
         #make a multiprocess pool
-        draw_pool = thread_pool(processes=2)
-        draw_pool.map(l_draw_some_hex, map_space_hexes)
-        draw_pool.close()
-        draw_pool.join() 
+        #draw_pool = thread_pool(processes=2)
+        #draw_pool.map(l_draw_some_hex, map_space_hexes)
+        #draw_pool.close()
+        #draw_pool.join() 
 
-        #for x in map_space_hexes:
-        #    l_draw_some_hex(x)
+        for x in map_space_hexes:
+            l_draw_some_hex(x)
 
 
     #get hexNums from coord mouse
