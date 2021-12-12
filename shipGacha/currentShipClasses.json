@@ -7,7 +7,8 @@
             "NewJerseyClass",
             "VittorioVenetoClass",
             "PrinceOfWalesClass",
-            "HoodClass"  
+            "HoodClass",
+            "DevestatorClass"  
         ],
         "BC":
         [
@@ -23,7 +24,8 @@
         ],
         "CA":
         [
-            "ApocalypseClass"
+            "ApocalypseClass",
+            "HarbingerClass"
         ],
         "CL":
         [
