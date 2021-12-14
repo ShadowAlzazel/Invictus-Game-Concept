@@ -81,6 +81,14 @@
                 "Class": "IllustriousClass",
                 "Hullnumber": 696,
                 "Experience": "Standard"
+            },
+            "Killow": 
+            {
+                "Name": "Killow",
+                "Type": "CS", 
+                "Class": "DynamoClass",
+                "Hullnumber": 1222,
+                "Experience": "Standard"
             }
 
             
