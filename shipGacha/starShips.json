@@ -98,12 +98,20 @@
                 "Hullnumber": 696,
                 "Experience": "Standard"
             },
+            "Marauder": 
+            {
+                "Name": "Marauder",
+                "Type": "CA", 
+                "Class": "Harbinger_Class",
+                "Hullnumber": 1981,
+                "Experience": "Veteran"
+            },
             "Killow": 
             {
                 "Name": "Killow",
-                "Type": "CS", 
-                "Class": "Dynamo_Class",
-                "Hullnumber": 1222,
+                "Type": "CA", 
+                "Class": "Harbinger_Class",
+                "Hullnumber": 1982,
                 "Experience": "Standard"
             }
 
