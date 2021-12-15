@@ -1,11 +1,10 @@
+#LIGHTCRUISERS
 from shipClasses.shipEquipment import *
 from shipClasses.shipRole import Lightcruiser
 
-#light cruisers
-
-#-----------------------------------Midnight Class Light Cruiser--------------------------------- 
-class MidnightClass(Lightcruiser):
-    ship_class = 'MidnightClass'
+#--------------------------------Midnight-Class-Light-Cruiser--------------------------------- 
+class Midnight_Class(Lightcruiser):
+    ship_class = 'Midnight-Class'
     ammount = 0 
     ship_type = 'CL'
     ship_stats = {
@@ -17,7 +16,7 @@ class MidnightClass(Lightcruiser):
     hull = 7500
 
     def __init__(self, hullnumber, name, command, fleet_name):
-        MidnightClass.ammount += 1
+        Midnight_Class.ammount += 1
         super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])

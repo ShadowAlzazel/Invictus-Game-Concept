@@ -26,8 +26,8 @@
                 ],
                 "shipClasses":
                 [
-                    "PrinceOfWalesClass", "PrinceOfWalesClass", "PrinceOfWalesClass", "AmagiClass", "AmagiClass", 
-                    "IllustriousClass", "IllustriousClass", "IllustriousClass", "IllustriousClass", "IllustriousClass"
+                    "Prince_of_Wales_Class", "Prince_of_Wales_Class", "Prince_of_Wales_Class", "Amagi_Class", "Amagi_Class", 
+                    "Illustrious_Class", "Illustrious_Class", "Illustrious_Class", "Illustrious_Class", "Illustrious_Class"
                 ],
                 "shipHullnumber":
                 [
@@ -56,8 +56,8 @@
                 ],
                 "shipClasses":
                 [
-                    "EssexClass", "PenumbraClass", "VoltageClass", "VoltageClass", "HarbingerClass", "HarbingerClass",
-                    "MidnightClass", "MidnightClass", "MidnightClass", "MidnightClass", "JohnstonClass", "JohnstonClass", "JohnstonClass", "JohnstonClass", "JohnstonClass"
+                    "Essex_Class", "Penumbra_Class", "Voltage_Class", "Voltage_Class", "Harbinger_Class", "Harbinger_Class",
+                    "Midnight_Class", "Midnight_Class", "Midnight_Class", "Midnight_Class", "Johnston_Class", "Johnston_Class", "Johnston_Class", "Johnston_Class", "Johnston_Class"
                 ],
                 "shipHullnumber":
                 [
@@ -76,7 +76,7 @@
                 ],
                 "shipClasses":
                 [
-                    "DevestatorClass", "DevestatorClass", "DevestatorClass"
+                    "Devestator_Class", "Devestator_Class", "Devestator_Class"
                 ],
                 "shipHullnumber":
                 [
@@ -129,8 +129,8 @@
                 ],
                 "shipClasses":
                 [
-                    "EssexClass", "PenumbraClass", "VoltageClass", "VoltageClass", "ApocalypseClass", "ApocalypseClass",
-                    "MidnightClass", "MidnightClass", "MidnightClass", "MidnightClass", "JohnstonClass", "JohnstonClass", "JohnstonClass", "JohnstonClass", "JohnstonClass"
+                    "Essex_Class", "Penumbra_Class", "Voltage_Class", "Voltage_Class", "Apocalypse_Class", "Apocalypse_Class",
+                    "Midnight_Class", "Midnight_Class", "Midnight_Class", "Midnight_Class", "Johnston_Class", "Johnston_Class", "Johnston_Class", "Johnston_Class", "Johnston_Class"
                 ],
                 "shipHullnumber":
                 [

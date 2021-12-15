@@ -4,8 +4,8 @@ from shipClasses.shipRole import Destroyer
 #Destroyers
 
 #-----------------------------Johnston Class destroyer-------------------------------
-class JohnstonClass(Destroyer):
-    ship_class = 'JohnstonClass'
+class Johnston_Class(Destroyer):
+    ship_class = 'Johnston-Class'
     ammount = 0
     ship_stats = {
         "FP": 67, "ACC": 35, "EVA": 66, "SPD": 8,
@@ -16,7 +16,7 @@ class JohnstonClass(Destroyer):
     hull = 2600
 
     def __init__(self, hullnumber, name, command, fleet_name):
-        JohnstonClass.ammount += 1
+        Johnston_Class.ammount += 1
         super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
@@ -31,8 +31,8 @@ class JohnstonClass(Destroyer):
                 
 
 #------------------------------------Shimakaze class destroyer---------------------------------------
-class ShimakazeClass(Destroyer):
-    ship_class = 'ShimakazeClass'
+class Shimakaze_Class(Destroyer):
+    ship_class = 'Shimakaze-Class'
     ammount = 0
     ship_stats = {
         "FP": 47, "ACC": 35, "EVA": 68, "SPD": 8,
@@ -43,7 +43,7 @@ class ShimakazeClass(Destroyer):
     hull = 2300
 
     def __init__(self, hullnumber, name, command, fleet_name):
-        ShimakazeClass.ammount += 1
+        Shimakaze_Class.ammount += 1
         super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])

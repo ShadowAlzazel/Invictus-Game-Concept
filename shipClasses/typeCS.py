@@ -4,8 +4,8 @@ from shipClasses.shipRole import Strikecruiser
 #strike cruisers
 
 #----------------------------------Voltage Class Strikecruiser-----------------------------------
-class VoltageClass(Strikecruiser):
-    ship_class = 'VoltageClass'
+class Voltage_Class(Strikecruiser):
+    ship_class = 'Voltage-Class'
     ammount = 0
     ship_stats = {
         "FP": 287, "ACC": 39, "EVA": 41, "SPD": 6,
@@ -16,7 +16,7 @@ class VoltageClass(Strikecruiser):
     hull = 8800
 
     def __init__(self, hullnumber, name, command, fleet_name):
-        VoltageClass.ammount += 1
+        Voltage_Class.ammount += 1
         super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
@@ -37,8 +37,8 @@ class VoltageClass(Strikecruiser):
 
 
 #-------------------------------------Dynamo Class Strikecruiser----------------------------------------
-class DynamoClass(Strikecruiser):
-    ship_class = 'DynamoClass'
+class Dynamo_Class(Strikecruiser):
+    ship_class = 'Dynamo-Class'
     ammount = 0
     ship_stats = {
         "FP": 298, "ACC": 40, "EVA": 38, "SPD": 6,
@@ -49,7 +49,7 @@ class DynamoClass(Strikecruiser):
     hull = 8200
 
     def __init__(self, hullnumber, name, command, fleet_name):
-        DynamoClass.ammount += 1
+        Dynamo_Class.ammount += 1
         super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])

@@ -1,11 +1,10 @@
+#HEAVYCRUISERS
 from shipClasses.shipEquipment import *
 from shipClasses.shipRole import Heavycruiser
 
-#Heavy cruisers
-
-#--------------------------Apocalypse Class Heavycrusier------------------------------
-class ApocalypseClass(Heavycruiser):
-    ship_class = 'ApocalypseClass'
+#----------------------------------Apocalypse-Class-Heavycruiser------------------------------
+class Apocalypse_Class(Heavycruiser):
+    ship_class = 'Apocalypse-Class'
     ammount = 0
     ship_stats = {
         "FP": 393, "ACC": 32, "EVA": 29, "SPD": 5,
@@ -16,7 +15,7 @@ class ApocalypseClass(Heavycruiser):
     hull = 10500
 
     def __init__(self, hullnumber, name, command, fleet_name):
-        ApocalypseClass.ammount += 1
+        Apocalypse_Class.ammount += 1
         super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
@@ -31,9 +30,9 @@ class ApocalypseClass(Heavycruiser):
                 self.armaments['broadside_battery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))
 
 
-#--------------------------Apocalypse Class Heavycrusier------------------------------
-class HarbingerClass(Heavycruiser):
-    ship_class = 'HarbingerClass'
+#---------------------------------Harbinger-Class-Heavycruiser------------------------------
+class Harbinger_Class(Heavycruiser):
+    ship_class = 'Harbinger-Class'
     ammount = 0
     ship_stats = {
         "FP": 377, "ACC": 34, "EVA": 30, "SPD": 5,
@@ -44,7 +43,7 @@ class HarbingerClass(Heavycruiser):
     hull = 10000
 
     def __init__(self, hullnumber, name, command, fleet_name):
-        HarbingerClass.ammount += 1
+        Harbinger_Class.ammount += 1
         super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])

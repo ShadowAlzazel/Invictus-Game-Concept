@@ -1,0 +1,115 @@
+{
+	// Place your ASCSFleetGacha workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"create_new_battleship":
+	{
+		"scope": "json",
+		"prefix": "new_battleship",
+		"body": [
+		  "\"${1:new_name}\": ",
+		  "{",
+		  "    \"Name\": \"${1:new_name}\",",
+		  "    \"Type\": \"BB\", ",
+		  "    \"Class\": \"${2|AmagiClass,EssexClass,NewJerseyClass,VittorioVeneto,PrinceOfWalesClass,HoodClass,DevestatorClass|}\",",
+		  "    \"Hullnumber\": ${3:999999},",
+		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
+		  "}"
+		],
+		"description": "Create a new battleship"
+	},
+	"create_new_battlecruiser":
+	{
+		"scope": "json",
+		"prefix": "new_battlecruiser",
+		"body": [
+		  "\"${1:new_name}\": ",
+		  "{",
+		  "    \"Name\": \"${1:new_name}\",",
+		  "    \"Type\": \"BC\", ",
+		  "    \"Class\": \"${2|ZenithClass,EssexClass,PenumbraClass,IllustriousClass|}\",",
+		  "    \"Hullnumber\": ${3:999999},",
+		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
+		  "}"
+		],
+		"description": "Create a new battlecruiser"
+	},
+	"create_new_strikecruiser":
+	{
+		"scope": "json",
+		"prefix": "new_strikecruiser",
+		"body": [
+		  "\"${1:new_name}\": ",
+		  "{",
+		  "    \"Name\": \"${1:new_name}\",",
+		  "    \"Type\": \"CS\", ",
+		  "    \"Class\": \"${2|VoltageClass,DynamoClass|}\",",
+		  "    \"Hullnumber\": ${3:999999},",
+		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
+		  "}"
+		],
+		"description": "Create a new strikecruiser"
+	},
+	"create_new_heavycruiser":
+	{
+		"scope": "json",
+		"prefix": "new_heavycruiser",
+		"body": [
+		  "\"${1:new_name}\": ",
+		  "{",
+		  "    \"Name\": \"${1:new_name}\",",
+		  "    \"Type\": \"CA\", ",
+		  "    \"Class\": \"${2|ApocalypseClass,HarbingerClass|}\",",
+		  "    \"Hullnumber\": ${3:999999},",
+		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
+		  "}"
+		],
+		"description": "Create a new heavycruiser"
+	},
+	"create_new_lightcruiser":
+	{
+		"scope": "json",
+		"prefix": "new_lightcruiser",
+		"body": [
+		  "\"${1:new_name}\": ",
+		  "{",
+		  "    \"Name\": \"${1:new_name}\",",
+		  "    \"Type\": \"CL\", ",
+		  "    \"Class\": \"${2|MidnightClass|}\",",
+		  "    \"Hullnumber\": ${3:999999},",
+		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
+		  "}"
+		],
+		"description": "Create a new lightcruiser"
+	},
+	"create_new_destroyer":
+	{
+		"scope": "json",
+		"prefix": "new_destroyer",
+		"body": [
+		  "\"${1:new_name}\": ",
+		  "{",
+		  "    \"Name\": \"${1:new_name}\",",
+		  "    \"Type\": \"CL\", ",
+		  "    \"Class\": \"${2|JohnstonClas,ShimikazeClass|}\",",
+		  "    \"Hullnumber\": ${3:999999},",
+		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
+		  "}"
+		],
+		"description": "Create a new destroyer"
+	}
+	
+}

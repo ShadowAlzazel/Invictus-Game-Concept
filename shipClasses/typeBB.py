@@ -1,11 +1,10 @@
+#BATTLESHIPS
 from shipClasses.shipEquipment import *
 from shipClasses.shipRole import Battleship
 
-#BATTLESHIPS
-
-#---------------------------Essex Class Battleship---------------------------
-class EssexClass(Battleship):
-    ship_class = 'EssexClass'
+#---------------------------Essex-Class-Battleship---------------------------
+class Essex_Class(Battleship):
+    ship_class = 'Essex-Class'
     ammount = 0
     ship_stats = {
         "FP": 666, "ACC": 38, "EVA": 30, "SPD": 4,
@@ -17,7 +16,7 @@ class EssexClass(Battleship):
 
     def __init__(self, hullnumber, name, command, fleet_name):
         super().__init__(hullnumber, name, command, fleet_name)
-        EssexClass.ammount += 1
+        Essex_Class.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
@@ -31,9 +30,9 @@ class EssexClass(Battleship):
                 self.armaments['broadside_battery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
         
 
-#---------------------------Amagi Class Battleship---------------------------
-class AmagiClass(Battleship):
-    ship_class = 'AmagiClass'
+#---------------------------Amagi-Class-Battleship---------------------------
+class Amagi_Class(Battleship):
+    ship_class = 'Amagi-Class'
     ammount = 0
     ship_stats = {
         "FP": 682, "ACC": 37, "EVA": 31, "SPD": 4,
@@ -45,7 +44,7 @@ class AmagiClass(Battleship):
     
     def __init__(self, hullnumber, name, command, fleet_name):
         super().__init__(hullnumber, name, command, fleet_name)
-        AmagiClass.ammount += 1
+        Amagi_Class.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
@@ -59,9 +58,9 @@ class AmagiClass(Battleship):
                 self.armaments['broadside_battery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
     
 
-#---------------------------Vittorio Veneto Class Battleship---------------------------
-class VittorioVenetoClass(Battleship):
-    ship_class = 'VittorioVenetoClass'
+#------------------------------------Vittorio-Veneto-Class-Battleship---------------------------
+class Vittorio_Veneto_Class(Battleship):
+    ship_class = 'Vittorio-Veneto-Class'
     ammount = 0
     ship_stats = {
         "FP": 660, "ACC": 35, "EVA": 30, "SPD": 4,
@@ -73,7 +72,7 @@ class VittorioVenetoClass(Battleship):
 
     def __init__(self, hullnumber, name, command, fleet_name):
         super().__init__(hullnumber, name, command, fleet_name)
-        VittorioVenetoClass.ammount += 1
+        Vittorio_Veneto_Class.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
@@ -87,9 +86,9 @@ class VittorioVenetoClass(Battleship):
                 self.armaments['broadside_battery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
 
 
-#--------------------------Hood Class Battleship---------------------------
-class HoodClass(Battleship):
-    ship_class = 'HoodClass'
+#--------------------------Hood-Class-Battleship-----------------------------
+class Hood_Class(Battleship):
+    ship_class = 'Hood-Class'
     ammount = 0
     ship_stats = {
         "FP": 685, "ACC": 37, "EVA": 30, "SPD": 4,
@@ -101,7 +100,7 @@ class HoodClass(Battleship):
     
     def __init__(self, hullnumber, name, command, fleet_name):
         super().__init__(hullnumber, name, command, fleet_name)
-        HoodClass.ammount += 1
+        Hood_Class.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
@@ -115,9 +114,9 @@ class HoodClass(Battleship):
                 self.armaments['broadside_battery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))
 
 
-#--------------------------Prince of Wales Class Battleship---------------------------
-class PrinceOfWalesClass(Battleship):
-    ship_class = 'PrinceOfWalesClass'
+#-----------------------------------Prince-of-Wales-Class-Battleship---------------------------
+class Prince_of_Wales_Class(Battleship):
+    ship_class = 'Prince-of-Wales-Class'
     ammount = 0
     ship_stats = {
         "FP": 704, "ACC": 35, "EVA": 29, "SPD": 4,
@@ -129,7 +128,7 @@ class PrinceOfWalesClass(Battleship):
 
     def __init__(self, hullnumber, name, command, fleet_name):
         super().__init__(hullnumber, name, command, fleet_name)
-        PrinceOfWalesClass.ammount += 1
+        Prince_of_Wales_Class.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
@@ -147,9 +146,9 @@ class PrinceOfWalesClass(Battleship):
                 self.armaments['broadside_battery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))
           
 
-#--------------------------New Jersey Class Battleship-----------------------------
-class NewJerseyClass(Battleship):
-    ship_class = 'NewJerseyClass'
+#-------------------------------New-Jersey-Class-Battleship-----------------------------
+class New_Jersey_Class(Battleship):
+    ship_class = 'New-Jersey-Class'
     ammount = 0 
     ship_stats = {
         "FP": 888, "ACC": 38, "EVA": 28, "SPD": 4,
@@ -161,7 +160,7 @@ class NewJerseyClass(Battleship):
 
     def __init__(self, hullnumber, name, command, fleet_name):
         super().__init__(hullnumber, name, command, fleet_name)
-        NewJerseyClass.ammount += 1 
+        New_Jersey_Class.ammount += 1 
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
@@ -183,9 +182,9 @@ class NewJerseyClass(Battleship):
                 self.armaments['broadside_battery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))   
 
     
-#--------------------------Devestator Class Battleship-----------------------------
-class DevestatorClass(Battleship):
-    ship_class = 'DevestatorClass'
+#--------------------------------Devestator-Class-Super-Battleship-----------------------------
+class Devestator_Class(Battleship):
+    ship_class = 'Devestator-Class'
     ammount = 0 
     ship_stats = {
         "FP": 1013, "ACC": 38, "EVA": 30, "SPD": 4,
@@ -197,7 +196,7 @@ class DevestatorClass(Battleship):
 
     def __init__(self, hullnumber, name, command, fleet_name):
         super().__init__(hullnumber, name, command, fleet_name)
-        DevestatorClass.ammount += 1 
+        Devestator_Class.ammount += 1 
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
