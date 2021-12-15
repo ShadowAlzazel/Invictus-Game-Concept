@@ -2,11 +2,27 @@
     {
         "ASC": 
         {
+            "Essex": 
+            {
+                "Name": "Essex",
+                "Type": "BB", 
+                "Class": "Essex_Class",
+                "Hullnumber": 69,
+                "Experience": "Heroic"
+            },
+            "Intrepid": 
+            {
+                "Name": "Intrepid",
+                "Type": "BB", 
+                "Class": "Essex_Class",
+                "Hullnumber": 71,
+                "Experience": "Heroic"
+            },
             "Prince Of Wales": 
             {
                 "Name": "Prince Of Wales",
                 "Type": "BB", 
-                "Class": "PrinceOfWalesClass",
+                "Class": "Prince_of_Wales_Class",
                 "Hullnumber": 421,
                 "Experience": "Heroic"
             },
@@ -14,7 +30,7 @@
             {
                 "Name": "Tiamat",
                 "Type": "BB", 
-                "Class": "PrinceOfWalesClass",
+                "Class": "Prince_of_Wales_Class",
                 "Hullnumber": 443,
                 "Experience": " Veteran"
             },
@@ -22,7 +38,7 @@
             {
                 "Name": "Scylla",
                 "Type": "BB", 
-                "Class": "PrinceOfWalesClass",
+                "Class": "Prince_of_Wales_Class",
                 "Hullnumber": 425,
                 "Experience": "Veteran"
             },
@@ -30,7 +46,7 @@
             {
                 "Name": "Vandal",
                 "Type": "BB", 
-                "Class": "AmagiClass",
+                "Class": "Amagi_Class",
                 "Hullnumber": 622,
                 "Experience": "Hardened"
             },
@@ -38,7 +54,7 @@
             {
                 "Name": "Aurelion",
                 "Type": "BB", 
-                "Class": "AmagiClass",
+                "Class": "Amagi_Class",
                 "Hullnumber": 642,
                 "Experience": "Hardened"
             },
@@ -46,7 +62,7 @@
             {
                 "Name": "Indomitable",
                 "Type": "BC", 
-                "Class": "IllustriousClass",
+                "Class": "Illustrious_Class",
                 "Hullnumber": 666,
                 "Experience": "Standard"    
             },
@@ -54,7 +70,7 @@
             {
                 "Name": "Implecable",
                 "Type": "BC", 
-                "Class": "IllustriousClass",
+                "Class": "Illustrious_Class",
                 "Hullnumber": 667,
                 "Experience": "Standard"
             },
@@ -62,7 +78,7 @@
             {
                 "Name": "Indefgitable",
                 "Type": "BC", 
-                "Class": "IllustriousClass",
+                "Class": "Illustrious_Class",
                 "Hullnumber": 668,
                 "Experience": "Standard"
             },
@@ -70,7 +86,7 @@
             {
                 "Name": "Invaluable",
                 "Type": "BC", 
-                "Class": "IllustriousClass",
+                "Class": "Illustrious_Class",
                 "Hullnumber": 695,
                 "Experience": "Standard"
             },
@@ -78,7 +94,7 @@
             {
                 "Name": "Irresistable",
                 "Type": "BC", 
-                "Class": "IllustriousClass",
+                "Class": "Illustrious_Class",
                 "Hullnumber": 696,
                 "Experience": "Standard"
             },
@@ -86,7 +102,7 @@
             {
                 "Name": "Killow",
                 "Type": "CS", 
-                "Class": "DynamoClass",
+                "Class": "Dynamo_Class",
                 "Hullnumber": 1222,
                 "Experience": "Standard"
             }
