@@ -1,0 +1,97 @@
+[
+    {
+        "ASC": 
+        {
+            "Prince Of Wales": 
+            {
+                "Name": "Prince Of Wales",
+                "Type": "BB", 
+                "Class": "PrinceOfWalesClass",
+                "Hullnumber": 421,
+                "Experience": "Heroic"
+            },
+            "Tiamat": 
+            {
+                "Name": "Tiamat",
+                "Type": "BB", 
+                "Class": "PrinceOfWalesClass",
+                "Hullnumber": 443,
+                "Experience": " Veteran"
+            },
+            "Scylla": 
+            {
+                "Name": "Scylla",
+                "Type": "BB", 
+                "Class": "PrinceOfWalesClass",
+                "Hullnumber": 425,
+                "Experience": "Veteran"
+            },
+            "Vandal": 
+            {
+                "Name": "Vandal",
+                "Type": "BB", 
+                "Class": "AmagiClass",
+                "Hullnumber": 622,
+                "Experience": "Hardened"
+            },
+            "Aurelion": 
+            {
+                "Name": "Aurelion",
+                "Type": "BB", 
+                "Class": "AmagiClass",
+                "Hullnumber": 642,
+                "Experience": "Hardened"
+            },
+            "Indomitable": 
+            {
+                "Name": "Indomitable",
+                "Type": "BC", 
+                "Class": "IllustriousClass",
+                "Hullnumber": 666,
+                "Experience": "Standard"    
+            },
+            "Implecable": 
+            {
+                "Name": "Implecable",
+                "Type": "BC", 
+                "Class": "IllustriousClass",
+                "Hullnumber": 667,
+                "Experience": "Standard"
+            },
+            "Indefgitable": 
+            {
+                "Name": "Indefgitable",
+                "Type": "BC", 
+                "Class": "IllustriousClass",
+                "Hullnumber": 668,
+                "Experience": "Standard"
+            },
+            "Invaluable": 
+            {
+                "Name": "Invaluable",
+                "Type": "BC", 
+                "Class": "IllustriousClass",
+                "Hullnumber": 695,
+                "Experience": "Standard"
+            },
+            "Irresistable": 
+            {
+                "Name": "Irresistable",
+                "Type": "BC", 
+                "Class": "IllustriousClass",
+                "Hullnumber": 696,
+                "Experience": "Standard"
+            },
+            "Killow": 
+            {
+                "Name": "Killow",
+                "Type": "CS", 
+                "Class": "DynamoClass",
+                "Hullnumber": 1222,
+                "Experience": "Standard"
+            }
+
+            
+        }
+    }
+]
