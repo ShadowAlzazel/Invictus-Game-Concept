@@ -2,37 +2,37 @@
     {
         "BB":
         [
-            "AmagiClass",
-            "EssexClass",
-            "NewJerseyClass",
-            "VittorioVenetoClass",
-            "PrinceOfWalesClass",
-            "HoodClass"  
+            "Amagi_Class",
+            "Essex_Class",
+            "New_Jersey_Class",
+            "Vittorio_Veneto_Class",
+            "Prince_of_Wales_Class",
+            "Hood_Class"  
         ],
         "BC":
         [
-            "ZenithClass",
-            "EclipseClass",
-            "PenumbraClass",
-            "IllustriousClass"
+            "Zenith_Class",
+            "Eclipse_Class",
+            "Penumbra_Class",
+            "Illustrious_Class"
         ],
         "CS":
         [
-            "VoltageClass",
-            "DynamoClass"
+            "Voltage_Class",
+            "Dynamo_Class"
         ],
         "CA":
         [
-            "ApocalypseClass"
+            "Apocalypse_Class"
         ],
         "CL":
         [
-            "MidnightClass"
+            "Midnight_Class"
         ],
         "DD":
         [
-            "JohnstonClass",
-            "ShimakazeClass"
+            "Johnston_Class",
+            "Shimakaze_Class"
         ]
     }
 ]

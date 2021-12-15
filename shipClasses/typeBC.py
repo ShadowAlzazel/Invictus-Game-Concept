@@ -1,11 +1,10 @@
+#BATTLECRUISERS
 from shipClasses.shipEquipment import *
 from shipClasses.shipRole import Battlecruiser
 
-#BattleCruisers
-
-#----------------------------Zenith Class Battlecruiser--------------------------------
-class ZenithClass(Battlecruiser):
-    ship_class = 'ZenithClass' 
+#-------------------------------Zenith-Class-Battlecruiser--------------------------------
+class Zenith_Class(Battlecruiser):
+    ship_class = 'Zenith-Class' 
     ammount = 0
     ship_stats = {       
         "FP": 493, "ACC": 47, "EVA": 37, "SPD": 5,
@@ -17,7 +16,7 @@ class ZenithClass(Battlecruiser):
 
     def __init__(self, hullnumber, name, command, fleet_name):
         super().__init__(hullnumber, name, command, fleet_name)
-        ZenithClass.ammount += 1
+        Zenith_Class.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(HiggsShieldGen(vID))
@@ -35,9 +34,9 @@ class ZenithClass(Battlecruiser):
                 self.armaments['broadside_battery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
 
 
-#-----------------------------Eclipse Class Battlecruiser-------------------------
-class EclipseClass(Battlecruiser):
-    ship_class = 'EclipseClass' 
+#--------------------------------Eclipse-Class-Battlecruiser-------------------------
+class Eclipse_Class(Battlecruiser):
+    ship_class = 'Eclipse-Class' 
     ammount = 0
     ship_stats = {       
         "FP": 517, "ACC": 45, "EVA": 35, "SPD": 5,
@@ -49,7 +48,7 @@ class EclipseClass(Battlecruiser):
 
     def __init__(self, hullnumber, name, command, fleet_name):
         super().__init__(hullnumber, name, command, fleet_name)
-        EclipseClass.ammount += 1
+        Eclipse_Class.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(HiggsShieldGen(vID))
@@ -67,9 +66,9 @@ class EclipseClass(Battlecruiser):
                 self.armaments['broadside_battery'].append(double_P6_PlasmaPhasers(vID, ''.join(['B', str(x)])))
 
 
-#--------------------------------Penumbra Class Battlecruiser------------------------------------
-class PenumbraClass(Battlecruiser):
-    ship_class = 'PenumbraClass'
+#---------------------------------Penumbra-Class-Battlecruiser------------------------------------
+class Penumbra_Class(Battlecruiser):
+    ship_class = 'Penumbra-Class'
     ammount = 0
     ship_stats = {       
         "FP": 535, "ACC": 48, "EVA": 35, "SPD": 5,
@@ -81,7 +80,7 @@ class PenumbraClass(Battlecruiser):
 
     def __init__(self, hullnumber, name, command, fleet_name):
         super().__init__(hullnumber, name, command, fleet_name)
-        PenumbraClass.ammount += 1
+        Penumbra_Class.ammount += 1
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(HiggsShieldGen(vID))
@@ -99,9 +98,9 @@ class PenumbraClass(Battlecruiser):
                 self.armaments['broadside_battery'].append(double_L6_ParticleLance(vID, ''.join(['B', str(x)])))
 
 
-#-----------------------------------Illustrious Class Battlecruiser--------------------------------------
-class IllustriousClass(Battlecruiser):
-    ship_class = 'IllustriousClass'
+#------------------------------------Illustrious-Class-Battlecruiser--------------------------------------
+class Illustrious_Class(Battlecruiser):
+    ship_class = 'Illustrious-Class'
     ammount = 0
     ship_stats = {       
         "FP": 513, "ACC": 46, "EVA": 32, "SPD": 5,
@@ -112,7 +111,7 @@ class IllustriousClass(Battlecruiser):
     hull = 16600
 
     def __init__(self, hullnumber, name, command, fleet_name):
-        IllustriousClass.ammount += 1
+        Illustrious_Class.ammount += 1
         super().__init__(hullnumber, name, command, fleet_name)
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
