@@ -183,7 +183,7 @@ class New_Jersey_Class(Battleship):
 
     
 #--------------------------------Devestator-Class-Super-Battleship-----------------------------
-class DevestatorClass(Battleship):
+class Devestator_Class(Battleship):
     ship_class = 'Devestator-Class'
     ammount = 0 
     ship_stats = {
@@ -196,7 +196,7 @@ class DevestatorClass(Battleship):
 
     def __init__(self, hullnumber, name, command, fleet_name):
         super().__init__(hullnumber, name, command, fleet_name)
-        DevestatorClass.ammount += 1 
+        Devestator_Class.ammount += 1 
         vID = self.vessel_ID
         self.radar = hex_radar(vID, self.ship_stats['RDR'])
         self.defenses['shield_gen'].append(DarkMatterShieldGen(vID))
