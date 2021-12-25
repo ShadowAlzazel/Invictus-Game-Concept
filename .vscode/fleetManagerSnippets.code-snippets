@@ -24,7 +24,7 @@
 		  "{",
 		  "    \"Name\": \"${1:new_name}\",",
 		  "    \"Type\": \"BB\", ",
-		  "    \"Class\": \"${2|AmagiClass,EssexClass,NewJerseyClass,VittorioVeneto,PrinceOfWalesClass,HoodClass,DevestatorClass|}\",",
+		  "    \"Class\": \"${2|Amagi_Class,Essex_Class,New_Jersey_Class,Vittorio_Veneto,Prince_of_Wales_Class,Hood_Class,Devestator_Class|}\",",
 		  "    \"Hullnumber\": ${3:999999},",
 		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
 		  "}"
@@ -40,7 +40,7 @@
 		  "{",
 		  "    \"Name\": \"${1:new_name}\",",
 		  "    \"Type\": \"BC\", ",
-		  "    \"Class\": \"${2|ZenithClass,EssexClass,PenumbraClass,IllustriousClass|}\",",
+		  "    \"Class\": \"${2|Zenith_Class,Essex_Class,Penumbra_Class,Illustrious_Class|}\",",
 		  "    \"Hullnumber\": ${3:999999},",
 		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
 		  "}"
@@ -56,7 +56,7 @@
 		  "{",
 		  "    \"Name\": \"${1:new_name}\",",
 		  "    \"Type\": \"CS\", ",
-		  "    \"Class\": \"${2|VoltageClass,DynamoClass|}\",",
+		  "    \"Class\": \"${2|Voltage_Class,Dynamo_Class|}\",",
 		  "    \"Hullnumber\": ${3:999999},",
 		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
 		  "}"
@@ -72,7 +72,7 @@
 		  "{",
 		  "    \"Name\": \"${1:new_name}\",",
 		  "    \"Type\": \"CA\", ",
-		  "    \"Class\": \"${2|ApocalypseClass,HarbingerClass|}\",",
+		  "    \"Class\": \"${2|Apocalypse_Class,Harbinger_Class|}\",",
 		  "    \"Hullnumber\": ${3:999999},",
 		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
 		  "}"
@@ -88,7 +88,7 @@
 		  "{",
 		  "    \"Name\": \"${1:new_name}\",",
 		  "    \"Type\": \"CL\", ",
-		  "    \"Class\": \"${2|MidnightClass|}\",",
+		  "    \"Class\": \"${2|Midnight_Class|}\",",
 		  "    \"Hullnumber\": ${3:999999},",
 		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
 		  "}"
@@ -104,7 +104,7 @@
 		  "{",
 		  "    \"Name\": \"${1:new_name}\",",
 		  "    \"Type\": \"CL\", ",
-		  "    \"Class\": \"${2|JohnstonClas,ShimikazeClass|}\",",
+		  "    \"Class\": \"${2|Johnston_Class,Shimikaze_Class|}\",",
 		  "    \"Hullnumber\": ${3:999999},",
 		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
 		  "}"
