@@ -66,3 +66,35 @@ class Dynamo_Class(Strikecruiser):
                 self.armaments['broadside_battery'].append(double_L5_WaveLasers(vID, ''.join(['B', str(x)])))
             else:
                 self.armaments['broadside_battery'].append(double_A5_ArcThrowers(vID, ''.join(['B', str(x)])))
+
+
+#-------------------------------------Dynamo Class Strikecruiser----------------------------------------
+class Hero_Class(Strikecruiser):
+    ship_class = 'Hero-Class'
+    ammount = 0
+    ship_stats = {
+        "FP": 333, "ACC": 40, "EVA": 38, "SPD": 6,
+        "RDR": 5, "LCK": 10, "STH": 1
+    } 
+    
+    shields = 12400
+    hull = 8700
+
+    def __init__(self, hullnumber, name, command, fleet_name):
+        Hero_Class.ammount += 1
+        super().__init__(hullnumber, name, command, fleet_name)
+        vID = self.vessel_ID
+        self.radar = hex_radar(vID, self.ship_stats['RDR'])
+        self.defenses['shield_gen'].append(HyperiumShieldGen(vID))
+        self.defenses['armor_type'].append(MythrilAlloyArmor(vID))
+        for x in range(1, 7):
+            if x <= 4:
+                self.armaments['primary_battery'].append(triple_L13_XRayLasers(vID, ''.join(['T', str(x)])))
+            elif x <= 6:
+                self.armaments['primary_battery'].append(double_L13_XRayLasers(vID, ''.join(['T', str(x)])))
+        self.armaments['secondary_battery'] = [triple_L6_ParticleLance(vID, ''.join(['S', str(x)])) for x in range(1,5)]
+        for x in range(1, 9):
+            if x <= 4:
+                self.armaments['broadside_battery'].append(double_L5_WaveLasers(vID, ''.join(['B', str(x)])))
+            else:
+                self.armaments['broadside_battery'].append(double_A5_ArcThrowers(vID, ''.join(['B', str(x)])))

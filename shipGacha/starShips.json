@@ -113,7 +113,23 @@
                 "Class": "Harbinger_Class",
                 "Hullnumber": 1982,
                 "Experience": "Standard"
-            }
+            },
+            "Stark": 
+            {
+                "Name": "Stark",
+                "Type": "CS", 
+                "Class": "Hero_Class",
+                "Hullnumber": 7777,
+                "Experience": "Standard"
+            },
+            "Rogers": 
+            {
+                "Name": "Rogers",
+                "Type": "CS", 
+                "Class": "Hero_Class",
+                "Hullnumber": 7778,
+                "Experience": "Hardened"
+            }   
 
             
         }
