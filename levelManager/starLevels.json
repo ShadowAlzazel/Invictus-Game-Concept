@@ -15,10 +15,10 @@
             "level_Test":
             {
                 "Name": "Level_Test",
-                "Length": 32, 
-                "Width": 20, 
+                "Length": 10, 
+                "Width": 10, 
                 "RhoDensity": 0, 
-                "SpawnLocations": [26, 88], 
+                "SpawnLocations": [1, 64], 
                 "Fleets": [["ASC", "Test Fleet ASC"], ["XNFF", "Test Fleet XNFF"]]
                 
             }

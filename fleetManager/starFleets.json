@@ -42,7 +42,7 @@
                     "Alaska",
                     "Anchorage",
                     "Long Beach",
-                    "Austin",
+                    "Austin", 
                     "Victorville",
                     "Orion",
                     "Aquarius",
@@ -54,7 +54,7 @@
                     "Hoel",
                     "Heermann"
                 ],
-                "shipClasses":
+                "shipClasses":  
                 [
                     "Essex_Class", "Penumbra_Class", "Voltage_Class", "Voltage_Class", "Harbinger_Class", "Harbinger_Class",
                     "Midnight_Class", "Midnight_Class", "Midnight_Class", "Midnight_Class", "Johnston_Class", "Johnston_Class", "Johnston_Class", "Johnston_Class", "Johnston_Class"

@@ -56,7 +56,7 @@
 		  "{",
 		  "    \"Name\": \"${1:new_name}\",",
 		  "    \"Type\": \"CS\", ",
-		  "    \"Class\": \"${2|Voltage_Class,Dynamo_Class|}\",",
+		  "    \"Class\": \"${2|Voltage_Class,Dynamo_Class,Hero_Class|}\",",
 		  "    \"Hullnumber\": ${3:999999},",
 		  "    \"Experience\": \"${4|Maiden,Standard,Hardened,Veteran,Heroic|}\"",
 		  "}"
