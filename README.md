@@ -1,4 +1,4 @@
-#ASCS Fleet Manager
+#Invictus Game
 
 A WIP
 hex-grid turn combat game involving ships and fleets.
